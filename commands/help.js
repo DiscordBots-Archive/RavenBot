@@ -36,16 +36,5 @@ exports.run = (client, message, args) => {
     `\n• **!levels** - It shows the position`)
 
     message.channel.send({embed});
-
-    {
-        const embed = new Discord.RichEmbed()
-        .setColor(65280)
-        .setFooter(`© ${client.user.username}`, client.user.displayAvatarURL)
-        .setTimestamp()
-        .setThumbnail(client.user.displayAvatarURL)
-        .setTitle('❯ NOTICE')
-        .setDescription("This bot is still in BETA, if you find any error/ fault/ bug, please infrom them using my discord tag above ^")
-        message.channel.send({embed});
-    }
     
 }
