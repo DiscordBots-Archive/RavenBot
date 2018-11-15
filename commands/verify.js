@@ -11,8 +11,8 @@ exports.run = async (client, message, args) => {
     if(!member)
     return message.channel.send(`**${message.author.username}**: `+ "Please mention a valid member of this server");
 
-    if(!member.roleable)
-    return message.channel.send(`**${message.author.username}**: `+ "I cannot kick this user: `Missing Permission or Role Order`");
+    //if(!member.roleable)
+    //return message.channel.send(`**${message.author.username}**: `+ "I cannot kick this user: `Missing Permission or Role Order`");
 
     let greenRole = message.guild.roles.find(rol => rol.name === "Verified")
 
