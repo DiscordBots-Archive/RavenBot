@@ -13,7 +13,7 @@ module.exports = (client, message) => {
     const cmd = client.commands.get(command);
   
     // If that command doesn't exist, silently exit and do nothing
-    if (!cmd) return message.channel.send(`${message.author.username}: `+ "Command Not Found! Please do **!help**")
+    if (!cmd) return;// message.channel.send(`${message.author.username}: `+ "Command Not Found! Please do **!help**")
   
     // Run the command
     cmd.run(client, message, args);
