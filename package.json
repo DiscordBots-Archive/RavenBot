@@ -1,0 +1,22 @@
+{
+  "name": "comman_handler_bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.6.1",
+    "discord.js": "^11.4.2",
+    "enmap": "^4.3.3",
+    "fs": "0.0.1-security",
+    "moment": "^2.22.2",
+    "moment-duration-format": "^2.2.2",
+    "ms": "^2.1.1",
+    "os-utils": "0.0.14"
+  }
+}
