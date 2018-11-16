@@ -11,9 +11,6 @@ exports.run = async (client, message, args) => {
     if(!member)
     return message.channel.send(`**${message.author.username}**: ` + "Please mention a valid member of this server");
 
-    //if(!member.roleable)
-    //return message.channel.send(`**${message.author.username}**: `+ "I cannot kick this user: `Missing Permission or Role Order`");
-
     let reason = args.slice(1).join(' ');
 
     if(!reason) reason = "No reason provided";
