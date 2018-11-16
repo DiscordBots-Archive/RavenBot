@@ -29,6 +29,7 @@ exports.run = (client, message, args) => {
 
     .addField("❯ OTHERS", `• Owner: ${message.guild.owner.user.tag}`+
     `\n• Region: ${message.guild.region.toUpperCase()}`+
-    `\n• Created at: ${moment(message.guild.createdAt).format("D-MM-YY, hh:mm A")}`)
+    `\n• Created at: ${moment(message.guild.createdAt).format("D-MM-YY, kk:mm")}`)
+
     message.channel.send({embed});
 }
