@@ -11,7 +11,8 @@ exports.run = async (client, message, args) => {
     if(!member)
     return message.channel.send(`**${message.author.username}**: `+ "Please mention a valid member of this server!");
 
-    let greenRole = message.guild.roles.find(rol => rol.name === "Verified")
+    let greenRole = message.guild.roles.find(rol => rol.name === process.env.V_ROLE)
+    if(!greenRole) return message.channel.send(`${process.env.V_ROLE} role not found`)
 
     let botcmd = message.guild.channels.find(ch => ch.name === process.env.LOG_CHANNEL);
     if (!botcmd) return message.channel.send(`Could not found **#${process.env.LOG_CHANNEL}** channel. Please create it and try again.`);
