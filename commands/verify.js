@@ -23,6 +23,7 @@ exports.run = async (client, message, args) => {
     .setDescription(`\`❯ USER VERIFIED \n• ${member.user.username} has been verified by ${message.author.username}\``)
 
     member.addRole(greenRole).then(() => {
+        message.channel.send("Ok Bro");
         client.channels.get(botcmd.id).send({embed})
         .catch(error => message.channel.send(`**${message.author.username}**: ` + `Sorry, I couldn't verify because of : ${error}`));
     });

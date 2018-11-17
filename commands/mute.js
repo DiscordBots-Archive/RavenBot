@@ -29,6 +29,8 @@ exports.run = async (client, message, args) => {
 
     member.addRole(muteRole).then(() => {
 
+        message.channel.send("Ok Bro");
+
         client.channels.get(botcmd.id).send({embed})
 
         .catch(error => message.channel.send(`**${message.author.username}**: ` + `Sorry, I couldn't mute because of : ${error}`));

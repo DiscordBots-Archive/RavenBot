@@ -31,4 +31,5 @@ exports.run = async (client, message, args) => {
   .setDescription(`\`❯ USER KICKED \n• ${member.user.username} has been kicked by ${message.author.username} \n• Reason : ${reason}\``)
 
   client.channels.get(botcmd.id).send({embed});
+  message.channel.send("Ok Bro");
 }

@@ -32,4 +32,5 @@ exports.run = async (client, message, args) => {
     .setDescription(`\`❯ USER BANNED \n• ${member.user.username} has been banned by ${message.author.username} \n• Reason : ${reason}\``)
 
     client.channels.get(botcmd.id).send({embed});
+    message.channel.send("Ok Bro");
 }

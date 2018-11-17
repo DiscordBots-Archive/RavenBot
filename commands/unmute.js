@@ -24,6 +24,7 @@ exports.run = async (client, message, args) => {
     .setDescription(`\`❯ USER UNMUTED \n• ${member.user.username} has been unmuted by ${message.author.username}\``)
 
     member.removeRole(muteRole).then(() => {
+        message.channel.send("Ok Bro");
         client.channels.get(botcmd.id).send({embed})
         .catch(error => message.channel.send(`**${message.author.username}**: ` + `Sorry, I couldn't unmute because of : ${error}`));
     });
