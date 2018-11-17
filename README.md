@@ -1,6 +1,6 @@
 # [Generic - The Discord Bot](https://discordapp.com/oauth2/authorize?client_id=499250383785558026&scope=bot&permissions=2146958839)
 
-This is very simple Discord Bot written in discord.js library. 
+This is very simple Discord Bot written in discord.js library. If you want this bot, you can invite from [here](https://discordapp.com/oauth2/authorize?client_id=499250383785558026&scope=bot&permissions=2146958839)
 
 ## Commands
 
