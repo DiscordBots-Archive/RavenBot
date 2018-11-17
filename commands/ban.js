@@ -19,7 +19,6 @@ exports.run = async (client, message, args) => {
     return message.channel.send(`**${message.author.username}**: ` + "I cannot ban this user: `Missing Permission or Role Order`");
 
     let reason = args.slice(1).join(' ');
-
     if(!reason) reason = "No reason provided";
 
     await member.ban(reason)
