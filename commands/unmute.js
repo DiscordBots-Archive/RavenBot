@@ -14,8 +14,8 @@ exports.run = async (client, message, args) => {
 
     let muteRole = message.guild.roles.find(rol => rol.name === "Muted")
 
-    let botcmd = message.guild.channels.find(ch => ch.name === "bot-spam");
-    if (!botcmd) return message.channel.send('Could not found **#bot-spam** channel. Please create it and try again.');
+    let botcmd = message.guild.channels.find(ch => ch.name === process.env.LOG_CHANNEL);
+    if (!botcmd) return message.channel.send(`Could not found **#${process.env.LOG_CHANNEL}** channel. Please create it and try again.`);
 
     const embed = new Discord.RichEmbed()
   
