@@ -6,7 +6,7 @@ This is very simple Discord Bot written in discord.js library.
 
 These are the commands of this bot.
 
-###❯ HELP
+### ❯ HELP
 
 - !help - It explains itself!
 
