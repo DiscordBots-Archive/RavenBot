@@ -3,15 +3,12 @@ exports.run = async (client, message, args) => {
     if(message.channel.type == 'dm') return message.channel.send('`Not a right place to use this command`')
 
     if(!message.member.roles.some(r=>["Dev", "Admin", "Staff"].includes(r.name)) )
-    return message.channel.send(`**${message.author.username}**: `+ "Sorry, you don't have the role to use this!  \nMissing **Admin** or **Staff** role. Please create them and try again.");
+    return message.channel.send(`**${message.author.username}**: ` + "Sorry, you don't have the role to use this!  \nMissing **Admin** or **Staff** role. Please create them and try again.");
 
     let member = message.mentions.members.first();
 
     if(!member)
-    return message.channel.send(`**${message.author.username}**: `+ "Please mention a valid member of this server!");
-
-    //if(!member.roleable)
-    //return message.channel.send(`**${message.author.username}**: `+ "I cannot kick this user: `Missing Permission or Role Order`");
+    return message.channel.send(`**${message.author.username}**: ` + "Please mention a valid member of this server!");
 
     let greenRole = message.guild.roles.find(rol => rol.name === "Verified")
 
@@ -26,6 +23,6 @@ exports.run = async (client, message, args) => {
 
     member.removeRole(greenRole).then(() => {
         client.channels.get(botcmd.id).send({embed})
-        .catch(error => message.channel.send(`**${message.author.username}**: `+ `Sorry, I couldn't unverify because of : ${error}`));
+        .catch(error => message.channel.send(`**${message.author.username}**: ` + `Sorry, I couldn't unverify because of : ${error}`));
     });
 }
