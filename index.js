@@ -3,9 +3,9 @@ const Enmap = require("enmap");
 const fs = require("fs");
 
 const client = new Discord.Client();
-const config = require("./config.json");
+//const config = require("./config.json");
 
-client.config = config;
+//client.config = config;
 
 fs.readdir("./events/", (err, files) => {
   if (err) return console.error(err);
@@ -24,7 +24,7 @@ fs.readdir("./commands/", (err, files) => {
     if (!file.endsWith(".js")) return;
     let props = require(`./commands/${file}`);
     let commandName = file.split(".")[0];
-    console.log(`Attempting to load command ${commandName}`);
+    console.log(`loading command: ${process.env.DISCORD_PREFIX} ${commandName}`);
     client.commands.set(commandName, props);
   });
 });
