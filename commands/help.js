@@ -29,8 +29,8 @@ exports.run = (client, message, args) => {
     `\n• **!unverify @user** - To unverify a user`)
 
     .addField("❯ UTIL", `• **!clear** - To clear messages`+
-    `\n• **!player #PLYRTAG** - It shows player info`+
-    `\n• **!clan #CLNTAG** - It shows clan info`)
+    `\n• **!player tag** - It shows player info`+
+    `\n• **!clan tag** - It shows clan info`)
 
     .addField("❯ MEE6", `• **!rank** - It shows your rank`+
     `\n• **!levels** - It shows the position`)
