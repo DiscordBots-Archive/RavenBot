@@ -6,6 +6,7 @@ This is very simple Discord Bot written in discord.js library.
 ❯ HELP
 • !help - It explains itself!
 ❯ INFO
+
 • !stats - It shows the bot information
 • !server - It shows the server information
 • !user @user - It shows the player info
