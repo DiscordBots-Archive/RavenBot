@@ -34,3 +34,5 @@ These are the commands of this bot.
 
 > May be you are thinking what is this `!player tag` and `!clan tag` command! if you are a clash of clans player, you just need it. This amazing command will give the info about players and clans
 
+## Do you like it ? Want to invite ? [Tap Here](https://discordapp.com/oauth2/authorize?client_id=499250383785558026&scope=bot&permissions=2146958839)
+
