@@ -24,7 +24,7 @@ fs.readdir("./commands/", (err, files) => {
     if (!file.endsWith(".js")) return;
     let props = require(`./commands/${file}`);
     let commandName = file.split(".")[0];
-    console.log(`loading command: ${process.env.DISCORD_PREFIX} ${commandName}`);
+    console.log(`loading command: ${process.env.DISCORD_PREFIX}${commandName}`);
     client.commands.set(commandName, props);
   });
 });
