@@ -9,7 +9,7 @@ exports.run = async (client, message, args) => {
     let member = message.mentions.members.first();
 
     if(!member)
-    return message.channel.send(`**${message.author.username}**: ` + "Please mention a valid member of this server!");
+    return message.channel.send(`${message.author.username}: ` + "Please mention a valid member of this server!");
 
     let reason = args.slice(1).join(' ');
 
@@ -33,7 +33,7 @@ exports.run = async (client, message, args) => {
 
         client.channels.get(botcmd.id).send({embed})
 
-        .catch(error => message.channel.send(`**${message.author.username}**: ` + `Sorry, I couldn't mute because of : ${error}`));
+        .catch(error => message.channel.send(`${message.author.username}: ` + `Sorry, I couldn't mute because of : ${error}`));
 
         setTimeout( () => {
 

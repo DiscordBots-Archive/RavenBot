@@ -4,17 +4,17 @@ exports.run = async (client, message, args) => {
   if(message.channel.type == 'dm') return message.channel.send('`Not a right place to use this command`')
 
   if(!message.member.roles.some(r=>[process.env.DEV_ROLE, process.env.ADM_ROLE].includes(r.name)) )
-  return message.channel.send(`${message.author.username} ` + ` you don't have the role to use this, missing **${process.env.ADM_ROLE}** role, please create them and try again.`);
+  return message.channel.send(`${message.author.username} ` + `you don't have the role to use this, missing **${process.env.ADM_ROLE}** role, please create them and try again.`);
 
   let member = message.mentions.members.first() || message.guild.members.get(args[0]);
   let botcmd = message.guild.channels.find(ch => ch.name === process.env.LOG_CHANNEL);
   if (!botcmd) return message.channel.send(`Could not found **#${process.env.LOG_CHANNEL}** channel. Please create it and try again.`)
 
   if(!member)
-  return message.channel.send(`**${message.author.username}**: ` + "Please mention a valid member of this server!");
+  return message.channel.send(`${message.author.username}: ` + "Please mention a valid member of this server!");
 
   if(!member.kickable) 
-  return message.channel.send(`**${message.author.username}**: ` + "I cannot kick this user: `Missing Permission or Role Order`");
+  return message.channel.send(`${message.author.username}: ` + "I cannot kick this user: `Missing Permission or Role Order`");
 
   let reason = args.slice(1).join(' ');
 
@@ -22,7 +22,7 @@ exports.run = async (client, message, args) => {
 
   await member.kick(reason)
 
-  .catch(error => message.channel.send(`**${message.author.username}**: ` + `Sorry, I couldn't kick because of : ${error}`));
+  .catch(error => message.channel.send(`${message.author.username}: ` + `Sorry, I couldn't kick because of : ${error}`));
 
   const embed = new Discord.RichEmbed()
 

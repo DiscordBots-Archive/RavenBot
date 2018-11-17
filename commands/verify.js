@@ -9,7 +9,7 @@ exports.run = async (client, message, args) => {
     let member = message.mentions.members.first();
 
     if(!member)
-    return message.channel.send(`**${message.author.username}**: `+ "Please mention a valid member of this server!");
+    return message.channel.send(`${message.author.username}: `+ "Please mention a valid member of this server!");
 
     let greenRole = message.guild.roles.find(rol => rol.name === process.env.V_ROLE)
     if(!greenRole) return message.channel.send(`${process.env.V_ROLE} role not found`)
@@ -26,7 +26,7 @@ exports.run = async (client, message, args) => {
     member.addRole(greenRole).then(() => {
         message.channel.send("Ok Bro");
         client.channels.get(botcmd.id).send({embed})
-        .catch(error => message.channel.send(`**${message.author.username}**: ` + `Sorry, I couldn't verify because of : ${error}`));
+        .catch(error => message.channel.send(`${message.author.username}: ` + `Sorry, I couldn't verify because of : ${error}`));
     });
 
 }

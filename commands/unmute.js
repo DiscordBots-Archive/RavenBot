@@ -10,7 +10,7 @@ exports.run = async (client, message, args) => {
     let member = message.mentions.members.first();
 
     if(!member)
-    return message.channel.send(`**${message.author.username}**: `+ "Please mention a valid member of this server!");
+    return message.channel.send(`${message.author.username}: `+ "Please mention a valid member of this server!");
 
     let muteRole = message.guild.roles.find(rol => rol.name === "Muted")
 
@@ -26,6 +26,6 @@ exports.run = async (client, message, args) => {
     member.removeRole(muteRole).then(() => {
         message.channel.send("Ok Bro");
         client.channels.get(botcmd.id).send({embed})
-        .catch(error => message.channel.send(`**${message.author.username}**: ` + `Sorry, I couldn't unmute because of : ${error}`));
+        .catch(error => message.channel.send(`${message.author.username}: ` + `Sorry, I couldn't unmute because of : ${error}`));
     });
 }
