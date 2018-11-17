@@ -9,6 +9,7 @@ exports.run = async (client, message, args) => {
     return message.channel.send(`**${message.author.username}:** ` + "Sorry, you don't have the role to use this! \nMissing **Admin** role. Please create them and try again.");
 
     let member = message.mentions.members.first();
+    
     let botcmd = message.guild.channels.find(ch => ch.name === "bot-spam");
     if (!botcmd) return message.channel.send('Could not found **#bot-spam** channel. Please create it and try again.')
 
