@@ -14,7 +14,7 @@ These are the commands of this bot.
 
 - !stats - It shows the bot information
 - !server - It shows the server information
-- !user @user - It shows the player info
+- !user @user - It shows the user info
 - !ping - It shows the ping status
 
 ### ❯ MOD
