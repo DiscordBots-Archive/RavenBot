@@ -12,7 +12,7 @@ fs.readdir("./events/", (err, files) => {
   files.forEach(file => {
     const event = require(`./events/${file}`);
     let eventName = file.split(".")[0];
-    console.log(`loading events: ${eventName}`)
+    console.log(`loading event: ${eventName}`)
     client.on(eventName, event.bind(null, client));
   });
 });
