@@ -9,7 +9,7 @@ exports.run = async (client, message, args) => {
 
     const sayMessage = args.join(" ");
     if (!args.join(" ")) {
-        return message.channel.send(`**${message.author.username}**: `+"Please provide a tag");
+        return message.channel.send(`**${message.author.username}**: ` + "Please provide a tag");
     };
     clantag = sayMessage.toUpperCase().replace(/#/g, '').replace(/O/g, '0')
     const m = await message.channel.send(clantag);
