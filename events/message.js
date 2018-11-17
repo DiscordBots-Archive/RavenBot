@@ -7,6 +7,7 @@ module.exports = (client, message) => {
   
     // Our standard argument/command name definition.
     //const args = message.content.slice(client.config.prefix.length).trim().split(/ +/g);
+
     const prefix = (client.config.prefix);
     const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|\\${prefix})\\s*`);
     if (!prefixRegex.test(message.content)) return;
