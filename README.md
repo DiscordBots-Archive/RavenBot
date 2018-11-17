@@ -1,25 +1,24 @@
-# Enmap - Enhanced Maps
+# Generic - The Discord Bot
 
 This is very simple Discord Bot written in discord.js library. 
 
 ## Commands
 
-❯ HELP
+###❯ HELP
 - !help - It explains itself!
-- !help - It explains itself!
-❯ INFO
+###❯ INFO
 - !stats - It shows the bot information
 - !server - It shows the server information
 - !user @user - It shows the player info
 - !ping - It shows the ping status
-❯ MOD
+###❯ MOD
 - !kick @user - To kick a user
 - !ban @user - To ban a user
 - !mute @user - To mute a user for a min
 - !unmute @user - To unmute a user
 - !verify @user - To verify a user
 - !unverify @user - To unverify a user
-❯ UTIL
+###❯ UTIL
 - !clear - To clear messages
 - !player tag - It shows player info 
 - !clan tag - It shows clan info
