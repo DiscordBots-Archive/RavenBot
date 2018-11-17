@@ -37,4 +37,3 @@ These are the commands of this bot.
 ## Do you like it ? Want to invite ? [Tap Here](https://discordapp.com/oauth2/authorize?client_id=499250383785558026&scope=bot&permissions=2146958839)
 
 You can invite this bot instead of making a new one to avoid hosing fees :p
-
