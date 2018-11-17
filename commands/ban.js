@@ -13,7 +13,7 @@ exports.run = async (client, message, args) => {
     if (!botcmd) return message.channel.send('Could not found **#bot-spam** channel. Please create it and try again.')
 
     if(!member)
-    return message.channel.send(`**${message.author.username}**: `+ "Please mention a valid member of this server");
+    return message.channel.send(`**${message.author.username}**: `+ "Please mention a valid member of this server!");
 
     if(!member.bannable) 
     return message.channel.send(`**${message.author.username}**: `+ "I cannot ban this user: `Missing Permission or Role Order`");

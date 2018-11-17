@@ -9,7 +9,7 @@ exports.run = async (client, message, args) => {
     let member = message.mentions.members.first();
 
     if(!member)
-    return message.channel.send(`**${message.author.username}**: ` + "Please mention a valid member of this server");
+    return message.channel.send(`**${message.author.username}**: ` + "Please mention a valid member of this server!");
 
     let reason = args.slice(1).join(' ');
 
