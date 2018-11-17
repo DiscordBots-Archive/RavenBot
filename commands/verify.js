@@ -3,8 +3,8 @@ exports.run = async (client, message, args) => {
 
     if(message.channel.type == 'dm') return message.channel.send('`Not a right place to use this command`')
 
-    if(!message.member.roles.some(r=>["Dev", "Admin", "Staff"].includes(r.name)) )
-    return message.channel.send(`**${message.author.username}**: ` + "Sorry, you don't have the role to use this! \nMissing **Admin** or **Staff** role. Please create them and try again.");
+    if(!message.member.roles.some(r=>[process.env.DEV_ROLE, process.env.ADM_ROLE, process.env.STF_ROLE].includes(r.name)) )
+    return message.channel.send(`${message.author.username} you don't have the role to use this, missing **${process.env.ADM_ROLE}** or **${process.env.STF_ROLE}** role please create them and try again.`);
 
     let member = message.mentions.members.first();
 
