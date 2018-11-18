@@ -12,7 +12,7 @@ module.exports = (client, message) => {
 
   const cmd = client.commands.get(command);
 
-  if (!cmd) return message.channel.send(`Command not found! Please do ${process.env.DISCORD_PREFIX}help for options`)
+  if (!cmd) return message.channel.send(`Command not found! Please do \`${process.env.DISCORD_PREFIX}help\` for options`)
 
   cmd.run(client, message, args);
 };
