@@ -6,6 +6,6 @@ exports.run = async (client, message, args) => {
         return message.channel.send(`Please use commands in appropriate chatrooms to reduce spam ${channel}`);
     }
     const m = await message.channel.send("PING TEST");
-    m.edit(`\`LATENCY: ${m.createdTimestamp - message.createdTimestamp} ms || API LATENCY: ${Math.round(client.ping)} ms\``);
+    m.edit(`\`LATENCY: ${m.createdTimestamp - message.createdTimestamp} MILLISECONDS || API LATENCY: ${Math.round(client.ping)} MILLISECONDS\``);
 
 }
