@@ -37,7 +37,7 @@ exports.run = (client, message, args) => {
     .addField("❯ OWNER INFO", `• Owner : SUVAJIT#5580`+
     `\n• Source Code : [View Here](https://github.com/xsuvajit/discord.js_bot)`+
     `\n• Hosting : [Heroku Salesforce](https://heroku.com)`+
-    `\n• Invitation Link : [Tap Here](https://discordapp.com/oauth2/authorize?client_id=499250383785558026&permissions=2146958839&scope=bot)`+
+    `\n• Invitation Link : [Tap Here](https://discordapp.com/oauth2/authorize?client_id=499250383785558026&permissions=2146958847&scope=bot)`+
     `\n• Creation Date : ${moment(client.user.createdAt).format("DD-MM-YY, kk:mm")}`) 
 
     message.channel.send({embed});
