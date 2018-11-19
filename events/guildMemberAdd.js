@@ -10,7 +10,7 @@ module.exports = (client, member) => {
     .setDescription(`Hello ${member}, Welcome to **${member.guild.name}** :tada:`)
     .setFooter(`© ${client.user.username}`, client.user.displayAvatarURL)
     .setThumbnail(member.user.displayAvatarURL)
-    .addField(process.env.ADD_FIELD1, process.env.ADD_FIELD2)
+    .addField(process.env.ADD_FIELD1, `${process.env.DISCORD_PREFIX}` + process.env.ADD_FIELD2)
     channel.send({embed});
     {
         const channel = member.guild.channels.find(ch => ch.name === 'bot-spam'); 
