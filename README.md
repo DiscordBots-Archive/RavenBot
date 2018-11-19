@@ -1,6 +1,6 @@
-# [Generic - The Discord Bot](https://discordapp.com/oauth2/authorize?client_id=499250383785558026&scope=bot&permissions=2146958839)
+# [Generic - The Discord Bot](https://discordapp.com/oauth2/authorize?client_id=499250383785558026&permissions=2146958839&scope=bot)
 
-This is very simple Discord Bot written in discord.js library. If you want this bot, you can invite from [here](https://discordapp.com/oauth2/authorize?client_id=499250383785558026&scope=bot&permissions=2146958839)
+This is very simple Discord Bot written in discord.js library. If you want this bot, you can invite from [here](https://discordapp.com/oauth2/authorize?client_id=499250383785558026&permissions=2146958839&scope=bot)
 
 ## Commands
 
@@ -34,6 +34,6 @@ These are the commands of this bot.
 
 > May be you are thinking what is this `!player tag` and `!clan tag` command! if you are a clash of clans player, you just need it. This amazing command will give you the info about players and clans
 
-## Do you like it ? Want to invite ? [Tap Here](https://discordapp.com/oauth2/authorize?client_id=499250383785558026&scope=bot&permissions=2146958839)
+## Do you like it ? Want to invite ? [Tap Here](https://discordapp.com/oauth2/authorize?client_id=499250383785558026&permissions=2146958839&scope=bot)
 
 You can invite this bot instead of making a new one to avoid hosting fees :p
