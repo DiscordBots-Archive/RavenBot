@@ -19,7 +19,8 @@ exports.run = (client, message, args) => {
     .addField("❯ INFO", `• **!stats** - It shows the bot information`+
     `\n• **!server** - It shows the server information`+
     `\n• **!user @user** - It shows the player info`+
-    `\n• **!ping** - It shows the ping status`)
+    `\n• **!ping** - It shows the ping status`+
+    `\n **!invite** - Invite the bot to your server`)
 
     .addField("❯ MOD", `• **!kick @user** - To kick a user`+
     `\n• **!ban @user** - To ban a user`+
