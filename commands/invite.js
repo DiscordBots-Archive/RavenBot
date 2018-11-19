@@ -10,8 +10,8 @@ exports.run = (client, message, args) => {
     }
 
     const embed = new Discord.RichEmbed()
-    .setTitle('TAP HERE TO INVITE' + client.user.displayAvatarURL)
-    .setDescription('Please do not remove any permissions')
+    .setAuthor(client.user.username ` The Discord Bot`, client.user.displayAvatarURL)
+    .addField('Invitation Link', `• [Tap Here](https://discordapp.com/oauth2/authorize?client_id=499250383785558026&permissions=2146958847&scope=bot)`)
     .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL)
     .setColor(65280)
     .setTimestamp()
