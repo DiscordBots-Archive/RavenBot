@@ -14,7 +14,8 @@ exports.run = (client, message, args) => {
 
     const embed = new Discord.RichEmbed()
     .setAuthor(`CLIENT INFIORMATION`, client.user.displayAvatarURL)
-    .setThumbnail(client.user.displayAvatarURL)
+    .setThumbnail('https://cdn.discordapp.com/emojis/393852367751086090.gif?v=1')
+    //.setThumbnail(client.user.displayAvatarURL)
     .setColor(65280)
     .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL)
     .setTimestamp()
