@@ -3,8 +3,8 @@ const Enmap = require("enmap");
 const fs = require("fs");
 
 const client = new Discord.Client();
-const Vot = new Discord.Client();
-const self = new Discord.Client();
+
+
 //const config = require("./config.json");
 
 //client.config = config;
@@ -33,6 +33,6 @@ fs.readdir("./commands/", (err, files) => {
 });
 
 client.login(process.env.DISCORD_TOKEN);
-Vot.login(process.env.SELF_TOKEN);
-self.login(process.env.SELFF_TOKEN);
+
+
 //client.login(config.token);
