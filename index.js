@@ -4,7 +4,6 @@ const fs = require("fs");
 
 const client = new Discord.Client();
 
-
 //const config = require("./config.json");
 
 //client.config = config;
@@ -33,6 +32,5 @@ fs.readdir("./commands/", (err, files) => {
 });
 
 client.login(process.env.DISCORD_TOKEN);
-
 
 //client.login(config.token);
