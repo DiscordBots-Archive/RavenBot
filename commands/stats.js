@@ -42,7 +42,7 @@ exports.run = (client, message, args) => {
     ` • Audio : ${client.channels.filter(ch => ch.type === 'voice').size}`)
 
     .addField("❯ LIBRARY INFO", `• Library : [Node.js](https://nodejs.org)`+
-    `\n • Discord.js : [v${Discord.version}](https://discord.js.org)`+
+    `\n• Discord.js : [v${Discord.version}](https://discord.js.org)`+
     `\n• Node Version : [${process.version}](https://nodejs.org)`)
 
     .addField("❯ OWNER INFO", `• Owner : SUVAJIT#5580`+
