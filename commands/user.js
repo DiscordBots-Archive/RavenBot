@@ -22,16 +22,16 @@ exports.run = (client, message, args) => {
         }
 
         let emot;
-        if (member.user.presence.status.toUpperCase() === "ONLINE") {
+        if (message.author.presence.status.toUpperCase() === "ONLINE") {
             emot = "<:online:515444566145630218>";
-        } else if (member.user.presence.status.toUpperCase() === "DND") {
+        } else if (message.author.presence.status.toUpperCase() === "DND") {
             emot = "<:dnd:515444542174920730>";
-        } else if (member.user.presence.status.toUpperCase() === "OFFLINE") {
+        } else if (message.author.presence.status.toUpperCase() === "OFFLINE") {
             emot = "<:offline:515444585686892587>";
-        } else if (member.user.presence.status.toUpperCase() === "IDLE") {
+        } else if (message.author.presence.status.toUpperCase() === "IDLE") {
             emot = "<:idle:515444772228431872>";
         }
-
+        
         const embed = new Discord.RichEmbed()
         .setColor(65280)
         .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL)
