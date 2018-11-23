@@ -45,7 +45,7 @@ exports.run = (client, message, args) => {
     `\n• Discord.js : [v${Discord.version}](https://discord.js.org)`+
     `\n• Node Version : [${process.version}](https://nodejs.org)`)
 
-    .addField("❯ OWNER INFO", `• Owner : SUVAJIT#5580`+
+    .addField("❯ OWNER INFO", `• Owner : SUVAJIT#5580 <a:hype:515571561345056783>`+
     `\n• Creation Date : ${moment(client.user.createdAt).format("DD-MM-YY, kk:mm")}`) 
 
     message.channel.send({embed});

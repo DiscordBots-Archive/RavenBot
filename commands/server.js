@@ -27,7 +27,7 @@ exports.run = (client, message, args) => {
     `\n• Humans: ${message.guild.memberCount - message.guild.members.filter(m => m.user.bot).size}`+
     `\n• Online: ${message.guild.members.filter(m => m.presence.status === 'online').size}`)
 
-    .addField("❯ OTHERS", `• Owner: ${message.guild.owner.user.tag}`+
+    .addField("❯ OTHERS", `• Owner: ${message.guild.owner.user.tag} <a:hype:515571561345056783>`+
     `\n• Region: ${message.guild.region.toUpperCase()}`+
     `\n• Created at: ${moment(message.guild.createdAt).format("D-MM-YY, kk:mm")}`)
 
