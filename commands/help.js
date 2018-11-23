@@ -11,8 +11,8 @@ exports.run = (client, message, args) => {
     const embed = new Discord.RichEmbed()
     .setAuthor(`COMMANDS INFORMATION`, client.user.displayAvatarURL)
     .setColor(65280)
-    .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL)
-    .setThumbnail(client.user.displayAvatarURL)
+    .setFooter(`Requested by ${message.author.username}`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
+    .setThumbnail('https://discordemoji.com/assets/emoji/DiscordHype.gif')
     .setTimestamp()
     .addField("❯ HELP", `• **${process.env.DISCORD_PREFIX}help** - It explains itself!`)
 
