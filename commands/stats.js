@@ -46,9 +46,6 @@ exports.run = (client, message, args) => {
     `\n• Node Version : [${process.version}](https://nodejs.org)`)
 
     .addField("❯ OWNER INFO", `• Owner : SUVAJIT#5580`+
-
-
-    `\n• Invitation Link : [Tap Here](https://discordapp.com/oauth2/authorize?client_id=499250383785558026&permissions=2146958847&scope=bot)`+
     `\n• Creation Date : ${moment(client.user.createdAt).format("DD-MM-YY, kk:mm")}`) 
 
     message.channel.send({embed});
