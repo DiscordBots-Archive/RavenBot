@@ -14,24 +14,24 @@ exports.run = (client, message, args) => {
     .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL)
     .setThumbnail(client.user.displayAvatarURL)
     .setTimestamp()
-    .addField("❯ HELP", "• **!help** - It explains itself!")
+    .addField("❯ HELP", `• **${process.env.DISCORD_PREFIX}help** - It explains itself!`)
 
-    .addField("❯ INFO", `• **!stats** - It shows the bot information`+
-    `\n• **!server** - It shows the server information`+
-    `\n• **!user @user** - It shows the user info`+
-    `\n• **!ping** - It shows the ping status`+
-    `\n• **!invite** - Invite the bot to your server`)
+    .addField("❯ INFO", `• **${process.env.DISCORD_PREFIX}stats** - It shows the bot information`+
+    `\n• **${process.env.DISCORD_PREFIX}server** - It shows the server information`+
+    `\n• **${process.env.DISCORD_PREFIX}user @user** - It shows the user info`+
+    `\n• **${process.env.DISCORD_PREFIX}ping** - It shows the ping status`+
+    `\n• **${process.env.DISCORD_PREFIX}invite** - Invite the bot to your server`)
 
-    .addField("❯ MOD", `• **!kick @user** - To kick a user`+
-    `\n• **!ban @user** - To ban a user`+
-    `\n• **!mute @user** - To mute a user for a min`+
-    `\n• **!unmute @user** - To unmute a user`+
-    `\n• **!verify @user** - To verify a user`+
-    `\n• **!unverify @user** - To unverify a user`)
+    .addField("❯ MOD", `• **${process.env.DISCORD_PREFIX}kick @user** - To kick a user`+
+    `\n• **${process.env.DISCORD_PREFIX}ban @user** - To ban a user`+
+    `\n• **${process.env.DISCORD_PREFIX}mute @user** - To mute a user for a min`+
+    `\n• **${process.env.DISCORD_PREFIX}unmute @user** - To unmute a user`+
+    `\n• **${process.env.DISCORD_PREFIX}verify @user** - To verify a user`+
+    `\n• **${process.env.DISCORD_PREFIX}unverify @user** - To unverify a user`)
 
-    .addField("❯ UTIL", `• **!clear** - To clear messages`+
-    `\n• **!player tag** - It shows player info`+
-    `\n• **!clan tag** - It shows clan info`)
+    .addField("❯ UTIL", `• **${process.env.DISCORD_PREFIX}clear** - To clear messages`+
+    `\n• **${process.env.DISCORD_PREFIX}player tag** - It shows player info`+
+    `\n• **${process.env.DISCORD_PREFIX}clan tag** - It shows clan info`)
 
     .addField("❯ MEE6", `• **!rank** - It shows your rank`+
     `\n• **!levels** - It shows the position`)

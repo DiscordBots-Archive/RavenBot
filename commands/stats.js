@@ -13,8 +13,9 @@ exports.run = (client, message, args) => {
     const duration = moment.duration(client.uptime).format("D [days], H [hrs], m [mins], s [secs]");
 
     const embed = new Discord.RichEmbed()
-    .setAuthor(`CLIENT INFIORMATION`, client.user.displayAvatarURL)
-    .setThumbnail('https://cdn.discordapp.com/emojis/393852367751086090.gif?v=1')
+    .setAuthor(`CLIENT INFIORMATION`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
+    //.setAuthor(`CLIENT INFIORMATION`, client.user.displayAvatarURL)
+    .setThumbnail('https://discordemoji.com/assets/emoji/DiscordHype.gif')
     //.setThumbnail(client.user.displayAvatarURL)
     .setColor(65280)
     .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL)
@@ -27,9 +28,18 @@ exports.run = (client, message, args) => {
 
     .addField("❯ UPTIME", `• ${duration}`)
 
-    .addField("❯ SERVER INFO", `• Users : ${client.users.size}`+
-    `\n• Servers : ${client.guilds.size}`+
-    `\n• Channels :  ${client.channels.size}`)
+    .addField("❯ SERVER INFO", `\n• Servers : ${client.guilds.size}`)
+
+    .addField("❯ USER INFO", `• Users : ${client.users.size}`+
+    `\n• Online : ${client.users.filter(m => m.presence.status === 'online').size}`+
+    `\n• Dnd : ${client.users.filter(m => m.presence.status === 'dnd').size}`+
+    `\n• Idle : ${client.users.filter(m => m.presence.status === 'idle').size}`+
+    `\n• Offline : ${client.users.filter(m => m.presence.status === 'offline').size}`)
+
+    .addField("❯ CHANNEL INFO", `• Total : ${client.channels.filter(ch => ch.type === 'text').size + client.channels.filter(ch => ch.type === 'voice').size}`+
+    `\n• Category :  ${client.channels.size - client.channels.filter(ch => ch.type === 'text').size - client.channels.filter(ch => ch.type === 'voice').size}`+
+    `\n• Text : ${client.channels.filter(ch => ch.type === 'text').size}`+
+    `\n• Audio : ${client.channels.filter(ch => ch.type === 'voice').size}`)
 
     .addField("❯ LIBRARY INFO", `• Library : [Node.js](https://nodejs.org)`+
     `\n • Discord.js : [v${Discord.version}](https://discord.js.org)`+
