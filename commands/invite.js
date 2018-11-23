@@ -14,7 +14,7 @@ exports.run = (client, message, args) => {
     .setAuthor(`${client.user.username} - The Discord Bot`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
     .setThumbnail('https://discordemoji.com/assets/emoji/DiscordHype.gif')
     .setDescription(`❯ Please don't remove any permission \n❯ Otherwise it will not work properly!! \n\n❯ [TAP HERE TO INVITE](https://discordapp.com/oauth2/authorize?client_id=499250383785558026&permissions=2146958847&scope=bot)`)
-    .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL)
+    .setFooter(`Requested by ${message.author.username}`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
     .setColor(65280)
     .setTimestamp()
     message.channel.send({embed});

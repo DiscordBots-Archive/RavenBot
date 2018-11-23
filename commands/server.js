@@ -13,7 +13,7 @@ exports.run = (client, message, args) => {
     const embed = new Discord.RichEmbed()
     .setDescription(`Info about **${message.guild.name}** (ID: ${message.guild.id})`)
     .setColor(65280)
-    .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL)
+    .setFooter(`Requested by ${message.author.username}`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
     .setTimestamp()
 
     .addField("❯ CHANNELS & ROLES", `• Category: ${message.guild.channels.size - message.guild.channels.filter(ch => ch.type === 'text').size - message.guild.channels.filter(ch => ch.type === 'voice').size}`+

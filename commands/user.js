@@ -31,10 +31,10 @@ exports.run = (client, message, args) => {
         } else if (message.author.presence.status.toUpperCase() === "IDLE") {
             emot = "<:idle:515444772228431872>";
         }
-        
+
         const embed = new Discord.RichEmbed()
         .setColor(65280)
-        .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL)
+        .setFooter(`Requested by ${message.author.username}`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
         .setTimestamp()
         .setThumbnail(message.author.displayAvatarURL)
         .setDescription(`Info about **${message.author.username}** (ID: ${message.author.id})`)
@@ -71,7 +71,7 @@ exports.run = (client, message, args) => {
 
     const embed = new Discord.RichEmbed()
     .setColor(65280)
-    .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL)
+    .setFooter(`Requested by ${message.author.username}`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
     .setTimestamp()
     .setThumbnail(member.user.displayAvatarURL)
     .setDescription(`Info about **${member.user.username}** (ID: ${member.user.id})`)

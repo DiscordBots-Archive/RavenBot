@@ -18,7 +18,7 @@ exports.run = (client, message, args) => {
     .setThumbnail('https://discordemoji.com/assets/emoji/DiscordHype.gif')
     //.setThumbnail(client.user.displayAvatarURL)
     .setColor(65280)
-    .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL)
+    .setFooter(`Requested by ${message.author.username}`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
     .setTimestamp()
 
     .addField("❯ MEMORY USAGE", `• Using : ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`+
