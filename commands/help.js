@@ -31,7 +31,8 @@ exports.run = (client, message, args) => {
     `\n• **${process.env.DISCORD_PREFIX}unverify @user** - To unverify a user`)
 
     .addField("❯ UTIL", `• **${process.env.DISCORD_PREFIX}clear** - To clear messages`+
-    `\n• **${process.env.DISCORD_PREFIX}link @user tag** - Link discord with player tag **[BETA]**`+ 
+    `\n• **${process.env.DISCORD_PREFIX}link @user tag** - Link discord with player tag **[BETA]**`+
+    `\n• **${process.env.DISCORD_PREFIX}find @user/tag** - Find someone's clash profile **[BETA]**`+
     `\n• **${process.env.DISCORD_PREFIX}player tag** - It shows player info`+
     `\n• **${process.env.DISCORD_PREFIX}clan tag** - It shows clan info`)
 
