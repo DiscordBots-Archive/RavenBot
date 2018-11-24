@@ -29,7 +29,7 @@ exports.run = async (client, message, args) => {
 
     member.addRole(muteRole).then(() => {
 
-        message.channel.send("Ok Bro");
+        message.channel.send("<a:hype:515571561345056783>");
 
         client.channels.get(botcmd.id).send({embed})
 

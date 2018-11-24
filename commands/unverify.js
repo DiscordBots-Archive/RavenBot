@@ -23,7 +23,7 @@ exports.run = async (client, message, args) => {
     .setDescription(`\`❯ USER UNVERIFIED \n• ${member.user.username} has been un-verified by ${message.author.username}\``)
 
     member.removeRole(greenRole).then(() => {
-        message.channel.send("Ok Bro");
+        message.channel.send("<a:hype:515571561345056783>");
         client.channels.get(botcmd.id).send({embed})
         .catch(error => message.channel.send(`${message.author.username}: ` + `Sorry, I couldn't unverify because of : ${error}`));
     });
