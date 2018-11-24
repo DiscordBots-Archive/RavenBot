@@ -123,8 +123,6 @@ exports.run = (client, message, args) => {
     
         .addField("**❯ UTILS**", "<a:hype:515571561345056783>")
         .addField(`• ${process.env.DISCORD_PREFIX}clear`, `• To clear messages`)
-        .addField(`• ${process.env.DISCORD_PREFIX}link @user tag **[BETA]**`, `• Link your clash profile with discord account`)
-        .addField(`• ${process.env.DISCORD_PREFIX}find @user/tag **[BETA]**`, ` Find someone's clash profile`)
         .addField(`• ${process.env.DISCORD_PREFIX}player tag`, `• It shows the clash player info`)
         .addField(`• ${process.env.DISCORD_PREFIX}clan tag`, `• It shows clan info`)
 
