@@ -1,4 +1,4 @@
-# [Generic - The Discord Bot](https://discordapp.com/oauth2/authorize?client_id=499250383785558026&permissions=2146958847&scope=bot)
+# [Violet - The Discord Bot](https://discordapp.com/oauth2/authorize?client_id=499250383785558026&permissions=2146958847&scope=bot)
 
 This is very simple Discord Bot written in discord.js library. If you want this bot, you can invite from [here](https://discordapp.com/oauth2/authorize?client_id=499250383785558026&permissions=2146958847&scope=bot)
 
