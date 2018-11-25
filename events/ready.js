@@ -9,7 +9,7 @@ module.exports = (client) => {
 
     const embed = new Discord.RichEmbed()
     .setColor('#157ef6')
-    .setThumbnail('https://discordemoji.com/assets/emoji/DiscordHype.gif')
+    .setThumbnail(client.user.displayAvatarURL)
     .setFooter(`${client.user.username}`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
     .setTimestamp()
     .setAuthor('❯ CLIENT STARTED', 'https://discordemoji.com/assets/emoji/DiscordHype.gif')

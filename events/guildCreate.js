@@ -9,7 +9,7 @@ module.exports = (client, guild) => {
     const embed = new Discord.RichEmbed()
 
     .setColor(65280)
-    .setThumbnail('https://discordemoji.com/assets/emoji/DiscordHype.gif')
+    .setThumbnail(client.user.displayAvatarURL)
     .setFooter(`Now ${client.guilds.size} Servers, ${client.users.size} Users`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
     .setTimestamp()
     .setAuthor('❯ CLIENT JOINED','https://discordemoji.com/assets/emoji/DiscordHype.gif')

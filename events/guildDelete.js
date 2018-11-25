@@ -9,8 +9,8 @@ module.exports = (client, guild) => {
     const embed = new Discord.RichEmbed()
 
     .setColor("#f32d11")
-    .setThumbnail('https://discordemoji.com/assets/emoji/DiscordHype.gif')
-    .setFooter(`${client.guilds.size} Servers, ${client.users.size} Users`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
+    .setThumbnail(client.user.displayAvatarURL)
+    .setFooter(`Now ${client.guilds.size} Servers, ${client.users.size} Users`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
     .setTimestamp()
     .setAuthor('❯ CLIENT REMOVED', 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
     .setDescription(`• Server: ${guild.name}`+
