@@ -13,10 +13,10 @@ module.exports = (client) => {
     .setFooter(`${client.user.username}`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
     .setTimestamp()
     .setAuthor('CLIENT STATUS UPDATE', 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
-    .addField(`❯ CLIENT STARTED`,`• Client: **${client.user.tag}**`+
-    `\n• Servers: **${client.guilds.size}**`+
-    `\n• Users: **${client.users.size}**`+
-    `\n• Channels:  **${client.channels.size}**`)
+    .addField(`❯ CLIENT STARTED`,`• Client: ${client.user.tag}`+
+    `\n• Servers: ${client.guilds.size}`+
+    `\n• Users: ${client.users.size}`+
+    `\n• Channels:  ${client.channels.size}`)
     channel.send({embed});
    
 }
