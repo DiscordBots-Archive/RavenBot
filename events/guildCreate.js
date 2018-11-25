@@ -9,14 +9,14 @@ module.exports = (client, guild) => {
     const embed = new Discord.RichEmbed()
 
     .setColor(65280)
-    .setThumbnail(client.user.displayAvatarURL)
+    .setThumbnail('https://discordemoji.com/assets/emoji/DiscordHype.gif')
     .setFooter(`Now ${client.guilds.size} Servers, ${client.users.size} Users`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
     .setTimestamp()
-    .setAuthor('CLIENT JOINED','https://discordemoji.com/assets/emoji/DiscordHype.gif')
-    .setDescription(`• Server: **${guild.name}**`+
-    `\n\n• ID: **${guild.id}**`+
-    `\n\n• Owner: **${guild.owner.user.tag}**`+
-    `\n\n• Members: **${guild.memberCount}**`)
+    .setAuthor('CLIENT STATUS UPDATE','https://discordemoji.com/assets/emoji/DiscordHype.gif')
+    .addField(`❯ CLIENT ADDED`, `• Server: ${guild.name}`+
+    `\n• ID: ${guild.id}`+
+    `\n• Owner: ${guild.owner.user.tag}`+
+    `\n• Members: ${guild.memberCount}`)
 
     channel.send({embed});
 
