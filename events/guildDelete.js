@@ -13,9 +13,9 @@ module.exports = (client, guild) => {
     .setFooter(`Now ${client.guilds.size} Servers, ${client.users.size} Users`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
     .setTimestamp()
     .setAuthor('❯ CLIENT REMOVED', 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
-    .setDescription(`• Server: ${guild.name}`+
-    `\n• ID: ${guild.id}`+
-    `\n• Owner: ${guild.owner.user.tag}`)
+    .setDescription(`• Server: **${guild.name}**`+
+    `\n\n• ID: **${guild.id}**`+
+    `\n\n• Owner: **${guild.owner.user.tag}**`)
 
     channel.send({embed});
 

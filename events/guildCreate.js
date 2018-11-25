@@ -12,11 +12,11 @@ module.exports = (client, guild) => {
     .setThumbnail(client.user.displayAvatarURL)
     .setFooter(`Now ${client.guilds.size} Servers, ${client.users.size} Users`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
     .setTimestamp()
-    .setAuthor('❯ CLIENT JOINED','https://discordemoji.com/assets/emoji/DiscordHype.gif')
-    .setDescription(`• Server: ${guild.name}`+
-    `\n• ID: ${guild.id}`+
-    `\n• Owner: ${guild.owner.user.tag}`+
-    `\n• Members: ${guild.memberCount}`)
+    .setAuthor('CLIENT JOINED','https://discordemoji.com/assets/emoji/DiscordHype.gif')
+    .setDescription(`• Server: **${guild.name}**`+
+    `\n\n• ID: **${guild.id}**`+
+    `\n\n• Owner: **${guild.owner.user.tag}**`+
+    `\n\n• Members: **${guild.memberCount}**`)
 
     channel.send({embed});
 

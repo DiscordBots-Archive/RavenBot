@@ -13,11 +13,10 @@ module.exports = (client) => {
     .setFooter(`${client.user.username}`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
     .setTimestamp()
     .setAuthor('❯ CLIENT STARTED', 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
-    .setDescription(`• Client: ${client.user.tag}`+
-    `\n• Servers: ${client.guilds.size}`+
-    `\n• Users: ${client.users.size}`+
-    `\n• Channels:  ${client.channels.size}`)
+    .setDescription(`• Client: **${client.user.tag}**`+
+    `\n\n• Servers: **${client.guilds.size}**`+
+    `\n\n• Users: **${client.users.size}**`+
+    `\n\n• Channels:  **${client.channels.size}**`)
     channel.send({embed});
-
-    
+   
 }
