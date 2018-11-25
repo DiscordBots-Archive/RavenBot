@@ -127,7 +127,6 @@ exports.run = (client, message, args) => {
         .addField(`• ${process.env.DISCORD_PREFIX}clan tag`, `• It shows clan info`)
 
         message.channel.send({embed});
-
     }
 
     else {
