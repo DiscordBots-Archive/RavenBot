@@ -17,7 +17,7 @@ exports.run = async (client, message, args) => {
     m.edit(`Player Details: \nhttp://kuilin.net/cc_n/member.php?tag=${playertag}`);
     const embed = new Discord.RichEmbed()
     .setColor('#1E90ff')
-    .setTitle("TAP HERE TO DIRECTLY OPEN IN GAME")
-    .setURL(`https://link.clashofclans.com/?action=OpenPlayerProfile&tag=${playertag} <:clash:516318617357254672>`)
+    .setTitle("TAP HERE TO DIRECTLY OPEN IN GAME <:clash:516318617357254672>")
+    .setURL(`https://link.clashofclans.com/?action=OpenPlayerProfile&tag=${playertag}`)
     message.channel.send({embed});
 }
