@@ -8,7 +8,7 @@ module.exports = (client) => {
     const channel = client.channels.find(ch => ch.id === '516098181549916172');
 
     const embed = new Discord.RichEmbed()
-    .setColor('#157ef6')
+    .setColor(65280)
     .setThumbnail(client.user.displayAvatarURL)
     .setFooter(`${client.user.username}`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
     .setTimestamp()
@@ -17,7 +17,6 @@ module.exports = (client) => {
     `\n• Servers: ${client.guilds.size}`+
     `\n• Users: ${client.users.size}`+
     `\n• Channels:  ${client.channels.size}`)
-    
-    channel.send({embed});
-   
+
+    channel.send({embed}); 
 }
