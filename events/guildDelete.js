@@ -4,7 +4,7 @@ const client = new Discord.Client();
 module.exports = (client, guild) => {
     console.log(`Server Removed \nName ${guild.name} \nID: ${guild.id}`);
 
-    const channel = client.channels.find(ch => ch.id === '516098181549916172');
+    const channel = client.channels.find(ch => ch.id === '516259519387533313');
 
     const embed = new Discord.RichEmbed()
 

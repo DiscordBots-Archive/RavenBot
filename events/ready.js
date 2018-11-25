@@ -17,6 +17,7 @@ module.exports = (client) => {
     `\n• Servers: ${client.guilds.size}`+
     `\n• Users: ${client.users.size}`+
     `\n• Channels:  ${client.channels.size}`)
+    
     channel.send({embed});
    
 }
