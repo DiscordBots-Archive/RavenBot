@@ -18,6 +18,6 @@ exports.run = async (client, message, args) => {
     const embed = new Discord.RichEmbed()
     .setColor('#1E90ff')
     .setTitle("TAP HERE TO DIRECTLY OPEN IN GAME")
-    .setURL(`https://link.clashofclans.com/?action=OpenPlayerProfile&tag=${playertag}`)
+    .setURL(`https://link.clashofclans.com/?action=OpenPlayerProfile&tag=${playertag} <:clash:516318617357254672>`)
     message.channel.send({embed});
 }
