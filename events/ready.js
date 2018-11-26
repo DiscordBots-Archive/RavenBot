@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 module.exports = (client) => {
-    console.log(`logging In \nClient: ${client.user.tag} \nUsers: ${client.users.size} \nChannels: ${client.channels.size} \nServers: ${client.guilds.size}`);
+    console.log(`logging In: Client: ${client.user.tag}, Users: ${client.users.size}, Channels: ${client.channels.size}, Servers: ${client.guilds.size}`);
     client.user.setActivity(`${process.env.DISCORD_PREFIX}help`, {type: "PLAYING"});
 
     const channel = client.channels.find(ch => ch.id === '516098181549916172');
