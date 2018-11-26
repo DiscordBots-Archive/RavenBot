@@ -13,7 +13,7 @@ fs.readdir("./events/", (err, files) => {
   files.forEach(file => {
     const event = require(`./events/${file}`);
     let eventName = file.split(".")[0];
-    console.log(`loading event: ${eventName}`)
+    //console.log(`loading event: ${eventName}`)
     client.on(eventName, event.bind(null, client));
   });
 });
@@ -26,7 +26,7 @@ fs.readdir("./commands/", (err, files) => {
     if (!file.endsWith(".js")) return;
     let props = require(`./commands/${file}`);
     let commandName = file.split(".")[0];
-    console.log(`loading command: ${process.env.DISCORD_PREFIX}${commandName}`);
+    //console.log(`loading command: ${process.env.DISCORD_PREFIX}${commandName}`);
     client.commands.set(commandName, props);
   });
 });
