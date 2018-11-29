@@ -29,7 +29,9 @@ message.channel.fetchMessages({
     return message.channel.send(`${message.author.username}: ` + "Please provide a number between 2 and 100 for the number of messages to delete");
     if (user) {
  const filterBy = user ? user.id : Client.user.id;
- fetched = messages.filter(m => m.author.id === filterBy).array().slice(0, amount);
+ fetched = messages.filter(m => m.author.id === filterBy).array().slice(0, deleteCount);
+        message.channel.bulkDelete(fetched)
+        .catch(error => message.channel.send (`${error}`));
  }
     const fetched = await message.channel.fetchMessages({limit: deleteCount});
     message.channel.bulkDelete(fetched)
