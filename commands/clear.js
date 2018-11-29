@@ -14,7 +14,7 @@ message.channel.fetchMessages({
  messages = messages.filter(m => m.author.id === filterBy).array().slice(0, amount);
  } 
    else if (!user) {
-           const messages =  message.channel.fetchMessages({limit: deleteCount});
+           const messages =  message.channel.fetchMessages({limit: amount});
     }
  message.channel.bulkDelete(messages).catch(error => console.log(error.stack));
 });
