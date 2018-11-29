@@ -32,10 +32,11 @@ message.channel.fetchMessages({
 const fetched = await messages.filter(m => m.author.id === filterBy).fetchMessages({limit: deleteCount});
         message.channel.bulkDelete(fetched)
         .catch(error => message.channel.send (`${error}`));
- }
+ } else if (!user) {
     const fetched = await message.channel.fetchMessages({limit: deleteCount});
     message.channel.bulkDelete(fetched)
     .catch(error => message.channel.send(`${message.author.username}: ` + `Couldn't delete messages because of: ${error}`));
+     }
         }
     else if (message.guild.id !== '500004711005683717') {
     //if(!message.member.roles.some(r=>[process.env.DEV_ROLE].includes(r.name)) )
