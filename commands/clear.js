@@ -12,7 +12,10 @@ message.channel.fetchMessages({
  if (user) {
  const filterBy = user ? user.id : Client.user.id;
  messages = messages.filter(m => m.author.id === filterBy).array().slice(0, amount);
- }
+ } 
+   else if (!user) {
+           const messages = await message.channel.fetchMessages({limit: deleteCount});
+    }
  message.channel.bulkDelete(messages).catch(error => console.log(error.stack));
 });
     
