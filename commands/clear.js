@@ -22,6 +22,9 @@ exports.run = async (client, message, args) => {
     
         {
             message.channel.send(`${amount} messages cleared`)
+            .then(msg => {
+                msg.delete(5000)
+            })
         }
     
         message.channel.bulkDelete(messages).catch(error => console.log(error.stack));
