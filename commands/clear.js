@@ -48,8 +48,12 @@ exports.run = async (client, message, args) => {
             messages = messages.array().slice(0, amount);
         }
     
+
         {
-            message.channel.send(`${amount} messages cleared`)
+            message.channel.send(`${amount} messages cleared ✅`)
+            .then(msg => {
+                msg.delete(5000)
+            })
         }
     
         message.channel.bulkDelete(messages).catch(error => console.log(error.stack));
