@@ -21,7 +21,7 @@ exports.run = async (client, message, args) => {
         }
     
         {
-            message.channel.send(`${amount} messages cleared`)
+            message.channel.send(`${amount} messages cleared ✅`)
             .then(msg => {
                 msg.delete(5000)
             })
