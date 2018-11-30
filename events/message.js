@@ -1,4 +1,9 @@
 module.exports = (client, message) => {
+  const swearWords = ["darn", "shucks", "frak", "shite"];
+if( swearWords.some(word => message.content.includes(word)) ) {
+  message.reply("Oh no you said a bad word!!!");
+  // Or just do message.delete();
+}
   if(message.author.bot) return;
   
   //const prefix = (client.config.prefix);
@@ -15,9 +20,9 @@ module.exports = (client, message) => {
   if (!cmd) return message.channel.send(`Command not found, please do \`${process.env.DISCORD_PREFIX}help\` for options`)
 
   cmd.run(client, message, args);
-  const swearWords = ["darn", "shucks", "frak", "shite"];
-if( swearWords.some(word => message.content.includes(word)) ) {
-  message.reply("Oh no you said a bad word!!!");
+ // const swearWords = ["darn", "shucks", "frak", "shite"];
+//if( swearWords.some(word => message.content.includes(word)) ) {
+ // message.reply("Oh no you said a bad word!!!");
   // Or just do message.delete();
 }
 };
