@@ -3,7 +3,7 @@ exports.run = async (client, message, args) => {
     if (message.guild.id === '500004711005683717') {
 
         if(!message.member.roles.some(r=>[process.env.DEV_ROLE, process.env.ADM_ROLE].includes(r.name)) )
-        return message.channel.send(`😒`);
+        return message.channel.send(`Only Admins can run this command 😒`);
     
         const user = message.mentions.users.first();
         const amount = !!parseInt(message.content.split(' ')[1]) ? parseInt(message.content.split(' ')[1]) : parseInt(message.content.split(' ')[2])
@@ -23,7 +23,7 @@ exports.run = async (client, message, args) => {
         {
             message.channel.send(`${amount} messages cleared ✅`)
             .then(msg => {
-                msg.delete(5000)
+                msg.delete(4000)
             })
         }
     
@@ -52,7 +52,7 @@ exports.run = async (client, message, args) => {
         {
             message.channel.send(`${amount} messages cleared ✅`)
             .then(msg => {
-                msg.delete(5000)
+                msg.delete(4000)
             })
         }
     

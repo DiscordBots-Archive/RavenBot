@@ -3,6 +3,8 @@ const client = new Discord.Client();
 
 exports.run = (client, message, args) => {
 
+    message.delete(10000);
+
     if (message.channel.name !== 'bot-commands' & message.channel.type !== 'dm') {
         message.delete(4000)
         let channel = message.guild.channels.find(ch => ch.name === "bot-commands");
