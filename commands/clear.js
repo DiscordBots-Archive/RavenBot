@@ -8,6 +8,7 @@ exports.run = async (client, message, args) => {
         }
     
         const user = message.mentions.users.first();
+        const author = message.author;
         const amount = !!parseInt(message.content.split(' ')[1]) ? parseInt(message.content.split(' ')[1]) : parseInt(message.content.split(' ')[2])
         if (!amount) {
             message.delete(4000);
@@ -51,6 +52,7 @@ exports.run = async (client, message, args) => {
     } else if (message.guild.id !== '500004711005683717') {
 
         const user = message.mentions.users.first();
+        const author = message.author;
         const amount = !!parseInt(message.content.split(' ')[1]) ? parseInt(message.content.split(' ')[1]) : parseInt(message.content.split(' ')[2])
         if (!amount) {
             message.delete(4000);
