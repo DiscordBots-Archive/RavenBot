@@ -24,12 +24,12 @@ exports.run = async (client, message, args) => {
             if (user) {
 
                 if (user == author) {
-                    message.delete(5000);
+                    message.delete(4000);
                     const filterBy = author ? user.id : client.user.id;
                     messages = messages.filter(m => m.author.id === filterBy).array().slice(1, amount + 1);
                 } 
                 else if (user !== author) {
-                    message.delete(5000);
+                    message.delete(4000);
                     const filterBy = user ? user.id : client.user.id;
                     messages = messages.filter(m => m.author.id === filterBy).array().slice(0, amount);
                 }
@@ -67,12 +67,12 @@ exports.run = async (client, message, args) => {
             if (user) {
 
                 if (user == author) {
-                    message.delete(5000);
+                    message.delete(4000);
                     const filterBy = author ? user.id : client.user.id;
                     messages = messages.filter(m => m.author.id === filterBy).array().slice(1, amount + 1);
                 } 
                 else if (user !== author) {
-                    message.delete(5000);
+                    message.delete(4000);
                     const filterBy = user ? user.id : client.user.id;
                     messages = messages.filter(m => m.author.id === filterBy).array().slice(0, amount);
                 }
