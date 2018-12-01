@@ -24,11 +24,11 @@ exports.run = async (client, message, args) => {
          if (user) {
              message.delete(4000);
          const filterBy = user ? user.id : Client.user.id;
-         messages = messages.filter(m => m.author.id === filterBy).array().slice(1, amount);
+         messages = messages.filter(m => m.author.id === filterBy).array().slice(1, amount + 1);
          }
          else if (!user) {
              message.delete(4000);
-            messages = messages.array().slice(1, amount);
+            messages = messages.array().slice(1, amount + 1);
         }
     
         {
@@ -60,11 +60,11 @@ exports.run = async (client, message, args) => {
          if (user) {
              message.delete(4000);
          const filterBy = user ? user.id : Client.user.id;
-         messages = messages.filter(m => m.author.id === filterBy).array().slice(1, amount);
+         messages = messages.filter(m => m.author.id === filterBy).array().slice(1, amount + 1);
          }
          else if (!user) {
              message.delete(4000);
-            messages = messages.array().slice(1, amount);
+            messages = messages.array().slice(1, amount + 1);
         }
     
 
