@@ -6,7 +6,6 @@ exports.run = async (client, message, args) => {
             message.delete(4000);
             return message.channel.send(`Only Admins can run this command 😒`).then(msg => {msg.delete(5000)});
         }
-
     
         const user = message.mentions.users.first();
         const amount = !!parseInt(message.content.split(' ')[1]) ? parseInt(message.content.split(' ')[1]) : parseInt(message.content.split(' ')[2])
@@ -21,24 +20,31 @@ exports.run = async (client, message, args) => {
         message.channel.fetchMessages({
          limit: 50,
         }).then((messages) => {
-         if (user) {
-             message.delete(4000);
-         const filterBy = user ? user.id : Client.user.id;
-         messages = messages.filter(m => m.author.id === filterBy).array().slice(0, amount);
-         }
-         else if (!user) {
-             message.delete(4000);
-            messages = messages.array().slice(1, amount + 1);
-        }
+
+            if (user) {
+
+                if (user == author) {
+                    message.delete(5000);
+                    const filterBy = author ? user.id : client.user.id;
+                    messages = messages.filter(m => m.author.id === filterBy).array().slice(1, amount + 1);
+                } 
+                else if (user !== author) {
+                    message.delete(5000);
+                    const filterBy = user ? user.id : client.user.id;
+                    messages = messages.filter(m => m.author.id === filterBy).array().slice(0, amount);
+                }
+
+            }
+            else if (!user) {
+                message.delete(4000);
+                messages = messages.array().slice(1, amount + 1);
+            }
     
-        {
-            message.channel.send(`${amount} messages cleared ✅`)
-            .then(msg => {
-                msg.delete(4000)
-            })
-        }
+            {
+                message.channel.send(`${amount} messages cleared ✅`).then(msg => {msg.delete(4000)});
+            }
     
-        message.channel.bulkDelete(messages).catch(error => console.log(error.stack));
+            message.channel.bulkDelete(messages).catch(error => console.log(error.stack));
         
         });
     
@@ -57,25 +63,31 @@ exports.run = async (client, message, args) => {
         message.channel.fetchMessages({
          limit: 50,
         }).then((messages) => {
-         if (user) {
-             message.delete(4000);
-         const filterBy = user ? user.id : Client.user.id;
-         messages = messages.filter(m => m.author.id === filterBy).array().slice(0, amount);
-         }
-         else if (!user) {
-             message.delete(4000);
-            messages = messages.array().slice(1, amount + 1);
-        }
-    
 
-        {
-            message.channel.send(`${amount} messages cleared ✅`)
-            .then(msg => {
-                msg.delete(4000)
-            })
-        }
+            if (user) {
+
+                if (user == author) {
+                    message.delete(5000);
+                    const filterBy = author ? user.id : client.user.id;
+                    messages = messages.filter(m => m.author.id === filterBy).array().slice(1, amount + 1);
+                } 
+                else if (user !== author) {
+                    message.delete(5000);
+                    const filterBy = user ? user.id : client.user.id;
+                    messages = messages.filter(m => m.author.id === filterBy).array().slice(0, amount);
+                }
+
+            }
+            else if (!user) {
+                message.delete(4000);
+                messages = messages.array().slice(1, amount + 1);
+            }
     
-        message.channel.bulkDelete(messages).catch(error => console.log(error.stack));
+            {
+                message.channel.send(`${amount} messages cleared ✅`).then(msg => {msg.delete(4000)});
+            }
+    
+            message.channel.bulkDelete(messages).catch(error => console.log(error.stack));
         
         });
     }
