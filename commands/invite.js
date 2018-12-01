@@ -4,9 +4,10 @@ const client = new Discord.Client();
 exports.run = (client, message, args) => {
 
     if (message.channel.name !== 'bot-commands' & message.channel.type !== 'dm') {
+        message.delete(4000)
         let channel = message.guild.channels.find(ch => ch.name === "bot-commands");
         if(!channel) return message.channel.send('Could not found **#bot-commands** channel. Please create it and try again.')
-        return message.channel.send(`Please use commands in appropriate chatrooms to reduce spam ${channel}`);
+        return message.channel.send(`Please use commands in appropriate chatrooms to reduce spam ${channel}`).then(msg => {msg.delete(4000)});
     }
 
     const embed = new Discord.RichEmbed()
@@ -17,5 +18,5 @@ exports.run = (client, message, args) => {
     .setFooter(`Requested by ${message.author.username}`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
     .setColor(65280)
     .setTimestamp()
-    message.channel.send({embed});
+    message.channel.send({embed}).then(msg => {msg.delete(10000)});
 }
