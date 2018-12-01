@@ -27,7 +27,8 @@ exports.run = async (client, message, args) => {
          messages = messages.filter(m => m.author.id === filterBy).array().slice(1, amount);
          }
          else if (!user) {
-            messages = messages.array().slice(0, amount);
+             message.delete(4000);
+            messages = messages.array().slice(1, amount);
         }
     
         {
@@ -62,7 +63,8 @@ exports.run = async (client, message, args) => {
          messages = messages.filter(m => m.author.id === filterBy).array().slice(1, amount);
          }
          else if (!user) {
-            messages = messages.array().slice(0, amount);
+             message.delete(4000);
+            messages = messages.array().slice(1, amount);
         }
     
 
