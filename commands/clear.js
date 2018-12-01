@@ -10,7 +10,7 @@ exports.run = async (client, message, args) => {
         if (!amount) return message.channel.send('Please specify a user and amount, or just an amount, of messages to clear.');
         if (!amount && !user) return message.reply('Please specify a user and amount, or just an amount, of messages to purge.');
         message.channel.fetchMessages({
-         limit: 20,
+         limit: 50,
         }).then((messages) => {
          if (user) {
          const filterBy = user ? user.id : Client.user.id;
@@ -38,7 +38,7 @@ exports.run = async (client, message, args) => {
         if (!amount) return message.channel.send('Please specify a user and amount, or just an amount, of messages to clear.');
         if (!amount && !user) return message.reply('Please specify a user and amount, or just an amount, of messages to purge.');
         message.channel.fetchMessages({
-         limit: 20,
+         limit: 50,
         }).then((messages) => {
          if (user) {
          const filterBy = user ? user.id : Client.user.id;
