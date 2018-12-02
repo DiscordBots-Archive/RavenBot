@@ -7,7 +7,7 @@ module.exports = (client, reaction, user) => {
   const msg = reaction.message;
   let member = msg.guild.members.get(user.id);
     
-  if (msg.id == '518671831482236929') {
+  if (msg.id == process.env.REACT_MESSAGE) {
 
     console.log('Valid Message Reaction')
     if (reaction.emoji.id == '509629414120882176') {
