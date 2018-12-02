@@ -1,7 +1,7 @@
 {
-  "name": "generic",
+  "name": "violet-01",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is very simple Discord Bot written in discord.js library. If you want this bot, you can invite from [here](https://discordapp.com/oauth2/authorize?client_id=499250383785558026&permissions=2146958847&scope=bot)",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -18,5 +18,14 @@
     "moment-duration-format": "^2.2.2",
     "ms": "^2.1.1",
     "os-utils": "0.0.14"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xsuvajit/discord-bot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xsuvajit/discord-bot/issues"
+  },
+  "homepage": "https://github.com/xsuvajit/discord-bot#readme"
 }
