@@ -1,23 +1,23 @@
 const Discord = require('discord.js');
 exports.run = async (client, message, args) => {
-    //message.delete(7000);
+    message.delete(6000);
     if(message.channel.type == 'dm') return message.channel.send('`Not a right place to use this command`')
 
     if(!message.member.roles.some(r=>[process.env.DEV_ROLE, process.env.ADM_ROLE, process.env.STF_ROLE].includes(r.name)) ) {
-        message.delete(5000);
+        //message.delete(5000);
         return message.channel.send(`${message.author.username} you don't have the role to use this, missing **${process.env.ADM_ROLE}** or **${process.env.STF_ROLE}** role, please create them and try again.`).then(msg => {msg.delete(5000)});
     }
 
     let member = message.mentions.members.first();
 
     if(!member)
-    return message.channel.send(`${message.author.username}: ` + "Please mention a valid member of this server!");
+    return message.channel.send(`${message.author.username}: ` + "Please mention a valid member of this server!").then(msg => {msg.delete(5000)});
 
     let greenRole = message.guild.roles.find(rol => rol.name === process.env.V_ROLE)
-    if(!greenRole) return message.channel.send(`${process.env.V_ROLE} role not found`)
+    if(!greenRole) return message.channel.send(`${process.env.V_ROLE} role not found`).then(msg => {msg.delete(5000)});
 
     let botcmd = message.guild.channels.find(ch => ch.name === process.env.LOG_CHANNEL);
-    if (!botcmd) return message.channel.send(`Could not found **#${process.env.LOG_CHANNEL}** channel. Please create it and try again.`);
+    if (!botcmd) return message.channel.send(`Could not found **#${process.env.LOG_CHANNEL}** channel. Please create it and try again.`).then(msg => {msg.delete(5000)});
 
     const embed = new Discord.RichEmbed()
   
@@ -28,6 +28,6 @@ exports.run = async (client, message, args) => {
     member.removeRole(greenRole).then(() => {
         message.channel.send("Done. User has been Un-Verified <a:hype:515571561345056783>").then(msg => {msg.delete(6000)});
         client.channels.get(botcmd.id).send({embed})
-        .catch(error => message.channel.send(`${message.author.username}: ` + `Sorry, I couldn't unverify because of : ${error}`));
+        .catch(error => message.channel.send(`${message.author.username}: ` + `Sorry, I couldn't unverify because of : ${error}`)).then(msg => {msg.delete(5000)});
     });
 }
