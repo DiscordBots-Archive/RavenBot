@@ -34,5 +34,5 @@ exports.run = async (client, message, args) => {
   .setDescription(`\`❯ USER KICKED \n• ${member.user.username} has been kicked by ${message.author.username} \n• Reason : ${reason}\``)
 
   client.channels.get(botcmd.id).send({embed});
-  message.channel.send("Done. User hs been Kicked <a:hype:515571561345056783>").then(msg => {msg.delete(6000)});
+  message.channel.send("Done. User has been Kicked <a:hype:515571561345056783>").then(msg => {msg.delete(6000)});
 }
