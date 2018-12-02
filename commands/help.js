@@ -47,9 +47,12 @@ exports.run = (client, message, args) => {
     }
 
     else if (message.guild.id == '500004711005683717') {
-        message.delete(4000)
+        
         let channel = message.guild.channels.find(ch => ch.name === "bot-commands");
-        if(message.channel.name !== 'bot-commands') return message.channel.send(`Please use commands in appropriate chatrooms to reduce spam ${channel}`).then(msg => {msg.delete(4000)});
+        if(message.channel.name !== 'bot-commands') {
+            message.delete(4000);
+            return message.channel.send(`Please use commands in appropriate chatrooms to reduce spam ${channel}`).then(msg => {msg.delete(4000)});
+        }
 
         const embed = new Discord.RichEmbed()
         .setAuthor(`COMMANDS INFORMATION`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
@@ -94,7 +97,10 @@ exports.run = (client, message, args) => {
     else if (message.guild.id == '487148999351205899') {
         message.delete(4000);
         let channel = message.guild.channels.find(ch => ch.name === "bot-commands");
-        if(message.channel.name !== 'bot-commands') return message.channel.send(`Please use commands in appropriate chatrooms to reduce spam ${channel}`).then(msg => {msg.delete(4000)});
+        if(message.channel.name !== 'bot-commands') {
+            message.delete(4000);
+            return message.channel.send(`Please use commands in appropriate chatrooms to reduce spam ${channel}`).then(msg => {msg.delete(4000)});
+        }
 
         const embed = new Discord.RichEmbed()
         .setAuthor(`COMMANDS INFORMATION`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
@@ -134,7 +140,10 @@ exports.run = (client, message, args) => {
         message.delete(4000);
         let channel = message.guild.channels.find(ch => ch.name === "bot-commands");
         if(!channel) return message.channel.send('Could not found **#bot-commands** channel. Please create it and try again.')
-        if(message.channel.name !== 'bot-commands') return message.channel.send(`Please use commands in appropriate chatrooms to reduce spam ${channel}`).then(msg => {msg.delete(4000)});
+        if(message.channel.name !== 'bot-commands') {
+            message.delete(4000);
+            return message.channel.send(`Please use commands in appropriate chatrooms to reduce spam ${channel}`).then(msg => {msg.delete(4000)});
+        }
 
         const embed = new Discord.RichEmbed()
         .setAuthor(`COMMANDS INFORMATION`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
