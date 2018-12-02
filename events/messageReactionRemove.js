@@ -1,3 +1,5 @@
+const Discord = require('discord.js');
+
 module.exports = (client, reaction, user) => {
   console.log(`${user.username} removed their "${reaction.emoji.name}" reaction.`);
   let role
@@ -13,5 +15,16 @@ module.exports = (client, reaction, user) => {
       console.log('Valid Emoji Reaction')
     } 
     member.removeRole(role);
+
+    let botcmd = msg.guild.channels.find(ch => ch.name === "bot-spam");
+
+    const embed = new Discord.RichEmbed()
+  
+    .setColor("#f32d11")
+    .setTimestamp()
+    .setDescription(`\`❯ UN-VERIFIED BY REACTING \n• ${user.username} has been un-verified by ${client.user.username}\``)
+
+    client.channels.get(botcmd.id).send({embed});
+
   }
 }

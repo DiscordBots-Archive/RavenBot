@@ -1,3 +1,5 @@
+const Discord = require('discord.js');
+
 module.exports = (client, reaction, user) => {
   console.log(`${user.username} reacted with "${reaction.emoji.name}".`);
   let role
@@ -13,5 +15,16 @@ module.exports = (client, reaction, user) => {
       console.log('Valid Emoji Reaction')
     } 
     member.addRole(role);
+
+    let botcmd = msg.guild.channels.find(ch => ch.name === "bot-spam");
+
+    const embed = new Discord.RichEmbed()
+  
+    .setColor(65280)
+    .setTimestamp()
+    .setDescription(`\`❯ VERIFIED BY REACTING \n• ${user.username} has been verified by ${client.user.username}\``)
+
+    client.channels.get(botcmd.id).send({embed});
+
   }
 }
