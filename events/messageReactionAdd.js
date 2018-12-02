@@ -6,6 +6,7 @@ module.exports = (client, reaction, user) => {
   const msg = reaction.message;
 
   if (msg.id == process.env.REACT_MESSAGE) {
+
     let role
     let member = msg.guild.members.get(user.id);
 
@@ -14,6 +15,7 @@ module.exports = (client, reaction, user) => {
       role = msg.guild.roles.get('500683488538656768')
       console.log('Role Given')
     } else if (reaction.emoji.id !== '509629414120882176') return;
+    
     member.addRole(role);
 
     let botcmd = msg.guild.channels.find(ch => ch.name === "bot-spam");

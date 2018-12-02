@@ -6,14 +6,16 @@ module.exports = (client, reaction, user) => {
   const msg = reaction.message;
 
   if (msg.id == process.env.REACT_MESSAGE) {
-  let role
-  let member = msg.guild.members.get(user.id);
+
+    let role
+    let member = msg.guild.members.get(user.id);
   
-  console.log('Valid Message Reaction')
-  if (reaction.emoji.id == '509629414120882176') {
-    role = msg.guild.roles.get('500683488538656768')
-    console.log('Role Given')
+    console.log('Valid Message Reaction')
+    if (reaction.emoji.id == '509629414120882176') {
+      role = msg.guild.roles.get('500683488538656768')
+      console.log('Role Removed')
     } else if (reaction.emoji.id !== '509629414120882176') return;
+    
     member.removeRole(role);
 
     let botcmd = msg.guild.channels.find(ch => ch.name === "bot-spam");
