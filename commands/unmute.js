@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 
 exports.run = async (client, message, args) => {
+    message.delete(7000);
 
     if(message.channel.type == 'dm') return message.channel.send('`Not a right place to use this command`')
     
@@ -26,7 +27,7 @@ exports.run = async (client, message, args) => {
     .setDescription(`\`❯ USER UNMUTED \n• ${member.user.username} has been unmuted by ${message.author.username}\``)
 
     member.removeRole(muteRole).then(() => {
-        message.channel.send("<a:hype:515571561345056783>");
+        message.channel.send("Done. User has been Un-Muted <a:hype:515571561345056783>").then(msg => {msg.delete(6000)});
         client.channels.get(botcmd.id).send({embed})
         .catch(error => message.channel.send(`${message.author.username}: ` + `Sorry, I couldn't unmute because of : ${error}`));
     });

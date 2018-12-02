@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 exports.run = async (client, message, args) => {
+    message.delete(7000);
     if(message.channel.type == 'dm') return message.channel.send('`Not a right place to use this command`')
 
     if(!message.member.roles.some(r=>[process.env.DEV_ROLE, process.env.ADM_ROLE, process.env.STF_ROLE].includes(r.name)) ) {
@@ -25,7 +26,7 @@ exports.run = async (client, message, args) => {
     .setDescription(`\`❯ USER UNVERIFIED \n• ${member.user.username} has been un-verified by ${message.author.username}\``)
 
     member.removeRole(greenRole).then(() => {
-        message.channel.send("<a:hype:515571561345056783>");
+        message.channel.send("Done. User has been Un-Verified <a:hype:515571561345056783>").then(msg => {msg.delete(6000)});
         client.channels.get(botcmd.id).send({embed})
         .catch(error => message.channel.send(`${message.author.username}: ` + `Sorry, I couldn't unverify because of : ${error}`));
     });
