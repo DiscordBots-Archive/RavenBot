@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 exports.run = async (client, message, args) => {
-    message.delete(7000);
+    //message.delete(7000);
 
     if(message.channel.type == 'dm') return message.channel.send('`Not a right place to use this command`')
     
