@@ -25,7 +25,7 @@ exports.run = async (client, message, args) => {
 
   await member.kick(reason)
 
-  .catch(error => message.channel.send(`${message.author.username}: ` + `Sorry, I couldn't kick because of : ${error}`)).then(msg => {msg.delete(5000)});
+  .catch(error => message.channel.send(`${message.author.username}: ` + `Sorry, I couldn't kick because of : ${error}`)).then(msg );
 
   const embed = new Discord.RichEmbed()
 
