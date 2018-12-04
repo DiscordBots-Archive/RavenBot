@@ -26,7 +26,7 @@ exports.run = async (client, message, args) => {
     if(!reason) reason = "No reason provided";
 
     await member.ban(reason)
-    .catch(error => message.channel.send(`${message.author.username}: ` + `Sorry, I couldn't ban because of : ${error}`)).then(msg => {msg.delete(5000)});
+    .catch(error => message.channel.send(`${message.author.username}: ` + `Sorry, I couldn't ban because of : ${error}`));
 
     const embed = new Discord.RichEmbed()
     
