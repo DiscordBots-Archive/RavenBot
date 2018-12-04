@@ -60,7 +60,7 @@ dc.on('message', (message) => {
 
 });
 
-dc.login(process.env.TOKEN);
+
 
 tg.on('message', (message) => {
   
