@@ -36,7 +36,7 @@ exports.run = async (client, message, args) => {
 
         client.channels.get(botcmd.id).send({embed})
 
-        .catch(error => message.channel.send(`${message.author.username}: ` + `Sorry, I couldn't mute because of : ${error}`)).then(msg => {msg.delete(5000)});
+        .catch(error => message.channel.send(`${message.author.username}: ` + `Sorry, I couldn't mute because of : ${error}`)) ;
 
         setTimeout( () => {
 
