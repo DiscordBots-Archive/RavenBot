@@ -22,7 +22,7 @@ exports.run = async (client, message, args) => {
     if(!muteRole) return message.channel.send('Could not found **Muted** role. Please create it').then(msg => {msg.delete(5000)});
 
     let botcmd = message.guild.channels.find(ch => ch.name === process.env.LOG_CHANNEL);
-    if (!botcmd) return message.channel.send(`Could not found **#${process.env.LOG_CHANNEL}** channel. Please create it and try again.`).then(msg => {msg.delete(5000)});
+    if (!botcmd) return message.channel.send(`Could not found **#${process.env.LOG_CHANNEL}** channel. Please create it and try again.`);
 
     const embed = new Discord.RichEmbed()
 
