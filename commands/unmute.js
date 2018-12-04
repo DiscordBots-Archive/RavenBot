@@ -29,6 +29,6 @@ exports.run = async (client, message, args) => {
     member.removeRole(muteRole).then(() => {
         message.channel.send("Done. User has been Un-Muted <a:hype:515571561345056783>");
         client.channels.get(botcmd.id).send({embed})
-        .catch(error => message.channel.send(`${message.author.username}: ` + `Sorry, I couldn't unmute because of : ${error}`)).then(msg => {msg.delete(5000)});
+        .catch(error => message.channel.send(`${message.author.username}: ` + `Sorry, I couldn't unmute because of : ${error}`)).then(msg =);
     });
 }
