@@ -1,11 +1,11 @@
 const Discord = require('discord.js');
 exports.run = async (client, message, args) => {
-  message.delete(6000);
+  //message.delete(6000);
 
   if(message.channel.type == 'dm') return message.channel.send('`Not a right place to use this command`')
 
   if(!message.member.roles.some(r=>[process.env.DEV_ROLE, process.env.ADM_ROLE].includes(r.name)) ) {
-    //message.delete(5000);
+    message.delete(5000);
     return message.channel.send(`${message.author.username} ` + `you don't have the role to use this, missing **${process.env.ADM_ROLE}** role, please create them and try again.`).then(msg => {msg.delete(5000)});
   }
 
@@ -34,5 +34,5 @@ exports.run = async (client, message, args) => {
   .setDescription(`\`❯ USER KICKED \n• ${member.user.username} has been kicked by ${message.author.username} \n• Reason : ${reason}\``)
 
   client.channels.get(botcmd.id).send({embed});
-  message.channel.send("Done. User has been Kicked <a:hype:515571561345056783>").then(msg => {msg.delete(6000)});
+  message.channel.send("Done. User has been Kicked <a:hype:515571561345056783>");
 }
