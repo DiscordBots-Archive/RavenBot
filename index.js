@@ -37,7 +37,7 @@ const log = winston.createLogger({
 const tg = new Telegram(process.env.TELEGRAM, { polling: true });
 const mentionHook = new Discord.WebhookClient(process.env.WEBHOOK_ID, process.env.WEBHOOK_TOKEN);
 
-dc.on('message', (message) => {
+client.on('message', (message) => {
 
   // ignore self
   if(message.author.id == client.user.id) return;
