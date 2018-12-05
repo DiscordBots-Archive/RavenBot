@@ -5,9 +5,9 @@ exports.run = async (client, message, args) => {
 
     if(message.channel.type == 'dm') return message.channel.send('`Not a right place to use this command`')
     
-    if(!message.member.roles.some(r=>[process.env.DEV_ROLE, process.env.ADM_ROLE, process.env.STF_ROLE, process.env.V_ROLE].includes(r.name)) ) {
+    if(!message.member.roles.some(r=>[client.config.mod_role.r1, client.config.mod_role.r2, client.config.mod_role.r3, client.config.mod_role.r4].includes(r.name)) ) {
         message.delete(5000);
-        return message.channel.send(`${message.author.username} you don't have the role to use this, missing **${process.env.ADM_ROLE}** or **${process.env.STF_ROLE}** or **${process.env.V_ROLE}** role. Please create them and try again.`).then(msg => {msg.delete(5000)});
+        return message.channel.send(`${message.author.username} you don't have the role to use this, missing **${client.config.mod_role.r2}** or **${client.config.mod_role.r3}** or **${client.config.mod_role.r4}** role. Please create them and try again.`).then(msg => {msg.delete(5000)});
     }
 
     let member = message.mentions.members.first();
@@ -17,8 +17,8 @@ exports.run = async (client, message, args) => {
 
     let muteRole = message.guild.roles.find(rol => rol.name === "Muted")
 
-    let botcmd = message.guild.channels.find(ch => ch.name === process.env.LOG_CHANNEL);
-    if (!botcmd) return message.channel.send(`Could not found **#${process.env.LOG_CHANNEL}** channel. Please create it and try again.`).then(msg => {msg.delete(5000)});
+    let botcmd = message.guild.channels.find(ch => ch.name === client.config.logchannel.modlog_ch_id);
+    if (!botcmd) return;
 
     const embed = new Discord.RichEmbed()
   

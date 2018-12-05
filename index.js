@@ -1,21 +1,16 @@
 const Discord = require("discord.js");
 const Enmap = require("enmap");
 const fs = require("fs");
+require('dotenv').config();
 
 const client = new Discord.Client();
-
-//const config = require("./config.json");
-
-//client.config = config;
+client.config = require("./config.js");
 
 
 const Telegram   = require('node-telegram-bot-api')
-  , winston    = require('winston');
-
-//const config = require('./config.json');
-
+const winston    = require('winston');
 const log = winston.createLogger({
-    level: process.env.LOG,
+    level: client.config.telegram.log,
     transports: [
         new winston.transports.File({
             filename: 'logs/bridge.log',
@@ -36,9 +31,9 @@ const log = winston.createLogger({
     ]
 });
 
-const tg = new Telegram(process.env.TELEGRAM, { polling: true });
+const tg = new Telegram(client.config.telegram.token, { polling: true });
 
-const mentionHook = new Discord.WebhookClient(process.env.WEBHOOK_ID, process.env.WEBHOOK_TOKEN);
+const mentionHook = new Discord.WebhookClient(client.config.webhooks.id, client.config.webhooks.token);
 
 client.on('message', (message) => {
 
@@ -53,17 +48,15 @@ client.on('message', (message) => {
     );
 
     if (message.channel.type == 'text'
-        && message.channel.id == process.env.CHANNEL_ID
-        && message.guild.id == process.env.SERVER_ID
+        && message.channel.id == client.config.webhooks.channel_id
+        && message.guild.id == client.config.webhooks.guild_id
     ) {
         // <user#1337> what's up
         let message_out = message.author.username + '\n' + message.content;
-        tg.sendMessage(process.env.TELEGRAM_CHAT, message_out);
+        tg.sendMessage(client.config.telegram.chat_id, message_out);
     }
 
 });
-
-//dc.login(process.env.TOKEN);
 
 tg.on('message', (message) => {
     
@@ -72,11 +65,10 @@ tg.on('message', (message) => {
         message.from.username, message.text
     );
 
-    if (message.chat.id != process.env.TELEGRAM_CHAT) return;
+    if (message.chat.id != client.config.telegram.chat_id) return;
 
     // <user> what's up
     mentionHook.name = message.from.first_name;
-    //let message_out = message.from.first_name + ' : ' + message.text;
     let message_out = message.text;
     mentionHook.send(message_out);
 
@@ -106,6 +98,5 @@ fs.readdir("./commands/", (err, files) => {
   });
 });
 
-client.login(process.env.DISCORD_TOKEN);
 
-//client.login(config.token);
+client.login(client.config.discord.token);

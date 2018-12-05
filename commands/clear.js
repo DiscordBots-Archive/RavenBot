@@ -2,7 +2,7 @@ exports.run = async (client, message, args) => {
 
     if (message.guild.id === '500004711005683717') {
 
-        if(!message.member.roles.some(r=>[process.env.DEV_ROLE, process.env.ADM_ROLE].includes(r.name)) ) {
+        if(!message.member.roles.some(r=>[client.config.mod_role.r1, client.config.mod_role.r2].includes(r.name)) ) {
             message.delete(4000);
             return message.channel.send(`Only Admins can run this command 😒`).then(msg => {msg.delete(5000)});
         }

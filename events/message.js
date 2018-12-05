@@ -3,7 +3,7 @@ module.exports = (client, message) => {
   if(message.author.bot) return;
   
   //const prefix = (client.config.prefix);
-  const prefix = (process.env.DISCORD_PREFIX);
+  const prefix = (client.config.discord.prefix);
 
   const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|\\${prefix})\\s*`);
   if (!prefixRegex.test(message.content)) return;
@@ -15,7 +15,7 @@ module.exports = (client, message) => {
 
   if (!cmd) {
     message.delete(4000);
-    return message.channel.send(`Command not found, please do \`${process.env.DISCORD_PREFIX}help\` for options.`).then(msg => {msg.delete(4000)});
+    return message.channel.send(`Command not found, please do \`${client.config.discord.prefix}help\` for options.`).then(msg => {msg.delete(4000)});
   }
 
   cmd.run(client, message, args);

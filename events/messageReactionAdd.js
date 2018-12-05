@@ -5,7 +5,7 @@ module.exports = (client, reaction, user) => {
 
   const msg = reaction.message;
 
-  if (msg.id == process.env.REACT_MESSAGE) {
+  if (msg.id == client.config.reaction.message_id) {
 
     let role
     let member = msg.guild.members.get(user.id);
@@ -26,5 +26,5 @@ module.exports = (client, reaction, user) => {
     .setDescription(`\`❯ VERIFIED BY REACTING \n• ${user.username} has been verified by ${client.user.username}\``)
     client.channels.get(botcmd.id).send({embed})
     
-  } else if (msg.id == process.env.REACT_MESSAGE) return;
+  } else if (msg.id == client.config.reaction.message_id) return;
 }
