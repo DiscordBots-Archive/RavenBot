@@ -8,8 +8,8 @@ const client = new Discord.Client();
 
 //client.config = config;
 
-const Discord  = require('discord.js')
-  , Telegram   = require('node-telegram-bot-api')
+
+const Telegram   = require('node-telegram-bot-api')
   , winston    = require('winston');
 
 //const config = require('./config.json');
@@ -43,7 +43,7 @@ const mentionHook = new Discord.WebhookClient(process.env.WEBHOOK_ID, process.en
 dc.on('message', (message) => {
 
     // ignore self
-    if(message.author.id == dc.user.id) return;
+    if(message.author.id == client.user.id) return;
     if(message.author.id == mentionHook.id) return;
 
     log.debug('[discord] [%s-#%s]: <%s#%s> %s',
@@ -57,13 +57,13 @@ dc.on('message', (message) => {
         && message.guild.id == process.env.SERVER_ID
     ) {
         // <user#1337> what's up
-        let message_out = message.author.username + ' : \n' + message.content;
+        let message_out = message.author.username + '\n' + message.content;
         tg.sendMessage(process.env.TELEGRAM_CHAT, message_out);
     }
 
 });
 
-dc.login(process.env.TOKEN);
+//dc.login(process.env.TOKEN);
 
 tg.on('message', (message) => {
     
