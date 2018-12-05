@@ -37,6 +37,8 @@ const config = {
     },"reaction" : {
 
         "message_id" : process.env.REACT_MSG_ID,
+        "react_role" : process.env.REACT_ROLE,
+        "emoji_id" : process.env.EMOJI_ID
 
     },"webhooks" : {
 

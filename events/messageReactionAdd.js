@@ -11,10 +11,10 @@ module.exports = (client, reaction, user) => {
     let member = msg.guild.members.get(user.id);
 
     console.log('Valid Message Reaction')
-    if (reaction.emoji.id == '509629414120882176') {
-      role = msg.guild.roles.get('500683488538656768')
+    if (reaction.emoji.id == client.config.reaction.emoji_id) {
+      role = msg.guild.roles.get(client.config.reaction.react_role)
       console.log('Role Given')
-    } else if (reaction.emoji.id !== '509629414120882176') return;
+    } else if (reaction.emoji.id !== client.config.reaction.emoji_id) return;
     
     member.addRole(role);
 
