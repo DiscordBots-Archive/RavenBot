@@ -2,48 +2,9 @@ const Discord = require('discord.js');
 
 exports.run = (client, message, args) => {
 
-    /*if (message.channel.name !== 'bot-commands' & message.channel.type !== 'dm') {
-        let channel = message.guild.channels.find(ch => ch.name === "bot-commands");
-        if(!channel) return message.channel.send('Could not found **#bot-commands** channel. Please create it and try again.')
-        return message.channel.send(`Please use commands in appropriate chatrooms to reduce spam ${channel}`);
-    }*/
 
     if (message.channel.type == 'dm') {
-
-        const embed = new Discord.RichEmbed()
-        .setAuthor(`COMMANDS INFORMATION`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
-        .setColor(65280)
-        .setFooter(`Requested by ${message.author.username}`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
-        //.setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL)
-        .setThumbnail('https://discordemoji.com/assets/emoji/DiscordHype.gif')
-        .setTimestamp()
-    
-        .addField("**❯ HELP**", '<a:hype:515571561345056783>')
-        .addField(`• ${process.env.DISCORD_PREFIX}help`,`• It explains itself!`)
-    
-        .addField("**❯ INFO**", '<a:hype:515571561345056783>')
-        .addField(`• ${process.env.DISCORD_PREFIX}stats`, `• It shows the bot information`)
-        .addField(`• ${process.env.DISCORD_PREFIX}server`, `• It shows the server information`)
-        .addField(`• ${process.env.DISCORD_PREFIX}user @user`, `• It shows the user info`)
-        .addField(`• ${process.env.DISCORD_PREFIX}ping`, `• It shows the ping status`)
-        .addField(`• ${process.env.DISCORD_PREFIX}invite`, `• Invite the bot to your server`)
-    
-        .addField("**❯ MOD**", '<a:hype:515571561345056783>')
-        .addField(`• ${process.env.DISCORD_PREFIX}kick @user`, `• To kick a user`)
-        .addField(`• ${process.env.DISCORD_PREFIX}ban @user`, `• To ban a user`)
-        .addField(`• ${process.env.DISCORD_PREFIX}mute @user`, `• To mute a user for 1 min`)
-        .addField(`• ${process.env.DISCORD_PREFIX}unmute @user`, `• To unmute a user`)
-        .addField(`• ${process.env.DISCORD_PREFIX}verify @user`, `• To verify a user`)
-        .addField(`• ${process.env.DISCORD_PREFIX}unverify @user`, `• To un-verify a user`)
-    
-        .addField("**❯ UTILS**", "<a:hype:515571561345056783>")
-        .addField(`• ${process.env.DISCORD_PREFIX}clear [optional @user]`, `• To clear messages`)
-        .addField(`• ${process.env.DISCORD_PREFIX}link @user tag **[BETA]**`, `• Link your clash profile with discord account`)
-        .addField(`• ${process.env.DISCORD_PREFIX}find @user/tag **[BETA]**`, `• Find someone's clash profile`)
-        .addField(`• ${process.env.DISCORD_PREFIX}player tag`, `• It shows the clash player info`)
-        .addField(`• ${process.env.DISCORD_PREFIX}clan tag`, `• It shows clan info`)
-    
-        message.channel.send({embed});
+        message.channel.send(`I do not talk personally ^_^`);
     }
 
     else if (message.guild.id == '500004711005683717') {
@@ -90,87 +51,6 @@ exports.run = (client, message, args) => {
         .addField("**❯ MEE6**", "<a:hype:515571561345056783>")
         .addField(`• !rank`, `• It shows your rank`)
         .addField(`• !levels`, `• It shows the position`)
-    
-        message.channel.send({embed});
-    }
-
-    else if (message.guild.id == '487148999351205899') {
-        message.delete(4000);
-        let channel = message.guild.channels.find(ch => ch.name === "bot-commands");
-        if(message.channel.name !== 'bot-commands') {
-            message.delete(4000);
-            return message.channel.send(`Please use commands in appropriate chatrooms to reduce spam ${channel}`).then(msg => {msg.delete(4000)});
-        }
-
-        const embed = new Discord.RichEmbed()
-        .setAuthor(`COMMANDS INFORMATION`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
-        .setColor(65280)
-        .setFooter(`Requested by ${message.author.username}`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
-        //.setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL)
-        .setThumbnail('https://discordemoji.com/assets/emoji/DiscordHype.gif')
-        .setTimestamp()
-    
-        .addField("**❯ HELP**", '<a:hype:515571561345056783>')
-        .addField(`• ${process.env.DISCORD_PREFIX}help`,`• It explains itself!`)
-    
-        .addField("**❯ INFO**", '<a:hype:515571561345056783>')
-        .addField(`• ${process.env.DISCORD_PREFIX}stats`, `• It shows the bot information`)
-        .addField(`• ${process.env.DISCORD_PREFIX}server`, `• It shows the server information`)
-        .addField(`• ${process.env.DISCORD_PREFIX}user @user`, `• It shows the user info`)
-        .addField(`• ${process.env.DISCORD_PREFIX}ping`, `• It shows the ping status`)
-        .addField(`• ${process.env.DISCORD_PREFIX}invite`, `• Invite the bot to your server`)
-    
-        .addField("**❯ MOD**", '<a:hype:515571561345056783>')
-        .addField(`• ${process.env.DISCORD_PREFIX}kick @user`, `• To kick a user`)
-        .addField(`• ${process.env.DISCORD_PREFIX}ban @user`, `• To ban a user`)
-        .addField(`• ${process.env.DISCORD_PREFIX}mute @user`, `• To mute a user for 1 min`)
-        .addField(`• ${process.env.DISCORD_PREFIX}unmute @user`, `• To unmute a user`)
-        .addField(`• ${process.env.DISCORD_PREFIX}verify @user`, `• To verify a user`)
-        .addField(`• ${process.env.DISCORD_PREFIX}unverify @user`, `• To un-verify a user`)
-    
-        .addField("**❯ UTILS**", "<a:hype:515571561345056783>")
-        .addField(`• ${process.env.DISCORD_PREFIX}clear [optional @user]`, `• To clear messages`)
-        .addField(`• ${process.env.DISCORD_PREFIX}player tag`, `• It shows the clash player info`)
-        .addField(`• ${process.env.DISCORD_PREFIX}clan tag`, `• It shows clan info`)
-
-        message.channel.send({embed});
-    }
-
-    else {
-        message.delete(4000);
-        let channel = message.guild.channels.find(ch => ch.name === "bot-commands");
-        if(!channel) return message.channel.send('Could not found **#bot-commands** channel. Please create it and try again.')
-        if(message.channel.name !== 'bot-commands') {
-            message.delete(4000);
-            return message.channel.send(`Please use commands in appropriate chatrooms to reduce spam ${channel}`).then(msg => {msg.delete(4000)});
-        }
-
-        const embed = new Discord.RichEmbed()
-        .setAuthor(`COMMANDS INFORMATION`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
-        .setColor(65280)
-        .setFooter(`Requested by ${message.author.username}`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
-        //.setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL)
-        .setThumbnail('https://discordemoji.com/assets/emoji/DiscordHype.gif')
-        .setTimestamp()
-    
-        .addField("**❯ HELP**", '<a:hype:515571561345056783>')
-        .addField(`• ${process.env.DISCORD_PREFIX}help`,`• It explains itself!`)
-    
-        .addField("**❯ INFO**", '<a:hype:515571561345056783>')
-        .addField(`• ${process.env.DISCORD_PREFIX}stats`, `• It shows the bot information`)
-        .addField(`• ${process.env.DISCORD_PREFIX}server`, `• It shows the server information`)
-        .addField(`• ${process.env.DISCORD_PREFIX}user @user`, `• It shows the user info`)
-        .addField(`• ${process.env.DISCORD_PREFIX}ping`, `• It shows the ping status`)
-        .addField(`• ${process.env.DISCORD_PREFIX}invite`, `• Invite the bot to your server`)
-    
-        .addField("**❯ MOD**", '<a:hype:515571561345056783>')
-        .addField(`• ${process.env.DISCORD_PREFIX}kick @user`, `• To kick a user`)
-        .addField(`• ${process.env.DISCORD_PREFIX}ban @user`, `• To ban a user`)
-        .addField(`• ${process.env.DISCORD_PREFIX}mute @user`, `• To mute a user for 1 min`)
-        .addField(`• ${process.env.DISCORD_PREFIX}unmute @user`, `• To unmute a user`)
-     
-        .addField("**❯ UTILS**", "<a:hype:515571561345056783>")
-        .addField(`• ${process.env.DISCORD_PREFIX}clear [optional @user]`, `• To clear messages`)
     
         message.channel.send({embed});
     }
