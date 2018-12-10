@@ -4,15 +4,15 @@ exports.run = async (client, message, args) => {
 
     if(message.channel.type == 'dm') return message.channel.send('`Not a right place to use this command`')
     
-    if(!message.member.roles.some(r=>[client.config.mod_role.r1, client.config.mod_role.r2, client.config.mod_role.r3].includes(r.name)) ) {
+    if(!message.member.roles.some(r=>["Dev", "Admin", "Co-Admin"].includes(r.name)) ) {
         message.delete(5000);
-        return message.channel.send(`${message.author.username} you don't have the role to use this, missing **${client.config.mod_role.r3}** or **${client.config.mod_role.r3}** role, please create them and try again.`).then(msg => {msg.delete(5000)});
+        return message.channel.send(`Only Admins and Co-Admins can use this Command!`).then(msg => {msg.delete(5000)});
     }
 
     let member = message.mentions.members.first();
 
     if(!member)
-    return message.channel.send(`${message.author.username}: ` + "Please mention a valid member of this server!").then(msg => {msg.delete(5000)});
+    return message.channel.send(`${message.author.username}: ` + "Please mention a valid member of this Server!").then(msg => {msg.delete(5000)});
 
     let reason = args.slice(1).join(' ');
 
@@ -21,7 +21,7 @@ exports.run = async (client, message, args) => {
     let muteRole = message.guild.roles.find(rol => rol.name === "Muted");
     if(!muteRole) return message.channel.send('Could not found **Muted** role. Please create it').then(msg => {msg.delete(5000)});
 
-    let botcmd = message.guild.channels.find(ch => ch.name === client.config.logchannel.modlog_ch_id);
+    let botcmd = message.guild.channels.find(ch => ch.name === "mod-log");
     if (!botcmd) return;
 
     const embed = new Discord.RichEmbed()

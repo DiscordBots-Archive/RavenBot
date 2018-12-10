@@ -16,19 +16,6 @@ const config = {
         "guild_id" : process.env,
         "channel_id" : process.env,
 
-    },"role" : {
-
-        "r5" : process.env.NO5_ROLE
-
-    },
-    "mod_role" : {
-
-        "r1" : process.env.NO1_ROLE,
-        "r2" : process.env.NO2_ROLE,
-        "r3" : process.env.NO3_ROLE,
-        "r4" : process.env.NO4_ROLE,
-        "r5" : process.env.NO5_ROLE,
-
     },"logchannel" : {
 
         "memberlog_ch_id" : process.env,
