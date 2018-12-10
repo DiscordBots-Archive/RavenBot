@@ -18,7 +18,7 @@ module.exports = (client, reaction, user) => {
     
     member.addRole(role);
 
-    let botcmd = msg.guild.channels.find(ch => ch.name === "bot-spam");
+    let botcmd = msg.guild.channels.find(ch => ch.name === "reaction-log");
 
     const embed = new Discord.RichEmbed()
     .setColor(65280)
