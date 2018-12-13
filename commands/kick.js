@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
   if (!message.member.roles.some(r=>['Dev', 'Admin'].includes(r.name)) ) 
   return message.channel.send(`Only Admins can use this Command`);
 
-  let member = message.mentions.members.first();
+  let member = message.mentions.members.first() || message.guild.members.get(args[0]);
 
   if (!member) 
   return message.channel.send(`Please mention a valid member of this Server!`);
@@ -30,9 +30,9 @@ exports.run = async (client, message, args) => {
   if (!member.kickable) 
   return message.channel.send("I could not kick this user!");
 
-  let reason = args.join('');
+  let reason = args.slice(1).join('');
   if (!reason) {
-    reason = "";
+    reason = "Not Provided";
   };
 
   let mod_log_channel = message.guild.channels.find(c => c.name === "mod-log");
@@ -42,10 +42,10 @@ exports.run = async (client, message, args) => {
 
   const embed = new Discord.RichEmbed()
   .setTitle(`${member.user.tag} | ${member.user.id}`)
-  .setColor("")
+  .setColor("#d7342a")
   .setTimestamp()
-  .setDescription(`${reason !== null ? `Reason: ${reason}` : ""}`)
-  .setFooter(`Kicked`)
+  .addField(`Mod : ${message.author.username}`, `Reason : ${reason}`)
+  .setFooter(`Kicked` , message.member.user.displayAvatarURL)
 
   client.channels.get(mod_log_channel.id).send({embed});
   message.channel.send("Done. User has been Kicked <a:hype:515571561345056783>");
