@@ -4,33 +4,31 @@ exports.run = async (client, message, args) => {
     return message.channel.send("This is Not a right place to use this Command!");
   };
 
-  if (!message.member.roles.some(r=>['Dev', 'Admin'].includes(r.name)) ) {
-    return message.channel.send(`Only Admins can use this Command`);
-  };
+  if (!message.member.roles.some(r=>['Dev', 'Admin'].includes(r.name)) ) 
+  return message.channel.send(`Only Admins can use this Command`);
 
   let member = message.mentions.members.first();
 
-  if (!member) {
-    return message.channel.send(`Please mention a valid member of this Server!`);
-  };
+  if (!member) 
+  return message.channel.send(`Please mention a valid member of this Server!`);
 
-  if (member == message.guild.members.get(message.author.id)) {
-    return message.channel.send("Don't kick yourself Idiot!");
-  } else if (member == message.guild.members.get(client.user.id)) {
-    return message.channel.send("You can't kick me!");
-  };
+  if (member == message.guild.members.get(message.author.id)) 
+  return message.channel.send("Don't kick yourself Idiot!");
+  
+  if (member == message.guild.members.get(client.user.id)) 
+  return message.channel.send("You can't kick me!");
 
-  if (member.roles.has('513284645274517504')) {
-    return message.channel.send("You can't kick a Staff!");
-  } else if (member.roles.has('500683658009640975')) {
-    return message.channel.send("You can't kick an Admin");
-  } else if (member.roles.has('500683949018710036')) {
-    return message.channel.send("You can't kick an Admin!");
-  };
+  if (member.roles.has('513284645274517504')) 
+  return message.channel.send("You can't kick a Staff!");
+  
+  if (member.roles.has('500683658009640975')) 
+  return message.channel.send("You can't kick an Admin");
+  
+  if (member.roles.has('500683949018710036')) 
+  return message.channel.send("You can't kick an Admin!");
 
-  if (!member.kickable) {
-    return message.channel.send("I could not kick this user!");
-  };
+  if (!member.kickable) 
+  return message.channel.send("I could not kick this user!");
 
   let reason = args.join('');
   if (!reason) {
