@@ -19,12 +19,13 @@ module.exports = (client, member) => {
 
     {
         if (member.user.bot === true) return;
-        const channel = member.guild.channels.find(ch => ch.name === 'bot-spam'); 
+        const channel = member.guild.channels.find(ch => ch.name === 'member-log'); 
         if (!channel) return;
         const embed = new Discord.RichEmbed()
         .setColor(65280)
         .setTimestamp()
-        .setDescription(`\`❯ USER JOINED \n•${member.user.tag} has joined\``)
+        .setFooter(`User Joined`)
+        .setTitle(`${member.user.tag} | ${member.user.id}`)
         channel.send({embed});
     }
 }
