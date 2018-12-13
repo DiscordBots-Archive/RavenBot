@@ -1,38 +1,54 @@
 const Discord = require('discord.js');
 exports.run = async (client, message, args) => {
-  //message.delete(6000);
+  if (message.channel.type == 'dm') {
+    message.channel.send("This is Not a right place to use this Command!");
+  };
 
-  if(message.channel.type == 'dm') return message.channel.send('`Not a right place to use this command`')
+  if (message.member.roles.some(r=>['Dev', 'Admin'].includes(r.name))) {
+    message.channel.send(`Only Admins can use this Command`);
+  };
 
-  if(!message.member.roles.some(r=>["Dev", "Admin"].includes(r.name)) ) {
-    message.delete(5000);
-    return message.channel.send(`Only Admins can use this Command!`).then(msg => {msg.delete(5000)});
-  }
+  let member = message.mentions.members.first();
 
-  let member = message.mentions.members.first() || message.guild.members.get(args[0]);
-  let botcmd = message.guild.channels.find(ch => ch.name === "mod-log");
-  if (!botcmd) return;
+  if (!member) {
+    message.channel.send(`Please mention a valid member of this Server!`);
+  };
 
-  if(!member)
-  return message.channel.send(`${message.author.username}: ` + "Please mention a valid member of this Server!").then(msg => {msg.delete(5000)});
+  if (member == message.guild.members.get(message.author.id)) {
+    message.channel.send("Don't kick yourself Idiot!");
+  } else if (member == message.guild.members.get(client.user.id)) {
+    message.channel.send("You can't kick me!");
+  };
 
-  if(!member.kickable) 
-  return message.channel.send(`${message.author.username}: ` + "I cannot kick this user: `Missing Permission or Role Order`").then(msg => {msg.delete(5000)});
+  if (member.roles.has('513284645274517504')) {
+    message.channel.send("You can't kick a Staff!");
+  } else if (member.roles.has('500683658009640975')) {
+    message.channel.send("You can't kick an Admin");
+  } else if (member.roles.has('500683949018710036')) {
+    message.channel.send("You can't kick an Admin!");
+  };
 
-  let reason = args.slice(1).join(' ');
+  if (!member.kickable) {
+    message.channel.send("I could not kick this user!");
+  };
 
-  if(!reason) reason = "No reason provided";
+  let reason = args.join('');
+  if (!reason) {
+    reason = "";
+  };
 
   await member.kick(reason)
+  .catch(error => message.channel.send(`I could not kick this user! \n ${error}`));
 
-  .catch(error => message.channel.send(`${message.author.username}: ` + `Sorry, I couldn't kick because of : ${error}`)).then(msg );
+  let mod_log_channel = message.guild.channels.find(c => c.name === "mod-log");
 
   const embed = new Discord.RichEmbed()
-
-  .setColor("#f32d11")
+  .setTitle(`${member.user.tag} | ${member.user.id}`)
+  .setColor("")
   .setTimestamp()
-  .setDescription(`\`❯ USER KICKED \n• ${member.user.username} has been kicked by ${message.author.username} \n• Reason : ${reason}\``)
+  .setDescription(`${reason !== null ? `Reason: ${reason}` : ""}`)
+  .setFooter(`Kicked`)
 
-  client.channels.get(botcmd.id).send({embed});
-  message.channel.send("Done. User has been Kicked <a:hype:515571561345056783>");
+  client.channels.get(mod_log_channel.id).send({embed});
+  message.channel.send("Done. User has been Kicked <a:hype:515571561345056783>")
 }
