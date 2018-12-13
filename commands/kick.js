@@ -4,7 +4,7 @@ exports.run = async (client, message, args) => {
     message.channel.send("This is Not a right place to use this Command!");
   };
 
-  if (message.member.roles.some(r=>['Dev', 'Admin'].includes(r.name))) {
+  if (!message.member.roles.some(r=>['Dev', 'Admin'].includes(r.name)) ) {
     message.channel.send(`Only Admins can use this Command`);
   };
 
