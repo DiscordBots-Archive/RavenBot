@@ -1,57 +1,69 @@
 const Discord = require('discord.js');
 exports.run = async (client, message, args) => {
-    //message.delete(6000);
+  if (message.channel.type == 'dm') {
+    return message.channel.send("This is Not a right place to use this Command!");
+  };
 
-    if(message.channel.type == 'dm') return message.channel.send('`Not a right place to use this command`')
-    
-    if(!message.member.roles.some(r=>["Dev", "Admin", "Co-Admin"].includes(r.name)) ) {
-        message.delete(5000);
-        return message.channel.send(`Only Admins and Co-Admins can use this Command!`).then(msg => {msg.delete(5000)});
-    }
+  if (!message.member.roles.some(r=>['Dev', 'Admin'].includes(r.name)) ) 
+  return message.channel.send(`Only Admins can use this Command`);
 
-    let member = message.mentions.members.first();
+  let member = message.mentions.members.first() || message.guild.members.get(args[0]);
 
-    if(!member)
-    return message.channel.send(`${message.author.username}: ` + "Please mention a valid member of this Server!").then(msg => {msg.delete(5000)});
+  if (!member) 
+  return message.channel.send(`Please mention a valid member of this Server!`);
 
-    let reason = args.slice(1).join(' ');
+  if (member == message.guild.members.get(message.author.id)) 
+  return message.channel.send("Don't mute yourself Idiot!");
+  
+  if (member == message.guild.members.get(client.user.id)) 
+  return message.channel.send("You can't mute me!");
 
-    if(!reason) reason = "No reason provided";
+  if (member.roles.has('513284645274517504')) 
+  return message.channel.send("You can't mute a Staff!");
+  
+  if (member.roles.has('500683658009640975')) 
+  return message.channel.send("You can't mute an Admin");
+  
+  if (member.roles.has('500683949018710036')) 
+  return message.channel.send("You can't mute an Admin!");
 
-    let muteRole = message.guild.roles.find(rol => rol.name === "Muted");
-    if(!muteRole) return message.channel.send('Could not found **Muted** role. Please create it').then(msg => {msg.delete(5000)});
+  if (!member.banable) 
+  return message.channel.send("I could not mute this user!");
 
-    let botcmd = message.guild.channels.find(ch => ch.name === "mod-log");
-    if (!botcmd) return;
+  let reason = args.slice(1).join('');
+  if (!reason) {
+    reason = "Not Provided";
+  };
 
-    const embed = new Discord.RichEmbed()
+  let mod_log_channel = message.guild.channels.find(c => c.name === "mod-log");
 
-    .setColor("#f32d11")
-    .setTimestamp()
-    .setDescription(`\`❯ USER MUTED \n• ${member.user.username} has been muted by ${message.author.username} \n• Reason: ${reason}\``)
+  let muteRole = message.guild.roles.find(r => r.name === 'Muted');
 
-    member.addRole(muteRole).then(() => {
+  const embed = new Discord.RichEmbed()
+  .setTitle(`${member.user.tag} | ${member.user.id}`)
+  .setColor("#d7342a")
+  .setTimestamp()
+  .addField(`Mod : ${message.author.tag} | ${message.author.id}`, `Reason : ${reason}`)
+  .setFooter(`Muted` , message.member.user.displayAvatarURL)
 
-        message.channel.send("Done. User has been Muted <a:hype:515571561345056783>");
+  member.addRole(muteRole).then(() => {
 
-        client.channels.get(botcmd.id).send({embed})
+    client.channels.get(mod_log_channel.id).send({embed});
+    message.channel.send("Done. User has been Banned <a:hype:515571561345056783>")
+    .catch(error => message.channel.send(`I could not mute this user! \n ${error}`));
 
-        .catch(error => message.channel.send(`${message.author.username}: ` + `Sorry, I couldn't mute because of : ${error}`)) ;
+    setTimeout ( () => {
+        member.removeRole(muteRole);
 
-        setTimeout( () => {
+        /*const embed = new Discord.RichEmbed()
+        .setTitle(`${member.user.tag} | ${member.user.id}`)
+        .setColor("#d7342a")
+        .setTimestamp()
+        .addField(`Mod : ${message.author.tag} | ${message.author.id}`, `Reason : ${reason}`)
+        .setFooter(`Un-Muted` , message.member.user.displayAvatarURL)*/
 
-            member.removeRole(muteRole)
+    }, 3000000);
 
-            const embed = new Discord.RichEmbed()
-
-            .setColor(65280)
-            .setTimestamp()
-            .setDescription(`\`❯ USER UNMUTED \n• ${member.user.username} has been unmuted by ${client.user.username}\``)
-
-            client.channels.get(botcmd.id).send({embed});
-
-        }, 60000); // 60000 Miliseconds ===> 60 Seconds { 1 sec = 1000 ms }
-
-    });
+  });
 
 }
