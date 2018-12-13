@@ -18,17 +18,17 @@ exports.run = async (client, message, args) => {
   if (member == message.guild.members.get(client.user.id)) 
   return message.channel.send("You can't mute me!");
 
+  if (member.roles.has('505324342679437322'))
+  return message.channel.send('User is already Muted!')
+
   if (member.roles.has('513284645274517504')) 
   return message.channel.send("You can't mute a Staff!");
   
   if (member.roles.has('500683658009640975')) 
-  return message.channel.send("You can't mute an Admin");
+  return message.channel.send("You can't mute an Admin!");
   
   if (member.roles.has('500683949018710036')) 
   return message.channel.send("You can't mute an Admin!");
-
-  if (!member.banable) 
-  return message.channel.send("I could not mute this user!");
 
   let reason = args.slice(1).join('');
   if (!reason) {
@@ -49,7 +49,7 @@ exports.run = async (client, message, args) => {
   member.addRole(muteRole).then(() => {
 
     client.channels.get(mod_log_channel.id).send({embed});
-    message.channel.send("Done. User has been Banned <a:hype:515571561345056783>")
+    message.channel.send("Done. User has been Muted <a:hype:515571561345056783>")
     .catch(error => message.channel.send(`I could not mute this user! \n ${error}`));
 
     setTimeout ( () => {
