@@ -44,7 +44,7 @@ exports.run = async (client, message, args) => {
   .setTitle(`${member.user.tag} | ${member.user.id}`)
   .setColor("#d7342a")
   .setTimestamp()
-  .addField(`Mod : ${message.author.username}`, `Reason : ${reason}`)
+  .addField(`Mod : ${message.author.tag} | ${message.author.id}`, `Reason : ${reason}`)
   .setFooter(`Kicked` , message.member.user.displayAvatarURL)
 
   client.channels.get(mod_log_channel.id).send({embed});

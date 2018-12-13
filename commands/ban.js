@@ -1,39 +1,52 @@
 const Discord = require('discord.js');
-const client = new Discord.Client();
-
 exports.run = async (client, message, args) => {
-    //message.delete(6000);
+  if (message.channel.type == 'dm') {
+    return message.channel.send("This is Not a right place to use this Command!");
+  };
 
-    if(message.channel.type == 'dm') return message.channel.send('`Not a right place to use this command`')
-    
-    if(!message.member.roles.some(r=>["Dev", "Admin"].includes(r.name)) ) {
-        message.delete(5000);
-        return message.channel.send(`Only Admins can use this Command!`).then(msg => {msg.delete(5000)});
-    }
+  if (!message.member.roles.some(r=>['Dev', 'Admin'].includes(r.name)) ) 
+  return message.channel.send(`Only Admins can use this Command`);
 
-    let member = message.mentions.members.first();
-    
-    let botcmd = message.guild.channels.find(ch => ch.name === "mod-log");
-    if (!botcmd) return;
+  let member = message.mentions.members.first() || message.guild.members.get(args[0]);
 
-    if(!member)
-    return message.channel.send(`${message.author.username}: ` + "Please mention a valid member of this server!").then(msg => {msg.delete(5000)});
+  if (!member) 
+  return message.channel.send(`Please mention a valid member of this Server!`);
 
-    if(!member.bannable) 
-    return message.channel.send(`${message.author.username}: ` + "I cannot ban this user: `Missing Permission or Role Order`").then(msg => {msg.delete(5000)});
+  if (member == message.guild.members.get(message.author.id)) 
+  return message.channel.send("Don't ban yourself Idiot!");
+  
+  if (member == message.guild.members.get(client.user.id)) 
+  return message.channel.send("You can't ban me!");
 
-    let reason = args.slice(1).join(' ');
-    if(!reason) reason = "No reason provided";
+  if (member.roles.has('513284645274517504')) 
+  return message.channel.send("You can't ban a Staff!");
+  
+  if (member.roles.has('500683658009640975')) 
+  return message.channel.send("You can't ban an Admin");
+  
+  if (member.roles.has('500683949018710036')) 
+  return message.channel.send("You can't ban an Admin!");
 
-    await member.ban(reason)
-    .catch(error => message.channel.send(`${message.author.username}: ` + `Sorry, I couldn't ban because of : ${error}`));
+  if (!member.banable) 
+  return message.channel.send("I could not ban this user!");
 
-    const embed = new Discord.RichEmbed()
-    
-    .setColor("#f32d11")
-    .setTimestamp()
-    .setDescription(`\`❯ USER BANNED \n• ${member.user.username} has been banned by ${message.author.username} \n• Reason : ${reason}\``)
+  let reason = args.slice(1).join('');
+  if (!reason) {
+    reason = "Not Provided";
+  };
 
-    client.channels.get(botcmd.id).send({embed});
-    message.channel.send("Done. User has been Banned <a:hype:515571561345056783>");
+  let mod_log_channel = message.guild.channels.find(c => c.name === "mod-log");
+
+  await member.ban(reason)
+  .catch(error => message.channel.send(`I could not ban this user! \n ${error}`));
+
+  const embed = new Discord.RichEmbed()
+  .setTitle(`${member.user.tag} | ${member.user.id}`)
+  .setColor("#d7342a")
+  .setTimestamp()
+  .addField(`Mod : ${message.author.tag} | ${message.author.id}`, `Reason : ${reason}`)
+  .setFooter(`Banned` , message.member.user.displayAvatarURL)
+
+  client.channels.get(mod_log_channel.id).send({embed});
+  message.channel.send("Done. User has been Banned <a:hype:515571561345056783>");
 }
