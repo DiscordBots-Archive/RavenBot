@@ -82,7 +82,9 @@ fs.readdir("./events/", (err, files) => {
     let eventName = file.split(".")[0];
     //console.log(`loading event: ${eventName}`)
     client.on(eventName, event.bind(null, client));
+
   });
+
 });
 
 client.commands = new Enmap();
@@ -95,7 +97,9 @@ fs.readdir("./commands/", (err, files) => {
     let commandName = file.split(".")[0];
     //console.log(`loading command: ${process.env.DISCORD_PREFIX}${commandName}`);
     client.commands.set(commandName, props);
+    
   });
+
 });
 
 
