@@ -25,44 +25,44 @@ exports.run = async (client, message, args) => {
         if (perm == 'staff') {
             let staffrole = message.guild.roles.get('513284645274517504');
             if (member.roles.has('513284645274517504')) 
-            return message.channel.send("User is already a Staff <:done:523005735001653248>");
+            return message.channel.send("User is already a Staff! <:done:523005735001653248>");
             let mod_log_channel = message.guild.channels.find(c => c.name === 'mod-log');
 
             member.addRole(staffrole).then(() => {
-                message.channel.send(`Added Staff Role`)
+                message.channel.send(`Added Staff Role! <:done:523005735001653248>`)
                 .catch(error => message.channel.send(`I could not add Staff Role\n ${error}`));
             })
 
         } else if (perm == 'coadmin') {
             let cadmin = message.guild.roles.get('500683658009640975');
             if (member.roles.has('500683658009640975')) 
-            return message.channel.send("User is already a Co-Admin!");
+            return message.channel.send("User is already a Co-Admin! <:done:523005735001653248>");
             let mod_log_channel = message.guild.channels.find(c => c.name === 'mod-log');
 
             member.addRole(cadmin).then(() => {
-                message.channel.send(`Added Co-Admin Role`)
+                message.channel.send(`Added Co-Admin Role! <:done:523005735001653248>`)
                 .catch(error => message.channel.send(`I could not add Staff Role\n ${error}`));
             })
 
         } else if(perm == 'verified') {
             let vrole = message.guild.roles.get('500683488538656768');
             if (member.roles.has('500683488538656768'))
-            return message.channel.send('User is already Verified');
+            return message.channel.send('User is already Verified! <:done:523005735001653248>');
             let mod_log_channel = message.guild.channels.find(c => c.name === 'mod-log');
 
             member.addRole(vrole).then(() => {
-                message.channel.send(`Added Verified Role`)
+                message.channel.send(`Added Verified Role! <:done:523005735001653248>`)
                 .catch(error => message.channel.send(`I could not add Staff Role\n ${error}`));
             })
 
         } else if(perm == 'admin') {
             let vrole = message.guild.roles.get('500683949018710036');
             if (member.roles.has('500683949018710036')) 
-            return message.channel.send("User is already an Admin");
+            return message.channel.send("User is already an Admin! <:done:523005735001653248>");
             let mod_log_channel = message.guild.channels.find(c => c.name === 'mod-log');
 
             member.addRole(vrole).then(() => {
-                message.channel.send(`Added Verified Role`)
+                message.channel.send(`Added Admin Role! <:done:523005735001653248>`)
                 .catch(error => message.channel.send(`I could not add Staff Role\n ${error}`));
             })
 
@@ -76,46 +76,46 @@ exports.run = async (client, message, args) => {
         if (perm == 'staff') {
             let staffrole = message.guild.roles.get('513284645274517504');
             if (!member.roles.has('513284645274517504')) 
-            return message.channel.send("User is already not a Staff");
+            return message.channel.send("User is already not a Staff! <:wrong:509629414577930241>");
             let mod_log_channel = message.guild.channels.find(c => c.name === 'mod-log');
 
             member.removeRole(staffrole).then(() => {
-                message.channel.send(`Removed Staff Role`)
+                message.channel.send(`Removed Staff Role! <:wrong:509629414577930241>`)
                 .catch(error => message.channel.send(`I could not remove Staff Role\n ${error}`));
             })
 
         } else if (perm == 'coadmin') {
             let cadmin = message.guild.roles.get('500683658009640975');
             if (!member.roles.has('500683658009640975')) 
-            return message.channel.send("User is already not a Co-Admin!");
+            return message.channel.send("User is already not a Co-Admin! <:wrong:509629414577930241>");
             let mod_log_channel = message.guild.channels.find(c => c.name === 'mod-log');
 
             member.removeRole(cadmin).then(() => {
-                message.channel.send(`Removed Co-Admin Role`)
+                message.channel.send(`Removed Co-Admin Role! <:wrong:509629414577930241>`)
                 .catch(error => message.channel.send(`I could not remove Staff Role\n ${error}`));
             })
 
         } else if(perm == 'verified') {
             let vrole = message.guild.roles.get('500683488538656768');
             if (!member.roles.has('500683488538656768'))
-            return message.channel.send('User is already not Verified');
+            return message.channel.send('User is already not Verified! <:wrong:509629414577930241>');
             let mod_log_channel = message.guild.channels.find(c => c.name === 'mod-log');
 
             member.removeRole(vrole).then(() => {
-                message.channel.send(`Removed Verified Role`)
+                message.channel.send(`Removed Verified Role! <:wrong:509629414577930241>`)
                 .catch(error => message.channel.send(`I could not remove Staff Role\n ${error}`));
             })
 
         } else if(perm == 'admin') {
             if (!message.member.roles.has('500700090181222400'))
-            return message.channel.send("You can't use this command to an Admin")
+            return message.channel.send("You can't use this command to an Admin! <:wrong:509629414577930241>")
             let vrole = message.guild.roles.get('500683949018710036');
             if (!member.roles.has('500683949018710036')) 
-            return message.channel.send("User is already not an Admin");
+            return message.channel.send("User is already not an Admin! <:wrong:509629414577930241>");
             let mod_log_channel = message.guild.channels.find(c => c.name === 'mod-log');
 
             member.removeRole(vrole).then(() => {
-                message.channel.send(`Removed Admin Role`)
+                message.channel.send(`Removed Admin Role! <:wrong:509629414577930241>`)
                 .catch(error => message.channel.send(`I could not add Staff Role\n ${error}`));
             })
 
