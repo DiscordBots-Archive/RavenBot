@@ -15,9 +15,9 @@ module.exports = (client, reaction, user) => {
       role = msg.guild.roles.get('500683488538656768')
       console.log('Role Given')
     } else if (reaction.emoji.id !== '509629414120882176') return;
-    
-    member.addRole(role);
 
+    member.addRole(role);
+    
     let botcmd = msg.guild.channels.find(ch => ch.name === "reaction-log");
 
     const embed = new Discord.RichEmbed()
