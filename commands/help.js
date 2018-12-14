@@ -38,7 +38,7 @@ exports.run = (client, message, args) => {
         .addField('ADMIN', `\`• ${process.env.DISCORD_PREFIX}perms @user [add/remove] [verified/staff/coadmin/admin]\`` + '\n' +
         `\`• To add permissions to the user\``)
     
-        .addField("❯ UTILS", `\`• ${process.env.DISCORD_PREFIX}clear [optional @user]\`` +' '+ `\`To clear messages\`` + '\n' +
+        .addField("❯ UTILS", `\`• ${process.env.DISCORD_PREFIX}clear [optional @user]\`` +' '+ `\`clear messages\`` + '\n' +
         `\`• ${process.env.DISCORD_PREFIX}player tag\`` +' '+ `\`Player Lookup\`` + '\n' +
         `\`• ${process.env.DISCORD_PREFIX}clan tag\`` +' '+ `\`Clan Lookup\``)
 
