@@ -10,13 +10,13 @@ exports.run = async (client, message, args) => {
   let member = message.mentions.members.first() || message.guild.members.get(args[0]);
 
   if (!member) 
-  return message.channel.send(`Please mention a valid member of this Server!`);
+  return message.channel.send(`Please mention a valid member of this Server! <:wrong:523020135737458689>`);
 
   if (member == message.guild.members.get(message.author.id)) 
   return;
   
   if (member == message.guild.members.get(client.user.id)) 
-  return;
+  return message.channel.send("Hello <:meww:523021051202895872>, that's me! **I'm not muteable!!!** <:huh:523021014481764352>")
 
   if (!member.roles.has('505324342679437322'))
   return message.channel.send('User is not Muted!');
@@ -44,13 +44,13 @@ exports.run = async (client, message, args) => {
   .setColor("#d7342a")
   .setTimestamp()
   .addField(`Mod : ${message.author.tag} | ${message.author.id}`, `Reason : ${reason}`)
-  .setFooter(`Un-Muted` , member.user.displayAvatarURL)
+  .setFooter(`Unmuted` , member.user.displayAvatarURL)
 
   member.removeRole(muteRole).then(() => {
 
     client.channels.get(mod_log_channel.id).send({embed});
-    message.channel.send("Done. User has been Un-muted <a:hype:515571561345056783>")
-    .catch(error => message.channel.send(`I could not un-mute this user! \n ${error}`));
+    message.channel.send("Done. User has been Unmuted <a:hype:515571561345056783>")
+    .catch(error => message.channel.send(`I could not unmute this user! \n ${error}`));
 
   });
 

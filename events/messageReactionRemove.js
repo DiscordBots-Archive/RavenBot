@@ -23,7 +23,7 @@ module.exports = (client, reaction, user) => {
     const embed = new Discord.RichEmbed()
     .setColor("#f32d11")
     .setTimestamp()
-    .setFooter(`Un-Verified`)
+    .setFooter(`Unverified`)
     .setTitle(`${user.username} | ${user.id}`)
     client.channels.get(botcmd.id).send({embed});
       

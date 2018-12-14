@@ -10,13 +10,13 @@ exports.run = async (client, message, args) => {
   let member = message.mentions.members.first() || message.guild.members.get(args[0]);
 
   if (!member) 
-  return message.channel.send(`Please mention a valid member of this Server!`);
+  return message.channel.send(`Please mention a valid member of this Server! <:wrong:523020135737458689>`);
 
   if (member == message.guild.members.get(message.author.id)) 
   return message.channel.send("Don't kick yourself Idiot!");
   
   if (member == message.guild.members.get(client.user.id)) 
-  return message.channel.send("You can't kick me!");
+  return message.channel.send("Hello <:meww:523021051202895872>, that's me! **I'm not kickable!!!** <:huh:523021014481764352>");
 
   if (member.roles.has('513284645274517504')) 
   return message.channel.send("You can't kick a Staff!");
