@@ -24,7 +24,7 @@ module.exports = (client, reaction, user) => {
     .setColor("#f32d11")
     .setTimestamp()
     .setFooter(`Unverified`)
-    .setTitle(`${user.username} | ${user.id}`)
+    .setTitle(`${user.username} | ${user.id}`, user.displayAvatarURL)
     client.channels.get(botcmd.id).send({embed});
       
   } else if (msg.id !== client.config.reaction.message_id) return;
