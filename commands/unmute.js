@@ -30,7 +30,7 @@ exports.run = async (client, message, args) => {
   if (member.roles.has('500683949018710036')) 
   return;
 
-  let reason = args.slice(1).join('');
+  let reason = args.slice(1).join(' ');
   if (!reason) {
     reason = "Not Provided";
   };

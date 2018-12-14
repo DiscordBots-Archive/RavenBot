@@ -27,5 +27,5 @@ module.exports = (client, reaction, user) => {
     .setTitle(`${user.username} | ${user.id}`)
     client.channels.get(botcmd.id).send({embed});
       
-  } else if (msg.id == client.config.reaction.message_id) return;
+  } else if (msg.id !== client.config.reaction.message_id) return;
 }

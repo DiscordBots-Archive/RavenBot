@@ -30,7 +30,7 @@ exports.run = async (client, message, args) => {
   if (!member.banable) 
   return message.channel.send("I could not ban this user!");
 
-  let reason = args.slice(1).join('');
+  let reason = args.slice(1).join(' ');
   if (!reason) {
     reason = "Not Provided";
   };

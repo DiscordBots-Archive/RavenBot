@@ -30,7 +30,7 @@ exports.run = async (client, message, args) => {
   if (member.roles.has('500683949018710036')) 
   return message.channel.send("You can't mute an Admin!");
 
-  let reason = args.slice(1).join('');
+  let reason = args.slice(1).join(' ');
   if (!reason) {
     reason = "Not Provided";
   };
@@ -53,15 +53,14 @@ exports.run = async (client, message, args) => {
     .catch(error => message.channel.send(`I could not mute this user! \n ${error}`));
 
     setTimeout ( () => {
-        member.removeRole(muteRole);
+      member.removeRole(muteRole);
 
-        /*const embed = new Discord.RichEmbed()
-        .setTitle(`${member.user.tag} | ${member.user.id}`)
-        .setColor("#d7342a")
-        .setTimestamp()
-        .addField(`Mod : ${message.author.tag} | ${message.author.id}`, `Reason : ${reason}`)
-        .setFooter(`Un-Muted` , member.user.displayAvatarURL)*/
-
+      /*const embed = new Discord.RichEmbed()
+      .setTitle(`${member.user.tag} | ${member.user.id}`)
+      .setColor("#d7342a")
+      .setTimestamp()
+      .addField(`Mod : ${message.author.tag} | ${message.author.id}`, `Reason : ${reason}`)
+      .setFooter(`Un-Muted` , member.user.displayAvatarURL)*/
     }, 3000000);
 
   });
