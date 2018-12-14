@@ -23,25 +23,25 @@ exports.run = (client, message, args) => {
         .setThumbnail('https://discordemoji.com/assets/emoji/DiscordHype.gif')
         .setTimestamp()
     
-        .addField("`❯ HELP`", `\`• ${process.env.DISCORD_PREFIX}help\`` +' '+ `\`It explains itself!\``)
+        .addField("`❯ HELP - IT EXPLAINS ITSELF`", `\`• ${process.env.DISCORD_PREFIX}help\``)
     
-        .addField("`❯ INFO`", `\`• ${process.env.DISCORD_PREFIX}stats\`` +' '+ '\n' +
+        .addField("`❯ INFO - CHECK STATISTICAL INFO OF THE BOT, SERVER INFO, USER INFO & PING STATUS`", `\`• ${process.env.DISCORD_PREFIX}stats\`` +' '+ '\n' +
         `\`• ${process.env.DISCORD_PREFIX}server\`` +' '+ '\n' + 
         `\`• ${process.env.DISCORD_PREFIX}user @user\`` +' ' + '\n' +
         `\`• ${process.env.DISCORD_PREFIX}ping\``)
 
-        .addField("`❯ MOD`", `\`• ${process.env.DISCORD_PREFIX}kick @user\`` +' '+ '\n' +
-        `\`• ${process.env.DISCORD_PREFIX}ban @user\`` +' ' + '\n' +
-        `\`• ${process.env.DISCORD_PREFIX}mute @user\`` +' '+ '\n' +
+        .addField("`❯ MOD - KICK / BAN / MUTE / UNMUTE A USER FROM THE SERVER`", `\`• ${process.env.DISCORD_PREFIX}kick @user reason\`` +' '+ '\n' +
+        `\`• ${process.env.DISCORD_PREFIX}ban @user reason\`` +' ' + '\n' +
+        `\`• ${process.env.DISCORD_PREFIX}mute @user reason\`` +' '+ '\n' +
         `\`• ${process.env.DISCORD_PREFIX}unmute @user\``)
 
-        .addField('`❯ ADMIN`', `\`• ${process.env.DISCORD_PREFIX}perms @user [add/remove] [verified/staff/coadmin/admin]\``)
+        .addField('`❯ ADMIN - ADD PERMISSIONS TO THE USER`', `\`• ${process.env.DISCORD_PREFIX}perms @user [add/remove] [verified/staff/coadmin/admin]\``)
     
-        .addField("`❯ UTILS`", `\`• ${process.env.DISCORD_PREFIX}clear @user no. of msg\`` +' ' + '\n' +
-        `\`• ${process.env.DISCORD_PREFIX}player tag\`` +' '+ '\n' +
-        `\`• ${process.env.DISCORD_PREFIX}clan tag\``)
+        .addField("`❯ UTILS - CLEAR MESSAGES UPTO 50 AT A TIME, CLASH OF CLANS PLAYER & CLAN LOOKUP`", `\`• ${process.env.DISCORD_PREFIX}clear @user no. of msg\`` +' ' + '\n' +
+        `\`• ${process.env.DISCORD_PREFIX}player #tag\`` +' '+ '\n' +
+        `\`• ${process.env.DISCORD_PREFIX}clan #tag\``)
 
-        .addField("`❯ MEE6`", `\`\n• !rank\`` +' ' + '\n' +
+        .addField("`❯ MEE6 - CHECK YOUR MEE6 RANK AND LEVELS OR POSITION`", `\`\n• !rank\`` +' ' + '\n' +
         `\`• !levels\``)
 
         message.channel.send({embed});
