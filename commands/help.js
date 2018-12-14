@@ -25,9 +25,9 @@ exports.run = (client, message, args) => {
     
         .addField("❯ HELP", `\`• ${process.env.DISCORD_PREFIX}help\`` +' '+ `\`- It explains itself!\``)
     
-        .addField("❯ INFO", `\`• ${process.env.DISCORD_PREFIX}stats\`` +' '+ `\`- It shows the bot info\`` + '\n' +
-        `\`• ${process.env.DISCORD_PREFIX}server\`` +' '+ `\`- It shows server info\`` + '\n' + 
-        `\`• ${process.env.DISCORD_PREFIX}user @user\`` +' '+ `\`- It shows the user info\`` + '\n' +
+        .addField("❯ INFO", `\`• ${process.env.DISCORD_PREFIX}stats\`` +' '+ `\`- Get the bot info\`` + '\n' +
+        `\`• ${process.env.DISCORD_PREFIX}server\`` +' '+ `\`- Get the server info\`` + '\n' + 
+        `\`• ${process.env.DISCORD_PREFIX}user @user\`` +' '+ `\`- Get the user info\`` + '\n' +
         `\`• ${process.env.DISCORD_PREFIX}ping\`` +' '+ `\`- It shows the ping status\``)
 
         .addField("❯ MOD", `\`• ${process.env.DISCORD_PREFIX}kick @user\`` +' '+ `\`- To kick a user\`` + '\n' +
