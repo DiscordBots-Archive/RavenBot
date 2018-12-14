@@ -25,8 +25,8 @@ exports.run = (client, message, args) => {
     
         .addField("❯ HELP", `\`• ${process.env.DISCORD_PREFIX}help\`` +' '+ `\`It explains itself!\``)
     
-        .addField("❯ INFO", `\`• ${process.env.DISCORD_PREFIX}stats\`` +' '+ `\`It shows the bot information\`` + '\n' +
-        `\`• ${process.env.DISCORD_PREFIX}server\`` +' '+ `\`It shows the server information\`` + '\n' + 
+        .addField("❯ INFO", `\`• ${process.env.DISCORD_PREFIX}stats\`` +' '+ `\`It shows the bot info\`` + '\n' +
+        `\`• ${process.env.DISCORD_PREFIX}server\`` +' '+ `\`It shows server info\`` + '\n' + 
         `\`• ${process.env.DISCORD_PREFIX}user @user\`` +' '+ `\`It shows the user info\`` + '\n' +
         `\`• ${process.env.DISCORD_PREFIX}ping\`` +' '+ `\`It shows the ping status\``)
 
@@ -36,7 +36,7 @@ exports.run = (client, message, args) => {
         `\`• ${process.env.DISCORD_PREFIX}unmute @user\`` +' '+ `\`To unmute a user\``)
 
         .addField('ADMIN', `\`• ${process.env.DISCORD_PREFIX}perms @user [add/remove] [verified/staff/coadmin/admin]\`` + '\n' +
-        `\`• To add special permissions to the user\``)
+        `\`• To add permissions to the user\``)
     
         .addField("❯ UTILS", `\`• ${process.env.DISCORD_PREFIX}clear [optional @user]\`` +' '+ `\`To clear messages\`` + '\n' +
         `\`• ${process.env.DISCORD_PREFIX}player tag\`` +' '+ `\`Player Lookup\`` + '\n' +
