@@ -23,7 +23,8 @@ module.exports = (client, reaction, user) => {
     const embed = new Discord.RichEmbed()
     .setColor("#f32d11")
     .setTimestamp()
-    .setDescription(`\`❯ UN-VERIFIED BY REACTING \n• ${user.username} has been un-verified by ${client.user.username}\``)
+    .setFooter(`Un-Verified`)
+    .setTitle(`${user.username} | ${user.id}`)
     client.channels.get(botcmd.id).send({embed});
       
   } else if (msg.id == client.config.reaction.message_id) return;
