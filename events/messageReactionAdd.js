@@ -23,8 +23,8 @@ module.exports = (client, reaction, user) => {
     const embed = new Discord.RichEmbed()
     .setColor(65280)
     .setTimestamp()
-    .setFooter(`Verified`)
-    .setAuthor(`${user.username} | ${user.id}`, user.displayAvatarURL)
+    .setFooter(`Verified`, user.displayAvatarURL)
+    .setTitle(`${user.username} | ${user.id}`)
     client.channels.get(botcmd.id).send({embed})
     
   } else if (msg.id !== client.config.reaction.message_id) return;
