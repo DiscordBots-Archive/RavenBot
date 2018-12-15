@@ -35,7 +35,7 @@ exports.run = (client, message, args) => {
         `\`• ${process.env.DISCORD_PREFIX}mute @user\`` +' '+ `\`- To mute a user\`` + '\n' +
         `\`• ${process.env.DISCORD_PREFIX}unmute @user\`` +' '+ `\`- To unmute a user\``)
 
-        .addField('ADMIN', `\`• ${process.env.DISCORD_PREFIX}perms @user [add/remove] [verified/staff/coadmin/admin]\`` + '\n' +
+        .addField('❯ ADMIN', `\`• ${process.env.DISCORD_PREFIX}perms @user [add/remove] [verified/staff/coadmin/admin]\`` + '\n' +
         `\`• To add permissions to the user\``)
     
         .addField("❯ UTILS", `\`• ${process.env.DISCORD_PREFIX}clear @user\`` +' '+ `\`- Clear messages\`` + '\n' +
@@ -49,6 +49,4 @@ exports.run = (client, message, args) => {
     }
     
 }
-/*
 
-*/
