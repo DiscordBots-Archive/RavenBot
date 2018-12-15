@@ -26,6 +26,7 @@ module.exports = (client, reaction, user) => {
     .setFooter(`Unverified`, user.displayAvatarURL)
     .setTitle(`${user.username} | ${user.id}`)
     client.channels.get(botcmd.id).send({embed});
+    member.send(`${member} you removed reaction and lost Verified Role!!`);
       
   } else if (msg.id !== '518712940615172096') return;
 }

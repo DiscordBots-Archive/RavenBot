@@ -25,7 +25,8 @@ module.exports = (client, reaction, user) => {
     .setTimestamp()
     .setFooter(`Verified`, user.displayAvatarURL)
     .setTitle(`${user.username} | ${user.id}`)
-    client.channels.get(botcmd.id).send({embed})
+    client.channels.get(botcmd.id).send({embed});
+    member.send(`${member} you are Verified! So now you can access other channels!`);
     
   } else if (msg.id !== '518712940615172096') return;
 }
