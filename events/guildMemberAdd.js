@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client()
 module.exports = (client, member) => {
     const channel = member.guild.channels.find(ch => ch.name === 'welcome'); 
-    if (!channel) return;
+    //if (!channel) return;
     if (member.user.bot === true) return;
     
     /*const embed = new Discord.RichEmbed() 
@@ -20,7 +20,7 @@ module.exports = (client, member) => {
     {
         if (member.user.bot === true) return;
         const channel = member.guild.channels.find(ch => ch.name === 'member-log'); 
-        if (!channel) return;
+        //if (!channel) return;
         const embed = new Discord.RichEmbed()
         .setColor(65280)
         .setTimestamp()
