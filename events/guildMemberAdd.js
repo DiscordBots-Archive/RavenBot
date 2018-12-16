@@ -15,7 +15,7 @@ module.exports = (client, member) => {
     .addField(process.env.ADD_FIELD1, process.env.DISCORD_PREFIX + process.env.ADD_FIELD2)
     channel.send({embed});*/
 
-    channel.send(`Hello ${member}, Welcome to **${member.guild.name}** :tada:`);
+    client.channels.get(channel.id).send(`Hello ${member}, Welcome to **${member.guild.name}** :tada:`);
 
     {
         if (member.user.bot === true) return;
@@ -26,6 +26,6 @@ module.exports = (client, member) => {
         .setTimestamp()
         .setFooter(`User Joined`, member.user.displayAvatarURL)
         .setTitle(`${member.user.tag} | ${member.user.id}`)
-        channel.send({embed});
+        client.channels.get(channel.id).send({embed});
     }
 }
