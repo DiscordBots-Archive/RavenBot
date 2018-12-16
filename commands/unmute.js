@@ -4,7 +4,7 @@ exports.run = async (client, message, args) => {
     return message.channel.send("This is Not a right place to use this Command!");
   };
 
-  if (!message.member.roles.some(r=>['Dev', 'Admin'].includes(r.name)) ) 
+  if (!message.member.roles.some(r=>['Dev', 'Admin', 'Co-Admin', 'Staff'].includes(r.name)) ) 
   return message.channel.send(`Only Admins can use this Command`);
 
   let member = message.mentions.members.first() || message.guild.members.get(args[0]);
