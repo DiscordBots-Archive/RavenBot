@@ -7,7 +7,7 @@ const client = new Discord.Client();
 client.config = require("./config.js");
 
 
-const Telegram   = require('node-telegram-bot-api')
+/*const Telegram   = require('node-telegram-bot-api')
 const winston    = require('winston');
 const log = winston.createLogger({
     level: client.config.telegram.log,
@@ -227,7 +227,7 @@ client.on('ready', () => {
     }
 });
 
-debug(config.apiKey);
+debug(config.apiKey);*/
 
 
 fs.readdir("./events/", (err, files) => {
