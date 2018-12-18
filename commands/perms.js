@@ -1,6 +1,7 @@
 const   Discord = require('discord.js');
 
 exports.run = async (client, message, args) => {
+    
     if (message.channel.type == 'dm')
     return message.channel.send(`This is Not a right plate to use this Command!`);
 
@@ -11,9 +12,6 @@ exports.run = async (client, message, args) => {
 
     if (!member)
     return message.channel.send(`Please mention a valid member of this server! <:wrong:523020135737458689>`);
-
-    /*if (member == message.guild.members.get(message.author.id)) 
-    return message.channel.send("Don't mute yourself Idiot!");*/
     
     if (member == message.guild.members.get(client.user.id)) 
     return message.channel.send("Hello <:meww:523021051202895872>, that's me! **I'm not roleable!!!** <:huh:523021014481764352>");
@@ -22,6 +20,7 @@ exports.run = async (client, message, args) => {
     let perm = args.slice(2).join(' ');
 
     if (access == 'add') {
+
         if (perm == 'staff') {
             let staffrole = message.guild.roles.get('513284645274517504');
             if (member.roles.has('513284645274517504')) 
@@ -67,7 +66,7 @@ exports.run = async (client, message, args) => {
             })
 
         } else {
-            message.channel.send('Wrong Arguments! **XX001**');
+            message.channel.send('Wrong Arguments! **XX002**');
         };
 
 
@@ -120,10 +119,10 @@ exports.run = async (client, message, args) => {
             })
 
         } else {
-            message.channel.send('Wrong Arguments! ** XX002**');
+            message.channel.send('Wrong Arguments! ** XX003**');
         };
 
     } else {
-        message.channel.send('Wrong Arguments! **XX003**');
+        message.channel.send('Wrong Arguments! **XX001**');
     };
 }

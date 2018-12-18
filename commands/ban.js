@@ -47,7 +47,7 @@ exports.run = async (client, message, args) => {
   .setColor("#d7342a")
   .setTimestamp()
   .addField(`\`MOD: ${message.author.tag}\``, `\`REASON: ${reason}\``)
-  .setFooter(`BANNED` , member.user.displayAvatarURL)
+  .setFooter(`BANNED`, member.user.displayAvatarURL)
 
   client.channels.get(mod_log_channel.id).send({embed});
   message.channel.send("Done. User has been Banned <a:hype:515571561345056783>");
