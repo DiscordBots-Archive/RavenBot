@@ -1,32 +1,36 @@
 const Discord = require('discord.js');
 
 module.exports = (client, reaction, user) => {
-  //console.log(`${user.username} removed their "${reaction.emoji.name}" reaction.`);
 
-  const msg = reaction.message;
+  console.log(`${user.username} removed his ${reaction.emoji.name} reaction`);
 
-  if (msg.id == '518712940615172096') {
+  const reactionMessage = reaction.message;
 
-    let role
-    let member = msg.guild.members.get(user.id);
-  
-    console.log('Valid Message Reaction')
+  let role = reactionMessage.guild.roles.get('500683488538656768')
+  let member = reactionMessage.guild.members.get(user.id);
+  let reaction_channel = msg.guild.channels.find(ch => ch.name === "reaction-log");
+
+  if (message.id = '518712940615172096') {
+
+    //console.log('Valid Message Reaction');
+
     if (reaction.emoji.id == '509629414120882176') {
-      role = msg.guild.roles.get('500683488538656768')
-      console.log('Role Removed')
+
+      //console.log(`Valid Emoji Reaction`);
+
+      member.removeRole(role);
+
+      const embed = new Discord.RichEmbed()
+      .setColor("#f32d11")
+      .setTimestamp()
+      .setFooter(`Unverified`, user.displayAvatarURL)
+      .setTitle(`${user.username} | ${user.id}`)
+
+      client.channels.get(reaction_channel.id).send({embed});
+
+      member.send(`${member} you removed reaction and lost Verified Role!!`);
+
     } else if (reaction.emoji.id !== '509629414120882176') return;
-    
-    member.removeRole(role);
 
-    let botcmd = msg.guild.channels.find(ch => ch.name === "reaction-log");
-
-    const embed = new Discord.RichEmbed()
-    .setColor("#f32d11")
-    .setTimestamp()
-    .setFooter(`Unverified`, user.displayAvatarURL)
-    .setTitle(`${user.username} | ${user.id}`)
-    client.channels.get(botcmd.id).send({embed});
-    member.send(`${member} you removed reaction and lost Verified Role!!`);
-      
   } else if (msg.id !== '518712940615172096') return;
 }

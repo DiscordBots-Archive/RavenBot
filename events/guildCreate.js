@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 module.exports = (client, guild) => {
+    
     console.log(`New Server added \nName: ${guild.name} \nID: ${guild.id}`);
 
     const channel = client.channels.find(ch => ch.id === '516259519387533313');

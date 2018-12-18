@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 module.exports = (client) => {
+    
     console.log(`logging In: Client: ${client.user.tag}, Users: ${client.users.size}, Channels: ${client.channels.size}, Servers: ${client.guilds.size}`);
     client.user.setActivity(`${client.config.discord.prefix}help`, {type: "PLAYING"});
 

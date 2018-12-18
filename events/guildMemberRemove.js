@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
-const client = new Discord.Client()
+const client = new Discord.Client();
+
 module.exports = (client, member) => {
     
     const channel = member.guild.channels.find(ch => ch.name === 'member-log'); 
@@ -12,6 +13,7 @@ module.exports = (client, member) => {
     .setTimestamp()
     .setFooter(`User Left`, member.user.displayAvatarURL)
     .setTitle(`${member.user.tag} | ${member.user.id}`)
-    channel.send({embed});
+
+    client.channels.get(channel.id).send({embed});
     
 }

@@ -1,5 +1,7 @@
 const Discord = require('discord.js');
+
 exports.run = async (client, message, args) => {
+  
   if (message.channel.type == 'dm') {
     return message.channel.send("This is Not a right place to use this Command!");
   };
