@@ -43,7 +43,7 @@ exports.run = async (client, message, args) => {
 
   const embed = new Discord.RichEmbed()
   .setTitle(`${member.user.tag} | ${member.user.id}`)
-  .setColor("#d7342a")
+  .setColor(65280)
   .setTimestamp()
   .addField(`\`MOD: ${message.author.tag}\``, `\`REASON: ${reason}\``)
   .setFooter(`UNMUTED`, member.user.displayAvatarURL)
