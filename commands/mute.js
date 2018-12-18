@@ -45,8 +45,8 @@ exports.run = async (client, message, args) => {
   .setTitle(`${member.user.tag} | ${member.user.id}`)
   .setColor("#d7342a")
   .setTimestamp()
-  .addField(`Mod : ${message.author.tag} | ${message.author.id}`, `Reason : ${reason}`)
-  .setFooter(`Muted` , member.user.displayAvatarURL)
+  .addField(`\`MOD: ${message.author.tag}\``, `\`REASON: ${reason}\``)
+  .setFooter(`MUTED` , member.user.displayAvatarURL)
 
   member.addRole(muteRole).then(() => {
 

@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 
 exports.run = async (client, message, args) => {
-  
+
   if (message.channel.type == 'dm') {
     return message.channel.send("This is Not a right place to use this Command!");
   };
@@ -45,8 +45,8 @@ exports.run = async (client, message, args) => {
   .setTitle(`${member.user.tag} | ${member.user.id}`)
   .setColor("#d7342a")
   .setTimestamp()
-  .addField(`Mod : ${message.author.tag} | ${message.author.id}`, `Reason : ${reason}`)
-  .setFooter(`Unmuted` , member.user.displayAvatarURL)
+  .addField(`\`MOD: ${message.author.tag}\``, `\`REASON: ${reason}\``)
+  .setFooter(`UNMUTED` , member.user.displayAvatarURL)
 
   member.removeRole(muteRole).then(() => {
 

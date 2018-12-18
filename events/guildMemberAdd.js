@@ -21,9 +21,9 @@ module.exports = (client, member) => {
         const embed = new Discord.RichEmbed()
         .setColor(65280)
         .setTimestamp()
-        .setFooter(`User Joined`, member.user.displayAvatarURL)
+        .setFooter(`USER JOINED`, member.user.displayAvatarURL)
         .setTitle(`${member.user.tag} | ${member.user.id}`)
-        
+
         client.channels.get(channel.id).send({embed});
     }
 }

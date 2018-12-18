@@ -23,7 +23,7 @@ module.exports = (client, reaction, user) => {
       const embed = new Discord.RichEmbed()
       .setColor("#f32d11")
       .setTimestamp()
-      .setFooter(`Verified`, user.displayAvatarURL)
+      .setFooter(`VERIFIED`, user.displayAvatarURL)
       .setTitle(`${user.username} | ${user.id}`)
 
       client.channels.get(reaction_channel.id).send({embed});
