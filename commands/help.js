@@ -3,10 +3,12 @@ const Discord = require('discord.js');
 exports.run = (client, message, args) => {
 
     if (message.channel.type == 'dm') {
-        message.channel.send(`I do not talk personally ^_^`);
+       return message.channel.send(`I do not talk personally ^_^`);
     };
 
-    if (message.guild.id !== '500004711005683717') return message.channel.send(`This command works for **Air Hounds - Discord Server** Only <:right:509629414120882176>` + `\n` + `https://discord.gg/8RTMVFW`);
+    if (message.guild.id !== '500004711005683717') {
+        return message.channel.send(`This command works for **Air Hounds - Discord Server** Only <:right:509629414120882176>` + `\n` + `https://discord.gg/8RTMVFW`);
+    };
 
     let channel = message.guild.channels.find(ch => ch.name === "bot-commands");
     if(!channel) return message.channel.send('Could not found **#bot-commands** channel.')
