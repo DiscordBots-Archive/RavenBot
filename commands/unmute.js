@@ -8,13 +8,14 @@ exports.run = async (client, message, args) => {
 
   if (message.guild.id !== '500004711005683717') return message.channel.send(`This command works for **Air Hounds - Discord Server** Only <:right:509629414120882176>` + `\n` + `https://discord.gg/8RTMVFW`);
 
-  if (!message.member.roles.get('500700090181222400') && !message.member.roles.get('500683949018710036')  && !message.member.roles.get('500683658009640975') && !message.member.roles.get('513284645274517504')) 
-  return message.channel.send(`Only <@&500683949018710036> / <@&500683658009640975> / <@&513284645274517504> can use this Command`);
+  if (!message.member.roles.get('500700090181222400') && !message.member.roles.get('500683949018710036')  && !message.member.roles.get('500683658009640975') && !message.member.roles.get('513284645274517504')) {
+    return message.channel.send(`Only <@&500683949018710036> / <@&500683658009640975> / <@&513284645274517504> can use this Command`).then(msg => {msg.delete(4000)});
+  }
 
   let member = message.mentions.members.first() || message.guild.members.get(args[0]);
 
   if (!member) 
-  return message.channel.send(`Please mention a valid member of this Server! <:wrong:523020135737458689>`);
+  return message.channel.send(`Please mention a valid member of this Server! <:wrong:523020135737458689>`).then(msg => {msg.delete(4000)});
 
   if (member == message.guild.members.get(message.author.id)) 
   return message.channel.send(`I am not sure why you are using this command! are you <@&505324342679437322>?`) // muted

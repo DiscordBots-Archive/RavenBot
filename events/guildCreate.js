@@ -15,7 +15,7 @@ module.exports = (client, guild) => {
     .setFooter(`${client.user.username}`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
     .setTimestamp()
     .setTitle(`${guild.name} | ${guild.id}`)
-    .setDescription(`OWNER ${guild.owner.user.tag} | ${guild.memberCount} USERS`)
+    .setDescription(`OWNER: ${guild.owner.user.tag} | ${guild.memberCount} USERS`)
 
     channel.send({embed});
 
