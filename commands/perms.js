@@ -11,9 +11,24 @@ exports.run = async (client, message, args) => {
     return message.channel.send('Only <@&500683949018710036> / <@&500683658009640975> / <@&513284645274517504> can use this Command!');
 
     let member = message.mentions.members.first();
+    let staf = message.guild.roles.get('513284645274517504');
+
+    const embed = new Discord.RichEmbed()
+    //.setTitle('Permission Command')
+    .setFooter(`${client.user.username}`, client.user.displayAvatarURL)
+    .setTimestamp()
+    .setColor('#fcfb04')
+    .addField("Permission Command" ,"``` !perms @user [add/remove] [Role Name] ``` ")
+    .addField("Role Name",
+    '<@&500683949018710036> - - admin' + "\n" +
+    '<@&500683658009640975> - - - - mod' + '\n' +
+    '<@&525375822391934997> - ahstaff' + '\n' +
+    '<@&513284645274517504> - - - - staff' + '\n' +
+    '<@&500683488538656768> - verified')
+    .addField(`Example`, `To add ${staf} Role` + '\n' + '```!perms @user add staff```')
 
     if (!member)
-    return message.channel.send(`Please mention a valid member of this server! <:wrong:523020135737458689>`);
+    return message.channel.send({embed});
     
     if (member == message.guild.members.get(client.user.id)) 
     return message.channel.send("Hello <:meww:523021051202895872>, that's me! **I'm not roleable!!!** <:huh:523021014481764352>");
@@ -86,7 +101,7 @@ exports.run = async (client, message, args) => {
             })
 
         } else {
-            message.channel.send('Wrong Arguments! **XX002**');
+            message.channel.send({embed});
         };
 
 
@@ -147,10 +162,10 @@ exports.run = async (client, message, args) => {
             })
 
         } else {
-            message.channel.send('Wrong Arguments! ** XX003**');
+            message.channel.send({embed});
         };
 
     } else {
-        message.channel.send('Wrong Arguments! **XX001**');
+        message.channel.send({embed});
     };
 }

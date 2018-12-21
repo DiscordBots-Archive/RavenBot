@@ -6,6 +6,8 @@ exports.run = (client, message, args) => {
         message.channel.send(`I do not talk personally ^_^`);
     };
 
+    if (message.guild.id !== '500004711005683717') return message.channel.send(`This command works for **Air Hounds - Discord Server** Only <:right:509629414120882176>` + `\n` + `https://discord.gg/8RTMVFW`);
+
     let channel = message.guild.channels.find(ch => ch.name === "bot-commands");
     if(!channel) return message.channel.send('Could not found **#bot-commands** channel.')
     if(message.channel.name !== 'bot-commands') {
@@ -33,15 +35,15 @@ exports.run = (client, message, args) => {
     `\`• ${process.env.DISCORD_PREFIX}mute @user\`` +' '+ `\`- To mute a user\`` + '\n' +
     `\`• ${process.env.DISCORD_PREFIX}unmute @user\`` +' '+ `\`- To unmute a user\``)
 
-    .addField('❯ ADMIN', `\`• ${process.env.DISCORD_PREFIX}perms @user [add/remove] [verified/staff/coadmin/admin]\`` + '\n' +
-    `\`• To add permissions to the user\``)
+    .addField('❯ ADMIN', `\`• ${process.env.DISCORD_PREFIX}perms - Add roles to the user\`` + '\n' +
+    `\`• Type !perms for more info\``)
 
     .addField("❯ UTILS", `\`• ${process.env.DISCORD_PREFIX}clear @user\`` +' '+ `\`- Clear messages\`` + '\n' +
     `\`• ${process.env.DISCORD_PREFIX}player #tag\`` +' '+ `\`- Player Lookup\`` + '\n' +
     `\`• ${process.env.DISCORD_PREFIX}clan #tag\`` +' '+ `\`- Clan Lookup\``)
 
-    .addField("❯ MEE6", `\`\n• !rank\`` +' '+ `\`It shows your rank\`` + '\n' +
-    `\`• !levels\`` +' '+ `\`It shows the position\``)
+    .addField("❯ MEE6", `\`\n• !rank\`` +' '+ `\` - It shows your rank\`` + '\n' +
+    `\`• !levels\`` +' '+ `\` - It shows the position\``)
 
     message.channel.send({embed});
     
