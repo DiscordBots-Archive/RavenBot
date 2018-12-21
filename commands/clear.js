@@ -4,7 +4,7 @@ exports.run = async (client, message, args) => {
 
     if (!message.member.roles.get('500700090181222400') && !message.member.roles.get('500683949018710036')  && !message.member.roles.get('500683658009640975')) {
         message.delete(4000);
-        return message.channel.send(`Only Admins / Mod can run this command 😒`).then(msg => {msg.delete(5000)});
+        return message.channel.send(`Only <@&500683949018710036> / <@&500683658009640975> 😒`).then(msg => {msg.delete(5000)});
     }
 
     const user = message.mentions.users.first();
