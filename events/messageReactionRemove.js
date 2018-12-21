@@ -17,11 +17,12 @@ module.exports = (client, reaction, user) => {
     if (reaction.emoji.id == '509629414120882176') {
 
       //console.log(`Valid Emoji Reaction`);
+      if (!member.roles.has('500683488538656768')) return;
 
       member.removeRole(role);
 
       const embed = new Discord.RichEmbed()
-      .setColor("#f32d11")
+      .setColor("#f60839")
       .setTimestamp()
       .setFooter(`UNVERIFIED`, user.displayAvatarURL)
       .setTitle(`${user.username} | ${user.id}`)

@@ -14,7 +14,7 @@ module.exports = (client, message) => {
 
   if (!cmd) {
     message.delete(10000);
-    return message.channel.send(`Command not found. Please do \`${client.config.discord.prefix}help\` for options! <:meww:523021051202895872>`).then(msg => {msg.delete(10000)});
+    return message.channel.send(`Command not found. Please do \`${client.config.discord.prefix}help\` for Options! <:meww:523021051202895872>`).then(msg => {msg.delete(10000)});
   }
 
   cmd.run(client, message, args);

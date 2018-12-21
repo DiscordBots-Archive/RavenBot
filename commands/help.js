@@ -7,6 +7,7 @@ exports.run = (client, message, args) => {
     };
 
     let channel = message.guild.channels.find(ch => ch.name === "bot-commands");
+    if(!channel) return message.channel.send('Could not found **#bot-commands** channel.')
     if(message.channel.name !== 'bot-commands') {
         message.delete(4000);
         return message.channel.send(`Please use commands in appropriate chatrooms to reduce spam ${channel}`).then(msg => {msg.delete(4000)});
@@ -14,7 +15,7 @@ exports.run = (client, message, args) => {
 
     const embed = new Discord.RichEmbed()
     .setAuthor(`COMMANDS INFORMATION`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
-    .setColor(65280)
+    .setColor('#c3fd09')
     .setFooter(`Requested by ${message.author.username}`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
     //.setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL)
     .setThumbnail('https://discordemoji.com/assets/emoji/DiscordHype.gif')

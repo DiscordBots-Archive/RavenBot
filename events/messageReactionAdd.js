@@ -18,10 +18,12 @@ module.exports = (client, reaction, user) => {
 
       //console.log(`Valid Emoji Reaction`);
 
+      if (member.roles.has('500683488538656768')) return;
+
       member.addRole(role);
 
       const embed = new Discord.RichEmbed()
-      .setColor(65280)
+      .setColor('#08f885')
       .setTimestamp()
       .setFooter(`VERIFIED`, user.displayAvatarURL)
       .setTitle(`${user.username} | ${user.id}`)

@@ -6,8 +6,10 @@ exports.run = async (client, message, args) => {
     return message.channel.send("This is Not a right place to use this Command!");
   };
 
-  if (!message.member.roles.some(r=>['Dev', 'Admin', 'Co-Admin', 'Staff'].includes(r.name)) ) 
-  return message.channel.send(`Only Admins can use this Command`);
+  if (message.guild.id !== '500004711005683717') return message.channel.send(`This command works for **Air Hounds - Discord Server** Only <:right:509629414120882176>` + `\n` + `https://discord.gg/8RTMVFW`);
+
+  if (!message.member.roles.get('500700090181222400') && !message.member.roles.get('500683949018710036')  && !message.member.roles.get('500683658009640975') && !message.member.roles.get('513284645274517504')) 
+  return message.channel.send(`Only Admin / Staff can use this Command`);
 
   let member = message.mentions.members.first() || message.guild.members.get(args[0]);
 
@@ -21,16 +23,19 @@ exports.run = async (client, message, args) => {
   return message.channel.send("Hello <:meww:523021051202895872>, that's me! **I'm not muteable!!!** <:huh:523021014481764352>");
 
   if (member.roles.has('505324342679437322'))
-  return message.channel.send('User is already Muted!')
+  return message.channel.send('User is already <@&505324342679437322>!') // muted
 
   if (member.roles.has('513284645274517504')) 
-  return message.channel.send("You can't mute a Staff!");
+  return message.channel.send("You can't mute a <@&513284645274517504>!"); // staff
+
+  if (member.roles.has('525375822391934997')) 
+  return message.channel.send("You can't mute a <@&525375822391934997>!"); // ah staff
   
   if (member.roles.has('500683658009640975')) 
-  return message.channel.send("You can't mute an Admin!");
+  return message.channel.send("You can't mute a <@&500683658009640975>!"); // mod
   
   if (member.roles.has('500683949018710036')) 
-  return message.channel.send("You can't mute an Admin!");
+  return message.channel.send("You can't mute an <@&500683949018710036>!"); // admin
 
   let reason = args.slice(1).join(' ');
   if (!reason) {
@@ -43,7 +48,7 @@ exports.run = async (client, message, args) => {
 
   const embed = new Discord.RichEmbed()
   .setTitle(`${member.user.tag} | ${member.user.id}`)
-  .setColor("#d7342a")
+  .setColor("#f60839")
   .setTimestamp()
   .addField(`\`MOD: ${message.author.tag}\``, `\`REASON: ${reason}\``)
   .setFooter(`MUTED`, member.user.displayAvatarURL)

@@ -7,17 +7,15 @@ module.exports = (client) => {
     client.user.setActivity(`${client.config.discord.prefix}help`, {type: "PLAYING"});
 
     const channel = client.channels.find(ch => ch.id === '516098181549916172');
+    if (!channel) return;
 
     const embed = new Discord.RichEmbed()
-    .setColor(65280)
-    .setThumbnail(client.user.displayAvatarURL)
+    .setColor('#9bf10c')
+    //.setThumbnail(client.user.displayAvatarURL)
     .setFooter(`${client.user.username}`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
     .setTimestamp()
-    .setAuthor('CLIENT STATUS UPDATE', 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
-    .addField(`❯ CLIENT STARTED`,`• Client: ${client.user.tag}`+
-    `\n• Servers: ${client.guilds.size}`+
-    `\n• Users: ${client.users.size}`+
-    `\n• Channels:  ${client.channels.size}`)
+    .setTitle(`${client.user.tag} | ${client.user.id}`)
+    .setDescription(`${client.guilds.size} SERVERS, ${client.users.size} USERS, ${client.channels.size} CHANNELS`)
 
     channel.send({embed}); 
 }

@@ -7,7 +7,7 @@ exports.run = (client, message, args) => {
     if (message.channel.name !== 'bot-commands' ) {
         message.delete(4000);
         let channel = message.guild.channels.find(ch => ch.name === "bot-commands");
-        if(!channel) return message.channel.send('Could not found **#bot-commands** channel. Please create it and try again.')
+        if(!channel) return message.channel.send('Could not found **#bot-commands** channel.')
         return message.channel.send(`Please use commands in appropriate chatrooms to reduce spam ${channel}`).then(msg => {msg.delete(4000)});
     }
 
@@ -34,7 +34,7 @@ exports.run = (client, message, args) => {
         }
 
         const embed = new Discord.RichEmbed()
-        .setColor(65280)
+        .setColor('#fae18c')
         .setFooter(`Requested by ${message.author.username}`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
         .setTimestamp()
         .setThumbnail(message.author.displayAvatarURL)
@@ -50,7 +50,8 @@ exports.run = (client, message, args) => {
         `\n• Status: \`${message.author.presence.status.toUpperCase()}\` ${emot !== null? `${emot}` : ""}`+
         `\n• Activity: \`${message.author.presence.game ? `${message.author.presence.game.name}` : "None"}\``+
         `\n• Account created at: ${moment(message.author.createdAt).format("D-MM-YY, k:mm")}`)
-    return message.channel.send({embed})};
+        return message.channel.send({embed})
+    };
 
     let bot;
     if (member.user.bot === true) {
@@ -71,7 +72,7 @@ exports.run = (client, message, args) => {
     }
 
     const embed = new Discord.RichEmbed()
-    .setColor(65280)
+    .setColor('#f6ff5c')
     .setFooter(`Requested by ${message.author.username}`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
     .setTimestamp()
     .setThumbnail(member.user.displayAvatarURL)

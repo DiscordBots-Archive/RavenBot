@@ -9,7 +9,7 @@ module.exports = (client, member) => {
     if (member.user.bot === true) return;
 
     const embed = new Discord.RichEmbed()
-    .setColor("#f32d11")
+    .setColor("#f60839")
     .setTimestamp()
     .setFooter(`USER LEFT`, member.user.displayAvatarURL)
     .setTitle(`${member.user.tag} | ${member.user.id}`)

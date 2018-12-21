@@ -1,35 +1,31 @@
 {
-  "name": "discord.js_bot",
+  "name": "discord_bot",
   "version": "1.0.0",
-  "description": "This is very simple Discord Bot written in discord.js library.",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "SUVAJIT#5580",
-  "license": "ISC",
-  "dependencies": {
-    "async": "^2.6.1",
-    "discord.js": "^11.4.2",
-    "dotenv": "^6.1.0",
-    "enmap": "^4.3.3",
-    "fs": "0.0.1-security",
-    "moment": "^2.22.2",
-    "moment-duration-format": "^2.2.2",
-    "ms": "^2.1.1",
-    "node-telegram-bot-api": "^0.30.0",
-    "os-utils": "0.0.14",
-    "request-promise": "^4.2.2",
-    "winston": "^3.1.0"
-  },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/xsuvajit/discord-bot.git"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/xsuvajit/discord-bot/issues"
   },
-  "homepage": "https://github.com/xsuvajit/discord-bot#readme"
+  "homepage": "https://github.com/xsuvajit/discord-bot#readme",
+  "dependencies": {
+    "async": "^2.6.1",
+    "discord.js": "^11.4.2",
+    "dotenv": "^6.2.0",
+    "enmap": "^4.5.0",
+    "fs": "0.0.1-security",
+    "moment": "^2.23.0",
+    "moment-duration-format": "^2.2.2",
+    "ms": "^2.1.1",
+    "os-utils": "0.0.14"
+  }
 }
