@@ -32,7 +32,7 @@ exports.run = async (client, message, args) => {
     if (access == 'add') {
 
         if (perm == 'staff') {
-            if (!message.member.roles.get('500700090181222400') && !member.roles.has('500683949018710036') && !member.roles.has('500683658009640975') && !member.roles.has('513284645274517504'))
+            if (!message.member.roles.has('500700090181222400') && !message.member.roles.has('500683949018710036') && !message.member.roles.has('500683658009640975') && !message.member.roles.has('513284645274517504'))
             return message.channel.send(`Only ${admin_role} / ${mod_role} / ${staff_role} can run this Command!`); // admin & mod & staff
 
             if (member.roles.has('513284645274517504')) 
@@ -44,7 +44,7 @@ exports.run = async (client, message, args) => {
             })
 
         } else if (perm == 'mod') {
-            if (!message.member.roles.get('500700090181222400') && !message.member.roles.has('500683949018710036') && !member.roles.has('500683658009640975'))
+            if (!message.member.roles.has('500700090181222400') && !message.member.roles.has('500683949018710036') && !message.member.roles.has('500683658009640975'))
             return message.channel.send(`Only ${admin_role} / ${mod_role} can run this Command!`); // admin & mod
 
             if (member.roles.has('500683658009640975')) 
@@ -56,7 +56,7 @@ exports.run = async (client, message, args) => {
             })
 
         } else if(perm == 'verified') {
-            if (member.roles.has('500683488538656768'))
+            if (!message.member.roles.has('500683488538656768'))
             return message.channel.send(`User is already ${verified_role}! <:done:523005735001653248>`);
 
             member.addRole(verified_role).then(() => {
@@ -65,7 +65,7 @@ exports.run = async (client, message, args) => {
             })
 
         } else if(perm == 'ahstaff') {
-            if (member.roles.has('525375822391934997'))
+            if (!message.member.roles.has('525375822391934997'))
             return message.channel.send(`User is already ${ah_staff_role}! <:done:523005735001653248>`);
 
             member.addRole(ah_staff_role).then(() => {
@@ -74,7 +74,7 @@ exports.run = async (client, message, args) => {
             })
 
         } else if(perm == 'admin') {
-            if (!message.member.roles.get('500700090181222400') && !message.member.roles.has('500683949018710036'))
+            if (!message.member.roles.has('500700090181222400') && !message.member.roles.has('500683949018710036'))
             return message.channel.send(`Only ${admin_role} can run this Command!`); // admin
 
             if (member.roles.has('500683949018710036')) 
@@ -93,7 +93,7 @@ exports.run = async (client, message, args) => {
     } else if (access == 'remove') {
 
         if (perm == 'staff') {
-            if (!message.member.roles.get('500700090181222400') && !member.roles.has('500683949018710036') && !member.roles.has('500683658009640975'))
+            if (!message.member.roles.has('500700090181222400') && !message.member.roles.has('500683949018710036') && !message.member.roles.has('500683658009640975'))
             return message.channel.send(`Only ${admin_role} / ${mod_role} can run this Command!`); // admin & mod
 
             if (!member.roles.has('513284645274517504')) 
@@ -105,7 +105,7 @@ exports.run = async (client, message, args) => {
             })
 
         } else if (perm == 'mod') {
-            if (!message.member.roles.get('500700090181222400') && !member.roles.has('500683949018710036') && !member.roles.has('500683658009640975'))
+            if (!message.member.roles.has('500700090181222400') && !message.member.roles.has('500683949018710036') && !message.member.roles.has('500683658009640975'))
             return message.channel.send(`Only ${admin_role} / ${mod_role} can run this Command!`); // admin & mod
 
             if (!member.roles.has('500683658009640975')) 
