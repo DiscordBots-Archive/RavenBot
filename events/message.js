@@ -13,6 +13,7 @@ module.exports = (client, message) => {
   const cmd = client.commands.get(command);
 
   if (!cmd) {
+    if (message.channel.type == 'dm') return message.channel.send(`Command not found. Please do \`${client.config.discord.prefix}help\` for Options! <:meww:523021051202895872>`);
     message.delete(10000);
     return message.channel.send(`Command not found. Please do \`${client.config.discord.prefix}help\` for Options! <:meww:523021051202895872>`).then(msg => {msg.delete(10000)});
   }
