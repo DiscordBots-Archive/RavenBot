@@ -10,7 +10,7 @@ exports.run = async (client, message, args) => {
 
   if (!message.member.roles.get('500700090181222400') && !message.member.roles.get('500683949018710036')) {
     message.delete(4000)
-    return message.channel.send(`Only <@&500683949018710036> can use this Command`).then(msg => {msg.delete(4000)});
+    return message.channel.send(`Only <@&500683949018710036> can use this Command!`).then(msg => {msg.delete(4000)});
   }
 
   let member = message.mentions.members.first() || message.guild.members.get(args[0]);
