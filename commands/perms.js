@@ -80,7 +80,7 @@ exports.run = async (client, message, args) => {
             })
 
         } else if(perm == 'ahstaff') {
-            if (!message.member.roles.has('525375822391934997'))
+            if (message.member.roles.has('525375822391934997'))
             return message.channel.send(`User is already ${ah_staff_role}! <:done:523005735001653248>`);
 
             member.addRole(ah_staff_role).then(() => {
