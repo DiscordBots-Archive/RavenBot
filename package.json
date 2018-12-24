@@ -27,5 +27,6 @@
     "moment-duration-format": "^2.2.2",
     "ms": "^2.1.1",
     "os-utils": "0.0.14"
+    
   }
 }
