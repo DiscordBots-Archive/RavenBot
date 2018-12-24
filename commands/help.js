@@ -67,11 +67,11 @@ exports.run = async (client, message, args) => {
 
             if (user.bot === true) return;
 			if (reaction.emoji.name === '➡') {
-                reaction.remove(user);
+                //reaction.remove(user);
                 message.edit({embed : embed2});
             }
             if (reaction.emoji.name === '⬅') {
-                reaction.remove(user);
+                //reaction.remove(user);
                 message.edit({embed : embed});
             }
 
@@ -79,8 +79,8 @@ exports.run = async (client, message, args) => {
         };
         message.awaitReactions(filter, {max: 50, time: 300000})
 		.then(async collected => {
-            message.edit({embed : embed3});
-            message.clearReactions()
+            //message.edit({embed : embed3});
+            //message.clearReactions()
 			//console.log(collected)
 		});
     });
