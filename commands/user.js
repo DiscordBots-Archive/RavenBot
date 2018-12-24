@@ -90,4 +90,5 @@ exports.run = (client, message, args) => {
     `\n• Account created at: ${moment(member.user.createdAt).format("D-MM-YY, k:mm")}`)
 
     message.channel.send({embed});
+    
 }
