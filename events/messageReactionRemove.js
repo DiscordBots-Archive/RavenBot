@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 
 module.exports = (client, reaction, user) => {
+  if (user.bot === true) return;
 
   //console.log(`${user.username} removed his ${reaction.emoji.name} reaction`);
 
@@ -9,6 +10,7 @@ module.exports = (client, reaction, user) => {
   let role = reactionMessage.guild.roles.get('500683488538656768')
   let member = reactionMessage.guild.members.get(user.id);
   let reaction_channel = reactionMessage.guild.channels.find(ch => ch.name === "reaction-log");
+  if (!reaction_channel) return;
 
   if (reactionMessage.id = '518712940615172096') {
 

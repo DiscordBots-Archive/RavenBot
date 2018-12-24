@@ -12,11 +12,14 @@ module.exports = (client, message) => {
 
   const cmd = client.commands.get(command);
 
-  if (!cmd) {
-    if (message.channel.type == 'dm') return message.channel.send(`Command not found. Please do \`${client.config.discord.prefix}help\` for Options! <:meww:523021051202895872>`);
-    message.delete(10000);
-    return message.channel.send(`Command not found. Please do \`${client.config.discord.prefix}help\` for Options! <:meww:523021051202895872>`).then(msg => {msg.delete(10000)});
+  if (message.channel.type === 'dm') {
+    if (message.author.id !== '444432489818357760') return message.channel.send('Please use **Air Hounds - Discord Server** to run this command! :: https://discord.gg/8RTMVFW')
   }
+  else if (message.guild.id !== '500004711005683717') {
+    if (message.author.id !== '444432489818357760') return message.channel.send('Please use **Air Hounds - Discord Server** to run this command! :: https://discord.gg/8RTMVFW')
+  }
+
+  if (!cmd) return;
 
   cmd.run(client, message, args);
 
