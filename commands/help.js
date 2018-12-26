@@ -28,7 +28,11 @@ exports.run = async (client, message, args) => {
     .addField('!perms @user [add/remove] [Role Name]', 'A special command, type **!perms** for more info')
     .addField('!player [#player tag]', 'Get your Clash of Clans profile info')
     .addField('!clan [#clan tag]', 'Get your Clash of Clans clan info')
+    .addField('!flag #playertag', 'Flag a player and get notification when she/he joins')
+    .addField('!unflag #playertag', 'Unflag a player')
+    .addField('!checkplayer #playertag', 'Check the player if he/she is flagged or not')
     .addField('!check [#clan tag]', 'If any Flagged player exist in your clan')
+
     .setFooter(message.author.tag, message.author.displayAvatarURL)
     .setTimestamp()
 

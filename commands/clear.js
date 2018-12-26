@@ -2,6 +2,8 @@ exports.run = async (client, message, args) => {
 
     if (message.channel.type == 'dm') return;
 
+    if (message.channel.id === '527084773164843018' && message.channel.id === '527125137959682049' && message.channel.id === '513999069111255040' && message.channel.id === '501395897322831875' && message.channel.id === '521735333658755093' && message.channel.id === '513743066025426945' && message.channel.id === '521739952728440832' && message.channel.id === '517935069172727818'  && message.channel.id === '524139389635395594'  && message.channel.id === '524139508757823498'  && message.channel.id === '524139577011863562') return message.channel.send('This Command id disabled for this channel!')
+
     if (!message.member.roles.get('500700090181222400') && !message.member.roles.get('500683949018710036')  && !message.member.roles.get('500683658009640975')) {
         message.delete(4000);
         return message.channel.send(`Only <@&500683949018710036> / <@&500683658009640975> 😒`).then(msg => {msg.delete(5000)});
