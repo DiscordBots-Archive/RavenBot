@@ -22,7 +22,7 @@ exports.run = async (client, message, args) => {
     .addField('!say [Your Text]', 'Get your text from the bot')
     .addField('!kick @user [optional reason]', 'Kick a user from the server')
     .addField('!ban @user [optional reason]', 'Ban a user from the server')
-    .setFooter('Page 1/2 | ' + message.author.tag, message.author.displayAvatarURL)
+    .setFooter('Page 1/2', message.author.displayAvatarURL)
     .setTimestamp()
 
     const embed2 = new Discord.RichEmbed()
@@ -37,7 +37,7 @@ exports.run = async (client, message, args) => {
     .addField('!unflag [#playertag]', 'Unflag a playe who is already flagged')
     .addField('!checkplayer [#playertag]', 'Check the player if he\'s flagged or not')
     .addField('!checkclan [#clantag]', 'Check if any flagged player exists in your clan')
-    .setFooter('Page 2/2 | ' + message.author.tag, message.author.displayAvatarURL)
+    .setFooter('Page 2/2', message.author.displayAvatarURL)
     .setTimestamp()
 
     const embed3 = new Discord.RichEmbed()
@@ -62,7 +62,7 @@ exports.run = async (client, message, args) => {
     .addField('!unflag [#playertag]', 'Unflag a playe who is already flagged')
     .addField('!checkplayer [#playertag]', 'Check the player if he\'s flagged or not')
     .addField('!checkclan [#clantag]', 'Check if any flagged player exists in your clan')
-    .setFooter(message.author.tag, message.author.displayAvatarURL)
+    .setFooter(client.user.username, client.user.displayAvatarURL)
     .setTimestamp()
 
     message.channel.send({embed}).then(async message => {
@@ -84,7 +84,7 @@ exports.run = async (client, message, args) => {
 
             return Emojis.includes(reaction.emoji.name);
         };
-        message.awaitReactions(filter, {max: 50, time: 300000})
+        message.awaitReactions(filter, {max: 50, time: 60000})
 		.then(async collected => {
             message.edit({embed : embed3});
             message.clearReactions()
