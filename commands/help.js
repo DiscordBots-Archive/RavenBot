@@ -31,7 +31,7 @@ exports.run = async (client, message, args) => {
     .addField('!flag #playertag', 'Flag a player and get notification when she/he joins')
     .addField('!unflag #playertag', 'Unflag a player')
     .addField('!checkplayer #playertag', 'Check the player if he/she is flagged or not')
-    .addField('!check [#clan tag]', 'If any Flagged player exist in your clan')
+    .addField('!checkclan [#clan tag]', 'If any Flagged player exist in your clan')
 
     .setFooter(message.author.tag, message.author.displayAvatarURL)
     .setTimestamp()
