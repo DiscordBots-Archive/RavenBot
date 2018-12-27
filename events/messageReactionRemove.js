@@ -12,28 +12,20 @@ module.exports = (client, reaction, user) => {
   let reaction_channel = reactionMessage.guild.channels.find(ch => ch.name === "reaction-log");
   if (!reaction_channel) return;
 
-  if (reactionMessage.id = '518712940615172096') {
-
-    //console.log('Valid Message Reaction');
-
-    if (reaction.emoji.id == '509629414120882176') {
-
-      //console.log(`Valid Emoji Reaction`);
-      if (!member.roles.has('500683488538656768')) return;
-
+  if (reaction.emoji.id == '509629414120882176') {
+    if (reactionMessage.id == '518712940615172096') {
+      if (!member.roles.has('500683488538656768'))return;
       member.removeRole(role);
 
-      const embed = new Discord.RichEmbed()
-      .setColor("#f60839")
-      .setTimestamp()
-      .setFooter(`UNVERIFIED`, user.displayAvatarURL)
+      const embed =  new Discord.RichEmbed()
+      .setColor('#f60839')
       .setTitle(`${user.username} | ${user.id}`)
+      .setFooter('UNVERIFIED', user.displayAvatarURL)
+      .setTimestamp()
 
       client.channels.get(reaction_channel.id).send({embed});
+      member.send(`${member} you removed reaction and lost access of all other channels`);
+    }
+  }
 
-      member.send(`${member} you removed reaction and lost Verified Role!!`);
-
-    } else if (reaction.emoji.id !== '509629414120882176') return;
-
-  } else if (reactionMessage.id !== '518712940615172096') return;
 }

@@ -12,29 +12,19 @@ module.exports = (client, reaction, user) => {
   let reaction_channel = reactionMessage.guild.channels.find(ch => ch.name === "reaction-log");
   if (!reaction_channel) return;
 
-  if (reactionMessage.id = '518712940615172096') {
-
-    //console.log('Valid Message Reaction');
-
-    if (reaction.emoji.id == '509629414120882176') {
-
-      //console.log(`Valid Emoji Reaction`);
-
+  if (reaction.emoji.id == '509629414120882176') {
+    if (reactionMessage.id == '518712940615172096') {
       if (member.roles.has('500683488538656768')) return;
-
       member.addRole(role);
 
-      const embed = new Discord.RichEmbed()
+      const embed =  new Discord.RichEmbed()
       .setColor('#08f885')
-      .setTimestamp()
-      .setFooter(`VERIFIED`, user.displayAvatarURL)
       .setTitle(`${user.username} | ${user.id}`)
+      .setFooter('VERIFIED', user.displayAvatarURL)
+      .setTimestamp()
 
       client.channels.get(reaction_channel.id).send({embed});
-
-      member.send(`${member} you are verified, so now you can access other channels.`);
-      
-    } else if (reaction.emoji.id !== '509629414120882176') return;
-
-  } else if (reactionMessage.id !== '518712940615172096') return;
+      member.send(`${member} you have access of all other channels`);
+    }
+  }
 }
