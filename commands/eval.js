@@ -6,7 +6,7 @@ vm.createContext(codeContext);
 
 exports.run = async (client, message, args) => {
 
-    if (message.author.id !== '44443248981835776') return message.channel.send(`===Eval===` + '\n' +
+    if (message.author.id !== '444432489818357760') return message.channel.send(`===Eval===` + '\n' +
     `This bot is an Eval which runs any JavaScript code- which is like users can even wreck our server- mass dm or anything so I have disabled it for other users- only owner can use it`, {code: "asciidoc"})
 
     const code = args.join(' ');
