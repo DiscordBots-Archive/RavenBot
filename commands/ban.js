@@ -9,7 +9,7 @@ exports.run = async (client, message, args) => {
   if (message.guild.id !== '500004711005683717') return message.channel.send(`This command works for **Air Hounds - Discord Server** Only <:right:509629414120882176>` + `\n` + `https://discord.gg/8RTMVFW`);
 
   if (!message.member.roles.get('500700090181222400') && !message.member.roles.get('500683949018710036')) {
-    message.delete(4000)
+    //message.delete(4000)
     return message.channel.send(`Only <@&500683949018710036> can use this Command!`).then(msg => {msg.delete(4000)});
   }
 

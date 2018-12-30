@@ -5,7 +5,7 @@ exports.run = (client, message, args) => {
 
     if(message.channel.type == 'dm') return message.channel.send('This is Not a right place to use this Command!');
     if (message.channel.name !== 'bot-commands' ) {
-        message.delete(4000);
+        //message.delete(4000);
         let channel = message.guild.channels.find(ch => ch.name === "bot-commands");
         if(!channel) return message.channel.send('Could not found **#bot-commands** channel.')
         return message.channel.send(`Please use commands in appropriate chatrooms to reduce spam ${channel}`).then(msg => {msg.delete(4000)});
