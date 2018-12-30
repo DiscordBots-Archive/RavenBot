@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 module.exports = async (client, message) => {
-    const logs = message.guild.channels.find(channel => channel.name === "logs");
+    const logs = message.guild.channels.find(channel => channel.name === "deleted-message");
+    if (!logs) return;
 	/*if (message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) {
 	  message.guild.createChannel('logs', 'text');
 	}
