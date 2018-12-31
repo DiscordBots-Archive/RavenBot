@@ -1,8 +1,33 @@
-module.exports = (client, message) => {
+const Sequelize = require('sequelize');
 
-  if(message.author.bot) return;
-  
-  const prefix = (client.config.discord.prefix);
+const prefixlize = new Sequelize('database', 'user', 'password', {
+  host: 'localhost',
+  dialect: 'sqlite',
+  logging: false,
+  operatorsAliases: false,
+  storage: 'prefix.sqlite',
+});
+
+const Prefixes = prefixlize.define('prefix', {
+  name: {
+    type: Sequelize.STRING,
+    unique: true,
+  },
+  guild_prefix: Sequelize.TEXT,
+});
+
+module.exports = async (client, message) => {
+
+  if (message.author.bot) return;
+
+  const guild = message.guild.id;
+
+  const guild_id = await Prefixes.findOne({where: {name : guild}});
+  if (!guild_id) {
+    prefix = (client.config.discord.prefix);
+  } else {
+    prefix = guild_id.get('guild_prefix');
+  }
 
   const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|\\${prefix})\\s*`);
   if (!prefixRegex.test(message.content)) return;

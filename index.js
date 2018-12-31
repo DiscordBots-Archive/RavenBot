@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const Enmap = require("enmap");
 const fs = require("fs");
+const Sequelize = require('sequelize');
 require('dotenv').config();
 
 const client = new Discord.Client();
@@ -29,6 +30,26 @@ fs.readdir('./commands/', (err, files) => {
         client.commands.set(commandName, props);
 
     });
+});
+
+const prefixlize = new Sequelize('database', 'user', 'password', {
+    host: 'localhost',
+    dialect: 'sqlite',
+    logging: false,
+    operatorsAliases: false,
+    storage: 'prefix.sqlite',
+  });
+  
+  const Prefixes = prefixlize.define('prefix', {
+    name: {
+      type: Sequelize.STRING,
+      unique: true,
+    },
+    guild_prefix: Sequelize.TEXT,
+  });
+
+client.once('ready', () => {
+    Prefixes.sync();
 });
 
 client.login(client.config.discord.token);

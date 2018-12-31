@@ -27,6 +27,8 @@
     "moment-duration-format": "^2.2.2",
     "ms": "^2.1.1",
     "os-utils": "0.0.14",
+    "sequelize": "^4.42.0",
+    "sqlite3": "^4.0.4",
     "util": "^0.11.1",
     "vm": "^0.1.0"
   }
