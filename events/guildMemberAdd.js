@@ -20,6 +20,9 @@ module.exports = (client, member) => {
         setTimeout(() => {
             client.channels.get(channel.id).send("If you're new to the server you should only see three chats." + "\n" + "To gain access to this server please react to the post in <#501395897322831875> with the checkmark by clicking it!")
         }, 2000);
+        const channel = member.guild.channels.find(ch => ch.name === 'member-log');
+        if (!channel) return;
+        client.channels.get(channel.id).send({embed});
 
     } else {
         const channel = member.guild.channels.find(ch => ch.name === 'member-log');
