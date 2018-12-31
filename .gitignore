@@ -2,5 +2,4 @@ node_modules/
 package-lock.json
 .env
 start.bat
-ex.js
 prefix.sqlite

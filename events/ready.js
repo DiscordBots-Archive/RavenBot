@@ -4,7 +4,7 @@ const client = new Discord.Client();
 module.exports = (client) => {
     
     console.log(`logging In: Client: ${client.user.tag}, Users: ${client.users.size}, Channels: ${client.channels.size}, Servers: ${client.guilds.size}`);
-    client.user.setActivity(`${client.config.discord.prefix}help`, {type: 'STREAMING'});
+    client.user.setActivity(`@${client.user.username} help`, {type: 'STREAMING'});
 
     const channel = client.channels.find(ch => ch.id === '516098181549916172');
     if (!channel) return;

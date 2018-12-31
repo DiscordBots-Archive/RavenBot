@@ -26,7 +26,7 @@ fs.readdir('./commands/', (err, files) => {
         if (!file.endsWith('.js')) return;
         let props = require(`./commands/${file}`);
         let commandName = file.split(".")[0];
-        //console.log(`Loading Commands : ${client.config.discord.prefix}${commandName}`);
+        //console.log(`Loading Commands : ${commandName}`);
         client.commands.set(commandName, props);
 
     });
