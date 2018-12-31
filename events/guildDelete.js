@@ -11,7 +11,7 @@ module.exports = (client, guild) => {
     const embed = new Discord.RichEmbed()
 
     .setColor("#f60839")
-    .setThumbnail(client.user.displayAvatarURL)
+    //.setThumbnail(client.user.displayAvatarURL)
     .setFooter(`${client.user.username}`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
     .setTimestamp()
     .setTitle(`${guild.name} | ${guild.id}`)
