@@ -18,6 +18,8 @@ const Prefixes = prefixlize.define('prefix', {
 
 module.exports = async (client, message) => {
 
+  if (message.channel.type == 'dm') return;
+
   if (message.author.bot) return;
 
   const guild = message.guild.id;
@@ -40,10 +42,7 @@ module.exports = async (client, message) => {
 
   const cmd = client.commands.get(command);
 
-  if (message.channel.type === 'dm') {
-    if (message.author.id !== '444432489818357760') return; //message.channel.send('Please use **Air Hounds - Discord Server** to run this command! :: https://discord.gg/8RTMVFW')
-  }
-  else if (message.guild.id !== '500004711005683717') {
+  if (message.guild.id !== '500004711005683717') {
     if (message.author.id !== '444432489818357760') return; //message.channel.send('Please use **Air Hounds - Discord Server** to run this command! :: https://discord.gg/8RTMVFW')
   }
 

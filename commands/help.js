@@ -1,8 +1,6 @@
 const Discord = require('discord.js');
 exports.run = async (client, message, args) => {
 
-    if (message.channel.type === 'dm') return message.channel.send("It doesn't work here!")
-
     if (message.channel.name !== 'bot-commands') {
         message.delete(4000);
         let channel = message.guild.channels.find(ch => ch.name === "bot-commands");

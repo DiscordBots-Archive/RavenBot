@@ -17,6 +17,11 @@ const Prefixes = prefixlize.define('prefix', {
 });
 
 exports.run = async (client, message, args) => {
+    
+    if (!message.member.roles.get('500700090181222400') && !message.member.roles.get('500683949018710036')  && !message.member.roles.get('500683658009640975')) {
+        //message.delete(4000)
+        return message.channel.send(`Only <@&500683949018710036> / <@&500683658009640975> can use this Command!`).then(msg => {msg.delete(4000)});
+    };
 
     const prefixName = args.join(' ');
 
@@ -29,7 +34,11 @@ exports.run = async (client, message, args) => {
     }
     catch (e) {
         if (e.name === 'SequelizeUniqueConstraintError') {
-            return message.channel.send('That prefix already exists');
+            //return message.channel.send('That prefix already exists');
+            const affectedRows = await Prefixes.update({ guild_prefix: prefixName }, { where: { name: message.guild.id } });
+            if (affectedRows > 0) {
+                return message.channel.send(`Prefix has been set to ${prefixName}`);
+            }
         }
         return message.channel.send('Something went wrong with adding a prefix');
     }

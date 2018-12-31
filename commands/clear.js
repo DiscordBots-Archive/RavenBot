@@ -1,6 +1,5 @@
 exports.run = async (client, message, args) => {
 
-    if (message.channel.type == 'dm') return;
     if (message.channel.id === '501395897322831875') return message.channel.send('This Command id disabled for this channel!');
     if (message.channel.id === '513999069111255040') return message.channel.send('This Command id disabled for this channel!');
     if (message.channel.id === '527084773164843018') return message.channel.send('This Command id disabled for this channel!');
