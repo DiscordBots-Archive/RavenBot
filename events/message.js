@@ -27,7 +27,6 @@ module.exports = async (client, message) => {
   const guild_id = await Prefixes.findOne({where: {name : guild}});
 
   if (!guild_id) {
-    //prefix = (client.config.discord.prefix);
     prefix = null;
     
   } else {
@@ -41,10 +40,6 @@ module.exports = async (client, message) => {
   const command = args.shift().toLowerCase();
 
   const cmd = client.commands.get(command);
-
-  if (message.guild.id !== '500004711005683717') {
-    if (message.author.id !== '444432489818357760') return; //message.channel.send('Please use **Air Hounds - Discord Server** to run this command! :: https://discord.gg/8RTMVFW')
-  }
 
   if (!cmd) return;
 
