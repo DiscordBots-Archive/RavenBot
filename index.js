@@ -38,15 +38,15 @@ const prefixlize = new Sequelize('database', 'user', 'password', {
     logging: false,
     operatorsAliases: false,
     storage: 'prefix.sqlite',
-  });
+});
   
-  const Prefixes = prefixlize.define('prefix', {
+const Prefixes = prefixlize.define('prefix', {
     name: {
       type: Sequelize.STRING,
       unique: true,
     },
     guild_prefix: Sequelize.TEXT,
-  });
+});
 
 client.once('ready', () => {
     Prefixes.sync();

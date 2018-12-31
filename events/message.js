@@ -23,8 +23,11 @@ module.exports = async (client, message) => {
   const guild = message.guild.id;
 
   const guild_id = await Prefixes.findOne({where: {name : guild}});
+
   if (!guild_id) {
-    prefix = (client.config.discord.prefix);
+    //prefix = (client.config.discord.prefix);
+    prefix = null;
+    
   } else {
     prefix = guild_id.get('guild_prefix');
   }
