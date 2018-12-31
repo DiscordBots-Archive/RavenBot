@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 
 exports.run = async (client, message, args) => {
 
-  if (message.guild.id !== '500004711005683717') return message.channel.send(`This command works for **Air Hounds - Discord Server** Only <:right:509629414120882176>` + `\n` + `https://discord.gg/8RTMVFW`);
+  if (message.guild.id !== '500004711005683717') return;
 
   if (!message.member.roles.get('500700090181222400') && !message.member.roles.get('500683949018710036')  && !message.member.roles.get('500683658009640975') && !message.member.roles.get('513284645274517504')) {
     //message.delete(4000)
