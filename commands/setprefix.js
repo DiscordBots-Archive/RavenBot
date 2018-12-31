@@ -19,7 +19,7 @@ const Prefixes = prefixlize.define('prefix', {
 exports.run = async (client, message, args) => {
     
     if (!message.member.roles.some(r=>['Dev', 'Admin'].includes(r.name)) ) 
-    return message.channel.send(`Only Admins can use this Command`);
+    return message.channel.send(`Only Admins can use this Command!`);
 
     const prefixName = args.join(' ');
 

@@ -13,7 +13,7 @@ exports.run = async (client, message, args) => {
     if (message.channel.id === '521739952728440832') return message.channel.send('This Command id disabled for this channel!');
 
     if (!message.member.roles.some(r=>['Dev', 'Admin', 'Mod'].includes(r.name)) ) 
-    return message.channel.send(`Only Admins can use this Command`);
+    return message.channel.send(`Only Admins can use this Command!`);
 
 
     const user = message.mentions.users.first();
