@@ -3,7 +3,7 @@ module.exports = {
   name: 'mute',
   type: 'Mod',
   aliases: ['mute user'],
-	usage: '@user [optional reason]',
+	usage: '@user/id [optional reason]',
   description: 'Mention a member and mute him',
   args: true,
   guildOnly: true,

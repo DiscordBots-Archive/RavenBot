@@ -24,7 +24,8 @@ module.exports = {
   cooldown: 30,
   guildOnly: true,
 
-	async execute(message, client, args) {
+	async execute(message) {
+    
     const guild = message.guild.id;
     const tag = await Prefixes.findOne({where: { name: guild } });
     if (tag) {

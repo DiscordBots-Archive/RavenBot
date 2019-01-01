@@ -27,6 +27,7 @@ module.exports = {
     guildOnly: true,
 
 	async execute(message, args) {
+        
         if (!message.member.roles.some(r=>['Dev', 'Admin'].includes(r.name)) ) 
         return message.channel.send(`Only Admins can use this Command!`);
     
@@ -41,7 +42,7 @@ module.exports = {
         }
         catch (e) {
             if (e.name === 'SequelizeUniqueConstraintError') {
-                //return message.channel.send('That prefix already exists');
+
                 const affectedRows = await Prefixes.update({ guild_prefix: prefixName }, { where: { name: message.guild.id } });
                 if (affectedRows > 0) {
                     return message.channel.send(`Prefix has been set to **${prefixName}** <:notlikecat:529505687773118484>`);

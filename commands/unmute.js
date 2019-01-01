@@ -3,12 +3,13 @@ module.exports = {
   name: 'unmute',
   type: 'Mod',
   aliases: ['unmute user'],
-	usage: '[@user]',
+	usage: '@user/id',
   description: 'Menation a muted user and unmute him',
   guildOnly: true,
   args: true,
   
 	async execute(message, args, client) {
+
     if (message.guild.id !== '500004711005683717') return;
 
     if (!message.member.roles.get('500700090181222400') && !message.member.roles.get('500683949018710036')  && !message.member.roles.get('500683658009640975') && !message.member.roles.get('513284645274517504')) {

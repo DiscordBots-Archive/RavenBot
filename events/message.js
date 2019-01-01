@@ -54,6 +54,10 @@ module.exports = async (client, message) => {
 		return message.reply('I can\'t execute that command inside DMs!');
 	}
 
+	if (command.botcmd && message.channel.name !== 'bot-commands') {
+		return message.reply('I can\'t execute that command in this channel!');
+	}
+
 	if (command.args && !args.length) {
 		let reply = `You didn't provide any arguments!`;
 

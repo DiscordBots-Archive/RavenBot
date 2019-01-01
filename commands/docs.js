@@ -38,6 +38,6 @@ module.exports = {
             tag.increment('usage_count');
             return message.channel.send(tag.get('description'));
         }
-        return; //message.channel.send(`Could not find tag **${tagName}**`);
+        return; //message.channel.send(`Could not find tag + tagName);
 	},
 };

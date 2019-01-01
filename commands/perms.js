@@ -14,7 +14,7 @@ module.exports = {
         if (!message.member.roles.get('500700090181222400') && !message.member.roles.get('500683949018710036') && !message.member.roles.get('500683658009640975') && !message.member.roles.get('513284645274517504'))
         return message.channel.send('Only <@&500683949018710036> / <@&500683658009640975> / <@&513284645274517504> can use this Command!');
     
-        let member = message.mentions.members.first();
+        let member = message.mentions.members.first() || message.guild.members.get(args[0]);
         let staf = message.guild.roles.get('513284645274517504');
     
         const embed = new Discord.RichEmbed()
@@ -45,8 +45,8 @@ module.exports = {
         let ah_staff_role = message.guild.roles.get('525375822391934997');
         let admin_role = message.guild.roles.get('500683949018710036');
     
-        let access = args.slice(1).join(' ').replace(/ staff/g, '').replace(/ mod/g, '').replace(/ ahstaff/g, '').replace(/ verified/g, '').replace(/ admin/g, '');
-        let perm = args.slice(2).join(' ');
+        let access = args[1]
+        let perm = args[2];
     
         if (access == 'add') {
     

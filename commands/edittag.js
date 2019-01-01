@@ -39,6 +39,6 @@ module.exports = {
         if (affectedRows > 0) {
             return message.channel.send(`Docs **${tagName}** has been edited <:notlikecat:529505687773118484>`);
         }
-        return; //message.channel.send(`Could not find any docs with name **${tagName}**`);
+        return; //message.channel.send(`Could not find any docs with name ` + tagName);
 	},
 };

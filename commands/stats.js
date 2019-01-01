@@ -9,14 +9,9 @@ module.exports = {
 	usage: '',
 	description: 'Statistical information about me!',
     cooldown: 60,
+    botcmd: true,
     
 	async execute(message, args, client) {
-        if (message.channel.name !== 'bot-commands') {
-            //message.delete(4000);
-            let channel = message.guild.channels.find(ch => ch.name === "bot-commands");
-            if(!channel) return message.channel.send('Could not found **#bot-commands** channel.')
-            return message.channel.send(`Please use commands in appropriate chatrooms to reduce spam ${channel}`).then(msg => {msg.delete(4000)});
-        }
     
         const duration = moment.duration(client.uptime).format("D [days], H [hrs], m [mins], s [secs]");
     

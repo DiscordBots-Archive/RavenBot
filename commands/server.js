@@ -8,14 +8,9 @@ module.exports = {
 	description: 'It shows your server information',
     cooldown: 60,
     guildOnly: true,
+    botcmd: true,
 
 	async execute(message) {
-        if (message.channel.name !== 'bot-commands' ) {
-            //message.delete(4000);
-            let channel = message.guild.channels.find(ch => ch.name === "bot-commands");
-            if(!channel) return message.channel.send('Could not found **#bot-commands** channel.')
-            return message.channel.send(`Please use commands in appropriate chatrooms to reduce spam ${channel}`).then(msg => {msg.delete(4000)});
-        }
     
         const embed = new Discord.RichEmbed()
         .setDescription(`Info about **${message.guild.name}** (ID: ${message.guild.id})`)

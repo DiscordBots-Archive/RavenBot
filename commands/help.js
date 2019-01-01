@@ -24,9 +24,10 @@ module.exports = {
     aliases: ['commands'],
 	usage: '[command name]',
     cooldown: 0,
+    botcmd: true,
     
 	async execute(message, args) {
-        const data = [];
+
 		const { commands } = message.client;
 
 		if (!args.length) {

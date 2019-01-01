@@ -33,6 +33,7 @@ module.exports = {
     guildOnly: true,
 
 	async execute(message, args) {
+
         const tagName = args[0];
         const tag = await Tags.findOne({ where: { name: tagName } });
     
@@ -48,6 +49,6 @@ module.exports = {
             return message.channel.send({embed})
     
         }
-        return; //message.channel.send(`Could not find **${tagName}**`);
+        return; //message.channel.send(`Could not find ` + tagName);
 	},
 };

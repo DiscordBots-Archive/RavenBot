@@ -7,11 +7,9 @@ module.exports = {
     description: 'An Interesting Command!',
     args: true,
     
-	async execute(message, client, args) {
-        const sayMessage = args.join(" ");
-        if (!args.join(" ")) {
-            return;
-        };
+	async execute(message, args) {
+
+        const sayMessage = args.slice(0).join(' ')
         message.delete().catch(O_o=>{}); 
         message.channel.send(sayMessage);
 	}

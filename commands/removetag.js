@@ -32,6 +32,7 @@ module.exports = {
     guildOnly: true,
 
 	async execute(message, args) {
+        
         const tagName = args[0];
         const rowCount = await Tags.destroy({ where: { name: tagName } });
         if (!rowCount) return message.channel.send('That tag did not exist <:notlikecat:529505687773118484>');

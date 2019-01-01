@@ -3,7 +3,7 @@ module.exports = {
   name: 'kick',
   type: 'Mod',
   aliases: ['kick user'],
-	usage: '@user [optional reason]',
+	usage: '@user/id [optional reason]',
   description: 'Mention a member and kick him',
   args: true,
   guildOnly: true, 

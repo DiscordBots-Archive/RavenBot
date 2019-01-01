@@ -8,16 +8,11 @@ module.exports = {
 	description: 'User lookup! get info about yourself or any other user',
     cooldown: 60,
     guildOnly: true,
+    botcmd: true,
 
-	async execute(message) {
-        if (message.channel.name !== 'bot-commands' ) {
-            //message.delete(4000);
-            let channel = message.guild.channels.find(ch => ch.name === "bot-commands");
-            if(!channel) return message.channel.send('Could not found **#bot-commands** channel.')
-            return message.channel.send(`Please use commands in appropriate chatrooms to reduce spam ${channel}`).then(msg => {msg.delete(4000)});
-        }
+	async execute(message, args) {
     
-        let member = message.mentions.members.first();
+        let member = message.mentions.members.first() || message.guild.members.get(args[0]);
     
         if(!member) {
     
