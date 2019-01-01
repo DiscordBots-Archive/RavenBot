@@ -57,7 +57,7 @@ module.exports = async (client, message) => {
 	}
 
 	if (command.botcmd && message.channel.name !== 'bot-commands') {
-		return message.reply('I can\'t execute that command in this channel!');
+		return message.channel.send('I can\'t execute that command in this channel!');
 	}
 
 	if (command.args && !args.length) {
