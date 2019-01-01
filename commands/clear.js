@@ -4,7 +4,9 @@ module.exports = {
     aliases: ['clear messages'],
 	usage: '[ optional user ] [ amount ]',
 	description: 'Clear upto 100 messages from everyone or a specific user',
-	cooldown: 60,
+    cooldown: 60,
+    guildOnly: true,
+    
 	async execute(message, args, client) {
         if (message.channel.id === '501395897322831875') return message.channel.send('This Command id disabled for this channel!');
         if (message.channel.id === '513999069111255040') return message.channel.send('This Command id disabled for this channel!');

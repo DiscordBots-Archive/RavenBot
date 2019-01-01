@@ -4,7 +4,8 @@ module.exports = {
     type: 'Utils',
     aliases: ['announcement'],
 	usage: '[ text ]',
-	description: 'An Interesting Command!',
+    description: 'An Interesting Command!',
+    
 	async execute(message, client, args) {
         const sayMessage = args.join(" ");
         if (!args.join(" ")) {

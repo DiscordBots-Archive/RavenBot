@@ -4,7 +4,7 @@ module.exports = {
     type: 'Utils',
     aliases: [' invite link '],
 	usage: '',
-	description: 'Ping!',
+	description: 'Server Invite Link',
 	cooldown: 60,
 	async execute(message) {
         message.channel.send('Permanent link: https://discord.gg/8RTMVFW');

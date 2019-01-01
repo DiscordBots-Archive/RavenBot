@@ -5,7 +5,8 @@ module.exports = {
     aliases: ['clan lookup'],
 	usage: '[ #clantag ]',
 	description: 'Clan lookup',
-	cooldown: 20,
+    cooldown: 20,
+    
 	async execute(message, args) {
         if (message.channel.name !== 'bot-commands') {
             //message.delete(4000)

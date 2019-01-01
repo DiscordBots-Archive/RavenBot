@@ -23,7 +23,8 @@ module.exports = {
     description: 'List all of my commands or info about a specific command',
     aliases: ['commands'],
 	usage: '[command name]',
-	cooldown: 1,
+    cooldown: 30,
+    
 	async execute(message, args) {
         const data = [];
 		const { commands } = message.client;
@@ -53,17 +54,16 @@ module.exports = {
         }
         
         const embed = new Discord.RichEmbed()
-        .setTitle()
+        .setColor('#9a1ceb')
+        .setTitle('Command info about: ' + command.name)
+        .addField('Usage', '`' + `${prefix}${command.name} ${command.usage}` + '`')
+        .addField(`Description`, command.description)
+        .addField('Aliases', command.aliases.join(', '))
+        .addField('Cooldown', `${command.cooldown || 3} second(s)`)
+        .setFooter(message.author.tag, message.author.displayAvatarURL)
+        .setTimestamp()
 
-		data.push(`**Name:** ${command.name}`);
-
-		if (command.aliases) data.push(`**Aliases:** ${command.aliases.join(', ')}`);
-		if (command.description) data.push(`**Description:** ${command.description}`);
-		if (command.usage) data.push(`**Usage:** ${prefix}${command.name} ${command.usage}`);
-
-		data.push(`**Cooldown:** ${command.cooldown || 3} second(s)`);
-
-		message.channel.send(data, { split: true });
+		message.channel.send({embed});
 
 	},
 };

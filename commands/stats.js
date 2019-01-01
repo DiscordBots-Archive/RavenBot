@@ -8,7 +8,8 @@ module.exports = {
     aliases: ['client stats'],
 	usage: '',
 	description: 'Statistical information about me!',
-	cooldown: 60,
+    cooldown: 60,
+    
 	async execute(message, args, client) {
         if (message.channel.name !== 'bot-commands') {
             //message.delete(4000);

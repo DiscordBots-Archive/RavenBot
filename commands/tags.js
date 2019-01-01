@@ -29,7 +29,9 @@ module.exports = {
     aliases: ['all tags'],
 	usage: '',
 	description: 'List of all tags',
-	cooldown: 30,
+    cooldown: 30,
+    guildOnly: true,
+    
 	async execute(message) {
         const tagList = await Tags.findAll({ attributes: ['name'] });
         const tagString = tagList.map(t => t.name).join('`, `') || 'No tags set';

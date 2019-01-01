@@ -29,6 +29,7 @@ module.exports = {
     aliases: ['commands'],
 	usage: '[tag name] [ data ]',
     description: 'Store docs type data',
+    guildOnly: true,
     
 	async execute(message, args) {
         const tagName = args[0];

@@ -31,6 +31,8 @@ module.exports = {
 	description: 'Raw Info about a tag',
     cooldown: 30,
     args: true,
+    guildOnly: true,
+    
 	async execute(message, args) {
         const tagName = args[0];
         const tag = await Tags.findOne({ where: { name: tagName } });

@@ -3,7 +3,7 @@ module.exports = {
   name: 'ban',
   type: 'Mod',
   aliases: ['commands'],
-	usage: '[@user]',
+	usage: '[ @user ] [ optional reason ]',
   description: 'Mention a member and ban him',
   guildOnly: true,
 

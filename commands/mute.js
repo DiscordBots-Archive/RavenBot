@@ -4,7 +4,7 @@ module.exports = {
   type: 'Mod',
   aliases: ['mute'],
 	usage: '[ @user ] [ optional reason ]',
-  description: 'Mention a member and mute them',
+  description: 'Mention a member and mute him',
   guildOnly: true,
 
 	async execute(message, args, client) {

@@ -7,6 +7,7 @@ module.exports = {
 	description: 'Player Lookup',
     cooldown: 20,
     args: true,
+    
 	async execute(message, args) {
         if (message.channel.name !== 'bot-commands') {
             //message.delete(4000);

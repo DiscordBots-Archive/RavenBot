@@ -27,7 +27,9 @@ module.exports = {
     type: 'Docs',
     aliases: ['tags'],
 	usage: '[ tag name ]',
-	description: 'Get the content of any tag from database',
+    description: 'Get the content of any tag from database',
+    guildOnly: true,
+    
 	async execute(message, args) {
         const tagName = args[0];
         const tag = await Tags.findOne({where: { name: tagName } });

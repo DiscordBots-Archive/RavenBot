@@ -28,6 +28,7 @@ module.exports = {
     aliases: ['edit tags'],
 	usage: '[ tag name ] [ new data ]',
     description: 'Add some more new content',
+    guildOnly: true,
     
 	async execute(message, args) {
         const tagName = args[0];

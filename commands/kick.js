@@ -4,7 +4,8 @@ module.exports = {
   type: 'Mod',
   aliases: ['kick'],
 	usage: '[ @user ] [ optional reason ]',
-  description: 'Mention a member and kick them',
+  description: 'Mention a member and kick him',
+  args: true,
   guildOnly: true, 
 
 	async execute(message, args, client) {
