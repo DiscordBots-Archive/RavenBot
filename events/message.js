@@ -25,8 +25,11 @@ module.exports = async (client, message) => {
   if (message.author.bot) return;
 
   if (message.channel.type == 'dm') {
-    prefix = '!';
+
+		prefix = (client.config.discord.prefix);
+		
   } else {
+
     const guild = message.guild.id;
 
     const guild_id = await Prefixes.findOne({where: {name : guild}});
@@ -45,8 +48,7 @@ module.exports = async (client, message) => {
   const args = message.content.slice(matchedPrefix.length).trim().split(/ +/);
   const commandName = args.shift().toLowerCase();
 
-	const command = client.commands.get(commandName)
-		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+	const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
 	if (!command) return;
 

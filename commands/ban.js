@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 module.exports = {
   name: 'ban',
   type: 'Mod',
-  aliases: ['ban user'],
+  aliases: ['block'],
 	usage: '@user/id [optional reason]',
   description: 'Mention a member and ban him',
   args: true,

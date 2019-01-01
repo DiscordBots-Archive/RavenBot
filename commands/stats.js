@@ -16,12 +16,10 @@ module.exports = {
         const duration = moment.duration(client.uptime).format("D [days], H [hrs], m [mins], s [secs]");
     
         const embed = new Discord.RichEmbed()
-        .setAuthor(`CLIENT INFIORMATION`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
-        //.setAuthor(`CLIENT INFIORMATION`, client.user.displayAvatarURL)
-        .setThumbnail('https://discordemoji.com/assets/emoji/DiscordHype.gif')
-        //.setThumbnail(client.user.displayAvatarURL)
+        .setTitle(`CLIENT INFIORMATION`)
+        .setThumbnail(client.user.displayAvatarURL)
         .setColor('#fcfb04')
-        .setFooter(`Requested by ${message.author.username}`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
+        .setFooter(message.author.username, message.author.displayAvatarURL)
         .setTimestamp()
     
         .addField("❯ MEMORY USAGE", `• Using : ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`+

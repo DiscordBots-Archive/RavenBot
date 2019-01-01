@@ -26,7 +26,7 @@ const Tags = sequelize.define('tags', {
 module.exports = {
     name: 'addtag',
     type: 'Docs',
-    aliases: ['add tag, add docs'],
+    aliases: ['add', 'docsadd'],
 	usage: '[tag name] [data]',
     description: 'Store docs type data',
     args: true,

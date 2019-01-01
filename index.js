@@ -12,7 +12,6 @@ fs.readdir('./events/', (err, files) => {
     files.forEach(file => {
         const event = require(`./events/${file}`);
         let eventName = file.split('.')[0];
-        //console.log(`Loading Events : ${eventName}`);
         client.on(eventName, event.bind(null, client));
 
     });

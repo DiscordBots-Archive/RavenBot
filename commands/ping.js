@@ -2,7 +2,7 @@
 module.exports = {
     name: 'ping',
     type: 'Utils',
-    aliases: ['ping status'],
+    aliases: ['pong', 'latency'],
 	usage: '',
 	description: 'API Latency or Ping Status',
     cooldown: 30,
