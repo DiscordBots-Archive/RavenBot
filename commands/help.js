@@ -24,7 +24,7 @@ module.exports = {
     aliases: ['commands'],
 	usage: '[command name]',
     cooldown: 0,
-    botcmd: true,
+    //botcmd: true,
     
 	async execute(message, args) {
 
