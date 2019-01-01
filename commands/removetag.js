@@ -22,10 +22,17 @@ const Tags = sequelize.define('tags', {
         allowNull: false,
     },
 });
-
-exports.run = async (client, message, args) => {
-    const tagName = args[0];
-    const rowCount = await Tags.destroy({ where: { name: tagName } });
-    if (!rowCount) return message.channel.send('That tag did not exist <:notlikecat:529505687773118484>');
-    return message.channel.send(`Docs **${tagName}** has been deleted <:notlikecat:529505687773118484>`);
-}
+module.exports = {
+    name: 'removetag',
+    type: "Docs",
+    aliases: ['commands'],
+	usage: '[ tag name ]',
+	description: 'Remove a Doc (Tag)',
+    args: true,
+	async execute(message, args) {
+        const tagName = args[0];
+        const rowCount = await Tags.destroy({ where: { name: tagName } });
+        if (!rowCount) return message.channel.send('That tag did not exist <:notlikecat:529505687773118484>');
+        return message.channel.send(`Docs **${tagName}** has been deleted <:notlikecat:529505687773118484>`);
+	},
+};

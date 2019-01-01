@@ -1,4 +1,12 @@
-exports.run = (client, message, args) => {
-    //message.delete(2000);
-    message.channel.send('Permanent link: https://discord.gg/8RTMVFW');
-}
+
+module.exports = {
+    name: 'invite',
+    type: 'Utils',
+    aliases: [' invite link '],
+	usage: '',
+	description: 'Ping!',
+	cooldown: 60,
+	async execute(message) {
+        message.channel.send('Permanent link: https://discord.gg/8RTMVFW');
+	},
+};

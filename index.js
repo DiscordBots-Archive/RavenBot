@@ -18,19 +18,14 @@ fs.readdir('./events/', (err, files) => {
     });
 });
 
-client.commands = new Enmap();
+client.commands = new Discord.Collection();
 
-fs.readdir('./commands/', (err, files) => {
-    if (err) return console.error(err);
-    files.forEach(file => {
-        if (!file.endsWith('.js')) return;
-        let props = require(`./commands/${file}`);
-        let commandName = file.split(".")[0];
-        //console.log(`Loading Commands : ${commandName}`);
-        client.commands.set(commandName, props);
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
-    });
-});
+for (const file of commandFiles) {
+	const command = require(`./commands/${file}`);
+	client.commands.set(command.name, command);
+}
 
 const sequelize = new Sequelize('database', 'user', 'password', {
     host: 'localhost',

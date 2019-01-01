@@ -1,5 +1,4 @@
 const Sequelize = require('sequelize');
-
 const prefixlize = new Sequelize('database', 'user', 'password', {
   host: 'localhost',
   dialect: 'sqlite',
@@ -16,11 +15,21 @@ const Prefixes = prefixlize.define('prefix', {
   guild_prefix: Sequelize.TEXT,
 });
 
-exports.run = async (client, message, args) => {
+module.exports = {
+  name: 'prefix',
+  type: 'Utils',
+  aliases: ['prefix'],
+	usage: '',
+	description: 'Get my Prefix',
+  cooldown: 30,
+  guildOnly: true,
+
+	async execute(message, client, args) {
     const guild = message.guild.id;
     const tag = await Prefixes.findOne({where: { name: guild } });
     if (tag) {
         return message.channel.send('My prefix is **' + tag.get('guild_prefix') + '**');
     }
     return message.channel.send(`This server has no Prefix`);
-}
+	},
+};

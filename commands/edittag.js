@@ -22,14 +22,21 @@ const Tags = sequelize.define('tags', {
         allowNull: false,
     },
 });
-
-exports.run = async (client, message, args) => {
-    const tagName = args[0];
-    const tagDescription = args.slice(1).join(' ');
-
-    const affectedRows = await Tags.update({ description: tagDescription }, { where: { name: tagName } });
-    if (affectedRows > 0) {
-        return message.channel.send(`Docs **${tagName}** has been edited <:notlikecat:529505687773118484>`);
-    }
-    return; //message.channel.send(`Could not find any docs with name **${tagName}**`);
-}
+module.exports = {
+    name: 'edittag',
+    type: 'Docs',
+    aliases: ['edit tags'],
+	usage: '[ tag name ] [ new data ]',
+    description: 'Add some more new content',
+    
+	async execute(message, args) {
+        const tagName = args[0];
+        const tagDescription = args.slice(1).join(' ');
+    
+        const affectedRows = await Tags.update({ description: tagDescription }, { where: { name: tagName } });
+        if (affectedRows > 0) {
+            return message.channel.send(`Docs **${tagName}** has been edited <:notlikecat:529505687773118484>`);
+        }
+        return; //message.channel.send(`Could not find any docs with name **${tagName}**`);
+	},
+};

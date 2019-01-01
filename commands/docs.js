@@ -22,13 +22,19 @@ const Tags = sequelize.define('tags', {
         allowNull: false,
     },
 });
-
-exports.run = async (client, message, args) => {
-    const tagName = args[0];
-    const tag = await Tags.findOne({where: { name: tagName } });
-    if (tag) {
-        tag.increment('usage_count');
-        return message.channel.send(tag.get('description'));
-    }
-    return; //message.channel.send(`Could not find tag **${tagName}**`);
-}
+module.exports = {
+    name: 'docs',
+    type: 'Docs',
+    aliases: ['tags'],
+	usage: '[ tag name ]',
+	description: 'Get the content of any tag from database',
+	async execute(message, args) {
+        const tagName = args[0];
+        const tag = await Tags.findOne({where: { name: tagName } });
+        if (tag) {
+            tag.increment('usage_count');
+            return message.channel.send(tag.get('description'));
+        }
+        return; //message.channel.send(`Could not find tag **${tagName}**`);
+	},
+};

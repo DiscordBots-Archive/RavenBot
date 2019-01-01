@@ -16,28 +16,38 @@ const Prefixes = prefixlize.define('prefix', {
   guild_prefix: Sequelize.TEXT,
 });
 
-exports.run = async (client, message, args) => {
+module.exports = {
+    name: 'setprefix',
+    type: 'Utils',
+    aliases: ['set prefix'],
+	usage: '[ new prefix ]',
+	description: 'Set your server prefix',
+    cooldown: 60,
+    args: true,
+    guildOnly: true,
+
+	async execute(message, args) {
+        if (!message.member.roles.some(r=>['Dev', 'Admin'].includes(r.name)) ) 
+        return message.channel.send(`Only Admins can use this Command!`);
     
-    if (!message.member.roles.some(r=>['Dev', 'Admin'].includes(r.name)) ) 
-    return message.channel.send(`Only Admins can use this Command!`);
-
-    const prefixName = args.join(' ');
-
-    try {
-        const prefixvalue = await Prefixes.create({
-            name: message.guild.id,
-            guild_prefix: prefixName,
-        });
-        return message.channel.send(`Prefix has been set to **${prefixvalue.guild_prefix}**`);
-    }
-    catch (e) {
-        if (e.name === 'SequelizeUniqueConstraintError') {
-            //return message.channel.send('That prefix already exists');
-            const affectedRows = await Prefixes.update({ guild_prefix: prefixName }, { where: { name: message.guild.id } });
-            if (affectedRows > 0) {
-                return message.channel.send(`Prefix has been set to **${prefixName}**`);
-            }
+        const prefixName = args[0];
+    
+        try {
+            const prefixvalue = await Prefixes.create({
+                name: message.guild.id,
+                guild_prefix: prefixName,
+            });
+            return message.channel.send(`Prefix has been set to **${prefixvalue.guild_prefix}**`);
         }
-        return message.channel.send('Something went wrong with adding a Prefix');
-    }
-}
+        catch (e) {
+            if (e.name === 'SequelizeUniqueConstraintError') {
+                //return message.channel.send('That prefix already exists');
+                const affectedRows = await Prefixes.update({ guild_prefix: prefixName }, { where: { name: message.guild.id } });
+                if (affectedRows > 0) {
+                    return message.channel.send(`Prefix has been set to **${prefixName}**`);
+                }
+            }
+            return message.channel.send('Something went wrong with adding a Prefix');
+        }
+	},
+};

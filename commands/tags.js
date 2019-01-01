@@ -23,15 +23,23 @@ const Tags = sequelize.define('tags', {
     },
 });
 
-exports.run = async (client, message, args) => {
-    const tagList = await Tags.findAll({ attributes: ['name'] });
-    const tagString = tagList.map(t => t.name).join('`, `') || 'No tags set';
-
-    const embed = new Discord.RichEmbed()
-    .setColor('#9a1ceb')
-    .setTitle('Docs (Tags)')
-    .addField('Command: **docs  <tag>**', '`' + tagString + '`')
-    .setFooter(message.author.tag, message.author.displayAvatarURL)
-    .setTimestamp()
-    return message.channel.send({embed});
-}
+module.exports = {
+    name: 'tags',
+    type: 'Docs',
+    aliases: ['all tags'],
+	usage: '',
+	description: 'List of all tags',
+	cooldown: 30,
+	async execute(message) {
+        const tagList = await Tags.findAll({ attributes: ['name'] });
+        const tagString = tagList.map(t => t.name).join('`, `') || 'No tags set';
+    
+        const embed = new Discord.RichEmbed()
+        .setColor('#9a1ceb')
+        .setTitle('Docs (Tags)')
+        .addField('Command: **docs  <tag>**', '`' + tagString + '`')
+        .setFooter(message.author.tag, message.author.displayAvatarURL)
+        .setTimestamp()
+        return message.channel.send({embed});
+	},
+};

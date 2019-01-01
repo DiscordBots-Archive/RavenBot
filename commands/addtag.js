@@ -23,22 +23,30 @@ const Tags = sequelize.define('tags', {
     },
 });
 
-exports.run = async (client, message, args) => {
-    const tagName = args[0];
-    const tagDescription = args.slice(1).join(' ');
-
-    try {
-        const tag = await Tags.create({
-            name: tagName,
-            description: tagDescription,
-            username: message.author.username,
-        });
-        return message.channel.send(`New docs **${tag.name}** added <:notlikecat:529505687773118484>`);
-    }
-    catch (e) {
-        if (e.name === 'SequelizeUniqueConstraintError') {
-            return message.channel.send('That tag already exists <:notlikecat:529505687773118484>');
+module.exports = {
+    name: 'addtag',
+    type: 'Docs',
+    aliases: ['commands'],
+	usage: '[tag name] [ data ]',
+    description: 'Store docs type data',
+    
+	async execute(message, args) {
+        const tagName = args[0];
+        const tagDescription = args.slice(1).join(' ');
+    
+        try {
+            const tag = await Tags.create({
+                name: tagName,
+                description: tagDescription,
+                username: message.author.username,
+            });
+            return message.channel.send(`New docs **${tag.name}** added <:notlikecat:529505687773118484>`);
         }
-        return message.channel.send('Something went wrong with adding a tag <:notlikecat:529505687773118484>');
-    }
-}
+        catch (e) {
+            if (e.name === 'SequelizeUniqueConstraintError') {
+                return message.channel.send('That tag already exists <:notlikecat:529505687773118484>');
+            }
+            return message.channel.send('Something went wrong with adding a tag <:notlikecat:529505687773118484>');
+        }
+	},
+};

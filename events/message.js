@@ -1,5 +1,9 @@
 const Sequelize = require('sequelize');
 
+const Discord = require('discord.js');
+
+const cooldowns = new Discord.Collection();
+
 const prefixlize = new Sequelize('database', 'user', 'password', {
   host: 'localhost',
   dialect: 'sqlite',
@@ -18,31 +22,74 @@ const Prefixes = prefixlize.define('prefix', {
 
 module.exports = async (client, message) => {
 
-  if (message.channel.type == 'dm') return;
-
   if (message.author.bot) return;
 
-  const guild = message.guild.id;
-
-  const guild_id = await Prefixes.findOne({where: {name : guild}});
-
-  if (!guild_id) {
-    prefix = null;
-    
+  if (message.channel.type == 'dm') {
+    prefix = '!';
   } else {
-    prefix = guild_id.get('guild_prefix');
+    const guild = message.guild.id;
+
+    const guild_id = await Prefixes.findOne({where: {name : guild}});
+  
+    if (!guild_id) {
+      prefix = null;
+      
+    } else {
+      prefix = guild_id.get('guild_prefix');
+    }
   }
 
   const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|\\${prefix})\\s*`);
   if (!prefixRegex.test(message.content)) return;
   const [, matchedPrefix] = message.content.match(prefixRegex);
   const args = message.content.slice(matchedPrefix.length).trim().split(/ +/);
-  const command = args.shift().toLowerCase();
+  const commandName = args.shift().toLowerCase();
 
-  const cmd = client.commands.get(command);
+	const command = client.commands.get(commandName)
+		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
-  if (!cmd) return;
+	if (!command) return;
 
-  cmd.run(client, message, args);
+	if (command.guildOnly && message.channel.type !== 'text') {
+		return message.reply('I can\'t execute that command inside DMs!');
+	}
+
+	if (command.args && !args.length) {
+		let reply = `You didn't provide any arguments, ${message.author}!`;
+
+		if (command.usage) {
+			reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
+		}
+
+		return message.channel.send(reply);
+	}
+
+	if (!cooldowns.has(command.name)) {
+		cooldowns.set(command.name, new Discord.Collection());
+	}
+
+	const now = Date.now();
+	const timestamps = cooldowns.get(command.name);
+	const cooldownAmount = (command.cooldown || 3) * 1000;
+
+	if (timestamps.has(message.author.id)) {
+		const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
+
+		if (now < expirationTime) {
+			const timeLeft = (expirationTime - now) / 1000;
+			return message.channel.send(`Please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`);
+		}
+	}
+
+	timestamps.set(message.author.id, now);
+	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
+
+	try {
+		command.execute(message, args, client);
+	}
+	catch (error) {
+		console.error(error);
+		message.reply('There was an error trying to execute that command!');
+	}
 
 };
