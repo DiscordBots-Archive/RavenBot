@@ -28,7 +28,7 @@ module.exports = {
     const guild = message.guild.id;
     const tag = await Prefixes.findOne({where: { name: guild } });
     if (tag) {
-        return message.channel.send('My prefix is **' + tag.get('guild_prefix') + '**');
+        return message.channel.send("Hello <:meww:523021051202895872>, that's me, my prefix is `" + tag.get('guild_prefix') + '` <:notlikecat:529505687773118484>');
     }
     return message.channel.send(`This server has no Prefix`);
 	},

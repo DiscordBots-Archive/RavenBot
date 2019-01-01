@@ -44,7 +44,7 @@ module.exports = {
                 //return message.channel.send('That prefix already exists');
                 const affectedRows = await Prefixes.update({ guild_prefix: prefixName }, { where: { name: message.guild.id } });
                 if (affectedRows > 0) {
-                    return message.channel.send(`Prefix has been set to **${prefixName}**`);
+                    return message.channel.send(`Prefix has been set to **${prefixName}** <:notlikecat:529505687773118484>`);
                 }
             }
             return message.channel.send('Something went wrong with adding a Prefix');

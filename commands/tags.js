@@ -29,7 +29,6 @@ module.exports = {
     aliases: ['all tags'],
 	usage: '',
 	description: 'List of all tags',
-    cooldown: 30,
     guildOnly: true,
     
 	async execute(message) {
@@ -38,8 +37,8 @@ module.exports = {
     
         const embed = new Discord.RichEmbed()
         .setColor('#9a1ceb')
-        .setTitle('Docs (Tags)')
-        .addField('Command: **docs  <tag>**', '`' + tagString + '`')
+        .setTitle('List of all Docs (Tags)')
+        .setDescription('`' + tagString + '`')
         .setFooter(message.author.tag, message.author.displayAvatarURL)
         .setTimestamp()
         return message.channel.send({embed});

@@ -29,7 +29,6 @@ module.exports = {
     aliases: ['tag info'],
 	usage: '[tag name]',
 	description: 'Raw Info about a tag',
-    cooldown: 30,
     args: true,
     guildOnly: true,
 
@@ -49,6 +48,6 @@ module.exports = {
             return message.channel.send({embed})
     
         }
-        return message.channel.send(`Could not find **${tagName}**`);
+        return; //message.channel.send(`Could not find **${tagName}**`);
 	},
 };
