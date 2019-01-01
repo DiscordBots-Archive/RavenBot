@@ -2,9 +2,10 @@ const Discord = require('discord.js');
 module.exports = {
   name: 'ban',
   type: 'Mod',
-  aliases: ['commands'],
-	usage: '[ @user ] [ optional reason ]',
+  aliases: ['ban user'],
+	usage: '@user [optional reason]',
   description: 'Mention a member and ban him',
+  args: true,
   guildOnly: true,
 
 	async execute(message, args, client) {

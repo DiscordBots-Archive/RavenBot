@@ -2,9 +2,10 @@ const Discord = require('discord.js');
 module.exports = {
   name: 'mute',
   type: 'Mod',
-  aliases: ['mute'],
-	usage: '[ @user ] [ optional reason ]',
+  aliases: ['mute user'],
+	usage: '@user [optional reason]',
   description: 'Mention a member and mute him',
+  args: true,
   guildOnly: true,
 
 	async execute(message, args, client) {

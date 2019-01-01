@@ -27,12 +27,12 @@ module.exports = {
     name: 'taginfo',
     type: 'Docs',
     aliases: ['tag info'],
-	usage: '[ tag name ]',
+	usage: '[tag name]',
 	description: 'Raw Info about a tag',
     cooldown: 30,
     args: true,
     guildOnly: true,
-    
+
 	async execute(message, args) {
         const tagName = args[0];
         const tag = await Tags.findOne({ where: { name: tagName } });

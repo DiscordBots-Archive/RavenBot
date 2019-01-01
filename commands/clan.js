@@ -3,8 +3,9 @@ module.exports = {
     name: 'clan',
     type: 'Look up',
     aliases: ['clan lookup'],
-	usage: '[ #clantag ]',
-	description: 'Clan lookup',
+	usage: '[#clantag]',
+    description: 'Clan lookup',
+    args: true,
     cooldown: 20,
     
 	async execute(message, args) {

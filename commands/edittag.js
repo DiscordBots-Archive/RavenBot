@@ -26,8 +26,9 @@ module.exports = {
     name: 'edittag',
     type: 'Docs',
     aliases: ['edit tags'],
-	usage: '[ tag name ] [ new data ]',
+	usage: '[tag name] [new data]',
     description: 'Add some more new content',
+    args: true,
     guildOnly: true,
     
 	async execute(message, args) {

@@ -26,9 +26,10 @@ const Tags = sequelize.define('tags', {
 module.exports = {
     name: 'addtag',
     type: 'Docs',
-    aliases: ['commands'],
-	usage: '[tag name] [ data ]',
+    aliases: ['add tag, add docs'],
+	usage: '[tag name] [data]',
     description: 'Store docs type data',
+    args: true,
     guildOnly: true,
     
 	async execute(message, args) {

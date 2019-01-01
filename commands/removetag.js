@@ -26,11 +26,11 @@ module.exports = {
     name: 'removetag',
     type: "Docs",
     aliases: ['commands'],
-	usage: '[ tag name ]',
+	usage: '[tag name]',
 	description: 'Remove a Doc (Tag)',
     args: true,
     guildOnly: true,
-    
+
 	async execute(message, args) {
         const tagName = args[0];
         const rowCount = await Tags.destroy({ where: { name: tagName } });

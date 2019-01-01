@@ -23,7 +23,7 @@ module.exports = {
     description: 'List all of my commands or info about a specific command',
     aliases: ['commands'],
 	usage: '[command name]',
-    cooldown: 30,
+    cooldown: 0,
     
 	async execute(message, args) {
         const data = [];
@@ -56,10 +56,10 @@ module.exports = {
         const embed = new Discord.RichEmbed()
         .setColor('#9a1ceb')
         .setTitle('Command info about: ' + command.name)
-        .addField('Usage', '`' + `${prefix}${command.name} ${command.usage}` + '`')
-        .addField(`Description`, command.description)
-        .addField('Aliases', command.aliases.join(', '))
-        .addField('Cooldown', `${command.cooldown || 3} second(s)`)
+        .addField('Usage', '`' + `${prefix}${command.name} ${command.usage}` + '`', true)
+        .addField(`Description`, command.description, true)
+        .addField('Aliases', command.aliases.join(', '), true)
+        .addField('Cooldown', `${command.cooldown || 3} second(s)`, true)
         .setFooter(message.author.tag, message.author.displayAvatarURL)
         .setTimestamp()
 

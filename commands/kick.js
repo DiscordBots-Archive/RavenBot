@@ -2,8 +2,8 @@ const Discord = require('discord.js');
 module.exports = {
   name: 'kick',
   type: 'Mod',
-  aliases: ['kick'],
-	usage: '[ @user ] [ optional reason ]',
+  aliases: ['kick user'],
+	usage: '@user [optional reason]',
   description: 'Mention a member and kick him',
   args: true,
   guildOnly: true, 

@@ -4,7 +4,7 @@ module.exports = {
     name: 'user',
     type: 'Utils',
     aliases: ['user info'],
-	usage: '[ optional user ]',
+	usage: '[optional user]',
 	description: 'User lookup! get info about yourself or any other user',
     cooldown: 60,
     guildOnly: true,

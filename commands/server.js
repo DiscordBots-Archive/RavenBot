@@ -4,10 +4,10 @@ module.exports = {
     name: 'server',
     type: 'Utils',
     aliases: ['server info'],
-	usage: '[ text ]',
-	description: 'Get your server information',
+	usage: '[text]',
+	description: 'It shows your server information',
     cooldown: 60,
-    guildOnly: true, 
+    guildOnly: true,
 
 	async execute(message) {
         if (message.channel.name !== 'bot-commands' ) {

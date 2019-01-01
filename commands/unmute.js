@@ -2,10 +2,11 @@ const Discord = require('discord.js');
 module.exports = {
   name: 'unmute',
   type: 'Mod',
-  aliases: ['unmute'],
-	usage: '[ @user ]',
+  aliases: ['unmute user'],
+	usage: '[@user]',
   description: 'Menation a muted user and unmute him',
   guildOnly: true,
+  args: true,
   
 	async execute(message, args, client) {
     if (message.guild.id !== '500004711005683717') return;

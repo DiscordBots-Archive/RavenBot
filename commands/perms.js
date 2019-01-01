@@ -3,8 +3,9 @@ module.exports = {
     name: 'perms',
     type: 'Mod',
     aliases: ['role permissions'],
-	usage: '[ @user ] [ role name ]',
-    description: 'Manage permissions roles',
+	usage: '@user [role name]',
+    description: 'Manage role permissions',
+    args: true,
     guildOnly: true,
 
 	async execute(message, args, client) {

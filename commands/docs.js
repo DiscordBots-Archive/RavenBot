@@ -25,11 +25,12 @@ const Tags = sequelize.define('tags', {
 module.exports = {
     name: 'docs',
     type: 'Docs',
-    aliases: ['tags'],
-	usage: '[ tag name ]',
+    aliases: ['tags, docs'],
+	usage: '[tag name]',
     description: 'Get the content of any tag from database',
+    args: true,
     guildOnly: true,
-    
+
 	async execute(message, args) {
         const tagName = args[0];
         const tag = await Tags.findOne({where: { name: tagName } });

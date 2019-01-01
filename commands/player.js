@@ -2,12 +2,12 @@ const Discord = require('discord.js');
 module.exports = {
     name: 'player',
     type: 'Look up',
-    aliases: ['player'],
-	usage: '[ #playertag ]',
+    aliases: ['player lookup'],
+	usage: '[#playertag]',
 	description: 'Player Lookup',
     cooldown: 20,
     args: true,
-    
+
 	async execute(message, args) {
         if (message.channel.name !== 'bot-commands') {
             //message.delete(4000);

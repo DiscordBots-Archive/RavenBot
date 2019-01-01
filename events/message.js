@@ -55,7 +55,7 @@ module.exports = async (client, message) => {
 	}
 
 	if (command.args && !args.length) {
-		let reply = `You didn't provide any arguments, ${message.author}!`;
+		let reply = `You didn't provide any arguments!`;
 
 		if (command.usage) {
 			reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
@@ -73,10 +73,10 @@ module.exports = async (client, message) => {
 	const cooldownAmount = (command.cooldown || 3) * 1000;
 
 	if (timestamps.has(message.author.id)) {
-		const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
+    const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
 
 		if (now < expirationTime) {
-			const timeLeft = (expirationTime - now) / 1000;
+      const timeLeft = (expirationTime - now) / 1000;
 			return message.channel.send(`Please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`);
 		}
 	}

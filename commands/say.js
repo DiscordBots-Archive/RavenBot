@@ -3,8 +3,9 @@ module.exports = {
     name: 'say',
     type: 'Utils',
     aliases: ['announcement'],
-	usage: '[ text ]',
+	usage: '[text]',
     description: 'An Interesting Command!',
+    args: true,
     
 	async execute(message, client, args) {
         const sayMessage = args.join(" ");
