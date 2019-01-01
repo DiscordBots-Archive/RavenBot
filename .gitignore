@@ -3,3 +3,4 @@ package-lock.json
 .env
 start.bat
 prefix.sqlite
+database.sqlite

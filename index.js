@@ -32,6 +32,29 @@ fs.readdir('./commands/', (err, files) => {
     });
 });
 
+const sequelize = new Sequelize('database', 'user', 'password', {
+    host: 'localhost',
+    dialect: 'sqlite',
+    logging: false,
+    operatorsAliases: false,
+    storage: 'database.sqlite',
+});
+
+const Tags = sequelize.define('tags', {
+    name: {
+        type: Sequelize.STRING,
+        unique: true,
+    },
+    description: Sequelize.TEXT,
+    username: Sequelize.STRING,
+    usage_count: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+        allowNull: false,
+    },
+});
+
+
 const prefixlize = new Sequelize('database', 'user', 'password', {
     host: 'localhost',
     dialect: 'sqlite',
@@ -50,6 +73,7 @@ const Prefixes = prefixlize.define('prefix', {
 
 client.once('ready', () => {
     Prefixes.sync();
+    Tags.sync();
 });
 
 client.login(client.config.discord.token);
