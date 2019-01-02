@@ -48,16 +48,7 @@ const Tags = sequelize.define('tags', {
     },
 });
 
-
-const prefixlize = new Sequelize('database', 'user', 'password', {
-    host: 'localhost',
-    dialect: 'sqlite',
-    logging: false,
-    operatorsAliases: false,
-    storage: 'prefix.sqlite',
-});
-  
-const Prefixes = prefixlize.define('prefix', {
+const Prefixes = sequelize.define('prefix', {
     name: {
       type: Sequelize.STRING,
       unique: true,

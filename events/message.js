@@ -4,15 +4,15 @@ const Discord = require('discord.js');
 
 const cooldowns = new Discord.Collection();
 
-const prefixlize = new Sequelize('database', 'user', 'password', {
-  host: 'localhost',
-  dialect: 'sqlite',
-  logging: false,
-  operatorsAliases: false,
-  storage: 'prefix.sqlite',
+const sequelize = new Sequelize('database', 'user', 'password', {
+	host: 'localhost',
+	dialect: 'sqlite',
+	logging: false,
+	operatorsAliases: false,
+	storage: 'database.sqlite',
 });
 
-const Prefixes = prefixlize.define('prefix', {
+const Prefixes = sequelize.define('prefix', {
   name: {
     type: Sequelize.STRING,
     unique: true,
