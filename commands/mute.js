@@ -1,4 +1,22 @@
 const Discord = require('discord.js');
+const Sequelize = require('sequelize');
+
+const sequelize = new Sequelize('database', 'user', 'password', {
+    host: 'localhost',
+    dialect: 'sqlite',
+    logging: false,
+    operatorsAliases: false,
+    storage: 'database.sqlite',
+});
+
+const Modroles = sequelize.define('roles', {
+  name: {
+    type: Sequelize.STRING,
+    unique: true,
+  },
+  guild: Sequelize.STRING,
+});
+
 module.exports = {
   name: 'mute',
   type: 'Mod',
@@ -7,15 +25,11 @@ module.exports = {
   example: ['mute @Purple', 'mute @Purple posting ads', 'mute 499250383785558026 posting ads'],
   args: true,
   guildOnly: true,
+  adminonly: true,
 
 	async execute(message, args, client) {
-    if (message.guild.id !== '500004711005683717') return;
 
-    if (!message.member.roles.get('500700090181222400') && !message.member.roles.get('500683949018710036')  && !message.member.roles.get('500683658009640975') && !message.member.roles.get('513284645274517504')) {
-      //message.delete(4000)
-      return message.channel.send(`Only <@&500683949018710036> / <@&500683658009640975> / <@&513284645274517504> can use this Command!`).then(msg => {msg.delete(4000)});
-    }
-  
+
     let member = message.mentions.members.first() || message.guild.members.get(args[0]);
   
     if (!member) 
@@ -26,55 +40,70 @@ module.exports = {
     
     if (member == message.guild.members.get(client.user.id)) 
     return message.channel.send("Hello <:meww:523021051202895872>, that's me! **I'm not muteable!!!** <:huh:523021014481764352>");
-  
-    if (member.roles.has('505324342679437322'))
-    return message.channel.send('User is already <@&505324342679437322>!') // muted
-  
-    if (member.roles.has('513284645274517504')) 
-    return message.channel.send("You can't mute a <@&513284645274517504>!"); // staff
-  
-    if (member.roles.has('525375822391934997')) 
-    return message.channel.send("You can't mute a <@&525375822391934997>!"); // ah staff
-    
-    if (member.roles.has('500683658009640975')) 
-    return message.channel.send("You can't mute a <@&500683658009640975>!"); // mod
-    
-    if (member.roles.has('500683949018710036')) 
-    return message.channel.send("You can't mute an <@&500683949018710036>!"); // admin
-  
+
     let reason = args.slice(1).join(' ');
-    if (!reason) {
-      reason = "Not Provided";
-    };
-  
+
     let mod_log_channel = message.guild.channels.find(c => c.name === "mod-log");
   
     let muteRole = message.guild.roles.find(r => r.name === 'Muted');
+
+    if (member.roles.has(muteRole.id) )
+    return message.channel.send(member.user.tag + ' is already muted!') 
+  
+    //if (member.roles.has(modrole.get('name') ) )
+    //return message.channel.send(`You can't mute any <@&` + modrole.get('name') + '>') 
+
+    const user = new Discord.RichEmbed()
+    .setTitle(member.user.tag + ' | ' + member.user.id)
+    .setFooter('Send yes to confirm', member.user.displayAvatarURL)
+    .setTimestamp()
+
+    await message.channel.send(`You sure you want me to mute this user?`, user);
+    
+		const responses = await message.channel.awaitMessages(msg => msg.author.id === message.author.id, { max: 1, time: 10000 });
+    
+		if (!responses || responses.size !== 1) {
+			return message.channel.send('Timed out. Cancelled mute');
+		}
+
+		const response = responses.first();
+
+		let sentMessage;
+
+		if (/^y(?:e(?:a|s)?)?$/i.test(response.content)) {
+
+			sentMessage = await message.channel.send(`Muting **${member.user.tag}**...`);
+
+		} else {
+			return message.channel.send('Cancelled mute');
+    }
   
     const embed = new Discord.RichEmbed()
     .setTitle(`${member.user.tag} | ${member.user.id}`)
     .setColor("#f60839")
     .setTimestamp()
-    .addField(`\`MOD: ${message.author.tag}\``, `\`REASON: ${reason}\``)
+    .addField(`Mod`, message.author.tag)
+    if (reason) embed.addField(`Reason`, reason)
     .setFooter(`MUTED`, member.user.displayAvatarURL)
-  
-    member.addRole(muteRole).then(() => {
-  
-      client.channels.get(mod_log_channel.id).send({embed});
-      message.channel.send("Done. User has been Muted <a:hype:515571561345056783>")
-      .catch(error => message.channel.send(`I could not mute this user! \n ${error}`));
-  
-      setTimeout ( () => {
-        member.removeRole(muteRole);
-  
-        /*const embed = new Discord.RichEmbed()
-        .setTitle(`${member.user.tag} | ${member.user.id}`)
-        .setColor("#d7342a")
-        .setTimestamp()
-        .addField(`Mod : ${message.author.tag} | ${message.author.id}`, `Reason : ${reason}`)
-        .setFooter(`Un-Muted` , member.user.displayAvatarURL)*/
-      }, 3000000);
-  
-    });
+
+    try {
+      await member.send({embed});
+    } catch {}
+
+    try {
+      await member.addRole(muteRole).then(() => {
+
+        client.channels.get(mod_log_channel.id).send({embed});
+        sentMessage.edit(`Successfully muted **${member.user.tag}**`)
+
+        setTimeout ( () => {
+          member.removeRole(muteRole);
+        }, 3000000);
+    
+      });
+    } catch (error) {
+      return sentMessage.edit(`I could not mute **${member.user.tag}**`)
+    }
+
 	},
 };
