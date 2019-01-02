@@ -49,7 +49,7 @@ module.exports = {
   
     let mod_log_channel = message.guild.channels.find(c => c.name === "mod-log");
   
-    await member.ban(reason)
+    await message.guild.ban(member.user.id)
     .catch(error => message.channel.send(`I could not ban this user! \n ${error}`));
   
     const embed = new Discord.RichEmbed()
