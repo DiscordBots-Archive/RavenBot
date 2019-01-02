@@ -25,7 +25,7 @@ const Tags = sequelize.define('tags', {
 module.exports = {
     name: 'docs',
     type: 'Docs',
-    aliases: ['tags, docs'],
+    aliases: ['tag'],
 	usage: '[tag name]',
     description: 'Get the content of any tag from database',
     args: true,

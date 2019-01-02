@@ -2,9 +2,9 @@ const Discord = require('discord.js');
 module.exports = {
   name: 'ban',
   type: 'Mod',
-  aliases: ['block'],
 	usage: '@user/id [optional reason]',
   description: 'Mention a member and ban him',
+  example: ['ban @Purple', 'ban @Purple posting ads', 'ban 499250383785558026 posting ads'],
   args: true,
   guildOnly: true,
 

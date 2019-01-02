@@ -3,9 +3,10 @@ const moment = require('moment');
 module.exports = {
     name: 'user',
     type: 'Utils',
-    aliases: ['user info'],
+    aliases: ['user-info'],
 	usage: '[optional user]',
-	description: 'User lookup! get info about yourself or any other user',
+    description: 'User lookup! get info about yourself or any other user',
+    example: ['user @Purple', 'user 499250383785558026'],
     cooldown: 60,
     guildOnly: true,
     botcmd: true,

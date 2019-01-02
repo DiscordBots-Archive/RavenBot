@@ -3,8 +3,8 @@ const moment = require('moment');
 module.exports = {
     name: 'server',
     type: 'Utils',
-    aliases: ['server info'],
-	usage: '[text]',
+    usage: ' ',
+    aliases: ['server-info'],
 	description: 'It shows your server information',
     cooldown: 60,
     guildOnly: true,

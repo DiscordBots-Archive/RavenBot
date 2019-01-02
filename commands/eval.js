@@ -8,7 +8,6 @@ module.exports = {
     type: 'Utils',
     aliases: ['eval'],
 	usage: '[JavaScript]',
-    description: 'Eval!',
     guildOnly: true,
     
 	async execute(message, args, client) {

@@ -26,8 +26,8 @@ const Tags = sequelize.define('tags', {
 module.exports = {
     name: 'tags',
     type: 'Docs',
-    aliases: ['all tags'],
-	usage: '',
+    usage: ' ',
+    aliases: ['alltags'],
 	description: 'List of all tags',
     guildOnly: true,
     

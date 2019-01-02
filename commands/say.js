@@ -2,7 +2,6 @@
 module.exports = {
     name: 'say',
     type: 'Utils',
-    aliases: ['announcement'],
 	usage: '[text]',
     description: 'An Interesting Command!',
     args: true,

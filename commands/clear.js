@@ -1,9 +1,10 @@
 module.exports = {
     name: 'clear',
     type: 'Utils',
-    aliases: ['clear messages'],
+    aliases: ['delete'],
 	usage: '[optional user] [amount]',
-	description: 'Clear upto 100 messages from everyone or a specific user',
+    description: 'Clear upto 100 messages from everyone or a specific user',
+    example: ['clear 10', 'clear @Purple 10'],
     cooldown: 60,
     args: true,
     guildOnly: true,

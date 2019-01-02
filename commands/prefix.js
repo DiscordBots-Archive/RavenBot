@@ -18,8 +18,8 @@ const Prefixes = prefixlize.define('prefix', {
 module.exports = {
   name: 'prefix',
   type: 'Utils',
-  aliases: ['prefix'],
-	usage: '',
+  usage: ' ',
+  aliases: ['my-prefix'],
 	description: 'Get my Prefix',
   cooldown: 30,
   guildOnly: true,

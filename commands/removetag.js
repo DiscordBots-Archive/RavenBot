@@ -25,7 +25,7 @@ const Tags = sequelize.define('tags', {
 module.exports = {
     name: 'removetag',
     type: "Docs",
-    aliases: ['commands'],
+    aliases: ['deletetag'],
 	usage: '[tag name]',
 	description: 'Remove a Doc (Tag)',
     args: true,

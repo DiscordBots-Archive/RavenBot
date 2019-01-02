@@ -22,7 +22,8 @@ module.exports = {
     type: 'Utils',
     description: 'List all of my commands or info about a specific command',
     aliases: ['commands'],
-	usage: '[command name]',
+    usage: '[command name]',
+    example: ['help', 'help kick', 'help stats'],
     cooldown: 0,
     //botcmd: true,
     
@@ -56,11 +57,12 @@ module.exports = {
         
         const embed = new Discord.RichEmbed()
         .setColor('#9a1ceb')
-        .setTitle('Command info about: ' + command.name)
-        .addField('Usage', '`' + `${prefix}${command.name} ${command.usage}` + '`', true)
-        .addField(`Description`, command.description, true)
-        .addField('Aliases', command.aliases.join(', '), true)
-        .addField('Cooldown', `${command.cooldown || 3} second(s)`, true)
+        .setTitle('Command info about :: ' + command.name)
+        if (command.usage) embed.addField('Usage', '`' + `${prefix}${command.name} ${command.usage}` + '`', true)
+        if (command.description) embed.addField(`Description`, command.description, true)
+        if (command.aliases) embed.addField('Aliases', '`' + prefix + command.aliases.join('`\n`' + prefix) + '`', true)
+        if (command.example) embed.addField('Example', '`' + prefix + command.example.join('`\n`' + prefix) + '`', true)
+        if (command.cooldown) embed.addField('Cooldown', `${command.cooldown} second(s)`, true)
         .setFooter(message.author.tag, message.author.displayAvatarURL)
         .setTimestamp()
 

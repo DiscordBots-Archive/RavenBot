@@ -2,9 +2,9 @@ const Discord = require('discord.js');
 module.exports = {
     name: 'clan',
     type: 'Look up',
-    aliases: ['clan search'],
 	usage: '[#clantag]',
-    description: 'Clan lookup',
+    description: 'Clash of Clans clan lookup',
+    example: ['clan #8QU8J9LP'],
     args: true,
     cooldown: 20,
     botcmd: true,

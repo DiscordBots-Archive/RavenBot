@@ -2,9 +2,9 @@ const Discord = require('discord.js');
 module.exports = {
     name: 'player',
     type: 'Look up',
-    aliases: ['player lookup'],
 	usage: '[#playertag]',
-	description: 'Player Lookup',
+    description: 'Clash of Clans player lookup',
+    example: ['player #9Q92C8R20'],
     cooldown: 20,
     args: true,
     botcmd: true,

@@ -2,10 +2,9 @@
 module.exports = {
     name: 'ping',
     type: 'Utils',
+    usage: ' ',
     aliases: ['pong', 'latency'],
-	usage: '',
 	description: 'API Latency or Ping Status',
-    cooldown: 30,
     
 	async execute(message, args, client) {
         const m = await message.channel.send("PING TEST");

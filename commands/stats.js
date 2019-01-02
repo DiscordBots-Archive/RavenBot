@@ -5,8 +5,8 @@ const duration = require('moment-duration-format');
 module.exports = {
     name: 'stats',
     type: 'Utils',
-    aliases: ['client stats, bot info'],
-	usage: '',
+    usage: ' ',
+    aliases: ['bot-info'],
 	description: 'Statistical information about me!',
     cooldown: 60,
     botcmd: true,

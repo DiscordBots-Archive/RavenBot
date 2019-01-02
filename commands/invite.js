@@ -1,9 +1,8 @@
 
 module.exports = {
     name: 'invite',
-    type: 'Utils',
-    aliases: ['invite link'],
-	usage: '',
+	type: 'Utils',
+	usage: ' ',
 	description: 'Server Invite Link',
 	cooldown: 600,
 	

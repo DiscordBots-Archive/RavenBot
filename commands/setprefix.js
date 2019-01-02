@@ -19,9 +19,10 @@ const Prefixes = prefixlize.define('prefix', {
 module.exports = {
     name: 'setprefix',
     type: 'Utils',
-    aliases: ['set prefix, change prefix'],
+    aliases: ['change-prefix'],
 	usage: '[new prefix]',
-	description: 'Set your server prefix',
+    description: 'Set your server prefix',
+    example: ['setprefix !', 'setprefix +'],
     cooldown: 60,
     args: true,
     guildOnly: true,

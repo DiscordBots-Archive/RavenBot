@@ -2,9 +2,10 @@ const   Discord = require('discord.js');
 module.exports = {
     name: 'perms',
     type: 'Mod',
-    aliases: ['role permissions'],
+    aliases: ['addrole'],
 	usage: '@user [role name]',
     description: 'Manage role permissions',
+    example: ['perms @Purple staff', 'perms @Purple admin'],
     args: true,
     guildOnly: true,
 
