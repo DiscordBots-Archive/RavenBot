@@ -25,10 +25,10 @@ module.exports = {
         }
         catch (e) {
             if (e.name === 'SequelizeUniqueConstraintError') {
-                return message.channel.send('That Role already exists <:notlikecat:529505687773118484>');
+                return message.channel.send('That Mod Role already exists <:notlikecat:529505687773118484>');
 
             }
-            return message.channel.send('Something went wrong with adding a Role <:notlikecat:529505687773118484>');
+            return message.channel.send('Something went wrong with adding a Mod Role <:notlikecat:529505687773118484>');
         }
 
     }

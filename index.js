@@ -34,7 +34,7 @@ const sequelize = new Sequelize('database', 'user', 'password', {
     storage: 'database.sqlite',
 });
 
-const Tags = sequelize.define('tags', {
+client.Tags = sequelize.define('tags', {
     name: {
         type: Sequelize.STRING,
         unique: true,
@@ -48,7 +48,7 @@ const Tags = sequelize.define('tags', {
     },
 });
 
-const Prefixes = sequelize.define('prefix', {
+client.Prefixes = sequelize.define('prefix', {
     name: {
       type: Sequelize.STRING,
       unique: true,
@@ -57,8 +57,8 @@ const Prefixes = sequelize.define('prefix', {
 });
 
 client.once('ready', () => {
-    Prefixes.sync();
-    Tags.sync();
+    client.Prefixes.sync();
+    client.Tags.sync();
 });
 
 client.login(client.config.discord.token);
