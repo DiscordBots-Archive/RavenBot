@@ -12,6 +12,8 @@ module.exports = {
     botcmd: true,
     
 	async execute(message, args, client) {
+		let guild = client.guilds.get('524672414261444623');
+let member = guild.members.get('444432489818357760');
     
         const duration = moment.duration(client.uptime).
 	format("D [days], H [hrs], m [mins], s [secs]");
@@ -40,7 +42,7 @@ module.exports = {
         .addField("❯ CLIENT INFO", `• Name : ${client.user.tag}`+
         `\n• Creation Date : ${moment(client.user.createdAt).format("DD-MM-YY, kk:mm")}`)
 
-        .setFooter('© 2018 SUVAJIT#5580')
+        .setFooter('© 2018 ' + member.user.tag, member.user.displayAvatarURL)
         //.setTimestamp()
     
         const msg = await message.channel.send({ embed });
