@@ -74,7 +74,7 @@ module.exports = {
       });
 
     } catch (error) {
-      return sentMessage.edit(`I could not unmute **${member.user.tag}**`)
+      return sentMessage.edit(`I could not unmute **${member.user.tag}** <:notlikecat:529505687773118484>`)
     }
 
 	},

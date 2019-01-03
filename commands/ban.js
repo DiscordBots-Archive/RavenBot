@@ -73,7 +73,7 @@ module.exports = {
       sentMessage.edit(`Successfully banned **${member.user.tag}**...`);
 
     } catch (error) {
-      sentMessage.edit(`I could not ban this user`);
+      sentMessage.edit(`I could not ban **${member.user.tag}** <:notlikecat:529505687773118484>`);
     }
 	},
 };

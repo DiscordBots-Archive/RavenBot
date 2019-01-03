@@ -42,7 +42,7 @@ module.exports = {
 		const responses = await message.channel.awaitMessages(msg => msg.author.id === message.author.id, { max: 1, time: 10000 });
     
 		if (!responses || responses.size !== 1) {
-			return message.channel.send('Timed out. Cancelled mute');
+			return message.channel.send('Timed out. Cancelled mute <:notlikecat:529505687773118484>');
 		}
 
 		const response = responses.first();
@@ -54,7 +54,7 @@ module.exports = {
       sentMessage = await message.channel.send(`Muting **${member.user.tag}**...`);
 
 		} else {
-			return message.channel.send('Cancelled mute');
+			return message.channel.send('Cancelled mute <:notlikecat:529505687773118484>');
     }
   
     const embed = new Discord.RichEmbed()
@@ -79,7 +79,7 @@ module.exports = {
       });
 
     } catch (error) {
-      return sentMessage.edit(`I could not mute **${member.user.tag}**`);
+      return sentMessage.edit(`I could not mute **${member.user.tag}** <:notlikecat:529505687773118484>`);
     }
 
     try {

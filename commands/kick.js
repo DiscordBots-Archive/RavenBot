@@ -18,7 +18,7 @@ module.exports = {
     return message.channel.send('You know you can\'t do it ' + '<:notlikecat:529505687773118484>');
 
     let reason = args.slice(1).join(' ');
-    if (!reason) return message.channel.send('You must provide a reason to kick');
+    if (!reason) return message.channel.send('You must provide a reason to kick <:notlikecat:529505687773118484>');
   
     if (member == message.guild.members.get(message.author.id)) return;
     
@@ -35,7 +35,7 @@ module.exports = {
 		const responses = await message.channel.awaitMessages(msg => msg.author.id === message.author.id, { max: 1, time: 10000 });
     
 		if (!responses || responses.size !== 1) {
-			return message.channel.send('Timed out. Cancelled kick');
+			return message.channel.send('Timed out. Cancelled kick <:notlikecat:529505687773118484>');
 		}
 
 		const response = responses.first();
@@ -47,7 +47,7 @@ module.exports = {
 			sentMessage = await message.channel.send(`Kicking **${member.user.tag}**...`);
 
 		} else {
-			return message.channel.send('Cancelled kick');
+			return message.channel.send('Cancelled kick <:notlikecat:529505687773118484>');
     }
   
     let mod_log_channel = message.guild.channels.find(c => c.name === "mod-log");
@@ -66,12 +66,12 @@ module.exports = {
 
     try {
 
-      await member.ban({embed});
+      await member.kick({embed});
       client.channels.get(mod_log_channel.id).send({embed});
       sentMessage.edit(`Successfully kicked **${member.user.tag}**...`);
 
     } catch (error) {
-      sentMessage.edit(`I could not kick this user`);
+      sentMessage.edit(`I could not kick **${member.user.tag}** <:notlikecat:529505687773118484>`);
     }
 	},
 };
