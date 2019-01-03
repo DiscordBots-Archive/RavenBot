@@ -31,9 +31,9 @@ module.exports = {
     args: true,
     guildOnly: true,
 
-	async execute(message, args) {
+	async execute(message, args, client) {
         const tagName = args[0];
-        const tag = await Tags.findOne({where: { name: tagName } });
+        const tag = await client.Tags.findOne({where: { name: tagName } });
         if (tag) {
             tag.increment('usage_count');
             return message.channel.send(tag.get('description'));

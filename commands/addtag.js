@@ -1,28 +1,3 @@
-const Discord = require('discord.js');
-const Sequelize = require('sequelize');
-
-const sequelize = new Sequelize('database', 'user', 'password', {
-    host: 'localhost',
-    dialect: 'sqlite',
-    logging: false,
-    operatorsAliases: false,
-    storage: 'database.sqlite',
-});
-
-const Tags = sequelize.define('tags', {
-    name: {
-        type: Sequelize.STRING,
-        unique: true,
-    },
-    description: Sequelize.TEXT,
-    username: Sequelize.STRING,
-    usage_count: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0,
-        allowNull: false,
-    },
-});
-
 module.exports = {
     name: 'addtag',
     type: 'Docs',
@@ -32,12 +7,12 @@ module.exports = {
     args: true,
     guildOnly: true,
     
-	async execute(message, args) {
+	async execute(message, args, client) {
         const tagName = args[0];
         const tagDescription = args.slice(1).join(' ');
     
         try {
-            const tag = await Tags.create({
+            const tag = await client.Tags.create({
                 name: tagName,
                 description: tagDescription,
                 username: message.author.username,
