@@ -31,10 +31,10 @@ module.exports = {
     args: true,
     guildOnly: true,
 
-	async execute(message, args) {
+	async execute(message, args, client) {
         
         const tagName = args[0];
-        const rowCount = await Tags.destroy({ where: { name: tagName } });
+        const rowCount = await client.Tags.destroy({ where: { name: tagName } });
         if (!rowCount) return message.channel.send('That tag did not exist <:notlikecat:529505687773118484>');
         return message.channel.send(`Docs **${tagName}** has been deleted <:notlikecat:529505687773118484>`);
 	},
