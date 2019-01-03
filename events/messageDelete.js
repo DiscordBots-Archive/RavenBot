@@ -28,9 +28,8 @@ module.exports = async (client, message) => {
 	const embed = new Discord.RichEmbed()
 	.setTitle(user + ' | ' + userid)
 	.addField('Channel', '<#' + message.channel.id + '>')
-	if(message) embed.addField('Content', message)
-	if (attachment) embed.addField('Attachment', attachment.url)
-	embed.setFooter('Message Deleted', entry.executor.displayAvatarURL)
-	embed.setTimestamp()
+	.addField('Content', message + '\n' + attachment.url)
+	.setFooter('Message Deleted' )
+	.setTimestamp()
 	logs.send({embed});
 }
