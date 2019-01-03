@@ -12,7 +12,7 @@ module.exports = {
 	async execute(message, args, force) {
         query = args.join(' ');
 		let project = 'main';
-		let branch = ['stable', 'master', 'rpc', 'commando'].includes(query.slice(-1)[0]) ? query.pop() : 'stable';
+		let branch = ['stable', 'master', 'rpc', 'commando'].includes(query.slice(-1)[0]) ? query.pop() : 'master';
 		if (['rpc', 'commando'].includes(branch)) {
 			project = branch;
 			branch = 'master';
