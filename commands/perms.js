@@ -8,6 +8,7 @@ module.exports = {
     example: ['perms @Purple add staff', 'perms @Purple remove admin'],
     args: true,
     guildOnly: true,
+	adminonly: true,
 
 	async execute(message, args, client) {
 
