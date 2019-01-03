@@ -39,7 +39,7 @@ module.exports = {
         `\n• Creation Date : ${moment(client.user.createdAt).format("DD-MM-YY, kk:mm")}`)
 
         .setFooter('© 2018 SUVAJIT#5580')
-        .setTimestamp()
+        //.setTimestamp()
     
         const msg = await message.channel.send({ embed });
 		msg.react('🗑');
