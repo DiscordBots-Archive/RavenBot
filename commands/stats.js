@@ -38,7 +38,7 @@ module.exports = {
         .addField("❯ OWNER INFO", `• Owner : SUVAJIT#5580 <a:hype:515571561345056783>`+
         `\n• Creation Date : ${moment(client.user.createdAt).format("DD-MM-YY, kk:mm")}`)
 
-        .setFooter(message.author.tag, message.author.displayAvatarURL)
+        .setFooter('© 2018 SUVAJIT#5580')
         .setTimestamp()
     
         const msg = await message.channel.send({ embed });
