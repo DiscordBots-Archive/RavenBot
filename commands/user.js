@@ -40,7 +40,7 @@ module.exports = {
             .setFooter(`${message.author.tag}`, message.author.displayAvatarURL)
             .setTimestamp()
             .setThumbnail(message.author.displayAvatarURL)
-            .setDescription(`Info about **${message.author.username}** (ID: ${message.author.id})`)
+            .setTitle(`Info about **${message.author.username}** (ID: ${message.author.id})`)
             
             .addField("❯ MEMBER DETAILS", `• Nickname: ${message.member.nickname !== null ? `${message.member.nickname}` : "None"}`+
             `\n• Joined at: ${moment(message.member.joinedAt).format("D-MM-YY, k:mm")}`+
@@ -78,7 +78,7 @@ module.exports = {
         .setFooter(`${message.author.username}`, message.author.displayAvatarURL)
         .setTimestamp()
         .setThumbnail(member.user.displayAvatarURL)
-        .setDescription(`Info about **${member.user.username}** (ID: ${member.user.id})`)
+        .setTitle(`Info about **${member.user.username}** (ID: ${member.user.id})`)
     
         .addField("❯ MEMBER DETAILS", `• Nickname: ${member.nickname !== null ? `${member.nickname}` : "None"}`+
         `\n• Joined at: ${moment(member.joinedAt).format("D-MM-YY, k:mm")}`+
