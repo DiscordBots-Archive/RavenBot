@@ -37,7 +37,7 @@ module.exports = {
     
             const embed = new Discord.RichEmbed()
             .setColor('#fae18c')
-            .setFooter(`Requested by ${message.author.username}`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
+            .setFooter(`${message.author.tag}`, message.author.displayAvatarURL)
             .setTimestamp()
             .setThumbnail(message.author.displayAvatarURL)
             .setDescription(`Info about **${message.author.username}** (ID: ${message.author.id})`)
@@ -75,7 +75,7 @@ module.exports = {
     
         const embed = new Discord.RichEmbed()
         .setColor('#f6ff5c')
-        .setFooter(`Requested by ${message.author.username}`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
+        .setFooter(`${message.author.username}`, message.author.displayAvatarURL)
         .setTimestamp()
         .setThumbnail(member.user.displayAvatarURL)
         .setDescription(`Info about **${member.user.username}** (ID: ${member.user.id})`)
