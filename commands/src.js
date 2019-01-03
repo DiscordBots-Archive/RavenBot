@@ -9,7 +9,7 @@ module.exports = {
 	description: 'Server Invite Link',
 	//cooldown: 600,
 	
-	async execute(message, args) {
+	async execute(message, args, force) {
         query = args.join(' ');
 		let project = 'main';
 		let branch = ['stable', 'master', 'rpc', 'commando'].includes(query.slice(-1)[0]) ? query.pop() : 'stable';
@@ -17,7 +17,7 @@ module.exports = {
 			project = branch;
 			branch = 'master';
 		}
-		const queryString = qs.stringify({ q: args.join(' ') });
+		const queryString = qs.stringify({ q: args.join(' '), force });
 		const res = await fetch(`https://djsdocs.sorta.moe/${project}/${branch}/embed?${queryString}`);
 		const embed = await res.json();
 		if (!embed) {
