@@ -75,7 +75,7 @@ module.exports = {
     
         const embed = new Discord.RichEmbed()
         .setColor('#f6ff5c')
-        .setFooter(`${message.author.username}`, message.author.displayAvatarURL)
+        .setFooter(`${message.author.tag}`, message.author.displayAvatarURL)
         .setTimestamp()
         .setThumbnail(member.user.displayAvatarURL)
         .setTitle(`Info about ${member.user.tag} (ID: ${member.user.id})`)
