@@ -21,6 +21,7 @@ module.exports = {
 
         .setTitle(`CLIENT STATISTICS`)
         .setThumbnail(client.user.displayAvatarURL)
+	.setURL('https://discordapp.com/oauth2/authorize?client_id=499250383785558026&scope=bot&permissions=2146958847')
 
         .addField("❯ MEMORY USAGE", `• Using : ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`+
         `\n• Free : ${Math.round(os.freemem())} MB`)
