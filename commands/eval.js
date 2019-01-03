@@ -3,6 +3,7 @@ const { inspect } = require("util");
 const vm = require("vm");
 const codeContext =  {};
 vm.createContext(codeContext);
+
 module.exports = {
     name: 'eval',
     type: 'Utils',
@@ -11,9 +12,9 @@ module.exports = {
     guildOnly: true,
     
 	async execute(message, args, client) {
-        if (message.author.id !== '444432489818357760') return message.channel.send(`===Eval===` + '\n' +
-        `This bot is an Eval which runs any JavaScript code- which is like users can even wreck our server- mass dm or anything so I have disabled it for other users- only owner can use it`, {code: "asciidoc"})
-    
+        
+        if (message.author.id !== '444432489818357760') return;
+
         const code = args.join(' ');
         const token = client.token.split('').join('[^]{0,2}');
         const rev = client.token.split('').reverse().join("[^]{0,2}");

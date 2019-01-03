@@ -1,21 +1,4 @@
 const Discord = require('discord.js');
-const Sequelize = require('sequelize');
-
-const sequelize = new Sequelize('database', 'user', 'password', {
-    host: 'localhost',
-    dialect: 'sqlite',
-    logging: false,
-    operatorsAliases: false,
-    storage: 'database.sqlite',
-});
-
-const Prefixes = sequelize.define('prefix', {
-  name: {
-    type: Sequelize.STRING,
-    unique: true,
-  },
-  guild_prefix: Sequelize.TEXT,
-});
 
 module.exports = {
     name: 'help',
