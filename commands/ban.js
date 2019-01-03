@@ -1,65 +1,79 @@
 const Discord = require('discord.js');
 module.exports = {
+
   name: 'ban',
   type: 'Mod',
-	usage: '@user/id [optional reason]',
+	usage: '@user/id [reason]',
   description: 'Mention a member and ban him',
-  example: ['ban @Purple', 'ban @Purple posting ads', 'ban 499250383785558026 posting ads'],
+  example: ['ban @Purple posting ads', 'ban 499250383785558026 posting ads'],
   args: true,
   guildOnly: true,
+  adminonly: true,
 
 	async execute(message, args, client) {
-    if (message.guild.id !== '500004711005683717') return;
-
-    if (!message.member.roles.get('500700090181222400') && !message.member.roles.get('500683949018710036')) {
-      //message.delete(4000)
-      return message.channel.send(`Only <@&500683949018710036> can use this Command!`).then(msg => {msg.delete(4000)});
-    }
   
     let member = message.mentions.members.first() || message.guild.members.get(args[0]);
+    if (!member) return;
+
+    if (message.member.highestRole.position <=  member.highestRole.position) 
+    return message.channel.send('You know you can\'t do it ' + '<:notlikecat:529505687773118484>');
+
+    let reason = args.slice(1).join(' ');
+    if (!reason) return message.channel.send('You must provide a reason to ban <:notlikecat:529505687773118484>')
   
-    if (!member) 
-    return message.channel.send(`Please mention a valid member of this Server! <:wrong:523020135737458689>`).then(msg => {msg.delete(4000)});
   
-    if (member == message.guild.members.get(message.author.id)) 
-    return message.channel.send("Don't ban yourself Idiot!");
+    if (member == message.guild.members.get(message.author.id)) return;
     
     if (member == message.guild.members.get(client.user.id)) 
     return message.channel.send("Hello <:meww:523021051202895872>, that's me! **I'm not banable!!!** <:huh:523021014481764352>");
-  
-    if (member.roles.has('513284645274517504')) 
-    return message.channel.send("You can't mute a <@&513284645274517504>!"); // staff
-  
-    if (member.roles.has('525375822391934997')) 
-    return message.channel.send("You can't mute a <@&525375822391934997>!"); // ah staff
+
+    const userembed = new Discord.RichEmbed()
+    .setTitle(member.user.tag + ' | ' + member.user.id)
+    .setFooter('Send yes to confirm', member.user.displayAvatarURL)
+    .setTimestamp()
+
+    await message.channel.send(`You sure you want me to ban this user? <:notlikecat:529505687773118484>`, userembed);
     
-    if (member.roles.has('500683658009640975')) 
-    return message.channel.send("You can't mute a <@&500683658009640975>!"); // mod
+		const responses = await message.channel.awaitMessages(msg => msg.author.id === message.author.id, { max: 1, time: 10000 });
     
-    if (member.roles.has('500683949018710036')) 
-    return message.channel.send("You can't mute an <@&500683949018710036>!"); // admin
-  
-    if (!member.banable) 
-    return message.channel.send("I could not ban this user!");
-  
-    let reason = args.slice(1).join(' ');
-    if (!reason) {
-      reason = "Not Provided";
-    };
+		if (!responses || responses.size !== 1) {
+			return message.channel.send('Timed out. Cancelled ban <:notlikecat:529505687773118484>');
+		}
+
+		const response = responses.first();
+
+		let sentMessage;
+
+		if (/^y(?:e(?:a|s)?)?$/i.test(response.content)) {
+
+			sentMessage = await message.channel.send(`Banning **${member.user.tag}**...`);
+
+		} else {
+			return message.channel.send('Cancelled ban <:notlikecat:529505687773118484>');
+    }
   
     let mod_log_channel = message.guild.channels.find(c => c.name === "mod-log");
-  
-    await member.ban(reason)
-    .catch(error => message.channel.send(`I could not ban this user! \n ${error}`));
-  
+
     const embed = new Discord.RichEmbed()
     .setTitle(`${member.user.tag} | ${member.user.id}`)
     .setColor("#f60839")
     .setTimestamp()
-    .addField(`\`MOD: ${message.author.tag}\``, `\`REASON: ${reason}\``)
-    .setFooter(`BANNED`, member.user.displayAvatarURL)
-  
-    client.channels.get(mod_log_channel.id).send({embed});
-    message.channel.send("Done. User has been Banned <a:hype:515571561345056783>");
+    .addField(`Mod`, message.author.tag)
+    .addField( `Reason`, reason)
+    .setFooter(`Banned`, member.user.displayAvatarURL)
+
+    try {
+      await member.send({embed});
+    } catch {}
+
+    try {
+
+      await member.ban({embed});
+      client.channels.get(mod_log_channel.id).send({embed});
+      sentMessage.edit(`Successfully banned **${member.user.tag}**...`);
+
+    } catch (error) {
+      sentMessage.edit(`I could not ban this user`);
+    }
 	},
 };
