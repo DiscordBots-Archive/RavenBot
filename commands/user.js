@@ -91,7 +91,22 @@ module.exports = {
         `\n• Activity: \`${member.user.presence.game ? `${member.user.presence.game.name}` : "None"}\``+
         `\n• Account created at: ${moment(member.user.createdAt).format("D-MM-YY, k:mm")}`)
     
-        message.channel.send({embed});
+        const msg = await message.channel.send({ embed });
+		msg.react('🗑');
+		let react;
+		try {
+			react = await msg.awaitReactions(
+				(reaction, user) => reaction.emoji.name === '🗑' && user.id === message.author.id,
+				{ max: 1, time: 10000, errors: ['time'] }
+			);
+		} catch (error) {
+			msg.clearReactions();
+
+			return message;
+		}
+		react.first().message.delete();
+
+		return message;
 	},
 };
 

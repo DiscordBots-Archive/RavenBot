@@ -37,6 +37,22 @@ module.exports = {
         `\n• Region: ${message.guild.region.toUpperCase()}`+
         `\n• Created at: ${moment(message.guild.createdAt).format("D-MM-YY, kk:mm")}`)
     
-        message.channel.send({embed});
+        const msg = await message.channel.send({ embed });
+		msg.react('🗑');
+		let react;
+		try {
+			react = await msg.awaitReactions(
+				(reaction, user) => reaction.emoji.name === '🗑' && user.id === message.author.id,
+				{ max: 1, time: 10000, errors: ['time'] }
+			);
+		} catch (error) {
+			msg.clearReactions();
+
+			return message;
+		}
+		react.first().message.delete();
+
+		return message;
+
 	},
 };
