@@ -12,8 +12,8 @@ module.exports = {
 
 	async execute(message, args, client) {
 
-        if (message.member.highestRole.position <=  member.highestRole.position) 
-        return message.channel.send('You know you can\'t do it ' + '<:notlikecat:529505687773118484>');
+        //if (message.member.highestRole.position <=  member.highestRole.position) 
+        //return message.channel.send('You know you can\'t do it ' + '<:notlikecat:529505687773118484>');
 
         let member = message.mentions.members.first() || message.guild.members.get(args[0]);
         if (!member) return;
