@@ -19,7 +19,7 @@ module.exports = {
 
         .setColor('#fcfb04')
 
-        .setTitle(`CLIENT INFIORMATION`)
+        .setTitle(`CLIENT STATISTICS`)
         .setThumbnail(client.user.displayAvatarURL)
 
         .addField("❯ MEMORY USAGE", `• Using : ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`+
@@ -35,7 +35,7 @@ module.exports = {
         
         .addField("❯ CHANNEL INFO", `• Total : ${client.channels.size}`)
 
-        .addField("❯ OWNER INFO", `• Owner : SUVAJIT#5580 <a:hype:515571561345056783>`+
+        .addField("❯ CLIENT INFO", `• Name : ${client.user.tag}`+
         `\n• Creation Date : ${moment(client.user.createdAt).format("DD-MM-YY, kk:mm")}`)
 
         .setFooter('© 2018 SUVAJIT#5580')
