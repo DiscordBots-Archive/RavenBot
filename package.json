@@ -19,6 +19,7 @@
   "homepage": "https://github.com/xsuvajit/discord-bot#readme",
   "dependencies": {
     "async": "^2.6.1",
+    "cheerio": "^1.0.0-rc.2",
     "discord.js": "^11.4.2",
     "dotenv": "^6.2.0",
     "enmap": "^4.5.0",
@@ -26,8 +27,10 @@
     "moment": "^2.23.0",
     "moment-duration-format": "^2.2.2",
     "ms": "^2.1.1",
+    "node-fetch": "^2.3.0",
     "os-utils": "0.0.14",
     "querystring": "^0.2.0",
+    "request-promise": "^4.2.2",
     "sequelize": "^4.42.0",
     "sqlite3": "^4.0.4",
     "util": "^0.11.1",
