@@ -13,7 +13,8 @@ module.exports = {
     
 	async execute(message, args, client) {
     
-        const duration = moment.duration(client.uptime).format("D [days], H [hrs], m [mins], s [secs]");
+        const duration = moment.duration(client.uptime).
+	format("D [days], H [hrs], m [mins], s [secs]");
     
         const embed = new Discord.RichEmbed()
 
