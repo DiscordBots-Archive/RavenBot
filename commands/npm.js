@@ -23,7 +23,7 @@ module.exports = {
 		}
 		const version = body.versions[body['dist-tags'].latest];
 		//const maintainers = this._trimArray(body.maintainers.map(user => user.name));
-		const dependencies = version.dependencies ? this._trimArray(Object.keys(version.dependencies)) : null;
+		//const dependencies = version.dependencies ? this._trimArray(Object.keys(version.dependencies)) : null;
 		const embed = new Discord.RichEmbed()
 			.setColor(0xCB0000)
 			.setAuthor('NPM', 'https://i.imgur.com/ErKf5Y0.png', 'https://www.npmjs.com/')
@@ -36,7 +36,7 @@ module.exports = {
 			.addField('❯ Creation Date', moment.utc(body.time.created).format('YYYY/MM/DD hh:mm:ss'), true)
 			.addField('❯ Modification Date', moment.utc(body.time.modified).format('YYYY/MM/DD hh:mm:ss'), true)
 			.addField('❯ Main File', version.main || 'index.js', true)
-			.addField('❯ Dependencies', dependencies && dependencies.length ? dependencies.join(', ') : 'None')
+			//.addField('❯ Dependencies', dependencies && dependencies.length ? dependencies.join(', ') : 'None')
             //.addField('❯ Maintainers', maintainers.join('; '));
             
 
