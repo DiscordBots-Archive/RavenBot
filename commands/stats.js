@@ -34,7 +34,7 @@ module.exports = {
         .addField("❯ UPTIME", `• ${duration}`)
     
         .addField("❯ GENERAL STATS", `\n• Servers : ${client.guilds.size}` +
-        //`\n• Users : ${client.users.size}` + 
+        `\n• Users : ${client.users.size}` + 
         `\n• Channels : ${client.channels.size}` )
         .addField('❯ SINCE', `• ${moment(client.user.createdAt).format("DD-MM-YY kk:mm")}`)
 
