@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-module.exports = (client, member) => {
+module.exports = async (client, member) => {
 
     const embed = new Discord.RichEmbed()
     .setColor('#08f885')
@@ -10,7 +10,6 @@ module.exports = (client, member) => {
     .setTitle(`${member.user.tag} | ${member.user.id}`)
 
     if (member.user.bot === true) return;
-
 
     const channel = member.guild.channels.find(ch => ch.name === 'welcome');
     if (!channel) return;
@@ -28,6 +27,24 @@ module.exports = (client, member) => {
     } else {
         
         client.channels.get(embedchannel.id).send({embed});
+    }
+
+    const uniquecode = member.user.id + member.guild.id;
+
+    try {
+        const tags = await client.UserHistory.create({
+            name: uniquecode,
+            guild: member.guild.id,
+            userid: member.user.id,
+        });
+        return;
+    }
+    catch (e) {
+
+        if (e.name === 'SequelizeUniqueConstraintError') {
+            return;
+        }
+        return channel.send('Something went wrong with adding a userdata!');
     }
 
 }

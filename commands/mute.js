@@ -30,12 +30,15 @@ module.exports = {
     let muteRole = message.guild.roles.find(r => r.name === 'Muted');
 
     if (member.roles.has(muteRole.id) )
-    return message.channel.send(member.user.tag + ' is already muted!') 
+    return message.channel.send(member.user.tag + ' is already muted!')
+
+    let uniquecode = member.user.id + message.guild.id;
+
+    const tag = await client.UserHistory.findOne({where: { name: uniquecode } });
 
     const userembed = new Discord.RichEmbed()
     .setTitle(member.user.tag + ' | ' + member.user.id)
-    .setFooter('Send yes to confirm', member.user.displayAvatarURL)
-    .setTimestamp()
+    .setFooter(`${tag.get('warnings')} warnings, ${tag.get('restrictions')} restrictions, ${tag.get('mutes')} mutes, ${tag.get('kicks')} kicks and ${tag.get('bans')} bans`)
 
     await message.channel.send(`You sure you want me to mute this user? <:notlikecat:529505687773118484>`, userembed);
     
@@ -65,16 +68,15 @@ module.exports = {
     .addField(`Reason`, reason)
     .setFooter(`Muted`, member.user.displayAvatarURL)
 
-    /*try {
-      await member.send({embed});
-    } catch {}*/
-
     try {
 
       await member.addRole(muteRole).then(() => {
 
         client.channels.get(mod_log_channel.id).send({embed});
         sentMessage.edit(`Successfully muted **${member.user.tag}**...`);
+        if (tag) {
+          tag.increment('mutes');
+        }
 
       });
 

@@ -18,4 +18,27 @@ module.exports = (client) => {
     .setDescription(`${client.guilds.size} SERVERS, ${client.users.size} USERS, ${client.channels.size} CHANNELS`)
 
     channel.send({embed}); 
+
+    client.guilds.forEach(async guild => {
+
+        guild.members.forEach(async member => {
+    
+            const uniquecode = member.user.id + guild.id;
+    
+            try {
+                const tags = await client.UserHistory.create({
+                    name: uniquecode,
+                    guild: guild.id,
+                    userid: member.user.id,
+                });
+                return console.log(tags.name)
+            }
+            catch (e) {
+                if (e.name === 'SequelizeUniqueConstraintError') {
+                    return;
+                }
+                return console.log(e)
+            }
+        });
+    });
 }

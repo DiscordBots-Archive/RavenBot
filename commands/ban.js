@@ -27,10 +27,13 @@ module.exports = {
     if (member == message.guild.members.get(client.user.id)) 
     return message.channel.send("Hello <:meww:523021051202895872>, that's me! **I'm not banable!!!** <:huh:523021014481764352>");
 
+    let uniquecode = member.user.id + message.guild.id;
+
+    const tag = await client.UserHistory.findOne({where: { name: uniquecode } });
+
     const userembed = new Discord.RichEmbed()
     .setTitle(member.user.tag + ' | ' + member.user.id)
-    .setFooter('Send yes to confirm', member.user.displayAvatarURL)
-    .setTimestamp()
+    .setFooter(`${tag.get('warnings')} warnings, ${tag.get('restrictions')} restrictions, ${tag.get('mutes')} mutes, ${tag.get('kicks')} kicks and ${tag.get('bans')} bans`)
 
     await message.channel.send(`You sure you want me to ban this user? <:notlikecat:529505687773118484>`, userembed);
     
@@ -68,9 +71,12 @@ module.exports = {
 
     try {
 
-      await member.ban({embed});
+      await member.ban(reason);
       client.channels.get(mod_log_channel.id).send({embed});
       sentMessage.edit(`Successfully banned **${member.user.tag}**...`);
+      if (tag) {
+        tag.increment('bans');
+      }
 
     } catch (error) {
       sentMessage.edit(`I could not ban **${member.user.tag}** <:notlikecat:529505687773118484>`);
