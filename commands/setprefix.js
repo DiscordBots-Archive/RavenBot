@@ -8,11 +8,12 @@ module.exports = {
     cooldown: 60,
     args: true,
     guildOnly: true,
+	adminonly: true,
 
 	async execute(message, args,  client) {
         
-        if (!message.member.roles.some(r=>['Dev', 'Admin'].includes(r.name)) ) 
-        return message.channel.send(`Only Admins can use this Command!`);
+        //if (!message.member.roles.some(r=>['Dev', 'Admin'].includes(r.name)) ) 
+        //return message.channel.send(`Only Admins can use this Command!`);
     
         const prefixName = args[0];
     
