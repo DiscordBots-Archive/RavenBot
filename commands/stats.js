@@ -29,16 +29,15 @@ module.exports = {
         .addField("❯ MEMORY USAGE", `• Using : ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`+
         `\n• Free : ${Math.round(os.freemem())} MB`)
     
-        .addField('❯ LOAD AVERAGE', "• Avg : " + os.loadavg(10))
+        //.addField('❯ LOAD AVERAGE', "• Avg : " + os.loadavg())
     
         .addField("❯ UPTIME", `• ${duration}`)
     
         .addField("❯ GENERAL STATS", `\n• Servers : ${client.guilds.size}` +
-        `\n• Users : ${client.users.size}` + 
-        `\n• Channels : ${client.channels.size}`)
-    
-        .addField("❯ CREATION", `• Since : ${moment(client.user.createdAt).format("DD-MM-YY, kk:mm")}`)
-        
+        //`\n• Users : ${client.users.size}` + 
+        `\n• Channels : ${client.channels.size}` )
+        .addField('❯ SINCE', `• ${moment(client.user.createdAt).format("DD-MM-YY kk:mm")}`)
+
         .addField("❯ LIBRARY", `[• discord.js](https://discord.js.org)`)
 
         .setFooter('© 2018 ' + member.user.tag, member.user.displayAvatarURL)
