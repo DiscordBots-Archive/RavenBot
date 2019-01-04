@@ -12,11 +12,11 @@ module.exports = {
     botcmd: true,
     
 	async execute(message, args, client) {
-		let guild = client.guilds.get('524672414261444623');
-let member = guild.members.get('444432489818357760');
+
+        let guild = client.guilds.get('524672414261444623');
+        let member = guild.members.get('444432489818357760');
     
-        const duration = moment.duration(client.uptime).
-	format("D [days], H [hrs], m [mins], s [secs]");
+        const duration = moment.duration(client.uptime).format("D [days], H [hrs], m [mins], s [secs]");
     
         const embed = new Discord.RichEmbed()
 
@@ -24,7 +24,7 @@ let member = guild.members.get('444432489818357760');
 
         .setTitle(`CLIENT STATISTICS`)
         .setThumbnail(client.user.displayAvatarURL)
-	.setURL('https://discordapp.com/oauth2/authorize?client_id=499250383785558026&scope=bot&permissions=2146958847')
+        .setURL('https://discordapp.com/oauth2/authorize?client_id=499250383785558026&scope=bot&permissions=2146958847')
 
         .addField("❯ MEMORY USAGE", `• Using : ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`+
         `\n• Free : ${Math.round(os.freemem())} MB`)
@@ -33,19 +33,17 @@ let member = guild.members.get('444432489818357760');
     
         .addField("❯ UPTIME", `• ${duration}`)
     
-        .addField("❯ SERVER INFO", `\n• Servers : ${client.guilds.size}`)
+        .addField("❯ GENERAL STATS", `\n• Servers : ${client.guilds.size}` +
+        `\n• Users : ${client.users.size}` + 
+        `\n• Channels : ${client.channels.size}`)
     
-        .addField("❯ USER INFO", `• Users : ${client.users.size}`)
+        .addField("❯ CREATION", `• Since : ${moment(client.user.createdAt).format("DD-MM-YY, kk:mm")}`)
         
-        .addField("❯ CHANNEL INFO", `• Total : ${client.channels.size}`)
-
-        .addField("❯ CLIENT INFO", `• Name : ${client.user.tag}`+
-        `\n• Creation Date : ${moment(client.user.createdAt).format("DD-MM-YY, kk:mm")}`)
+        .addField("❯ LIBRARY", `[• discord.js](https://discord.js.org)`)
 
         .setFooter('© 2018 ' + member.user.tag, member.user.displayAvatarURL)
-        //.setTimestamp()
     
-        const msg = await message.channel.send({ embed });
+        const msg = await message.channel.send({embed});
 		msg.react('🗑');
 		let react;
 		try {

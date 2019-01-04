@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
-
+const client = new Discord.Client();
 module.exports = {
-    name: 'docs',
+    name: 'tag',
     type: 'Docs',
     aliases: ['tag'],
 	usage: '[tag name]',
