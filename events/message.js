@@ -61,7 +61,7 @@ module.exports = async (client, message) => {
 		return message.channel.send('I can\'t execute that command in this channel!');
 	}
 
-	if (command.adminonly && !message.author.hasPermission('ADMINISTRATOR')) {
+	if (command.adminonly && !message.member.hasPermission('ADMINISTRATOR')) {
 		return message.channel.send('You know you can\'t do it ' + '<:notlikecat:529505687773118484>')
 	}
 
