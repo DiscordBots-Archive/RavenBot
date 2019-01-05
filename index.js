@@ -7,6 +7,8 @@ require('dotenv').config();
 const client = new Discord.Client();
 client.config = require("./config.js");
 
+client.Discord = require('discord.js');
+
 fs.readdir('./events/', (err, files) => {
     if (err) return console.error(err);
     files.forEach(file => {
@@ -78,6 +80,9 @@ client.UserHistory = sequelize.define('users', {
     },
     guild: Sequelize.STRING,
     userid: Sequelize.STRING,
+    username: Sequelize.TEXT,
+    avatarurl: Sequelize.TEXT,
+    roleid: Sequelize.STRING,
     warnings: {
         type: Sequelize.INTEGER,
         defaultValue: 0,
@@ -105,35 +110,10 @@ client.UserHistory = sequelize.define('users', {
     },
 });
 
-
-client.guilds.forEach(async guild => {
-
-    guild.members.forEach(async member => {
-
-        const uniquecode = member.user.id + guild.id;
-
-        try {
-            const tags = await client.UserHistory.create({
-                name: uniquecode,
-                guild: guild.id,
-                userid: member.user.id,
-            });
-            return console.log(tags.name)
-        }
-        catch (e) {
-            if (e.name === 'SequelizeUniqueConstraintError') {
-                return;
-            }
-            return console.log(e)
-        }
-    });
-});
-
 client.once('ready', () => {
     client.Prefixes.sync();
     client.Tags.sync();
     client.UserHistory.sync();
-    //fetchmember();
 });
 
 client.login(client.config.discord.token);

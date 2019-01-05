@@ -20,6 +20,9 @@ module.exports = {
                     name: uniquecode,
                     guild: message.guild.id,
                     userid: member.user.id,
+                    username: member.user.tag,
+                    avatarurl: member.user.displayAvatarURL,
+                    roleid: member.highestRole.id,
                 });
 
                 const tag = await client.UserHistory.findOne({where: { name: uniquecode } });
@@ -30,6 +33,18 @@ module.exports = {
             }
             catch (e) {
                 if (e.name === 'SequelizeUniqueConstraintError') {
+                    const roleupdate = await client.UserHistory.update({ roleid: member.highestRole.id }, { where: { name: uniquecode } });
+                    if (roleupdate > 0) {
+                        return; //console.log('Updated');
+                    }
+                    const nameupdate = await client.UserHistory.update({ username: member.user.tag }, { where: { name: uniquecode } });
+                    if (nameupdate > 0) {
+                        return; //console.log('Updated');
+                    }
+                    const avatarupdate = await client.UserHistory.update({ avatarurl: member.user.displayAvatarURL }, { where: { name: uniquecode } });
+                    if (avatarupdate > 0) {
+                        return; //console.log('Updated');
+                    }
                     const tag = await client.UserHistory.findOne({where: { name: uniquecode } });
                     const embed = new Discord.RichEmbed()
                     .setTitle(member.user.tag + ' | ' + member.user.id)
@@ -48,7 +63,11 @@ module.exports = {
                     name: uniquecode,
                     guild: message.guild.id,
                     userid: message.author.id,
+                    username: message.author.tag,
+                    avatarurl: message.author.displayAvatarURL,
+                    roleid: message.author.highestRole.id,
                 });
+
                 const tag = await client.UserHistory.findOne({where: { name: uniquecode } });
                 const embed = new Discord.RichEmbed()
                 .setTitle(message.author.tag + ' | ' + message.author.id)
@@ -57,6 +76,18 @@ module.exports = {
             }
             catch (e) {
                 if (e.name === 'SequelizeUniqueConstraintError') {
+                    const roleupdate = await client.UserHistory.update({ roleid: message.author.highestRole.id }, { where: { name: uniquecode } });
+                    if (roleupdate > 0) {
+                        return; //console.log('Updated');
+                    }
+                    const nameupdate = await client.UserHistory.update({ username: message.author.tag }, { where: { name: uniquecode } });
+                    if (nameupdate > 0) {
+                        return; //console.log('Updated');
+                    }
+                    const avatarupdate = await client.UserHistory.update({ avatarurl: message.author.displayAvatarURL }, { where: { name: uniquecode } });
+                    if (avatarupdate > 0) {
+                        return; //console.log('Updated');
+                    }
                     const tag = await client.UserHistory.findOne({where: { name: uniquecode } });
                     const embed = new Discord.RichEmbed()
                     .setTitle(message.author.tag + ' | ' + message.author.id)

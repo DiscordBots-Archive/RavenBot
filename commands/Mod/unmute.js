@@ -15,9 +15,6 @@ module.exports = {
 
     if (message.member.highestRole.position <=  member.highestRole.position) 
     return message.channel.send('You know you can\'t do it ' + '<:notlikecat:529505687773118484>');
-
-    let reason = args.slice(1).join(' ');
-    if (!reason) return message.channel.send('You must provide a reason to mute <:notlikecat:529505687773118484>')
   
     if (member == message.guild.members.get(message.author.id)) return;
     
@@ -29,10 +26,12 @@ module.exports = {
 
     if (!member.roles.has(muteRole.id) )return;
 
+    const tag = await client.UserHistory.findOne({where: { name: uniquecode } });
+    if (!tag) return message.channel.send('No data found for this user!')
+
     const userembed = new Discord.RichEmbed()
     .setTitle(member.user.tag + ' | ' + member.user.id)
-    .setFooter('Send yes to confirm', member.user.displayAvatarURL)
-    .setTimestamp()
+    .setFooter(`${tag.get('warnings')} warnings, ${tag.get('restrictions')} restrictions, ${tag.get('mutes')} mutes, ${tag.get('kicks')} kicks and ${tag.get('bans')} bans`)
 
     await message.channel.send(`You sure you want me to unmute this user? <:notlikecat:529505687773118484>`, userembed);
     
@@ -62,13 +61,8 @@ module.exports = {
     .setFooter(`Unmuted`, member.user.displayAvatarURL)
 
     try {
-      await member.send({embed});
-    } catch {}
-
-    try {
 
       await member.removeRole(muteRole).then(() => {
-
         client.channels.get(mod_log_channel.id).send({embed});
         sentMessage.edit(`Successfully unmuted **${member.user.tag}**...`)    
       });

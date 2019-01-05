@@ -17,7 +17,6 @@ module.exports = async (client, member) => {
     if (!embedchannel) return;
 
     if (member.guild.id === '500004711005683717') {
-        client.channels.get(channel.id).send(`Hello ${member}, Welcome to **${member.guild.name}** :tada:`);
         setTimeout(() => {
             client.channels.get(channel.id).send("If you're new to the server you should only see three chats." + "\n" + "To gain access to this server please react to the post in <#501395897322831875> with the checkmark by clicking it!")
         }, 2000);
@@ -31,20 +30,50 @@ module.exports = async (client, member) => {
 
     const uniquecode = member.user.id + member.guild.id;
 
+    const findrole = await client.UserHistory.findOne({where: { name: uniquecode } });
+    if (!findrole) {
+        client.channels.get(channel.id).send(`Hello ${member}, Welcome to **${member.guild.name}** :tada:`);
+    }
+
+    let role = member.guild.roles.get(`${findrole.get('roleid')}`);
+
+    try {
+        await member.addRole(role).then(() => {
+            channel.send(`Welcome back **${member}** :tada:`)
+        })
+    } catch (error) {
+        channel.send(`Welcome back **${member}** :tada:`);
+    }
+
+
     try {
         const tags = await client.UserHistory.create({
             name: uniquecode,
             guild: member.guild.id,
             userid: member.user.id,
+            username: member.user.tag,
+            avatarurl: member.user.displayAvatarURL,
+            roleid: member.highestRole.id,
         });
-        return;
+        return; //console.log(tags.name + tags.username);
     }
     catch (e) {
 
         if (e.name === 'SequelizeUniqueConstraintError') {
-            return;
+            const roleupdate = await client.UserHistory.update({ roleid: member.highestRole.id }, { where: { name: uniquecode } });
+            if (roleupdate > 0) {
+                return; //console.log('Updated');
+            }
+            const nameupdate = await client.UserHistory.update({ username: member.user.tag }, { where: { name: uniquecode } });
+            if (nameupdate > 0) {
+                return; //console.log('Updated');
+            }
+            const avatarupdate = await client.UserHistory.update({ avatarurl: member.user.displayAvatarURL }, { where: { name: uniquecode } });
+            if (avatarupdate > 0) {
+                return; //console.log('Updated');
+            }
         }
-        return channel.send('Something went wrong with adding a userdata!');
+        return console.log(e);
     }
 
 }

@@ -12,8 +12,8 @@ module.exports = {
 
 	async execute(message, args, client) {
 
-        //if (message.member.highestRole.position <=  member.highestRole.position) 
-        //return message.channel.send('You know you can\'t do it ' + '<:notlikecat:529505687773118484>');
+        if (message.member.highestRole.position <=  member.highestRole.position) 
+        return message.channel.send('You know you can\'t do it ' + '<:notlikecat:529505687773118484>');
 
         let member = message.mentions.members.first() || message.guild.members.get(args[0]);
         if (!member) return;
@@ -21,20 +21,24 @@ module.exports = {
         let access = args[1];
         if (!access) return message.channel.send('Please provide an action :: `add / remove`')
 
-        let role = message.guild.roles.get(args[2]) || message.guild.roles.find(r => r.name === args[2]) || message.mentions.roles.first();
+        let role = message.guild.roles.get(args[2]) || message.guild.roles.find(r => r.name === args.slice(2).join(' ')) || message.mentions.roles.first();
         if (!role) return;
+
+        if (member == message.guild.members.get(message.author.id)) return;
     
         if (member == message.guild.members.get(client.user.id))
         return message.channel.send("Hello <:meww:523021051202895872>, that's me! **I'm not roleable!!!** <:huh:523021014481764352>");
     
         let mod_log_channel = message.guild.channels.find(c => c.name === 'mod-log');
         
+        const tag = await client.UserHistory.findOne({where: { name: uniquecode } });
+        if (!tag) return message.channel.send('No data found for this user!')
+
         const userembed = new Discord.RichEmbed()
         .setTitle(member.user.tag + ' | ' + member.user.id)
-        .setFooter('Send yes to confirm', member.user.displayAvatarURL)
-        .setTimestamp()
+        .setFooter(`${tag.get('warnings')} warnings, ${tag.get('restrictions')} restrictions, ${tag.get('mutes')} mutes, ${tag.get('kicks')} kicks and ${tag.get('bans')} bans`)
     
-        await message.channel.send(`You sure you want me to ${access} ${role} to this user? <:notlikecat:529505687773118484>`, userembed);
+        await message.channel.send(`You sure you want me to ${access} ${role} role? <:notlikecat:529505687773118484>`, userembed);
     
         const responses = await message.channel.awaitMessages(msg => msg.author.id === message.author.id, { max: 1, time: 10000 });
         
@@ -62,10 +66,10 @@ module.exports = {
 
         try {
             if (access === 'add') {
-                if (member.roles.has(role)) return sentMessage.edit('Successfully added ' + role + ' role to **' + member + '**')
+                if (member.roles.has(role)) return sentMessage.edit('Successfully added ' + role + ' role to **' + member.user.tag + '**')
 
                 await member.addRole(role);
-                sentMessage.edit('Successfully added ' + role + ' role to **' + member + '**')
+                sentMessage.edit('Successfully added ' + role + ' role to **' + member.user.tag + '**')
             }
         } catch (error) {
             sentMessage.edit('I could not add this role <:notlikecat:529505687773118484>')
@@ -74,7 +78,7 @@ module.exports = {
         try {
             if (access === 'remove') {
                 await member.removeRole(role);
-                sentMessage.edit('Successfully removed ' + role + ' role from **' + member + '**')
+                sentMessage.edit('Successfully removed ' + role + ' role from **' + member.user.tag + '**')
             }
         } catch (error) {
             sentMessage.edit('I could not Remove this role <:notlikecat:529505687773118484>')

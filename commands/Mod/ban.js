@@ -30,6 +30,7 @@ module.exports = {
     let uniquecode = member.user.id + message.guild.id;
 
     const tag = await client.UserHistory.findOne({where: { name: uniquecode } });
+    if (!tag) return message.channel.send('No data found for this user!')
 
     const userembed = new Discord.RichEmbed()
     .setTitle(member.user.tag + ' | ' + member.user.id)
@@ -71,12 +72,21 @@ module.exports = {
 
     try {
 
-      await member.ban(reason);
-      client.channels.get(mod_log_channel.id).send({embed});
-      sentMessage.edit(`Successfully banned **${member.user.tag}**...`);
-      if (tag) {
-        tag.increment('bans');
-      }
+      await member.ban(reason).then(() => {
+        client.channels.get(mod_log_channel.id).send({embed});
+        sentMessage.edit(`Successfully banned **${member.user.tag}**...`);
+        if (tag) {
+          tag.increment('bans');
+        }
+        setTimeout(() => {
+          const roleupdate = client.UserHistory.update({ roleid: message.guild.id }, { where: { name: uniquecode } });
+          if (roleupdate > 0) {
+            return; //console.log('Updated');
+          }
+          return;
+        }, 2000)
+
+      }) 
 
     } catch (error) {
       sentMessage.edit(`I could not ban **${member.user.tag}** <:notlikecat:529505687773118484>`);
