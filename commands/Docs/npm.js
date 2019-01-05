@@ -6,7 +6,7 @@ const duration = require('moment-duration-format');
 
 module.exports = {
     name: 'npm',
-	type: 'Utils',
+	type: 'null',
 	usage: ' ',
 	description: 'Server Invite Link',
 	//cooldown: 600,

@@ -17,7 +17,7 @@ module.exports = {
                 description: tagDescription,
                 username: message.author.username,
             });
-            return message.channel.send(`New docs **${tag.name}** added <:notlikecat:529505687773118484>`);
+            return message.channel.send(`New tag **${tag.name}** added <:notlikecat:529505687773118484>`);
         }
         catch (e) {
             if (e.name === 'SequelizeUniqueConstraintError') {

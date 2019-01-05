@@ -3,7 +3,7 @@ const qs = require('querystring');
 
 module.exports = {
     name: 'avatar',
-    type: 'Utils',
+    type: 'Info',
     aliases: ['picture'],
 	usage: '[optional user]',
 	example: ['avatar', 'avatar @Purple', 'avatar 499250383785558026'],

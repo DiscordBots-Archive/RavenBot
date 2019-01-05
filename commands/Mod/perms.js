@@ -2,7 +2,7 @@ const   Discord = require('discord.js');
 module.exports = {
     name: 'perms',
     type: 'Mod',
-    aliases: ['addrole'],
+    aliases: ['set-mod'],
 	usage: '@user [role name]',
     description: 'Manage role permissions',
     example: ['perms @Purple add staff', 'perms @Purple remove admin'],

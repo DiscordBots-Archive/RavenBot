@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const moment = require('moment');
 module.exports = {
     name: 'user',
-    type: 'Utils',
+    type: 'Info',
     aliases: ['user-info'],
 	usage: '[optional user]',
     description: 'User lookup! get info about yourself or any other user',

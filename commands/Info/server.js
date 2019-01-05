@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const moment = require('moment');
 module.exports = {
     name: 'server',
-    type: 'Utils',
+    type: 'Info',
     usage: ' ',
     aliases: ['server-info'],
 	description: 'It shows your server information',

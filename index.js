@@ -19,12 +19,27 @@ fs.readdir('./events/', (err, files) => {
 
 client.commands = new Discord.Collection();
 
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+/*const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
 	client.commands.set(command.name, command);
-}
+}*/
+
+fs.readdir('./commands/', (err, folders) => {
+    if (err) return console.error(err);
+    folders.forEach(folder => {
+        fs.readdir(`./commands/${folder}/`, (err, files) => {
+            if (err) return console.err(err)
+            files.forEach(file => {
+                if (!file.endsWith('.js')) return;
+                let command = require(`./commands/${folder}/${file}`);
+                client.commands.set(command.name, command);
+            });
+        });
+
+    });
+});
 
 const sequelize = new Sequelize('database', 'user', 'password', {
     host: 'localhost',

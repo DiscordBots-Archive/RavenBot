@@ -6,7 +6,7 @@ const $ = require('cheerio');
 
 module.exports = {
     name: 'plyr',
-	type: 'Utils',
+	type: 'null',
 	usage: ' ',
     description: 'Server Invite Link',
     args: true,

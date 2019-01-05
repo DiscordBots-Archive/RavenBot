@@ -1,11 +1,11 @@
 module.exports = {
     name: 'invite',
-	type: 'Utils',
+	type: 'null',
 	usage: ' ',
 	description: 'Server Invite Link',
 	cooldown: 600,
 	
 	async execute(message) {
-        message.channel.send('Permanent link: https://discord.gg/8RTMVFW');
+        return; //message.channel.send('Permanent link: https://discord.gg/8RTMVFW');
 	},
 };

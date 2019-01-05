@@ -4,7 +4,7 @@ const moment = require('moment');
 const duration = require('moment-duration-format');
 module.exports = {
     name: 'stats',
-    type: 'Utils',
+    type: 'Info',
     usage: ' ',
     aliases: ['bot-info'],
 	description: 'Statistical information about me!',

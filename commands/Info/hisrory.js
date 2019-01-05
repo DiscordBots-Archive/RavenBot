@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 
 module.exports = {
     name: 'history',
-	type: 'Mod',
+	type: 'Info',
 	usage: ' ',
     description: 'History of a member',
     guildOnly: true,

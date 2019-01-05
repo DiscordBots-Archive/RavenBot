@@ -6,7 +6,7 @@ vm.createContext(codeContext);
 
 module.exports = {
     name: 'eval',
-    type: 'Utils',
+    type: 'null',
     aliases: ['eval'],
 	usage: '[JavaScript]',
     guildOnly: true,

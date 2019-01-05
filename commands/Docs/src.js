@@ -4,7 +4,7 @@ const qs = require('querystring');
 
 module.exports = {
     name: 'src',
-	type: 'Utils',
+	type: 'null',
 	usage: ' ',
 	description: 'Server Invite Link',
 	//cooldown: 600,
