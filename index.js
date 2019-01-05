@@ -32,7 +32,7 @@ fs.readdir('./commands/', (err, folders) => {
     if (err) return console.error(err);
     folders.forEach(folder => {
         fs.readdir(`./commands/${folder}/`, (err, files) => {
-            if (err) return console.err(err)
+            if (err) return console.error(err)
             files.forEach(file => {
                 if (!file.endsWith('.js')) return;
                 let command = require(`./commands/${folder}/${file}`);
