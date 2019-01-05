@@ -26,6 +26,8 @@ module.exports = {
 
     if (!member.roles.has(muteRole.id) )return;
 
+    let uniquecode = member.user.id + message.guild.id;
+
     const tag = await client.UserHistory.findOne({where: { name: uniquecode } });
     if (!tag) return message.channel.send('No data found for this user!')
 

@@ -12,11 +12,11 @@ module.exports = {
 
 	async execute(message, args, client) {
 
-        if (message.member.highestRole.position <=  member.highestRole.position) 
-        return message.channel.send('You know you can\'t do it ' + '<:notlikecat:529505687773118484>');
-
         let member = message.mentions.members.first() || message.guild.members.get(args[0]);
         if (!member) return;
+
+        if (message.member.highestRole.position <=  member.highestRole.position) 
+        return message.channel.send('You know you can\'t do it ' + '<:notlikecat:529505687773118484>');
 
         let access = args[1];
         if (!access) return message.channel.send('Please provide an action :: `add / remove`')
@@ -29,7 +29,7 @@ module.exports = {
         if (member == message.guild.members.get(client.user.id))
         return message.channel.send("Hello <:meww:523021051202895872>, that's me! **I'm not roleable!!!** <:huh:523021014481764352>");
     
-        let mod_log_channel = message.guild.channels.find(c => c.name === 'mod-log');
+        let uniquecode = member.user.id + message.guild.id;
         
         const tag = await client.UserHistory.findOne({where: { name: uniquecode } });
         if (!tag) return message.channel.send('No data found for this user!')
