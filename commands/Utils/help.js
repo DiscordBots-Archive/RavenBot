@@ -21,7 +21,7 @@ module.exports = {
             .setTitle('Commands')
             .addField('Here\'s a list of all my commands', `For additional info you can send \`${prefix}help [command name]\` to get info on a specific command!`)
             .addField('Utils', '`' + commands.filter(t => t.type === 'Utils').map(c => c.name).join('`, `') + '`')
-            .addField('Look Up', '`' + commands.filter(t => t.type === 'Info').map(c => c.name).join('`, `') + '`')
+            .addField('Info', '`' + commands.filter(t => t.type === 'Info').map(c => c.name).join('`, `') + '`')
             .addField('Mod', '`' + commands.filter(t => t.type === 'Mod').map(c => c.name).join('`, `') + '`')
             .addField('Docs', '`' + commands.filter(t => t.type === 'Docs').map(c => c.name).join('`, `') + '`')
             .setFooter(message.author.tag, message.author.displayAvatarURL)

@@ -3,7 +3,8 @@ const Discord = require('discord.js');
 module.exports = {
     name: 'history',
 	type: 'Info',
-	usage: ' ',
+    usage: '[optional user]',
+    example: ['history', 'history @Purple', 'history 499250383785558026'],
     description: 'History of a member',
     guildOnly: true,
 
