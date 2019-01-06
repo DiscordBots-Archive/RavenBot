@@ -1,5 +1,5 @@
 {
-  "name": "discord_bot",
+  "name": "purple",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xsuvajit/discord-bot.git"
+    "url": "git+https://github.com/xsuvajit/Purple.git"
   },
   "keywords": [],
   "author": "SUVAJIT",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/xsuvajit/discord-bot/issues"
+    "url": "https://github.com/xsuvajit/Purple/issues"
   },
-  "homepage": "https://github.com/xsuvajit/discord-bot#readme",
+  "homepage": "https://github.com/xsuvajit/Purple#readme",
   "dependencies": {
     "async": "^2.6.1",
     "cheerio": "^1.0.0-rc.2",
