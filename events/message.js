@@ -32,7 +32,7 @@ module.exports = async (client, message) => {
 
     const guild = message.guild.id;
 
-    const guild_id = await Prefixes.findOne({where: {name : guild}});
+    const guild_id = await client.Prefixes.findOne({where: {name : guild}});
   
     if (!guild_id) {
 			
