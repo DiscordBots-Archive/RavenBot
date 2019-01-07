@@ -12,7 +12,7 @@ module.exports = {
 	async execute(message, args, force) {
         query = args.join(' ');
 		let project = 'main';
-		let branch = ['stable', 'master', 'rpc', 'commando'].includes(query.slice(-1)[0]) ? query.pop() : 'master';
+		let branch = ['stable', 'master', 'rpc', 'commando'].includes(args.slice(-1)[0]) ? args.pop() : 'stable';
 		if (['rpc', 'commando'].includes(branch)) {
 			project = branch;
 			branch = 'master';
@@ -24,7 +24,7 @@ module.exports = {
 			return message.channel.reply("Purple couldn't find the requested information. Maybe look for something that actually exists the next time!");
 		}
 		if (message.channel.type === 'dm' || !(message.channel).permissionsFor(message.guild.me).has(['ADD_REACTIONS', 'MANAGE_MESSAGES'], false)) {
-			return message.util.send({ embed });
+			return message.channel.send({ embed });
 		}
 		const msg = await message.channel.send({ embed });
 		msg.react('🗑');

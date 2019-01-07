@@ -11,7 +11,7 @@ module.exports = {
     guildOnly: true,
     botcmd: true,
 
-	async execute(message, args) {
+	async execute(message, args, client) {
     
         let member = message.mentions.members.first() || message.guild.members.get(args[0]);
     
