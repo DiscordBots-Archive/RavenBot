@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const qs = require('querystring');
 
 module.exports = {
     name: 'avatar',
