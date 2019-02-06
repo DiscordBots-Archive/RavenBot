@@ -3,7 +3,7 @@ yarn.lock
 auth.json
 database.sqlite
 tags.sqlite
-Purple/database/
+purple/database/
 logger/
 metrics/
 .vs
