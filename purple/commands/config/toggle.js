@@ -40,4 +40,3 @@ class DisableCommand extends Command {
 	}
 }
 module.exports = DisableCommand;
-//
