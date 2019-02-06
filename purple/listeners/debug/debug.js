@@ -10,6 +10,7 @@ class DebugListener extends Listener {
 	}
 
 	async exec(event) {
+		
 		this.client.logger.debug(`[DEBUG] ${event}`);
 	}
 }
