@@ -123,29 +123,7 @@ class PurpleClient extends AkairoClient {
         })
 
         // ACTIONS=> default moderation message constructor
-        this.ACTIONS = ({
-            1: 'ban',
-            2: 'unban',
-            3: 'kick',
-            4: 'kick',
-            5: 'mute',
-            6: 'restriction',
-            7: 'restriction',
-            8: 'restriction',
-            9: 'warn'
-        });
         this.CONSTANTS = {
-            ACTIONS: {
-                BAN: 1,
-                UNBAN: 2,
-                SOFTBAN: 3,
-                KICK: 4,
-                MUTE: 5,
-                EMBED: 6,
-                EMOJI: 7,
-                REACTION: 8,
-                WARN: 9
-            },
             COLORS: {
                 BAN: 16718080,
                 UNBAN: 8450847,
