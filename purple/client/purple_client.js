@@ -14,12 +14,9 @@ const Raven = require('raven');
 
 class PurpleClient extends AkairoClient {
     constructor() {
-        super({
-            ownerID: '444432489818357760',
-        }, {
-            disableEveryone: true
-        });
-        // handlers=> loading commands, events, etc
+        super({ownerID: '444432489818357760'}, {disableEveryone: true});
+
+        // handlers => loading commands, events, etc
         this.commandHandler = new CommandHandler(this, {
             directory: './purple/commands/',
             prefix: message => {
@@ -50,7 +47,7 @@ class PurpleClient extends AkairoClient {
             directory: './purple/listeners/'
         });
 
-        // logger=> keeps record of each events
+        // logger => keeps record of each events
         this.logger = createLogger({
             format: format.combine(
                 format.colorize({ level: true }),
@@ -78,7 +75,8 @@ class PurpleClient extends AkairoClient {
         if (Raven_) {
 			Raven.config(Raven_, {
 				captureUnhandledRejections: true,
-				autoBreadcrumbs: true,
+                autoBreadcrumbs: true,
+                environment: 'purple-main',
 				release: '0.1.0'
 			}).install();
 		} else {
