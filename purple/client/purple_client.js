@@ -214,7 +214,7 @@ class PurpleClient extends AkairoClient {
 				res.write(this.prometheus.register.metrics());
 			}
 			res.end();
-		}).listen(5500);
+		}).listen(8800);
     }
     
     // START=> logging in purple, and initializing databases
