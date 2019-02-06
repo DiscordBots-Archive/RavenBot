@@ -1,6 +1,12 @@
 node_modules/
-package-lock.json
-.env
-start.bat
-prefix.sqlite
+yarn.lock
+auth.json
 database.sqlite
+tags.sqlite
+Purple/database/
+logger/
+metrics/
+.vs
+.env
+package-lock.json
+start.bat

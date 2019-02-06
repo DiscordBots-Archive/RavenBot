@@ -1,39 +1,32 @@
 {
   "name": "purple",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
-  "main": "index.js",
+  "main": "purple.js",
+  "author": "SUVAJIT#5580",
+  "license": "UNLICENSED",
+  "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/xsuvajit/Purple.git"
-  },
-  "keywords": [],
-  "author": "SUVAJIT",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/xsuvajit/Purple/issues"
-  },
-  "homepage": "https://github.com/xsuvajit/Purple#readme",
   "dependencies": {
-    "async": "^2.6.1",
     "cheerio": "^1.0.0-rc.2",
-    "discord.js": "^11.4.2",
-    "dotenv": "^6.2.0",
-    "enmap": "^4.5.0",
-    "fs": "0.0.1-security",
+    "common-tags": "^1.8.0",
+    "diff": "^4.0.1",
+    "discord-akairo": "1Computer1/discord-akairo",
+    "discord.js": "discordjs/discord.js",
     "moment": "^2.23.0",
     "moment-duration-format": "^2.2.2",
-    "ms": "^2.1.1",
-    "node-fetch": "^2.3.0",
-    "os-utils": "0.0.14",
-    "querystring": "^0.2.0",
+    "os-utils": "^0.0.14",
+    "parse": "^2.1.0",
+    "prom-client": "^11.2.1",
     "request-promise": "^4.2.2",
     "sequelize": "^4.42.0",
-    "sqlite3": "^4.0.4",
+    "sqlite": "^3.0.0",
+    "then": "^0.0.1",
+    "url": "^0.11.0",
     "util": "^0.11.1",
-    "vm": "^0.1.0"
+    "winston": "^3.1.0",
+    "winston-daily-rotate-file": "^3.5.2"
   }
 }
