@@ -10,6 +10,7 @@ class DisconnectListener extends Listener {
 	}
 
 	async exec(event) {
+		
 		this.client.logger.warn(`[DISCONNECT] (${event.code})`);
 	}
 }
