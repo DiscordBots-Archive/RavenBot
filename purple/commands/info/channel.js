@@ -38,7 +38,7 @@ class ChannelCommand extends Command {
 
         const embed = new MessageEmbed()
 
-        .setAuthor(`Info about #${channel.name} | ${channel.id}`)
+        .setAuthor(`#${channel.name} | ${channel.id}`).setColor('RANDOM')
         .addField('❯ Info',`• Type: ${channel.type.toUpperCase()}` + `\n` +
         `• Topic ${channel.topic ? channel.topic : 'None'}` + `\n` +
         `• NSFW: ${NSFW[channel.nsfw]}` + `\n` +

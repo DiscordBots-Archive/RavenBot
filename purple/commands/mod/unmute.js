@@ -1,6 +1,4 @@
 const { Command } = require('discord-akairo');
-const { MessageEmbed } = require('discord.js');
-const moment = require('moment');
 
 class UnMuteCommand extends Command {
     constructor() {

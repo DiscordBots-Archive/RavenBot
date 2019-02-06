@@ -12,13 +12,12 @@ class UsersCommand extends Command {
 
     async exec(message) {
         const users = this.client.users;
-        
         const output = users.reduce((out, t) => {
 			out += `Usertag: ${t.tag}\r\nUserid: ${t.id.replace(/\n/g, '\r\n')}\r\n\r\n========================================\r\n\r\n`;
 			return out;
 		}, '');
 
-		return message.util.send('~<a:load:532929637102387210>~', { files: [{ attachment: Buffer.from(output, 'utf8'), name: `${this.client.user.username}_users.txt` }] });
+		return message.util.send('_total__users_', { files: [{ attachment: Buffer.from(output, 'utf8'), name: `${this.client.user.username.toLowerCase()}_users.txt` }] });
     }
 }
 

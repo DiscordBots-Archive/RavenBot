@@ -1,6 +1,5 @@
 const { Command } = require('discord-akairo');
-const { MessageEmbed } = require('discord.js');
-const moment = require('moment');
+
 
 class SoftBanCommand extends Command {
     constructor() {
@@ -21,8 +20,8 @@ class SoftBanCommand extends Command {
                    id: 'member',
                    type: 'member',
                    prompt: {
-                       start: message => `${message.author}, what member do you want to softban?`,
-                       retry: message => `${message.author}, please mention a member`
+                       start: message => `*${message.author}, what member do you want to softban?*`,
+                       retry: message => `*${message.author}, please mention a member...*`
                    }
                },
                {
@@ -41,22 +40,22 @@ class SoftBanCommand extends Command {
         const reason = args.reason;
 
         const embed = this.client.historyEmbed({message, member}).setColor(this.client.CONSTANTS.COLORS.SOFTBAN)
-		await message.channel.send('You sure you want me to softban this?', { embed });
+		await message.channel.send('*You sure you want me to softban this member?*', { embed });
 		const responses = await message.channel.awaitMessages(msg => msg.author.id === message.author.id, {
 			max: 1,
 			time: 10000
 		});
 
 		if (!responses || responses.size !== 1) {
-			return message.reply('timed out. Cancelled softban.');
+			return message.reply('*timed out_ cancelled softban..*');
 		}
 		const response = responses.first();
 
 		let sentMessage;
 		if (/^y(?:e(?:a|s)?)?$/i.test(response.content)) {
-			sentMessage = await message.channel.send(`Softbanning **${member.user.tag}**...`);
+			sentMessage = await message.channel.send(`*Softbanning ${member.user.tag}...*`);
 		} else {
-			return message.reply('cancelled softban.');
+			return message.reply('*cancelled softban...*');
 		}
 
         const modcount = message.guild.id + member.user.id;
@@ -67,10 +66,10 @@ class SoftBanCommand extends Command {
             await member.ban({ days: 1, reason: `Softbanned by ${message.author.tag} | Case #${totalCases}` })
             await message.guild.members.unban(member, `Softbanned by ${message.author.tag} | Case #${totalCases}`);
             try {
-				await member.send(`**You have been softbanned from ${message.guild.name}** \n${reason ? `**Reason:** ${reason}\n` : ''} A softban is a kick that uses ban + unban to remove your messages from the server, you may rejoin whenever`);
+				await member.send(`*You have been softbanned from ${message.guild.name}** \n${reason ? `*Reason: ${reason}\n` : ''}, softban is a kick that uses ban + unban to remove your messages from the server, you may rejoin whenever*`);
 			} catch {} 
 		} catch (error) {
-			return sentMessage.edit(`${message.author} I could not softban **${member.user.tag}**`);
+			return sentMessage.edit(`*${message.author}, I could not softban ${member.user.tag}*`);
         }
 
         this.client.settings.set(message.guild.id, 'caseTotal', totalCases);
@@ -83,7 +82,7 @@ class SoftBanCommand extends Command {
 			modMessage = await (this.client.channels.get(modLogChannel)).send(embed);
         }
         
-        return sentMessage.edit(`Successfully softbanned **${member.user.tag}**`)
+        return sentMessage.edit(`*Successfully softbanned ${member.user.tag}*`)
     }
 }
 

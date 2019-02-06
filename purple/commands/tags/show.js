@@ -2,37 +2,35 @@ const { Command } = require('discord-akairo');
 
 class AddTagCommand extends Command {
     constructor() {
-        super('show-tag', {
-           aliases: ['tag'],
-           category: 'tag',
-           description: {
-               content: 'It displays the tag content',
-               usage: '<tag name>',
-               examples: ['purple', 'rules']
-           },
-           channel: 'guild',
-           ratelimit: 2,
-           args: [
-               {
-                   id: 'tag',
-                   type: 'tag',
-                   match: 'rest',
-                   prompt: {
-                       start: message => `${message.author}, what tag do you want to see?`,
-                   }
-               },
-           ]
+        super('tag-show', {
+            //aliases: ['tag-show'],
+            category: 'tag',
+            description: {
+                content: 'It displays the tag content',
+                usage: '<tag name>',
+                examples: ['discord.js', 'purple', 'akairo']
+            },
+            channel: 'guild',
+            ratelimit: 2,
+            args: [
+                {
+                    id: 'name',
+                    match: 'content',
+                    type: 'lowercase',
+                    prompt: {
+                        start: message => `*${message.author}, what tag do you want to see?*`
+                    }
+                }
+            ]
         });
     }
 
-    async exec(message, args) {
+    async exec(message, { name }) {
 
-        const tag = args.tag;
-
-        const value = await this.client.Tags.findOne({where: { tag_name: tag, guild: message.guild.id } });
-        if (value) {
-            value.increment('usage_count');
-            return message.util.send(value.get('tag_content'))
+        const data = await this.client.Tags.findOne({where: { tag_name: name, guild: message.guild.id } });
+        if (data) {
+            data.increment('usage_count');
+            return message.util.send(data.get('tag_content'));
         }
         return;
 

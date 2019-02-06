@@ -1,13 +1,13 @@
 const { Command } = require('discord-akairo');
 
 const RESPONSES = [
-	'No.',
-	'Not happening.',
-	'Maybe later.',
-	`:ping_pong: Pong! \`$(ping)ms\` Heartbeat: \`$(heartbeat)ms\``,
-	`Just so you know, I'm not doing this for fun! \`$(ping)ms\` Doki doki: \`$(heartbeat)ms\``,
-	`Don't think this means anything special! \`$(ping)ms\` Heartbeat: \`$(heartbeat)ms\``,
-	`Can we get on with this already?! \`$(ping)ms\` Heartbeat: \`$(heartbeat)ms\``
+	'*No...*',
+	'*Not happening...*',
+	'*Maybe later...*',
+	`*Pong!* \`$(ping)ms\` *::* \`$(heartbeat)ms\``,
+	`*Just so you know, I'm not doing this for fun!* \n\`$(ping)ms\` *::* \`$(heartbeat)ms\``,
+	`*Don't think this means anything special!* \n\`$(ping)ms\` *::* \`$(heartbeat)ms\``,
+	`*Can we get on with this already?* \n\`$(ping)ms\` *::* \`$(heartbeat)ms\``
 ];
 
 class PingCommand extends Command {

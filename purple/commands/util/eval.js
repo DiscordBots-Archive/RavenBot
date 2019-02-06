@@ -1,111 +1,93 @@
 const { Command } = require('discord-akairo');
+const { Util } = require('discord.js');
 const util = require('util');
-const { MessageEmbed } = require('discord.js');
+
+const NL = '!!NL!!';
+const NL_PATTERN = new RegExp(NL, 'g');
 
 class EvalCommand extends Command {
-    constructor() {
-        super('eval', {
-            aliases: ['eval', 'e'],
-            description: {
-                content: 'Eval bruh! It runs JavaScript codes',
-                usage: '<JavaScript Codes>'
-            },
-            category: 'util',
-            ownerOnly: true,
-            quoted: false,
-            args: [
-                {
-                    id: 'code',
-                    match: 'content'
-                }
-            ]
-        });
-    }
+    
+	constructor() {
+		super('eval', {
+			aliases: ['eval', 'ev', 'e'],
+			description: {
+				content: 'Prohibit/Allow a user from using Purple',
+				usage: '<code>'
+			},
+			category: 'util',
+			ratelimit: 2,
+			args: [
+				{
+					id: 'code',
+					match: 'content',
+					type: 'string',
+					prompt: {
+						start: (message) => `${message.author}, what would you like to evaluate?`
+					}
+				}
+			]
+		});
+	}
 
-    async exec(message, { code }) {
-        if (!code) return message.util.reply('No code provided!');
+	async exec(message, { code }) {
+		
+		if (message.author.id !== this.client.ownerID) return;
+		const msg = message;
+		const { client, lastResult } = this;
+		
+		const doReply = (val) => {
+			if (val instanceof Error) {
+				message.util.send(`Callback error: \`${val}\``);
+			} else {
+				const result = this._result(val, process.hrtime(this.hrStart));
+				if (Array.isArray(result)) {
+					for (const res of result) message.util.send(res);
+				}
 
-        const evaled = {};
-        const logs = [];
+				message.util.send(result);
+			}
+		};
 
-        const token = this.client.token.split('').join('[^]{0,2}');
-        const rev = this.client.token.split('').reverse().join('[^]{0,2}');
-        const tokenRegex = new RegExp(`${token}|${rev}`, 'g');
-        const cb = '```';
+		let hrDiff;
+		try {
+			const hrStart = process.hrtime();
+			this.lastResult = eval(code);
+			hrDiff = process.hrtime(hrStart);
+		} catch (error) {
+			return message.util.send(`Error while evaluating: \`${error}\``);
+		}
 
-        const print = (...a) => { // eslint-disable-line no-unused-vars
-            const cleaned = a.map(obj => {
-                if (typeof o !== 'string') obj = util.inspect(obj, { depth: 1 });
-                return obj.replace(tokenRegex, '[TOKEN]');
-            });
+		this.hrStart = process.hrtime();
+		const result = this._result(this.lastResult, hrDiff, code);
+		if (Array.isArray(result)) return result.map(async res => message.util.send(res));
+		return message.util.send(result);
+	}
 
-            if (!evaled.output) {
-                logs.push(...cleaned);
-                return;
-            }
+	_result(result, hrDiff, input) {
+        
+        const inspected = util.inspect(result, { depth: 0 }).replace(NL_PATTERN, '\n').replace(this.sensitivePattern, '--🙄--');
+        
+		const split = inspected.split('\n');
+		const last = inspected.length - 1;
+		const prependPart = inspected[0] !== '{' && inspected[0] !== '[' && inspected[0] !== "'" ? split[0] : inspected[0];
+		const appendPart = inspected[last] !== '}' && inspected[last] !== ']' && inspected[last] !== "'" ? split[split.length - 1] : inspected[last];
+		const prepend = `\`\`\`javascript\n${prependPart}\n`;
+		const append = `\n${appendPart}\n\`\`\``;
+		if (input) {
+			return Util.splitMessage(`*Executed in ${hrDiff[0] > 0 ? `${hrDiff[0]}s ` : ''}${hrDiff[1] / 1000000}ms* \`\`\`javascript\n${inspected}\`\`\`` , { maxLength: 1900, prepend, append });
+		}
 
-            evaled.output += evaled.output.endsWith('\n') ? cleaned.join(' ') : `\n${cleaned.join(' ')}`;
-            const title = evaled.errored ? '☠\u2000**Error**' : '📤\u2000**Output**';
+		return Util.splitMessage(`*Callback executed after ${hrDiff[0] > 0 ? `${hrDiff[0]}s ` : ''}${hrDiff[1] / 1000000}ms* \`\`\`javascript\n${inspected}\`\`\``, { maxLength: 1900, prepend, append });
+	}
 
-            if (evaled.output.length + code.length > 1900) evaled.output = 'Output too long.';
-            evaled.message.edit([
-                `📥\u2000**Input**${cb}js`,
-                code,
-                cb,
-                `${title}${cb}js`,
-                evaled.output,
-                cb
-            ]);
-        };
-
-        try {
-            let output = eval(code);
-            if (output && typeof output.then === 'function') output = await output;
-
-            if (typeof output !== 'string') output = util.inspect(output, { depth: 0 });
-            output = `${logs.join('\n')}\n${logs.length && output === 'undefined' ? '' : output}`;
-            output = output.replace(tokenRegex, '[TOKEN]');
-
-            if (output.length + code.length > 1900) output = 'Output too long.';
-
-            const sent = await message.util.send([
-                `📥\u2000**Input**${cb}js`,
-                code,
-                cb,
-                `📤\u2000**Output**${cb}js`,
-                output,
-                cb
-            ]);
-
-            evaled.message = sent;
-            evaled.errored = false;
-            evaled.output = output;
-
-            return sent;
-        } catch (err) {
-            console.log(err); // eslint-disable-line no-console
-            let error = err;
-
-            error = error.toString();
-            error = `${logs.join('\n')}\n${logs.length && error === 'undefined' ? '' : error}`;
-            error = error.replace(tokenRegex, '[TOKEN]');
-
-            const sent = await message.util.send([
-                `📥\u2000**Input**${cb}js`,
-                code,
-                cb,
-                `☠\u2000**Error**${cb}js`,
-                error,
-                cb
-            ]);
-
-            evaled.message = sent;
-            evaled.errored = true;
-            evaled.output = error;
-
-            return sent;
-        }
-    }
+	get sensitivePattern() {
+		if (!this._sensitivePattern) {
+			const token = this.client.token.split('').join('[^]{0,2}');
+			const revToken = this.client.token.split('').reverse().join('[^]{0,2}');
+			Object.defineProperty(this, '_sensitivePattern', { value: new RegExp(`${token}|${revToken}`, 'g') });
+		}
+		return this._sensitivePattern;
+	}
 }
 
 module.exports = EvalCommand;

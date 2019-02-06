@@ -1,9 +1,8 @@
 const { Command } = require('discord-akairo');
 
-class CountChannelCommand extends Command {
+class CountingCommand extends Command {
     constructor() {
-        super('set-countchannel', {
-           aliases: ['set-count'],
+        super('set-counting', {
            description: {
                content: 'Sets the counting channel',
                usage: '<channel>',
@@ -20,20 +19,20 @@ class CountChannelCommand extends Command {
                    match: 'content',
                    type: 'textChannel',
                    prompt: {
-                       start: message => `${message.author}, what channel you want to set?`,
-                       retry: message => `${message.author}, please provide a valid channel`
+                       start: message => `*${message.author}, what channel you want to set?*`,
+                       retry: message => `*${message.author}, please provide a valid channel...*`
                    }
                }
            ]
         });
     }
 
-    async exec(message, args) {
+    async exec(message, { channel }) {
 
-        const channel = args.channel;
         this.client.settings.set(this.client.user.id, 'countChannel', channel.id);
-		return message.util.reply(`set count channel to **${channel.name}**`);
+        return message.util.reply(`set count channel to **${channel.name}**`);
+        
     }
 }
 
-module.exports = CountChannelCommand;
+module.exports = CountingCommand;

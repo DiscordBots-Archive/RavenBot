@@ -10,7 +10,7 @@ class ReconnectListener extends Listener {
 	}
 
 	async exec() {
-		this.client.logger.info("[RECONNECTING] Come at me if you don't value your life!");
+		this.client.logger.info("[RECONNECTING]");
 	}
 }
 module.exports = ReconnectListener;

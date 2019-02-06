@@ -3,14 +3,14 @@ const { Command } = require('discord-akairo');
 class DownloadCommand extends Command {
     constructor() {
         super('tag-download', {
-           aliases: ['download-tags', 'dl-tags'],
-           description: {
-               content: 'Download your server tags',
-           },
-           category: 'tag',
-           channel: 'guild',
-           ratelimit: 2,
-           clientPermissions: ['ATTACH_FILES']
+            //aliases: ['download', 'dl-tags'],
+            category: 'tag',
+            description: {
+                content: 'Download your server tags'
+            },
+            channel: 'guild',
+            ratelimit: 2,
+            clientPermissions: ['ATTACH_FILES']
         });
     }
 

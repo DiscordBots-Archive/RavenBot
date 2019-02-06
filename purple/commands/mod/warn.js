@@ -1,6 +1,4 @@
 const { Command } = require('discord-akairo');
-const { MessageEmbed } = require('discord.js');
-const moment = require('moment');
 
 class WarnCommand extends Command {
     constructor() {
@@ -21,8 +19,8 @@ class WarnCommand extends Command {
                    id: 'member',
                    type: 'member',
                    prompt: {
-                       start: message => `${message.author}, what member do you want to warn?`,
-                       retry: message => `${message.author}, please mention a member.`
+                       start: message => `*${message.author}, what member do you want to warn?*`,
+                       retry: message => `*${message.author}, please mention a member...*`
                    }
                }, 
                {
@@ -41,22 +39,22 @@ class WarnCommand extends Command {
         const reason = args.reason;
 
         const embed = this.client.historyEmbed({message, member}).setColor(this.client.CONSTANTS.COLORS.WARN)
-		await message.channel.send('You sure you want me to warn this?', { embed });
+		await message.channel.send('*You sure you want me to warn this member?*', { embed });
 		const responses = await message.channel.awaitMessages(msg => msg.author.id === message.author.id, {
 			max: 1,
 			time: 10000
 		});
 
 		if (!responses || responses.size !== 1) {
-			return message.reply('timed out. Cancelled warn.');
+			return message.reply('*timed out_ cancelled warn...*');
 		}
 		const response = responses.first();
 
 		let sentMessage;
 		if (/^y(?:e(?:a|s)?)?$/i.test(response.content)) {
-			sentMessage = await message.channel.send(`Warning **${member.user.tag}**...`);
+			sentMessage = await message.channel.send(`*Warning ${member.user.tag}...*`);
 		} else {
-			return message.reply('cancelled warn.');
+			return message.reply('*cancelled warn...*');
 		}
 
         const modcount = message.guild.id + member.user.id;
@@ -73,7 +71,7 @@ class WarnCommand extends Command {
 			modMessage = await (this.client.channels.get(modLogChannel)).send(embed);
         }
         
-        return sentMessage.edit(`Successfully warned **${member.user.tag}**`);
+        return sentMessage.edit(`*Successfully warned ${member.user.tag}*`);
     }
 }
 

@@ -25,7 +25,6 @@ class MessageListener extends Listener {
 					await this.client.settings.set(channel.id, 'authorID', message.author.id)
 					await this.client.settings.set(channel.id, 'messageContent', message.content)
 				}
-				//console.log(parseInt(authormsg) + 1)
 				if (message.author.id === authorID || isNaN(message.content) || parseInt(message.content) !== parseInt(authormsg) + 1) {
 					setTimeout(() => {
 						message.delete()
@@ -33,6 +32,7 @@ class MessageListener extends Listener {
 				}
 			}
 		}
+
 	}
 }
 module.exports = MessageListener;

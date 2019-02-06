@@ -19,7 +19,7 @@ class ServerCommand extends Command {
     exec(message) {
 
         const embed = new MessageEmbed()
-        .setDescription(`Info about **${message.guild.name}** (ID: ${message.guild.id})`)
+        .setAuthor(`${message.guild.name} (${message.guild.id})`)
         .setColor('#f3d43d')
         .setFooter(`Requested by ${message.author.username}`, 'https://discordemoji.com/assets/emoji/DiscordHype.gif')
         .setTimestamp()

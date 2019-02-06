@@ -24,9 +24,7 @@ class HistoryCommand extends Command {
         });
     }
 
-    async exec(message, args) {
-
-        const member = args.member;
+    async exec(message, { member }) {
 
         const embed = this.client.historyEmbed({message, member}).setColor(this.client.CONSTANTS.COLORS.KICK);
         await message.channel.send(embed);

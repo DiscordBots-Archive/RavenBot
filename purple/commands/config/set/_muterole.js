@@ -3,7 +3,6 @@ const { Command } = require('discord-akairo');
 class SetMuteRoleCommand extends Command {
     constructor() {
         super('set-muterole', {
-           aliases: ['set-muterole'],
            description: {
                content: 'Sets the mute role of thr command use for permission checking.',
                usage: '<role>',
@@ -19,17 +18,16 @@ class SetMuteRoleCommand extends Command {
                    match: 'content',
                    type: 'role',
                    prompt: {
-                       start: message => `${message.author}, what role you want to set?`,
-                       retry: message => `${message.author}, please provide a valid role`
+                       start: message => `*${message.author}, what role you want to set?*`,
+                       retry: message => `*${message.author}, please provide a valid role...*`
                    }
                }
            ]
         });
     }
 
-    async exec(message, args) {
+    async exec(message, { role }) {
 
-        const role = args.role;
         this.client.settings.set(message.guild.id, 'muteRole', role.id);
 		return message.util.reply(`set mute role to **${role.name}**`);
     }

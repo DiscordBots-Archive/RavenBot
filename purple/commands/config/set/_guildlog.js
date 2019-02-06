@@ -3,7 +3,6 @@ const { Command } = require('discord-akairo');
 class SetGuildLogCommand extends Command {
     constructor() {
         super('set-guildlog', {
-           aliases: ['set-guildlog'],
            description: {
                content: 'Sets the guild log to capture message edit, delete, etc',
                usage: '<channel>',
@@ -20,17 +19,15 @@ class SetGuildLogCommand extends Command {
                    match: 'content',
                    type: 'textChannel',
                    prompt: {
-                       start: message => `${message.author}, what channel you want to set?`,
-                       retry: message => `${message.author}, please provide a valid channel`
+                       start: message => `*${message.author}, what channel you want to set?*`,
+                       retry: message => `*${message.author}, please provide a valid channel...*`
                    }
                }
            ]
         });
     }
 
-    async exec(message, args) {
-
-        const channel = args.channel;
+    async exec(message, { channel }) {
         
         try {
 

@@ -34,7 +34,7 @@ class ServerInfoCommand extends Command {
 
 		const embed = new MessageEmbed()
 			.setColor('#f6ff5c')
-			.setDescription(`${message.guild.name} | ${message.guild.id}`)
+			.setAuthor(`${message.guild.name} | ${message.guild.id}`).setFooter(message.author.tag, message.author.displayAvatarURL())
 
 			.addField('❯ General Info',
 				`• Members: ${message.guild.memberCount}\n` +

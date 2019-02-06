@@ -5,7 +5,7 @@ const moment = require('moment');
 class AddTagCommand extends Command {
     constructor() {
         super('tag-info', {
-           aliases: ['tag-info'],
+           //aliases: ['tag-info'],
            category: 'tag',
            description: {
                content: 'Get all info of tag',
@@ -16,29 +16,27 @@ class AddTagCommand extends Command {
            ratelimit: 2,
            args: [
                {
-                   id: 'tag',
-                   type: 'tag',
-                   match: 'rest',
+                   id: 'name',
+                   type: 'lowercase',
+                   match: 'content',
                    prompt: {
-                       start: message => `${message.author}, what tag do you want to see?`,
+                       start: message => `*${message.author}, what tag do you want to see?*`,
                    }
                },
            ]
         });
     }
 
-    async exec(message, args) {
+    async exec(message, { name }) {
 
-        const tag = args.tag;
-
-        const value = await this.client.Tags.findOne({where: { tag_name: tag, guild: message.guild.id } });
-        if (value) {
+        const data = await this.client.Tags.findOne({where: { tag_name: name, guild: message.guild.id } });
+        if (data) {
             const embed = new MessageEmbed().setColor('0x824aee')
-			.addField('❯ Name', value.get('tag_name'))
-			.addField('❯ User', value.get('username') + ' | ' + value.get('user'))
-			.addField('❯ Uses', value.get('usage_count'))
-			.addField('❯ Created at', moment(value.createdAt).format('DD-MM-YY kk:mm:ss'))
-            .addField('❯ Modified at', moment(value.updatedAt).format('DD-MM-YY kk:mm:ss'));
+			.addField('❯ Name', data.get('tag_name'))
+			.addField('❯ User', data.get('username') + ' (' + data.get('user') + ')')
+			.addField('❯ Uses', data.get('usage_count'))
+			.addField('❯ Created at', moment(data.createdAt).format('DD-MM-YY kk:mm:ss'))
+            .addField('❯ Modified at', moment(data.updatedAt).format('DD-MM-YY kk:mm:ss'));
             return message.util.send(embed);
         }
         return;

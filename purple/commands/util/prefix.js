@@ -6,7 +6,7 @@ class PrefixCommand extends Command {
            aliases: ['prefix'],
            description: {
                content: 'Displays or changes the prefix of the guild',
-               usage: '[prefix]',
+               usage: '<prefix>',
                examples: ['!', '?']
            },
            category: 'util',

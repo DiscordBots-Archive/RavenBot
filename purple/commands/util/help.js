@@ -22,8 +22,8 @@ class HelpCommand extends Command {
         });
     }
 
-    exec(message, args) {
-        const command = args.command;
+    exec(message, { command }) {
+        
 		const prefix = this.handler.prefix(message);
 		if (!command) {
 			const embed = new MessageEmbed()

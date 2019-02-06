@@ -14,7 +14,6 @@ class DocsCommand extends Command {
 			category: 'tag',
 			clientPermissions: ['EMBED_LINKS'],
 			ratelimit: 2,
-			ownerOnly: true,
 			args: [
 				{
 					id: 'query',
@@ -34,6 +33,8 @@ class DocsCommand extends Command {
 	}
 
 	async exec(message, { query, force }) {
+
+		if (message.guild.id !== '524672414261444623' && message.guild.id !== '509784317598105619') return;
 		query = query.split(' ');
 		let project = 'main';
 		let branch = ['stable', 'master', 'rpc', 'commando'].includes(query.slice(-1)[0]) ? query.pop() : 'stable';

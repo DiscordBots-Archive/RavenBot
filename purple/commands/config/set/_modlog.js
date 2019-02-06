@@ -19,19 +19,19 @@ class SetModLogCommand extends Command {
                    match: 'content',
                    type: 'textChannel',
                    prompt: {
-                       start: message => `${message.author}, what channel you want to set?`,
-                       retry: message => `${message.author}, please provide a valid channel`
+                       start: message => `*${message.author}, what channel you want to set?*`,
+                       retry: message => `*${message.author}, please provide a valid channel...*`
                    }
                }
            ]
         });
     }
 
-    async exec(message, args) {
+    async exec(message, { channel }) {
 
-        const channel = args.channel;
         this.client.settings.set(message.guild.id, 'modLogChannel', channel.id);
-		return message.util.reply(`set moderation log channel to **${channel.name}**`);
+        return message.util.reply(`set moderation log channel to **${channel.name}**`);
+        
     }
 }
 

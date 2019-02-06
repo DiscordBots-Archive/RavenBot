@@ -40,7 +40,7 @@ class EmojiCommand extends Command {
         const embed = new MessageEmbed().setColor(0x824aee)
 
         if (emoji) {
-			embed.setDescription(`Info about ${emoji.name} (ID: ${emoji.id})`);
+			embed.setDescription(`${emoji.name} (${emoji.id})`);
 			embed.setThumbnail(emoji.url);
 			embed.addField('❯ Info',`• Identifier: \`<${emoji.identifier}>\`\n` +
 				`• Creation Date: ${moment.utc(emoji.createdAt).format('YYYY/MM/DD hh:mm:ss')}\n` +

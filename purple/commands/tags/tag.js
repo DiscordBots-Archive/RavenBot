@@ -1,0 +1,63 @@
+const { Command } = require('discord-akairo');
+
+class TagCommand extends Command {
+	constructor() {
+		super('tag', {
+            aliases: ['tag'],
+            category: 'tag',
+			description: {
+				content: `Available methods:\n` +
+					`• show \`<tag>\`\n` +
+					`• add \` <tag> <content>\`\n` +
+					`• del \`<tag>\`\n` +
+					`• edit \`<tag> <content>\`\n` +
+					`• info \`<tag>\`\n` +
+					`• list \`[member]\`\n` +
+					`• download \`[member]\`\n` +
+					`Required: \`<>\` | Optional: \`[]\`\n` +
+					`For additional \`<...arguments>\` usage refer to the examples below.`,
+				usage: '<method> <...arguments>',
+				examples: [
+					'show Test',
+					'add Test Test',
+					'del Test',
+					'edit Test Some new content',
+					'info Test',
+					'list @Purple',
+					'download @Purple'
+				]
+			},
+			channel: 'guild',
+			ratelimit: 2,
+			args: [
+				{
+					id: 'method',
+					type: ['show', 'add', 'del', 'delete', 'edit', 'info', 'list', 'download', 'dl']
+				},
+				{
+					id: 'name',
+					match: 'rest',
+					default: ''
+				}
+			]
+		});
+	}
+
+	async exec(message, { method, name }) {
+		if (!method)return;
+		const command = ({
+			show: this.handler.modules.get('tag-show'),
+			add: this.handler.modules.get('tag-add'),
+			del: this.handler.modules.get('tag-delete'),
+			delete: this.handler.modules.get('tag-delete'),
+			edit: this.handler.modules.get('tag-edit'),
+			info: this.handler.modules.get('tag-info'),
+			list: this.handler.modules.get('tag-list'),
+			download: this.handler.modules.get('tag-download'),
+			dl: this.handler.modules.get('tag-download')
+		})[method];
+
+		return this.handler.handleDirectCommand(message, name, command, true);
+	}
+}
+module.exports = TagCommand;

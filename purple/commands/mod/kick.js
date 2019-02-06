@@ -19,8 +19,8 @@ class KickCommand extends Command {
                    id: 'member',
                    type: 'member',
                    prompt: {
-                       start: message => `${message.author}, what member do you want to kick?`,
-                       retry: message => `${message.author}, please mention a member`
+                       start: message => `*${message.author}, what member do you want to kick?*`,
+                       retry: message => `*${message.author}, please mention a member...*`
                    }
                },
                {
@@ -39,22 +39,22 @@ class KickCommand extends Command {
         const reason = args.reason;
 
         const embed = this.client.historyEmbed({message, member}).setColor(this.client.CONSTANTS.COLORS.KICK)
-		await message.channel.send('You sure you want me to kick this?', { embed });
+		await message.channel.send('*You sure you want me to kick this member?*', { embed });
 		const responses = await message.channel.awaitMessages(msg => msg.author.id === message.author.id, {
 			max: 1,
 			time: 10000
 		});
 
 		if (!responses || responses.size !== 1) {
-			return message.reply('timed out. Cancelled kick.');
+			return message.reply('*timed out_ cancelled kick..*');
 		}
 		const response = responses.first();
 
 		let sentMessage;
 		if (/^y(?:e(?:a|s)?)?$/i.test(response.content)) {
-			sentMessage = await message.channel.send(`Kicking **${member.user.tag}**...`);
+			sentMessage = await message.channel.send(`*Kicking ${member.user.tag}...*`);
 		} else {
-			return message.reply('cancelled kick.');
+			return message.reply('*cancelled kick...*');
 		}
 
         const modcount = message.guild.id + member.user.id;
@@ -64,10 +64,10 @@ class KickCommand extends Command {
 		try {
 			await member.kick(`Kicked by ${message.author.tag} | Case #${totalCases}`);
 			try {
-				await member.send(`**You have been kicked from ${message.guild.name}** \n${reason ? `**Reason:** ${reason}\n` : ''} You may rejoin whenever.`);
+				await member.send(`*You have been kicked from ${message.guild.name}** \n${reason ? `*Reason: ${reason}\n` : ''}, you may rejoin whenever*`);
 			} catch {} 
 		} catch (error) {
-			return sentMessage.edit(`${message.author} I could not kick **${member.user.tag}**`);
+			return sentMessage.edit(`*${message.author}, I could not kick ${member.user.tag}*`);
         }
 
         this.client.settings.set(message.guild.id, 'caseTotal', totalCases);
@@ -80,7 +80,7 @@ class KickCommand extends Command {
 			modMessage = await (this.client.channels.get(modLogChannel)).send(embed);
         }
         
-        return sentMessage.edit(`Successfully kicked **${member.user.tag}**`);
+        return sentMessage.edit(`*Successfully kicked ${member.user.tag}*`);
     }
 }
 

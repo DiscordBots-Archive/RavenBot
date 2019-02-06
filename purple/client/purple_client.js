@@ -5,8 +5,12 @@ const DailyRotateFile = require('winston-daily-rotate-file');
 const { MessageEmbed } = require('discord.js');
 const { createServer } = require('http');
 const Sequelize = require('sequelize');
+const env = require('dotenv').config();
+const Raven_ = process.env.RAVEN;
+const moment = require('moment');
 const { parse } = require('url');
 const sqlite = require('sqlite');
+const Raven = require('raven');
 
 class PurpleClient extends AkairoClient {
     constructor() {
@@ -15,7 +19,6 @@ class PurpleClient extends AkairoClient {
         }, {
             disableEveryone: true
         });
-
         // handlers=> loading commands, events, etc
         this.commandHandler = new CommandHandler(this, {
             directory: './purple/commands/',
@@ -31,20 +34,18 @@ class PurpleClient extends AkairoClient {
             commandUtilLifetime: 3e5,
             defaultCooldown: 3000,
             defaultPrompt: {
-                modifyStart: str => `${str}\n\nType \`cancel\` to cancel the command.`,
-                modifyRetry: str => `${str}\n\nType \`cancel\` to cancel the command.`,
-                timeout: 'Guess you took too long, the command has been cancelled.',
-                ended: "More than 3 tries and you still didn't quite get it. The command has been cancelled",
-                cancel: 'The command has been cancelled.',
+                modifyStart: str => `${str}\n*type \`cancel\` to cancel the command...*`,
+                modifyRetry: str => `${str}\n*type \`cancel\` to cancel the command...*`,
+                timeout: '*Guess you took too long, the command has been cancelled..*',
+                ended: "*More than 3 tries and you still didn't quite get it. The command has been cancelled..*",
+                cancel: '*The command has been cancelled...*',
                 retries: 3,
                 time: 30000
             }
         });
-
         this.inhibitorHandler = new InhibitorHandler(this, {
             directory: './purple/inhibitors/'
         });
-
         this.listenerHandler = new ListenerHandler(this, {
             directory: './purple/listeners/'
         });
@@ -53,7 +54,7 @@ class PurpleClient extends AkairoClient {
         this.logger = createLogger({
             format: format.combine(
                 format.colorize({ level: true }),
-                format.timestamp({ format: 'YYYY/MM/DD HH:mm:ss' }),
+                format.timestamp({ format: 'DD-MM-YY HH:mm:ss' }),
                 format.printf((info) => {
                     const { timestamp, level, message, ...rest } = info;
                     return `[${timestamp}] ${level}: ${message}${Object.keys(rest).length ? `\n${JSON.stringify(rest, null, 2)}` : ''}`;
@@ -73,6 +74,17 @@ class PurpleClient extends AkairoClient {
             ]
         });
 
+        // Raven => Bug Catcher
+        if (Raven_) {
+			Raven.config(Raven_, {
+				captureUnhandledRejections: true,
+				autoBreadcrumbs: true,
+				release: '0.1.0'
+			}).install();
+		} else {
+			process.on('unhandledRejection', err => this.logger.error(`[UNHANDLED REJECTION] ${err.message}`, err.stack));
+		}
+
         // counter=> message counter
         this.prometheus = {
             messagesCounter: new Counter({ name: 'purple_messages_total', help: 'Total number of messages Purple has seen' }),
@@ -80,7 +92,6 @@ class PurpleClient extends AkairoClient {
             collectDefaultMetrics,
             register
         };
-
         this.prometheus.collectDefaultMetrics({ prefix: 'purple_', timeout: 30000 });
 
         // SQLiteProvider=> database of guild settings
@@ -110,7 +121,6 @@ class PurpleClient extends AkairoClient {
                 defaultValue: 0,
             }
         })
-
 
         // ACTIONS=> default moderation message constructor
         this.ACTIONS = ({
@@ -151,28 +161,25 @@ class PurpleClient extends AkairoClient {
 
         this.logEmbed = ({message, member, caseNum, action, reason}) => {
     
-            const embed = new MessageEmbed()
-            if (message) embed.setAuthor(`${message.member.user.tag} | ${message.member.user.id}`, message.member.user.displayAvatarURL())
+            const embed = new MessageEmbed().setTimestamp().setFooter('Case ' + caseNum)
+            if (message) embed.setAuthor(`${message.member.user.tag} (${message.member.user.id})`, message.member.user.displayAvatarURL())
             .setDescription(`**Member:** ${member.user.tag} (${member.id})` + '\n' +
 			`**Action:** ${action}` + '\n' +
             `**Reason:** ${reason}`)
-            .setFooter('Case ' + caseNum)
-            .setTimestamp()
             return embed;
         }
 
         this.historyEmbed = ({ message, member }) => {
-            const modcount = message.guild.id + member.user.id;
 
-            const kick = this.settings.get(modcount, 'Kick', 0)
-            const mute = this.settings.get(modcount, 'Mute', 0)
-            const ban = this.settings.get(modcount, 'Ban', 0)
-            const warn = this.settings.get(modcount, 'Warn', 0)
-            const restriction = this.settings.get(modcount, 'Restriction', 0)
+            const key = message.guild.id + member.user.id;
+            const kick = this.settings.get(key, 'Kick', 0);
+            const mute = this.settings.get(key, 'Mute', 0);
+            const ban = this.settings.get(key, 'Ban', 0);
+            const warn = this.settings.get(key, 'Warn', 0);
+            const restriction = this.settings.get(key, 'Restriction', 0);
 
             return new MessageEmbed()
-            .setAuthor(`${member.user.tag} | ${member.user.id}`, member.user.displayAvatarURL())
-
+            .setAuthor(`${member.user.tag} (${member.user.id})`, member.user.displayAvatarURL())
 			.setFooter(`${warn} warning${warn > 1 || warn === 0 ? 's' : ''}, ` +
 			`${restriction} restriction${restriction > 1 || restriction === 0 ? 's' : ''}, ` +
 			`${mute} mute${mute > 1 || mute === 0 ? 's' : ''}, ` +
@@ -180,51 +187,41 @@ class PurpleClient extends AkairoClient {
 			`and ${ban} ban${ban > 1 || ban === 0 ? 's' : ''}`);
         }
 
-        this.setup();
     }
 
     // loader=> loading up all commands, events etc
-    setup() {
+    async setup() {
         this.commandHandler.useInhibitorHandler(this.inhibitorHandler);
         this.commandHandler.useListenerHandler(this.inhibitorHandler);
-
         this.listenerHandler.setEmitters({
             commandHandler: this.commandHandler,
             inhibitorHandler: this.inhibitorHandler,
             listenerHandler: this.listenerHandler
         });
-
         this.commandHandler.loadAll();
         this.inhibitorHandler.loadAll();
         this.listenerHandler.loadAll();
 
-        const resolver = this.commandHandler.resolver;
-        resolver.addType('1-10', phrase => {
-            const num = resolver.type('integer')(phrase);
-            if (num == null) return null;
-            if (num < 1 || num > 10) return null;
-            return num;
-        });
-
+        await this.settings.init();
+        await this.Tags.sync();
     }
 
-    // counter=> message counter
-	metrics() {
+    // counter=> message & command counter
+	async metrics() {
 		createServer((req, res) => {
 			if (parse(req.url).pathname === '/metrics') {
 				res.writeHead(200, { 'Content-Type': this.prometheus.register.contentType });
 				res.write(this.prometheus.register.metrics());
 			}
 			res.end();
-		}).listen(5400);
+		}).listen(5500);
     }
     
     // START=> logging in purple, and initializing databases
     async start(token) {
-        await this.settings.init();
-        await this.Tags.sync();
+        await this.setup();
         await this.login(token);
-        console.log('Ready!');
+        console.log(`[${moment(new Date()).format('DD-MM-YY kk:mm:ss')}] info: [NODE PROCESS STARTED]`);
     }
 
 }

@@ -3,7 +3,6 @@ const { Command } = require('discord-akairo');
 class SetAutoRoleCommand extends Command {
     constructor() {
         super('set-autorole', {
-           aliases: ['set-autorole'],
            description: {
                content: 'Sets the automatic role of the guild',
                usage: '<role>',
@@ -19,19 +18,19 @@ class SetAutoRoleCommand extends Command {
                    match: 'content',
                    type: 'role',
                    prompt: {
-                       start: message => `${message.author}, what role you want to set?`,
-                       retry: message => `${message.author}, please provide a valid role`
+                       start: message => `*${message.author}, what role you want to set?*`,
+                       retry: message => `*${message.author}, please provide a valid role...*`
                    }
                }
            ]
         });
     }
 
-    async exec(message, args) {
+    async exec(message, { role }) {
 
-        const role = args.role;
         this.client.settings.set(message.guild.id, 'autoRole', role.id);
-		return message.util.reply(`set automatic role to **${role.name}**`);
+        return message.util.reply(`set automatic role to **${role.name}**`);
+        
     }
 }
 

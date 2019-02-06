@@ -20,8 +20,8 @@ class BanCommand extends Command {
                    id: 'member',
                    type: 'member',
                    prompt: {
-                       start: message => `${message.author}, what member do you want to ban?`,
-                       retry: message => `${message.author}, please mention a member`
+                       start: message => `*${message.author}, what member do you want to ban?*`,
+                       retry: message => `*${message.author}, please mention a member...*`
                    }
                },
                {
@@ -40,22 +40,22 @@ class BanCommand extends Command {
         const reason = args.reason;
 
         const embed = this.client.historyEmbed({message, member}).setColor(this.client.CONSTANTS.COLORS.BAN)
-		await message.channel.send('You sure you want me to ban this?', { embed });
+		await message.channel.send('*You sure you want me to ban this member?*', { embed });
 		const responses = await message.channel.awaitMessages(msg => msg.author.id === message.author.id, {
 			max: 1,
 			time: 10000
 		});
 
 		if (!responses || responses.size !== 1) {
-			return message.reply('timed out. Cancelled ban.');
+			return message.reply('*timed out_ cancelled ban*');
 		}
 		const response = responses.first();
 
 		let sentMessage;
 		if (/^y(?:e(?:a|s)?)?$/i.test(response.content)) {
-			sentMessage = await message.channel.send(`Banning **${member.user.tag}**...`);
+			sentMessage = await message.channel.send(`*Banning ${member.user.tag}...*`);
 		} else {
-			return message.reply('cancelled ban.');
+			return message.reply('*cancelled ban*');
 		}
 
         const modcount = message.guild.id + member.user.id;
@@ -65,10 +65,10 @@ class BanCommand extends Command {
 		try {
             await member.ban({ days: 1, reason: `Banned by ${message.author.tag} | Case #${totalCases}` });
             try {
-				await member.send(`**You have been banned from ${message.guild.name}** \n${reason ? `**Reason:** ${reason}\n` : ''}`);
+				await member.send(`*You have been banned from ${message.guild.name}* \n${reason ? `*Reason: ${reason}*\n` : ''}`);
 			} catch {} 
 		} catch (error) {
-			return sentMessage.edit(`${message.author} I could not unmute **${member.user.tag}**`);
+			return sentMessage.edit(`*${message.author} I could not ban ${member.user.tag}*`);
         }
 
         this.client.settings.set(message.guild.id, 'caseTotal', totalCases);
@@ -81,7 +81,7 @@ class BanCommand extends Command {
 			modMessage = await (this.client.channels.get(modLogChannel)).send(embed);
         }
         
-        return sentMessage.edit(`Successfully banned **${member.user.tag}**`)
+        return sentMessage.edit(`*Successfully banned ${member.user.tag}*`)
     }
 }
 
