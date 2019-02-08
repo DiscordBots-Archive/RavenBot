@@ -25,11 +25,8 @@ class ReadyListener extends Listener {
 
 		setInterval(async () => {
 			for (const guild of this.client.guilds.values()) {
-			
 				const mutes = await this.client.Mute.findAll({where: {guild: guild.id}},{ attributes: ['time'] });
-	
 				for (const mute of mutes) {
-	
 					if (mute.time <= Date.now()) {
 						const member = guild.members.get(mute.user);
 						const role = this.client.settings.get(guild.id, 'muteRole', undefined);

@@ -52,25 +52,26 @@ class MuteCommand extends Command {
     async exec(message, { member, duration, reason}) {
 
         const muteRole = this.client.settings.get(message.guild.id, 'muteRole', undefined);
-		if (!muteRole) return message.reply('there is no mute role configured on this server');
+        if (!muteRole) return message.reply('*there is no mute role configured on this server...*');
+        if (member.roles.has(muteRole)) return message.util.reply('*this user is already muted!*');
 
         const embed = this.client.historyEmbed({message, member}).setColor(this.client.CONSTANTS.COLORS.SOFTBAN)
-		await message.channel.send('You sure you want me to mute this?', { embed });
+		await message.channel.send('*You sure you want me to mute this member?*', { embed });
 		const responses = await message.channel.awaitMessages(msg => msg.author.id === message.author.id, {
 			max: 1,
 			time: 10000
 		});
 
 		if (!responses || responses.size !== 1) {
-			return message.reply('timed out. Cancelled mute.');
+			return message.reply('*timed out_ cancelled mute...*');
 		}
 		const response = responses.first();
 
 		let sentMessage;
 		if (/^y(?:e(?:a|s)?)?$/i.test(response.content)) {
-			sentMessage = await message.channel.send(`Muting **${member.user.tag}**...`);
+			sentMessage = await message.channel.send(`*Muting **${member.user.tag}**...*`);
 		} else {
-			return message.reply('cancelled mute.');
+			return message.reply('*cancelled mute...*');
 		}
 
         const modcount = message.guild.id + member.user.id;
@@ -83,7 +84,7 @@ class MuteCommand extends Command {
 				await member.send(`*You have been muted from ${message.guild.name} \n${reason ? `Reason: ${reason}*\n` : ''}`);
             } catch {} 
 		} catch (error) {
-			return sentMessage.edit(`${message.author} I could not mute **${member.user.tag}**`);
+			return sentMessage.edit(`*${message.author} I could not mute **${member.user.tag}**...*`);
         }
 
         try {
@@ -96,7 +97,7 @@ class MuteCommand extends Command {
             })
         } catch (error) {
             if (error.name === 'SequelizeUniqueConstraintError') {
-                return message.util.reply(`*This user is already muted by other mods...*`)
+                return sentMessage.edit(`*${message.author}, this user is already muted!*`)
             }
             return;
         }
@@ -107,11 +108,11 @@ class MuteCommand extends Command {
         const modLogChannel = this.client.settings.get(message.guild.id, 'modLogChannel', undefined);
 		let modMessage;
 		if (modLogChannel) {
-			const embed = this.client.logEmbed({message, member, caseNum: totalCases, action: 'Mute', reason}).setColor(this.client.CONSTANTS.COLORS.MUTE);
+			const embed = this.client.logEmbed({message, member, duration, caseNum: totalCases, action: 'Mute', reason}).setColor(this.client.CONSTANTS.COLORS.MUTE);
 			modMessage = await (this.client.channels.get(modLogChannel)).send(embed);
         }
         
-        return sentMessage.edit(`Successfully muted **${member.user.tag}**`)
+        return sentMessage.edit(`*Successfully muted **${member.user.tag}**...*`)
     }
 }
 

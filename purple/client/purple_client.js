@@ -11,6 +11,7 @@ const moment = require('moment');
 const { parse } = require('url');
 const sqlite = require('sqlite');
 const Raven = require('raven');
+const ms = require('ms');
 
 class PurpleClient extends AkairoClient {
     constructor() {
@@ -145,12 +146,12 @@ class PurpleClient extends AkairoClient {
             }
         },
 
-        this.logEmbed = ({message, member, caseNum, action, reason}) => {
+        this.logEmbed = ({message, member, duration, caseNum, action, reason}) => {
     
             const embed = new MessageEmbed().setTimestamp().setFooter('Case ' + caseNum)
             if (message) embed.setAuthor(`${message.member.user.tag} (${message.member.user.id})`, message.member.user.displayAvatarURL())
             .setDescription(`**Member:** ${member.user.tag} (${member.id})` + '\n' +
-			`**Action:** ${action}` + '\n' +
+			`**Action:** ${action}${action === 'Mute' && duration ? `\n**Length:** ${ms(duration, { long: true })}` : ''}` + '\n' +
             `**Reason:** ${reason}`)
             return embed;
         }

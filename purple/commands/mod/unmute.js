@@ -33,16 +33,14 @@ class UnMuteCommand extends Command {
         });
     }
 
-    async exec(message, args) {
-
-        const member = args.member;
-        const reason = args.reason;
+    async exec(message, { member, reason } ) {
 
         const muteRole = this.client.settings.get(message.guild.id, 'muteRole', undefined);
-        if (!muteRole) return message.reply('there is no mute role configured on this server.');
+        if (!muteRole) return message.util.reply('*there is no mute role configured on this server...*');
+        if (!member.roles.has(muteRole)) return;
         
         const embed = this.client.historyEmbed({message, member}).setColor(this.client.CONSTANTS.COLORS.MUTE)
-		await message.channel.send('You sure you want me to unmute this?', { embed });
+		await message.channel.send('*You sure you want me to unmute this member?*', { embed });
 		const responses = await message.channel.awaitMessages(msg => msg.author.id === message.author.id, {
 			max: 1,
 			time: 10000
