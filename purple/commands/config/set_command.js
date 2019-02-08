@@ -33,7 +33,7 @@ class SetCommand extends Command {
 
         const command = ({
             modlog: this.handler.modules.get('set-modlog'),
-            guildlog: this.handler.modules.get('set-autorole'),
+            guildlog: this.handler.modules.get('set-guildlog'),
             counting: this.handler.modules.get('set-counting'),
             memberlog: this.handler.modules.get('set-memberlog'),
             modrole: this.handler.modules.get('set-modrole'),
