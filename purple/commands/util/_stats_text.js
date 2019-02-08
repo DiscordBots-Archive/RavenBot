@@ -17,7 +17,7 @@ class DownloadStatsCommand extends Command {
         
         let output = data.replace(/\n/g, '\r\n');
 
-		return message.util.send('_main__stats_', { files: [{ attachment: Buffer.from(output, 'utf8'), name: `${this.client.user.username.toLowerCase()}_stats.txt` }] } );
+		return message.util.send('*main_stats*', { files: [{ attachment: Buffer.from(output, 'utf8'), name: `${this.client.user.username.toLowerCase()}_stats.txt` }] } );
     }
 }
 

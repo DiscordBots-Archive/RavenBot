@@ -1,6 +1,7 @@
 const { Command } = require('discord-akairo');
 const { Util } = require('discord.js');
 const util = require('util');
+const { MessageEmbed } = require('discord.js');
 
 const NL = '!!NL!!';
 const NL_PATTERN = new RegExp(NL, 'g');

@@ -18,7 +18,7 @@ class GuildsCommand extends Command {
 			return out;
 		}, '');
 
-		return message.util.send('_total__guilds_', { files: [{ attachment: Buffer.from(output, 'utf8'), name: `${this.client.user.username.toLowerCase()}_guilds.txt` }] });
+		return message.util.send('*total_guilds*', { files: [{ attachment: Buffer.from(output, 'utf8'), name: `${this.client.user.username.toLowerCase()}_guilds.txt` }] });
     }
 }
 

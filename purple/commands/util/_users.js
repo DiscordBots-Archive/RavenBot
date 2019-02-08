@@ -17,7 +17,7 @@ class UsersCommand extends Command {
 			return out;
 		}, '');
 
-		return message.util.send('_total__users_', { files: [{ attachment: Buffer.from(output, 'utf8'), name: `${this.client.user.username.toLowerCase()}_users.txt` }] });
+		return message.util.send('*total_users*', { files: [{ attachment: Buffer.from(output, 'utf8'), name: `${this.client.user.username.toLowerCase()}_users.txt` }] });
     }
 }
 
