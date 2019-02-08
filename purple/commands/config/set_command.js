@@ -38,7 +38,7 @@ class SetCommand extends Command {
             memberlog: this.handler.modules.get('set-memberlog'),
             modrole: this.handler.modules.get('set-modrole'),
             muterole: this.handler.modules.get('set-muterole'),
-            autorole: this.handler.modules.get('set-aurorole'),
+            autorole: this.handler.modules.get('set-autorole'),
         })[method];
         return this.handler.handleDirectCommand(message, name, command, true);
     }

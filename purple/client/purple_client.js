@@ -31,8 +31,8 @@ class PurpleClient extends AkairoClient {
             commandUtilLifetime: 3e5,
             defaultCooldown: 3000,
             defaultPrompt: {
-                modifyStart: str => `${str}\n*type \`cancel\` to cancel the command...*`,
-                modifyRetry: str => `${str}\n*type \`cancel\` to cancel the command...*`,
+                modifyStart: str => `*${str}\ntype \`cancel\` to cancel the command...*`,
+                modifyRetry: str => `*${str}\ntype \`cancel\` to cancel the command...*`,
                 timeout: '*Guess you took too long, the command has been cancelled..*',
                 ended: "*More than 3 tries and you still didn't quite get it. The command has been cancelled..*",
                 cancel: '*The command has been cancelled...*',

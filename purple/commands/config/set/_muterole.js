@@ -18,8 +18,8 @@ class SetMuteRoleCommand extends Command {
                    match: 'content',
                    type: 'role',
                    prompt: {
-                       start: message => `*${message.author}, what role you want to set?*`,
-                       retry: message => `*${message.author}, please provide a valid role...*`
+                       start: message => `${message.author}, what role you want to set?`,
+                       retry: message => `${message.author}, please provide a valid role...`
                    }
                }
            ]

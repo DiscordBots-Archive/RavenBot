@@ -18,8 +18,8 @@ class SetMemberLogCommand extends Command {
                    match: 'content',
                    type: 'textChannel',
                    prompt: {
-                       start: message => `*${message.author}, what channel you want to set?*`,
-                       retry: message => `*${message.author}, please provide a valid channel...*`
+                       start: message => `${message.author}, what channel you want to set?`,
+                       retry: message => `${message.author}, please provide a valid channel...`
                    }
                }
            ]

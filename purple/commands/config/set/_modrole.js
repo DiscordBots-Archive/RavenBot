@@ -3,7 +3,7 @@ const { Command } = require('discord-akairo');
 class SetModRoleCommand extends Command {
     constructor() {
         super('set-modrole', {
-           aliases: ['set-mod'],
+           //aliases: ['set-mod'],
            description: {
                content: 'Sets the mod role of thr command use for permission checking',
                usage: '<role>',
@@ -19,8 +19,8 @@ class SetModRoleCommand extends Command {
                    match: 'content',
                    type: 'role',
                    prompt: {
-                       start: message => `*${message.author}, what role you want to set?*`,
-                       retry: message => `*${message.author}, please provide a valid role...*`
+                       start: message => `${message.author}, what role you want to set?`,
+                       retry: message => `${message.author}, please provide a valid role...`
                    }
                }
            ]
