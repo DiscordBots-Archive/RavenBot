@@ -18,7 +18,7 @@ class AddTagCommand extends Command {
                     match: 'content',
                     type: 'lowercase',
                     prompt: {
-                        start: message => `*${message.author}, what tag do you want to see?*`
+                        start: message => `${message.author}, what tag do you want to see?`
                     }
                 }
             ]

@@ -20,7 +20,7 @@ class AddTagCommand extends Command {
                     content: 'match',
                     type: 'lowercase',
                     prompt: {
-                        start: message => `*${message.author}, what tag do you want to add?*`
+                        start: message => `${message.author}, what tag do you want to add?`
                     }
                 },
                 {
@@ -29,7 +29,7 @@ class AddTagCommand extends Command {
                     type: 'content',
                     default: '',
                     prompt: {
-                        start: message => `*${message.author}, what is the content of your tag?*`
+                        start: message => `${message.author}, what is the content of your tag?`
                     }
                 }
             ]

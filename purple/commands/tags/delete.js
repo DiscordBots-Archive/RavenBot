@@ -15,10 +15,11 @@ class DeleteTagCommand extends Command {
             args: [
                 {
                     id: 'name',
-                    content: 'match',
+                    
                     type: 'lowercase',
+                    match: 'content',
                     prompt: {
-                        start: message => `*${message.author}, what tag do you want to delete?*`
+                        start: message => `${message.author}, what tag do you want to delete?`
                     }
                 }
             ]

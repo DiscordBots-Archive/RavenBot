@@ -32,7 +32,7 @@ class TagCommand extends Command {
 			args: [
 				{
 					id: 'method',
-					type: ['show', 'add', 'del', 'delete', 'edit', 'info', 'list', 'download', 'dl']
+					type: ['show', 'add', 'del', 'delete', 'edit', 'info', 'list', 'download', 'dl', 'alias']
 				},
 				{
 					id: 'name',
@@ -54,7 +54,8 @@ class TagCommand extends Command {
 			info: this.handler.modules.get('tag-info'),
 			list: this.handler.modules.get('tag-list'),
 			download: this.handler.modules.get('tag-download'),
-			dl: this.handler.modules.get('tag-download')
+			dl: this.handler.modules.get('tag-download'),
+			alias: this.handler.modules.get('tag-alias')
 		})[method];
 
 		return this.handler.handleDirectCommand(message, name, command, true);
