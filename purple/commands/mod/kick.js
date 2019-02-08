@@ -19,8 +19,8 @@ class KickCommand extends Command {
                    id: 'member',
                    type: 'member',
                    prompt: {
-                       start: message => `*${message.author}, what member do you want to kick?*`,
-                       retry: message => `*${message.author}, please mention a member...*`
+                       start: message => `${message.author}, what member do you want to kick?`,
+                       retry: message => `${message.author}, please mention a member...`
                    }
                },
                {
