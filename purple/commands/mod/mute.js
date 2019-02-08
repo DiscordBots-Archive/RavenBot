@@ -1,6 +1,7 @@
 const { Command } = require('discord-akairo');
 const { MessageEmbed } = require('discord.js');
 const moment = require('moment');
+const ms = require('ms');
 
 class MuteCommand extends Command {
     constructor() {
@@ -26,6 +27,19 @@ class MuteCommand extends Command {
                    }
                },
                {
+                   id: 'duration',
+                   type: str => {
+                       if (!str) return;
+                       const duration = ms(str);
+                       if (duration && duration >= 300000 && !isNaN(duration)) return duration;
+                       return;
+                   },
+                   prompt: {
+                       start: message => `${message.author}, for how long do you want the mute to last?`,
+                       retry: message => `${message.author}, please use proper time format...`
+                   }
+               },
+               {
                    id: 'reason',
                    match: 'rest',
                    type: 'string',
@@ -35,10 +49,7 @@ class MuteCommand extends Command {
         });
     }
 
-    async exec(message, args) {
-
-        const member = args.member;
-        const reason = args.reason;
+    async exec(message, { member, duration, reason}) {
 
         const muteRole = this.client.settings.get(message.guild.id, 'muteRole', undefined);
 		if (!muteRole) return message.reply('there is no mute role configured on this server');
@@ -69,10 +80,25 @@ class MuteCommand extends Command {
 		try {
             await member.roles.add(muteRole, `Muted by ${message.author.tag} | Case #${totalCases}`);
             try {
-				await member.send(`**You have been muted from ${message.guild.name}** \n${reason ? `**Reason:** ${reason}\n` : ''}`);
+				await member.send(`*You have been muted from ${message.guild.name} \n${reason ? `Reason: ${reason}*\n` : ''}`);
             } catch {} 
 		} catch (error) {
 			return sentMessage.edit(`${message.author} I could not mute **${member.user.tag}**`);
+        }
+
+        try {
+            const time = await this.client.Mute.create({
+                name: message.guild.id + member.user.id,
+                user: member.user.id,
+                author: message.author.id,
+                guild: message.guild.id,
+                time: new Date(Date.now() + duration)
+            })
+        } catch (error) {
+            if (error.name === 'SequelizeUniqueConstraintError') {
+                return message.util.reply(`*This user is already muted by other mods...*`)
+            }
+            return;
         }
 
         this.client.settings.set(message.guild.id, 'caseTotal', totalCases);

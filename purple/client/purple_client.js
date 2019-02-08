@@ -119,6 +119,16 @@ class PurpleClient extends AkairoClient {
                 defaultValue: 0,
             }
         })
+        this.Mute = sequelize.define('mutes', {
+            name: {
+                type: Sequelize.STRING,
+                unique: true,
+            },
+            guild: Sequelize.STRING,
+            user: Sequelize.STRING,
+            author: Sequelize.STRING,
+            time: Sequelize.DATE
+        })
 
         // ACTIONS=> default moderation message constructor
         this.CONSTANTS = {
@@ -180,6 +190,7 @@ class PurpleClient extends AkairoClient {
 
         await this.settings.init();
         await this.Tags.sync();
+        await this.Mute.sync()
     }
 
     // counter=> message & command counter
