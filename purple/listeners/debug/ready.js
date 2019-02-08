@@ -39,7 +39,7 @@ class ReadyListener extends Listener {
 					}
 				}
 			}
-		}, 30000);
+		}, 300000);
 	}
 }
 module.exports = ReadyListener;

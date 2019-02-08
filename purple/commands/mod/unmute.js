@@ -49,7 +49,7 @@ class UnMuteCommand extends Command {
 		});
 
 		if (!responses || responses.size !== 1) {
-			return message.reply('timed out. Cancelled unmute.');
+			return message.reply('*timed out_ cancelled unmute..*');
 		}
 		const response = responses.first();
 
@@ -63,7 +63,9 @@ class UnMuteCommand extends Command {
         const totalCases = this.client.settings.get(message.guild.id, 'caseTotal', 0) + 1;
 
 		try {
-			await member.roles.remove(muteRole, `Unmuted by ${message.author.tag} | Case #${totalCases}`);
+			await member.roles.remove(muteRole, `Unmuted by ${message.author.tag} | Case #${totalCases}`).then(async () => {
+                await this.client.Mute.destroy({where: {user: member.user.id}});
+            });
 		} catch (error) {
 			return sentMessage.edit(`${message.author} I could not unmute **${member.user.tag}**`);
         }
