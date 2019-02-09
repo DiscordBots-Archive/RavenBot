@@ -1,7 +1,6 @@
 {
   "name": "purple",
   "version": "0.1.0",
-  "description": "",
   "main": "purple.js",
   "author": "SUVAJIT#5580",
   "license": "UNLICENSED",
@@ -13,8 +12,8 @@
     "cheerio": "^1.0.0-rc.2",
     "common-tags": "^1.8.0",
     "diff": "^4.0.1",
-    "discord-akairo": "1Computer1/discord-akairo",
-    "discord.js": "discordjs/discord.js",
+    "discord-akairo": "github:1Computer1/discord-akairo",
+    "discord.js": "github:discordjs/discord.js",
     "dotenv": "^6.2.0",
     "moment": "^2.23.0",
     "moment-duration-format": "^2.2.2",
@@ -31,5 +30,15 @@
     "util": "^0.11.1",
     "winston": "^3.1.0",
     "winston-daily-rotate-file": "^3.5.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isuvajit/purple.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/isuvajit/purple/issues"
+  },
+  "homepage": "https://github.com/isuvajit/purple#readme",
+  "description": ""
 }
