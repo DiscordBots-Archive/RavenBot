@@ -11,7 +11,7 @@ class MuteCommand extends Command {
            description: {
                content: 'Mutes a member, bruh!',
                usage: '<member> <...reason>',
-               examples: ['@Purple posting ads']
+               examples: ['@Purple 10m posting ads', '@Purple 12h spamming']
            },
            channel: 'guild',
            clientPermissions: ['MANAGE_ROLES', 'EMBED_LINKS'],
