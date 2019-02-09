@@ -4,7 +4,7 @@ class EditTagCommand extends Command {
     constructor() {
         super('tag-edit', {
             //aliases: ['edit-tag', 'edit'],
-            category: 'tag',
+            category: 'tags',
             description: {
                 content: 'Edit a tag',
                 usage: '<tag name> <...content>',

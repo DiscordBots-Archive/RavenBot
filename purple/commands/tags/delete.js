@@ -4,7 +4,7 @@ class DeleteTagCommand extends Command {
     constructor() {
         super('tag-delete', {
             //aliases: ['delete', 'delete-tag', 'del-tag'],
-            category: 'tag',
+            category: 'tags',
             description: {
                 content: 'Add a tag bruh',
                 usage: '<tag name> <...content>',

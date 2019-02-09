@@ -3,7 +3,6 @@ const { Command } = require('discord-akairo');
 class SetAutoRoleCommand extends Command {
     constructor() {
         super('set-autorole', {
-            aliases:['t'],
            description: {
                content: 'Sets the automatic role of the guild',
                usage: '<role>',

@@ -5,7 +5,7 @@ class AllTagsCommand extends Command {
     constructor() {
         super('tag-list', {
             aliases: ['tags'],
-            category: 'tag',
+            category: 'tags',
             description: {
                 content: 'Get all of your server tags'
             },

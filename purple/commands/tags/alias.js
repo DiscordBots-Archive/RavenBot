@@ -5,7 +5,7 @@ const { MessageEmbed } = require('discord.js');
 class SearchTagCommand extends Command {
 	constructor() {
 		super('tag-alias', {
-			category: 'tag',
+			category: 'tags',
 			description: {
 				content: 'Searches a tag.',
 				usage: '<tag>'

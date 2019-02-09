@@ -11,7 +11,7 @@ class DocsCommand extends Command {
 				usage: '<query>',
 				examples: ['TextChannel', 'Client', 'ClientUser#setActivity master']
 			},
-			category: 'tag',
+			category: 'docs',
 			clientPermissions: ['EMBED_LINKS'],
 			ratelimit: 2,
 			args: [

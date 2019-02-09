@@ -6,7 +6,7 @@ class AddTagCommand extends Command {
     constructor() {
         super('tag-info', {
            //aliases: ['tag-info'],
-           category: 'tag',
+           category: 'tags',
            description: {
                content: 'Get all info of tag',
                usage: '<tag name>',

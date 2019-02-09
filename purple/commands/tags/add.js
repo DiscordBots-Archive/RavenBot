@@ -5,7 +5,7 @@ class AddTagCommand extends Command {
     constructor() {
         super('tag-add', {
             //aliases: ['add', 'addtag'],
-            category: 'tag',
+            category: 'tags',
             description: {
                 content: 'Adds a tag, usable for everyone on the server',
                 usage: '<tag name> <...content>',

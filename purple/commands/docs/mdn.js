@@ -8,7 +8,7 @@ class MDNCommand extends Command {
 	constructor() {
 		super('mdn', {
 			aliases: ['mdn', 'mozilla-developer-network'],
-			category: 'tag',
+			category: 'docs',
 			description: {
 				content: 'Searches MDN for your query.',
 				usage: '<query>',

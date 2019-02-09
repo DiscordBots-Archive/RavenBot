@@ -4,7 +4,7 @@ class DownloadCommand extends Command {
     constructor() {
         super('tag-download', {
             //aliases: ['download', 'dl-tags'],
-            category: 'tag',
+            category: 'tags',
             description: {
                 content: 'Download your server tags'
             },

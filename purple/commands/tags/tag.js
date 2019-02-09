@@ -4,7 +4,7 @@ class TagCommand extends Command {
 	constructor() {
 		super('tag', {
             aliases: ['tag'],
-            category: 'tag',
+            category: 'tags',
 			description: {
 				content: `Available methods:\n` +
 					`• show \`<tag>\`\n` +

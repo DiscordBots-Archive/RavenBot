@@ -4,7 +4,7 @@ class AddTagCommand extends Command {
     constructor() {
         super('tag-show', {
             //aliases: ['tag-show'],
-            category: 'tag',
+            category: 'tags',
             description: {
                 content: 'It displays the tag content',
                 usage: '<tag name>',

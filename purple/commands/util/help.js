@@ -29,10 +29,10 @@ class HelpCommand extends Command {
 			const embed = new MessageEmbed()
                 .setColor('#c394f3').setFooter(`© 2018 ${this.client.user.username}`, this.client.user.displayAvatarURL())
                 .setTitle('COMMANDS')
-				.setDescription(`A list of available commands. For additional info on a command: \`${prefix}help <command>\``);
+				.setDescription(`*A list of available commands. For additional info on a command: \`${prefix}help <command>\`*`);
 
 			for (const category of this.handler.categories.values()) {
-				embed.addField(`❯ ${category.id.replace(/(\b\w)/gi, lc => lc.toUpperCase())}`, `${category.filter(cmd => cmd.aliases.length > 0).map(cmd => `\`${cmd.aliases[0]}\``).join(', ')}`);
+				embed.addField(`❯ ${category.id.replace(/(\b\w)/gi, lc => lc.toUpperCase())}`, `${category.filter(cmd => cmd.aliases.length > 0).map(cmd => `*\u200b**${prefix}${cmd.aliases[0]}** - ${cmd.description.content.toLowerCase().replace(/\n/g, '\n \u200b ').replace(/`/g, '')}*`).join('\n')}`);
 			}
 
 			return message.util.send(embed);
