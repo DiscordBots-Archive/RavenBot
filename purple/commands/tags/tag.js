@@ -9,7 +9,7 @@ class TagCommand extends Command {
 				content: `*Available Methods:*\n` +
 					`• show \`<tag>\`\n` +
 					`• add \` <tag> <content>\`\n` +
-					`• alias <old alias> <new alias>\n` +
+					`• alias \`<old alias> <new alias>\`\n` +
 					`• del \`<tag>\`\n` +
 					`• edit \`<tag> <content>\`\n` +
 					`• info \`<tag>\`\n` +
