@@ -2,7 +2,6 @@ const { AkairoClient, CommandHandler, InhibitorHandler, ListenerHandler, SQLiteP
 const { Counter, collectDefaultMetrics, register } = require('prom-client');
 const { logger, createLogger, transports, format } = require('winston');
 const DailyRotateFile = require('winston-daily-rotate-file');
-const { MessageEmbed } = require('discord.js');
 const { createServer } = require('http');
 const Sequelize = require('sequelize');
 const env = require('dotenv').config();
@@ -11,7 +10,6 @@ const moment = require('moment');
 const { parse } = require('url');
 const sqlite = require('sqlite');
 const Raven = require('raven');
-const ms = require('ms');
 
 class PurpleClient extends AkairoClient {
     constructor() {
@@ -130,50 +128,6 @@ class PurpleClient extends AkairoClient {
             author: Sequelize.STRING,
             time: Sequelize.DATE
         })
-
-        // ACTIONS=> default moderation message constructor
-        this.CONSTANTS = {
-            COLORS: {
-                BAN: 16718080,
-                UNBAN: 8450847,
-                SOFTBAN: 16745216,
-                KICK: 16745216,
-                MUTE: 16763904,
-                EMBED: 16776960,
-                EMOJI: 16776960,
-                REACTION: 16776960,
-                WARN: 16776960
-            }
-        },
-
-        this.logEmbed = ({message, member, duration, caseNum, action, reason}) => {
-    
-            const embed = new MessageEmbed().setTimestamp().setFooter('Case ' + caseNum)
-            if (message) embed.setAuthor(`${message.member.user.tag} (${message.member.user.id})`, message.member.user.displayAvatarURL())
-            .setDescription(`**Member:** ${member.user.tag} (${member.id})` + '\n' +
-			`**Action:** ${action}${action === 'Mute' && duration ? `\n**Length:** ${ms(duration, { long: true })}` : ''}` + '\n' +
-            `**Reason:** ${reason}`)
-            return embed;
-        }
-
-        this.historyEmbed = ({ message, member }) => {
-
-            const key = message.guild.id + member.user.id;
-            const kick = this.settings.get(key, 'Kick', 0);
-            const mute = this.settings.get(key, 'Mute', 0);
-            const ban = this.settings.get(key, 'Ban', 0);
-            const warn = this.settings.get(key, 'Warn', 0);
-            const restriction = this.settings.get(key, 'Restriction', 0);
-
-            return new MessageEmbed()
-            .setAuthor(`${member.user.tag} (${member.user.id})`, member.user.displayAvatarURL())
-			.setFooter(`${warn} warning${warn > 1 || warn === 0 ? 's' : ''}, ` +
-			`${restriction} restriction${restriction > 1 || restriction === 0 ? 's' : ''}, ` +
-			`${mute} mute${mute > 1 || mute === 0 ? 's' : ''}, ` +
-			`${kick} kick${kick > 1 || kick === 0 ? 's' : ''}, ` +
-			`and ${ban} ban${ban > 1 || ban === 0 ? 's' : ''}`);
-        }
-
     }
 
     // loader=> loading up all commands, events etc
