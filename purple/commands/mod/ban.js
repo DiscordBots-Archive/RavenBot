@@ -1,5 +1,5 @@
 const { Command } = require('discord-akairo');
-const { MessageEmbed } = require('discord.js');
+const Util = require('../../util/index.js');
 
 class BanCommand extends Command {
     constructor() {
@@ -77,7 +77,7 @@ class BanCommand extends Command {
         const modLogChannel = this.client.settings.get(message.guild.id, 'modLogChannel', undefined);
 		let modMessage;
 		if (modLogChannel) {
-			const embed = this.client.logEmbed({message, member, caseNum: totalCases, action: 'Ban', reason}).setColor(this.client.CONSTANTS.COLORS.BAN);
+			const embed = Util.logEmbed({message, client: this.client, member, caseNum: totalCases, action: 'Ban', reason}).setColor(Util.CONSTANTS.COLORS.BAN);
 			modMessage = await (this.client.channels.get(modLogChannel)).send(embed);
         }
         

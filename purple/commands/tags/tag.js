@@ -6,20 +6,20 @@ class TagCommand extends Command {
             aliases: ['tag'],
             category: 'tags',
 			description: {
-				content: `Available methods:\n` +
+				content: `*Available Methods:*\n` +
 					`• show \`<tag>\`\n` +
 					`• add \` <tag> <content>\`\n` +
+					`• alias <old alias> <new alias>\n` +
 					`• del \`<tag>\`\n` +
 					`• edit \`<tag> <content>\`\n` +
 					`• info \`<tag>\`\n` +
 					`• list \`[member]\`\n` +
-					`• download \`[member]\`\n` +
-					`Required: \`<>\` | Optional: \`[]\`\n` +
-					`For additional \`<...arguments>\` usage refer to the examples below.`,
+					`• download \`[member]\``,
 				usage: '<method> <...arguments>',
 				examples: [
 					'show Test',
 					'add Test Test',
+					'alias Test New name',
 					'del Test',
 					'edit Test Some new content',
 					'info Test',

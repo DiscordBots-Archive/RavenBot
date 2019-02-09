@@ -1,4 +1,5 @@
 const { Command } = require('discord-akairo');
+const Util = require('../../util/index.js');
 
 class AddRoleCommand extends Command {
     constructor() {
@@ -43,7 +44,6 @@ class AddRoleCommand extends Command {
             await member.roles.add(role, `Added by ${message.author.tag}`);
         }
 		try {
-
 
 		} catch (error) {
 			return message.reply(`I could not add **${role.name}** role to **${member.user.tag}**`);

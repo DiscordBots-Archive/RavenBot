@@ -1,4 +1,5 @@
 const { Command } = require('discord-akairo');
+const Util = require('../../util/index.js');
 
 class HistoryCommand extends Command {
     constructor() {
@@ -25,8 +26,8 @@ class HistoryCommand extends Command {
     }
 
     async exec(message, { member }) {
-
-        const embed = this.client.historyEmbed({message, member}).setColor(this.client.CONSTANTS.COLORS.KICK);
+        
+        const embed = Util.historyEmbed({message, member, client: this.client }).setColor(Util.CONSTANTS.COLORS.KICK);
         await message.channel.send(embed);
     }
 }

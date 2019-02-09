@@ -1,5 +1,5 @@
 const { Command } = require('discord-akairo');
-
+const Util = require('../../util/index.js');
 
 class SoftBanCommand extends Command {
     constructor() {
@@ -78,7 +78,7 @@ class SoftBanCommand extends Command {
         const modLogChannel = this.client.settings.get(message.guild.id, 'modLogChannel', undefined);
 		let modMessage;
 		if (modLogChannel) {
-			const embed = this.client.logEmbed({message, member, caseNum: totalCases, action: 'Softban', reason}).setColor(this.client.CONSTANTS.COLORS.SOFTBAN);
+			const embed = Util.logEmbed({message, client: this.client, member, caseNum: totalCases, action: 'Softban', reason}).setColor(Util.CONSTANTS.COLORS.SOFTBAN);
 			modMessage = await (this.client.channels.get(modLogChannel)).send(embed);
         }
         

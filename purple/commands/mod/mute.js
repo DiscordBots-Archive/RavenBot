@@ -1,7 +1,7 @@
 const { Command } = require('discord-akairo');
-const { MessageEmbed } = require('discord.js');
-const moment = require('moment');
+const Util = require('../../util/index.js');
 const ms = require('ms');
+
 
 class MuteCommand extends Command {
     constructor() {
@@ -108,7 +108,7 @@ class MuteCommand extends Command {
         const modLogChannel = this.client.settings.get(message.guild.id, 'modLogChannel', undefined);
 		let modMessage;
 		if (modLogChannel) {
-			const embed = this.client.logEmbed({message, member, duration, caseNum: totalCases, action: 'Mute', reason}).setColor(this.client.CONSTANTS.COLORS.MUTE);
+			const embed = Util.logEmbed({message, member, client: this.client, duration, caseNum: totalCases, action: 'Mute', reason}).setColor(Util.CONSTANTS.COLORS.MUTE);
 			modMessage = await (this.client.channels.get(modLogChannel)).send(embed);
         }
         

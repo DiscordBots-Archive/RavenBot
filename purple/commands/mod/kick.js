@@ -1,4 +1,5 @@
 const { Command } = require('discord-akairo');
+const Util = require('../../util/index.js');
 
 class KickCommand extends Command {
     constructor() {
@@ -76,7 +77,7 @@ class KickCommand extends Command {
         const modLogChannel = this.client.settings.get(message.guild.id, 'modLogChannel', undefined);
 		let modMessage;
 		if (modLogChannel) {
-			const embed = this.client.logEmbed({message, member, caseNum: totalCases, action: 'Kick', reason}).setColor(this.client.CONSTANTS.COLORS.KICK);
+			const embed = Util.logEmbed({message, client: this.client, member, caseNum: totalCases, action: 'Kick', reason}).setColor(Util.CONSTANTS.COLORS.KICK);
 			modMessage = await (this.client.channels.get(modLogChannel)).send(embed);
         }
         

@@ -1,4 +1,5 @@
 const { Command } = require('discord-akairo');
+const Util = require('../../util/index.js');
 
 class RemoveRoleCommand extends Command {
     constructor() {
