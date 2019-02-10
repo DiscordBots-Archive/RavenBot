@@ -58,19 +58,18 @@ class RoleCommand extends Command {
         });
     }
 
-    exec(message, args) {
-
-        const role = args.role;
+    exec(message, { role }) {
 
         const permissions = Object.keys(PERMISSIONS).filter(permission => role.permissions.serialize()[permission]);
+        const permission = permissions.map(permission => `• ${PERMISSIONS[permission]}`).join('\n')
         
-        const embed = new MessageEmbed().setColor(0x824aee)
-        .setAuthor(`Info about @${role.name} | ${role.id}`)
+        const embed = new MessageEmbed().setColor(role.hexColor)
+        .setAuthor(`${role.name} (${role.id})`)
         .addField('❯ Info',`• Color: ${role.hexColor.toUpperCase()}` + '\n' +
         `• Hoisted: ${role.hoist ? 'Yes' : 'No'}` + '\n' +
         `• Mentionable: ${role.mentionable ? 'Yes' : 'No'}` + '\n' +
         `• Creation Date: ${moment.utc(role.createdAt).format('DD-MM-YY kk:mm:ss')}`)
-        .addField('❯ Permissions', `${permissions.map(permission => `• ${PERMISSIONS[permission]}`).join('\n') || 'None'}`)
+        .addField('❯ Permissions', `${ permission.length === 487 ? '• Administrator' : permission }`)
         .setThumbnail(message.guild.iconURL());
 
         return message.util.send(embed);
