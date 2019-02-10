@@ -39,7 +39,7 @@ class BanCommand extends Command {
         const member = args.member;
         const reason = args.reason;
 
-        const embed = Util.historyEmbed({message, member}).setColor(Util.CONSTANTS.COLORS.BAN)
+        const embed = Util.historyEmbed({message, member, client: this.client}).setColor(Util.CONSTANTS.COLORS.BAN)
 		await message.channel.send('*You sure you want me to ban this member?*', { embed });
 		const responses = await message.channel.awaitMessages(msg => msg.author.id === message.author.id, {
 			max: 1,
