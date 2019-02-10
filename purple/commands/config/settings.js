@@ -4,15 +4,14 @@ const { MessageEmbed } = require('discord.js');
 class ConfigCommand extends Command {
     constructor() {
         super('show-config', {
-           aliases: ['settings', 'config', 'guild-settings'],
-           description: {
-               content: 'Displays your server settings',
-               usage: '[config]',
-           },
-           category: 'config',
-           channel: 'guild',
-           ratelimit: 2,
-           typing: true,
+            aliases: ['settings', 'config', 'guild-settings'],
+            description: {
+                content: 'Displays your server settings',
+            },
+            category: 'config',
+            channel: 'guild',
+            ratelimit: 2,
+            typing: true
         });
     }
 

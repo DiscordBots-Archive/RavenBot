@@ -3,15 +3,10 @@ const { Command } = require('discord-akairo');
 class ToggleModLogCommand extends Command {
     constructor() {
         super('toggle-modlog', {
-           description: {
-               content: 'Sets the mod log many of the commands use to log moderation actions',
-               usage: '<channel>',
-               examples: ['#mod-log', 'mod-log', '5465454654985659']
-           },
-           category: 'config',
-           channel: 'guild',
-           userPermissions: ['MANAGE_GUILD'],
-           ratelimit: 2,
+            category: 'config',
+            channel: 'guild',
+            userPermissions: ['MANAGE_GUILD'],
+            ratelimit: 2
         });
     }
 

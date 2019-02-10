@@ -5,9 +5,16 @@ class DisableCommand extends Command {
 		super('delete-log', {
 			aliases: ['disable', 'disable-log', 'toggle'],
 			description: {
-				content: 'Disbale any log cahnnel',
-				usage: '[channel]',
-				examples: ['modlog', 'memberlog', 'guildlog']
+				content: `*Available Methods:*\n` +
+				`• modlog\n` +
+				`• memberlog\n` +
+				`• guildlog`,
+				usage: '<method>',
+				examples: [
+					'modlog',
+					'memberlog',
+					'guildlog'
+				]
 			},
 			category: 'config',
 			channel: 'guild',
@@ -31,8 +38,6 @@ class DisableCommand extends Command {
 			modlog: this.handler.modules.get('toggle-modlog'),
             memberlog: this.handler.modules.get('toggle-memberlog'),
 			guildlog: this.handler.modules.get('toggle-guildlog'),
-			autorole: this.handler.modules.get('toggle-autorole'),
-			//count: this.handler.modules.get('set-countchannel')
 		})[method];
 
 		return this.handler.handleDirectCommand(message, name, command, true);
