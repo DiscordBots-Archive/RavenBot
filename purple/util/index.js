@@ -3,7 +3,7 @@ const ms = require('ms');
 
 const Util = {
     CONSTANTS : {
-        COLORS: {
+        COLORS : {
             BAN: 16718080,
             UNBAN: 8450847,
             SOFTBAN: 16745216,

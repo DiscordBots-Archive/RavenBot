@@ -46,7 +46,7 @@ class AddTagCommand extends Command {
         const uniqueid =  moment(new Date()).format('YYYYMMDDhhmmssSSS');
         const data = await this.client.Tags.findOne({ where: { tag_name: tag_, guild: message.guild.id } });
         if (data) {
-            if (data.get('tag_name') === tag_) return message.util.send(`${message.author}, a tag with the name **${tag_}** already exists.`)
+            if (data.get('tag_name') === tag_) return message.util.send(`*${message.author}, a tag with the name **${tag_}** already exists..*`)
         }
 
         try {

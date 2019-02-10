@@ -39,11 +39,11 @@ class UserCommand extends Command {
 
         .addField('❯ Member Details',`${member.nickname == undefined ? '• No nickname' : ` • Nickname: ${member.nickname}`}` + '\n' +
         `• Roles: ${member.roles.map(roles => `\`${roles.name}\``).join(' ')}` + '\n' +
-        `• Joined at: ${moment.utc(member.joinedAt).format('DD-MM-YY kk:mm')}`)
+        `• Joined at: ${moment.utc(member.joinedAt).format('DD-MM-YY kk:mm:ss')}`)
 
         .addField('❯ User Details',`• ID: ${member.id}` + '\n' +
         `• Username: ${member.user.tag}` + '\n' +
-        `• Created at: ${moment.utc(user.createdAt).format('DD-MM-YY kk:mm')}${user.bot ? '\n• Is a bot account' : ''}` + '\n' +
+        `• Created at: ${moment.utc(user.createdAt).format('DD-MM-YY kk:mm:ss')}${user.bot ? '\n• Is a bot account' : ''}` + '\n' +
         `• Status: ${user.presence.status.toUpperCase()}` + '\n' +
         `• Activity: ${user.presence.activity ? user.presence.activity.name : 'None'}`)
         .setThumbnail(user.displayAvatarURL());

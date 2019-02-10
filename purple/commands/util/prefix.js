@@ -23,9 +23,7 @@ class PrefixCommand extends Command {
         });
     }
 
-    async exec(message, args) {
-
-        const prefix = args.prefix;
+    async exec(message, { prefix }) {
 
 		if (!prefix) return message.util.send(`*The current prefix for this guild is: \`${this.handler.prefix(message)}\`*`);
 		this.client.settings.set(message.guild.id, 'prefix', prefix);

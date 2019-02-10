@@ -30,13 +30,13 @@ class DeleteTagCommand extends Command {
 
         const data = await this.client.Tags.findOne({ where: { tag_name: name, guild: message.guild.id } });
         if (data) {
-            if (data.get('user') !== message.author.id) return message.util.reply('you can only delete your own tags!');
+            if (data.get('user') !== message.author.id) return message.util.reply('*you can only delete your own tags!*');
 
             await this.client.Tags.destroy({ where: { name: data.get('name') } })
 
-            return message.util.send(`Successfully deleted **${name}**...`)
+            return message.util.send(`*Successfully deleted **${name}**...*`)
         }
-        return message.util.send(`No result found with name **${name}**...`)
+        return message.util.send(`*No result found with name **${name}**...*`)
 
     }
 }

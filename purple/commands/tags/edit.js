@@ -44,10 +44,10 @@ class EditTagCommand extends Command {
 
             const affectedRows = await this.client.Tags.update({ tag_content: content }, { where: { name: data.get('name') } });
             if (affectedRows > 0) {
-                return message.util.send(`A tag with the name **${data.tag_name}** has been edited!`);
+                return message.util.send(`*A tag with the name **${data.tag_name}** has been edited!*`);
             }
         }
-        return message.util.send(`No result found with name **${name}**...`);
+        return message.util.send(`*No result found with name **${name}**...*`);
 
     }
 }

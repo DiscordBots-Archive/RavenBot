@@ -42,7 +42,7 @@ class ChannelCommand extends Command {
         .addField('❯ Info',`• Type: ${channel.type.toUpperCase()}` + `\n` +
         `• Topic ${channel.topic ? channel.topic : 'None'}` + `\n` +
         `• NSFW: ${NSFW[channel.nsfw]}` + `\n` +
-        `• Creation Date: ${moment(channel.createdAt).format('D-MM-YY, k:mm')}`)
+        `• Creation Date: ${moment(channel.createdAt).format('D-MM-YY, k:mm:ss')}`)
         .setThumbnail(message.guild.iconURL());
 
         return message.util.send(embed);

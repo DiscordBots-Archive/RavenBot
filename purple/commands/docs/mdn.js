@@ -35,7 +35,7 @@ class MDNCommand extends Command {
 		const res = await fetch(`https://mdn.pleb.xyz/search?${queryString}`);
 		const body = await res.json();
 		if (!body.URL || !body.Title || !body.Summary) {
-			return message.util.reply("I couldn't find the requested information. Maybe look for something that actually exists the next time!");
+			return message.util.reply("*I couldn't find the requested information..*");
 		}
 		const turndown = new Turndown();
 		turndown.addRule('hyperlink', {

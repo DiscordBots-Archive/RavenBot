@@ -34,7 +34,7 @@ class ServerInfoCommand extends Command {
 
 		const embed = new MessageEmbed()
 			.setColor('#f6ff5c')
-			.setAuthor(`${message.guild.name} | ${message.guild.id}`).setFooter(message.author.tag, message.author.displayAvatarURL())
+			.setAuthor(`${message.guild.name} (${message.guild.id})`).setFooter(message.author.tag, message.author.displayAvatarURL())
 
 			.addField('❯ General Info',
 				`• Members: ${message.guild.memberCount}\n` +
@@ -45,7 +45,7 @@ class ServerInfoCommand extends Command {
 				`• AFK: ${message.guild.afkChannelID ? `<#${message.guild.afkChannelID}> after ${message.guild.afkTimeout / 60}min` : 'None'}`)
 			.addField('❯ Other',
 				`• Region: ${message.guild.region.toUpperCase()}\n` +
-				`• Created at: ${moment.utc(message.guild.createdAt).format('DD-MM-YY kk:mm')}\n` +
+				`• Created at: ${moment.utc(message.guild.createdAt).format('DD-MM-YY kk:mm:ss')}\n` +
 				`• Owner: ${message.guild.owner.user.tag} (${message.guild.ownerID})\n` +
 				`• Verification Level: ${HUMAN_LEVELS[message.guild.verificationLevel]}`)
 			.setThumbnail(message.guild.iconURL());

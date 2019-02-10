@@ -43,7 +43,7 @@ class EmojiCommand extends Command {
 			embed.setDescription(`${emoji.name} (${emoji.id})`);
 			embed.setThumbnail(emoji.url);
 			embed.addField('❯ Info',`• Identifier: \`<${emoji.identifier}>\`\n` +
-				`• Creation Date: ${moment.utc(emoji.createdAt).format('YYYY/MM/DD hh:mm:ss')}\n` +
+				`• Creation Date: ${moment.utc(emoji.createdAt).format('DD-MM-YY kk:mm:ss')}\n` +
 				`• URL: ${emoji.url}`);
 		} return message.util.send(embed);
     }

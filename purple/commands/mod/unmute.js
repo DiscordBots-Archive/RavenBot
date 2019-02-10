@@ -78,7 +78,7 @@ class UnMuteCommand extends Command {
 			modMessage = await (this.client.channels.get(modLogChannel)).send(embed);
         }
         
-        return sentMessage.edit(`Successfully unmuted **${member.user.tag}**`)
+        return sentMessage.edit(`*Successfully unmuted ${member.user.tag}*`)
     }
 }
 

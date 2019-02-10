@@ -31,7 +31,7 @@ class AddTagCommand extends Command {
 
         const data = await this.client.Tags.findOne({where: { tag_name: name, guild: message.guild.id } });
         if (data) {
-            const embed = new MessageEmbed().setColor('0x824aee')
+            const embed = new MessageEmbed().setColor('RANDOM')
 			.addField('❯ Name', data.get('tag_name'))
 			.addField('❯ User', data.get('username') + ' (' + data.get('user') + ')')
 			.addField('❯ Uses', data.get('usage_count'))

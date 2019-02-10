@@ -24,7 +24,7 @@ class AllTagsCommand extends Command {
 
         if (member) {
             const tagList = await this.client.Tags.findAll( { where: { guild: message.guild.id, user: member.user.id } }, { attributes: ['tag_name'] },);
-            const tagString = tagList.map(t => `\`${t.tag_name}\``).join(', ') || '`no_tags_set`';
+            const tagString = tagList.map(t => `\`${t.tag_name}\``).join(', ') || '\u200b';
     
             const embed = new MessageEmbed().setAuthor(`Tags of ${member.user.tag}`, message.guild.iconURL()).setColor(16776960)
             .setDescription(`${tagString}`)
@@ -32,7 +32,7 @@ class AllTagsCommand extends Command {
             return message.util.send(embed);
         }
         const tagList = await this.client.Tags.findAll( { where: { guild: message.guild.id } }, { attributes: ['tag_name'] },);
-        const tagString = tagList.map(t => `\`${t.tag_name}\``).join(', ') || '`no_tags_set`';
+        const tagString = tagList.map(t => `\`${t.tag_name}\``).join(', ') || '\u200b';
 
         const embed = new MessageEmbed().setAuthor(`Tags`, message.guild.iconURL()).setColor(16776960)
         .setDescription(`${tagString}`)

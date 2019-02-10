@@ -7,7 +7,7 @@ class BlacklistCommand extends Command {
 			description: {
 				content: 'Prohibit/Allow a user from using Purple',
 				usage: '<user>',
-				examples: ['Crawl', '@Crawl', '81440962496172032']
+				examples: ['Suvajit', '@Suvajit', '444432489818357760']
 			},
 			category: 'util',
 			ownerOnly: true,
@@ -18,7 +18,7 @@ class BlacklistCommand extends Command {
 					match: 'content',
 					type: 'user',
 					prompt: {
-						start: (message) => `${message.author}, who would you like to blacklist/unblacklist?`
+						start: message => `${message.author}, who would you like to blacklist/unblacklist?`
 					}
 				}
 			]

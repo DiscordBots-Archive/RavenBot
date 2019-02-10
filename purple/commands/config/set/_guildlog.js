@@ -25,22 +25,21 @@ class SetGuildLogCommand extends Command {
                }
            ]
         });
-    }
+    };
 
     async exec(message, { channel }) {
         
         try {
 
             this.client.settings.set(message.guild.id, 'guildLog', channel.id);
-            const Webhook = await channel.createWebhook(this.client.user.username || this.client.user.tag)
-            this.client.settings.set(message.guild.id, 'WebhookID', Webhook.id)
-            this.client.settings.set(message.guild.id, 'WebhookToken', Webhook.token)
+            const Webhook = await channel.createWebhook(this.client.user.username || this.client.user.tag);
+            this.client.settings.set(message.guild.id, 'WebhookID', Webhook.id);
+            this.client.settings.set(message.guild.id, 'WebhookToken', Webhook.token);
             
-        } catch {}
+        } catch {};
 
         return message.util.reply(`set guild log channel to **${channel.name}**`);
 		
-    }
-}
-
+    };
+};
 module.exports = SetGuildLogCommand;

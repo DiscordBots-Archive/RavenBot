@@ -27,7 +27,7 @@ class AvatarCommand extends Command {
 
     async exec(message, args) {
         const member = args.member;
-        const embed = new MessageEmbed()
+        const embed = new MessageEmbed().setColor('RANDOM')
         .setTitle(member.user.tag)
         .setURL(member.user.avatarURL())
         .setImage(member.user.displayAvatarURL({ size: 2048 }))
