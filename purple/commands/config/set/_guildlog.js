@@ -3,27 +3,27 @@ const { Command } = require('discord-akairo');
 class SetGuildLogCommand extends Command {
     constructor() {
         super('set-guildlog', {
-           description: {
-               content: 'Sets the guild log to capture message edit, delete, etc',
-               usage: '<channel>',
-               examples: ['#guild-log', 'guild-log', '5465454654985659']
-           },
-           category: 'config',
-           channel: 'guild',
-           userPermissions: ['MANAGE_GUILD'],
-           clientPermissions: ['MANAGE_WEBHOOKS'],
-           ratelimit: 2,
-           args: [
-               {
-                   id: 'channel',
-                   match: 'content',
-                   type: 'textChannel',
-                   prompt: {
-                       start: message => `${message.author}, what channel you want to set?`,
-                       retry: message => `${message.author}, please provide a valid channel...`
-                   }
-               }
-           ]
+            description: {
+                content: 'Sets the guild log to capture message edit, delete, etc',
+                usage: '<channel>',
+                examples: ['#guild-log', 'guild-log', '5465454654985659']
+            },
+            category: 'config',
+            channel: 'guild',
+            ratelimit: 2,
+            userPermissions: ['MANAGE_GUILD'],
+            clientPermissions: ['MANAGE_WEBHOOKS'],
+            args: [
+                {
+                    id: 'channel',
+                    match: 'content',
+                    type: 'textChannel',
+                    prompt: {
+                        start: message => `${message.author}, what channel you want to set?`,
+                        retry: message => `${message.author}, please provide a valid channel...`
+                    }
+                }
+            ]
         });
     };
 
