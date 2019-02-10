@@ -41,11 +41,11 @@ class EmojiInfoCommand extends Command {
 		const embed = new MessageEmbed().setColor('#8387db');
 
 		if (emoji instanceof GuildEmoji) {
-			embed.setDescription(`Emoji: ${emoji.name} (${emoji.id})`);
+			embed.setAuthor(`Emoji: ${emoji.name} (${emoji.id})`);
 			embed.setThumbnail(emoji.url);
 			embed.addField('❯ Info', `• Identifier: \`<${emoji.identifier}>\` \n• Creation Date: ${moment.utc(emoji.createdAt).format('DD-MM-YY kk:mm:ss')} \n• URL: ${emoji.url}`);
 		} else {
-			embed.setDescription(`Emoji: ${emoji.emoji}`);
+			embed.setAuthor(`Emoji: ${emoji.emoji}`);
 			embed.addField('❯ Info', `• Name: \`${emoji.key}\` \n• Raw: \`${emoji.emoji}\` \n• Unicode: \`${punycode.ucs2.decode(emoji.emoji).map(e => `\\u${e.toString(16).toUpperCase()}`).join('')}\``);
 		}
 		return message.util.send(embed);
