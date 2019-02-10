@@ -62,16 +62,14 @@ class RoleCommand extends Command {
 
         const role = args.role;
 
-        const permissions = Object.keys(PERMISSIONS).filter(
-			permission => role.permissions.serialize()[permission]
-        );
+        const permissions = Object.keys(PERMISSIONS).filter(permission => role.permissions.serialize()[permission]);
         
         const embed = new MessageEmbed().setColor(0x824aee)
         .setAuthor(`Info about @${role.name} | ${role.id}`)
         .addField('❯ Info',`• Color: ${role.hexColor.toUpperCase()}` + '\n' +
         `• Hoisted: ${role.hoist ? 'Yes' : 'No'}` + '\n' +
         `• Mentionable: ${role.mentionable ? 'Yes' : 'No'}` + '\n' +
-        `• Creation Date: ${moment.utc(role.createdAt).format('D-MM-YY, k:mm')}`)
+        `• Creation Date: ${moment.utc(role.createdAt).format('DD-MM-YY kk:mm:ss')}`)
         .addField('❯ Permissions', `${permissions.map(permission => `• ${PERMISSIONS[permission]}`).join('\n') || 'None'}`)
         .setThumbnail(message.guild.iconURL());
 

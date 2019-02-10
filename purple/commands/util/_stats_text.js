@@ -3,7 +3,6 @@ const { Command } = require('discord-akairo');
 class DownloadStatsCommand extends Command {
     constructor() {
         super('dlstats', {
-            //aliases: ['dl'],
             category: 'util',
             ratelimit: 2,
             clientPermissions: ['ATTACH_FILES'],
