@@ -39,7 +39,7 @@ class KickCommand extends Command {
         const member = args.member;
         const reason = args.reason;
 
-        const embed = this.client.historyEmbed({message, member}).setColor(this.client.CONSTANTS.COLORS.KICK)
+        const embed = Util.historyEmbed({message, member}).setColor(Util.CONSTANTS.COLORS.KICK)
 		await message.channel.send('*You sure you want me to kick this member?*', { embed });
 		const responses = await message.channel.awaitMessages(msg => msg.author.id === message.author.id, {
 			max: 1,

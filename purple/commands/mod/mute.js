@@ -55,7 +55,7 @@ class MuteCommand extends Command {
         if (!muteRole) return message.reply('*there is no mute role configured on this server...*');
         if (member.roles.has(muteRole)) return message.util.reply('*this user is already muted!*');
 
-        const embed = this.client.historyEmbed({message, member}).setColor(this.client.CONSTANTS.COLORS.SOFTBAN)
+        const embed = Util.historyEmbed({message, member}).setColor(Util.CONSTANTS.COLORS.SOFTBAN)
 		await message.channel.send('*You sure you want me to mute this member?*', { embed });
 		const responses = await message.channel.awaitMessages(msg => msg.author.id === message.author.id, {
 			max: 1,
