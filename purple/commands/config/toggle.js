@@ -31,7 +31,6 @@ class DisableCommand extends Command {
 			modlog: this.handler.modules.get('toggle-modlog'),
             memberlog: this.handler.modules.get('toggle-memberlog'),
 			guildlog: this.handler.modules.get('toggle-guildlog'),
-			modrole: this.handler.modules.get('toggle-modrole'),
 			autorole: this.handler.modules.get('toggle-autorole'),
 			//count: this.handler.modules.get('set-countchannel')
 		})[method];

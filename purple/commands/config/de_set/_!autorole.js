@@ -20,7 +20,7 @@ class ToggleAutoRoleCommand extends Command {
         const autoRole = this.client.settings.get(message.guild.id, 'autoRole', undefined);
         if (autoRole) {
             this.client.settings.delete(message.guild.id, 'autoRole', undefined);
-            return message.util.reply(`successfully deactivated auto-role!`);
+            return message.util.reply(`*successfully deactivated auto-role!*`);
         }
     }
 }

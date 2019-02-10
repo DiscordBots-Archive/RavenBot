@@ -1,4 +1,4 @@
-/*const { Inhibitor } = require('discord-akairo');
+const { Inhibitor } = require('discord-akairo');
 
 class ModerationInhibitor extends Inhibitor {
 	constructor() {
@@ -15,4 +15,4 @@ class ModerationInhibitor extends Inhibitor {
 		return false;
 	}
 }
-module.exports = ModerationInhibitor;*/
+module.exports = ModerationInhibitor;

@@ -20,7 +20,7 @@ class ToggleModLogCommand extends Command {
         const modLog = this.client.settings.get(message.guild.id, 'modLogChannel', undefined);
         if (modLog) {
             this.client.settings.delete(message.guild.id, 'modLogChannel', undefined);
-            return message.util.reply(`successfully deactivated mod-log!`);
+            return message.util.reply(`*successfully deactivated mod-log!*`);
         }
     }
 }

@@ -19,7 +19,7 @@ class ToggleMemberLogCommand extends Command {
         const memberLog = this.client.settings.get(message.guild.id, 'memberLog', undefined);
         if (memberLog) {
             this.client.settings.delete(message.guild.id, 'memberLog', undefined);
-            return message.util.reply(`successfully deactivated member-log!`);
+            return message.util.reply(`*successfully deactivated member-log!*`);
         }
 
     }

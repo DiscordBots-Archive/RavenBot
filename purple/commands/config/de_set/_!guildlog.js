@@ -21,7 +21,7 @@ class ToggleGuildLogCommand extends Command {
             this.client.settings.delete(message.guild.id, 'guildLog');
             this.client.settings.delete(message.guild.id, 'WebhookID');
             this.client.settings.delete(message.guild.id, 'WebhookToken');
-            return message.util.reply(`successfully deactivated guild-log!`);
+            return message.util.reply(`*successfully deactivated guild-log!*`);
         }
     }
 }

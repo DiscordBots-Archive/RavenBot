@@ -30,6 +30,15 @@ class SetModRoleCommand extends Command {
     async exec(message, { role }) {
 
         const modrole = this.client.settings.get(message.guild.id, 'modRole', []);
+		if (modrole.includes(role.id)) {
+			const index = modrole.indexOf(role.id);
+			modrole.splice(index, 1);
+			if (modrole.length === 0) this.client.settings.delete(message.guild.id, 'modRole');
+			else this.client.settings.set(message.guild.id, 'modRole', modrole);
+
+			return message.util.send(`*Successfully removed this mod role [**${role.name}**]*`);
+		}
+
         modrole.push(role.id);
         this.client.settings.set(message.guild.id, 'modRole', modrole);
 		return message.util.reply(`*set mod role to **${role.name}**\u200b*`);
