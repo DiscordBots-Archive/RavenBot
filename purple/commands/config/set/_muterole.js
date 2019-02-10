@@ -29,7 +29,7 @@ class SetMuteRoleCommand extends Command {
     async exec(message, { role }) {
 
         this.client.settings.set(message.guild.id, 'muteRole', role.id);
-		return message.util.reply(`set mute role to **${role.name}**`);
+		return message.util.reply(`*set mute role to **${role.name}**\u200b*`);
     }
 }
 

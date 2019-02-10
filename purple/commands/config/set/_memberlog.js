@@ -29,7 +29,7 @@ class SetMemberLogCommand extends Command {
     async exec(message, { channel }) {
 
         this.client.settings.set(message.guild.id, 'memberLog', channel.id);
-		return message.util.reply(`set member log channel to **${channel.name}**`);
+		return message.util.reply(`*set member log channel to ${channel}*`);
     }
 }
 

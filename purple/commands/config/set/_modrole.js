@@ -32,7 +32,7 @@ class SetModRoleCommand extends Command {
         const modrole = this.client.settings.get(message.guild.id, 'modRole', []);
         modrole.push(role.id);
         this.client.settings.set(message.guild.id, 'modRole', modrole);
-		return message.util.reply(`set mod role to **${role.name}**`);
+		return message.util.reply(`*set mod role to **${role.name}**\u200b*`);
     }
 }
 

@@ -29,7 +29,7 @@ class SetAutoRoleCommand extends Command {
     async exec(message, { role }) {
 
         this.client.settings.set(message.guild.id, 'autoRole', role.id);
-        return message.util.reply(`set automatic role to **${role.name}**`);
+        return message.util.reply(`*set automatic role to **${role.name}**\u200b*`);
         
     }
 }

@@ -38,7 +38,7 @@ class SetGuildLogCommand extends Command {
             
         } catch {};
 
-        return message.util.reply(`set guild log channel to **${channel.name}**`);
+        return message.util.reply(`*set guild log channel to ${channel}*`);
 		
     };
 };

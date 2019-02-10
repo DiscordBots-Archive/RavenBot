@@ -30,7 +30,7 @@ class CountingCommand extends Command {
     async exec(message, { channel }) {
 
         this.client.settings.set(this.client.user.id, 'countChannel', channel.id);
-        return message.util.reply(`set count channel to **${channel.name}**`);
+        return message.util.reply(`*set count channel to ${channel}*`);
         
     }
 }

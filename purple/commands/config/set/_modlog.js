@@ -30,7 +30,7 @@ class SetModLogCommand extends Command {
     async exec(message, { channel }) {
 
         this.client.settings.set(message.guild.id, 'modLogChannel', channel.id);
-        return message.util.reply(`set moderation log channel to **${channel.name}**`);
+        return message.util.reply(`*set moderation log channel to ${channel}*`);
         
     }
 }
