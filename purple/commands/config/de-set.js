@@ -16,7 +16,7 @@ class DisableCommand extends Command {
 			args: [
 				{
 					id: 'method',
-					type: ['modlog', 'memberlog', 'guildlog', 'modrole', 'autorole']
+					type: ['modlog', 'memberlog', 'guildlog']
 				},
 
 			]

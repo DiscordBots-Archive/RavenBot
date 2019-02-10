@@ -28,8 +28,18 @@ class SetAutoRoleCommand extends Command {
 
     async exec(message, { role }) {
 
-        this.client.settings.set(message.guild.id, 'autoRole', role.id);
-        return message.util.reply(`*set automatic role to **${role.name}**\u200b*`);
+        const autorole = this.client.settings.get(message.guild.id, 'autoRole', []);
+		if (autorole.includes(role.id)) {
+			const index = autorole.indexOf(role.id);
+			autorole.splice(index, 1);
+			if (autorole.length === 0) this.client.settings.delete(message.guild.id, 'autoRole');
+			else this.client.settings.set(message.guild.id, 'autoRole', autorole);
+
+			return message.util.send(`*Successfully removed this auto role [**${role.name}**]*`);
+		}
+        modrole.push(role.id);
+        this.client.settings.set(message.guild.id, 'autoRole', modrole);
+		return message.util.reply(`*set auto role to **${role.name}**\u200b*`);
         
     }
 }
