@@ -20,7 +20,7 @@ class HelloCommand extends Command {
 
     async exec(message) {
         const connection = await this.client.channels.get('544379786605363200').join();
-        connection.play(ytdl('https://www.youtube.com/watch?v=pHR3ttH5t-w'));
+        connection.play(ytdl('https://www.youtube.com/watch?v=F1_bv6Rac6A', { quality: 'highestaudio' }));
     }
 }
 
