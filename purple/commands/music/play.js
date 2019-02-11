@@ -19,7 +19,9 @@ class PlayCommand extends Command {
             args: [
                 {
                     id: 'searchString',
-                    match: 'rest'
+                    match: 'rest',
+                    default: 'https://www.youtube.com/watch?v=F1_bv6Rac6A'
+                    
                 }
             ]
         });
