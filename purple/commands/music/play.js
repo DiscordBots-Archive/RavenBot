@@ -8,10 +8,10 @@ class PlayCommand extends Command {
         super('play', {
            aliases: ['play'],
            description: {
-               conntent: 'Plays music',
+               content: 'Plays music',
                usage: '<query>'
            },
-           category: 'util',
+           category: 'music',
            typing: true,
            ratelimit: 2,
            args: [

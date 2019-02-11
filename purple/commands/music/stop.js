@@ -5,9 +5,9 @@ class StopCommand extends Command {
         super('stop', {
            aliases: ['stop'],
            description: {
-               conntent: 'Stops music and leave voice channel',
+               content: 'Stops music and leave voice channel',
            },
-           category: 'util',
+           category: 'music',
            typing: true,
            ratelimit: 2,
         });
