@@ -16,6 +16,7 @@ class StopCommand extends Command {
 
     async exec(message) {
         await this.client.channels.get(message.guild.me.voice.channel.id).leave();
+        return message.util.send('*Disconnected!*')
     };
 };
 module.exports = StopCommand;
