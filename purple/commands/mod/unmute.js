@@ -40,7 +40,7 @@ class UnMuteCommand extends Command {
         if (!muteRole) return message.util.reply('*there is no mute role configured on this server...*');
         if (!member.roles.has(muteRole)) return;
         
-        const embed = this.client.historyEmbed({message, member, client: this.client}).setColor(this.client.CONSTANTS.COLORS.MUTE)
+        const embed = Util.historyEmbed({message, member, client: this.client}).setColor(Util.CONSTANTS.COLORS.MUTE)
 		await message.channel.send('*You sure you want me to unmute this member?*', { embed });
 		const responses = await message.channel.awaitMessages(msg => msg.author.id === message.author.id, {
 			max: 1,
