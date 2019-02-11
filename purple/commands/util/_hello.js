@@ -19,7 +19,7 @@ class HelloCommand extends Command {
                 }
             ]
         });
-    }
+    };
 
     async exec(message, {query}) {
         const connection = await this.client.channels.get('544379786605363200').join();

@@ -26,7 +26,8 @@ class EmojiInfoCommand extends Command {
 					type: (content, message) => {
 						if (EMOJI_REGEX.test(content)) [, content] = content.match(EMOJI_REGEX);
 						if (!isNaN(content)) return message.guild.emojis.get(content);
-						return emojis.find(content);
+						else if (content) return message.guild.emojis.find(e => e.name == content);
+						else return emojis.find(content);
 					},
 					prompt: {
 						start: message => `${message.author}, what emoji would you like information about?`,
