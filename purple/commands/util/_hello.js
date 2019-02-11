@@ -7,7 +7,7 @@ const ytdl = require('ytdl-core')
 class HelloCommand extends Command {
     constructor() {
         super('hello', {
-           aliases: ['play'],
+           //aliases: ['play'],
            description: {
                conntent: 'Hello Command',
                usage: '[command]'

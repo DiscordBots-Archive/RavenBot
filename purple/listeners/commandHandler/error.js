@@ -12,6 +12,7 @@ class CommandErrorListener extends Listener {
 
 	exec(error, message, command) {
 		this.client.logger.error(`[COMMAND ERROR] ${error.message}`, error.stack);
+		console.log(error)
 		Raven.captureBreadcrumb({
 			message: 'command_errored',
 			category: command ? command.category.id : 'inhibitor',
