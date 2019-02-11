@@ -10,15 +10,15 @@ class MessageDeleteBulkListener extends Listener {
 			event: 'messageDeleteBulk',
 			category: 'client'
 		});
-	}
+	};
 
 	async exec(messages) {
 		if (messages.first().author.bot) return;
 		const guildLogs = this.client.settings.get(messages.first().guild.id, 'guildLog', undefined);
-		const WebhookID = this.client.settings.get(messages.first().guild.id, 'WebhookID', undefined)
-		const WebhookToken = this.client.settings.get(messages.first().guild.id, 'WebhookToken', undefined)
+		const WebhookID = this.client.settings.get(messages.first().guild.id, 'WebhookID', undefined);
+		const WebhookToken = this.client.settings.get(messages.first().guild.id, 'WebhookToken', undefined);
 		if (guildLogs && WebhookID && WebhookToken) {
-            const webhook = new WebhookClient(WebhookID, WebhookToken)
+            const webhook = new WebhookClient(WebhookID, WebhookToken);
 			if (!webhook) return;
 			const output = messages.reduce((out, msg) => {
 				const attachment = msg.attachments.first();
@@ -38,7 +38,7 @@ class MessageDeleteBulkListener extends Listener {
 				username: 'Logs: MESSAGE DELETED BULK',
 				avatarURL: 'https://i.imgur.com/EUGvQJJ.png'
 			});
-		}
-	}
-}
+		};
+	};
+};
 module.exports = MessageDeleteBulkListener;

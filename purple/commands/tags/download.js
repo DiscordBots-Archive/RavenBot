@@ -12,7 +12,7 @@ class DownloadCommand extends Command {
             ratelimit: 2,
             clientPermissions: ['ATTACH_FILES']
         });
-    }
+    };
 
     async exec(message) {
         const tagList = await this.client.Tags.findAll( { where: { guild: message.guild.id } }, { attributes: ['tag_name'] },);
@@ -22,7 +22,6 @@ class DownloadCommand extends Command {
 		}, '');
 
 		return message.util.send('~<a:load:532929637102387210>~', { files: [{ attachment: Buffer.from(output, 'utf8'), name: `${message.guild.name}.txt` }] });
-    }
-}
-
+    };
+};
 module.exports = DownloadCommand;

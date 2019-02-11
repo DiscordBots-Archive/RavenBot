@@ -7,15 +7,12 @@ const duration = require('moment-duration-format');
 class StatsCommand extends Command {
     constructor() {
         super('stats-cmd', {
-           description: {
-               content: 'Displays statistics about me'
-           },
-           category: 'util',
-           clientPermissions: ['EMBED_LINKS'],
-           ratelimit: 2,
-           typing: true,
+            category: 'util',
+            clientPermissions: ['EMBED_LINKS'],
+            ratelimit: 2,
+            typing: true
         });
-    }
+    };
 
     async exec(message) {
 
@@ -53,7 +50,6 @@ class StatsCommand extends Command {
 		react.first().message.delete();
 
 		return message;
-    }
-}
-
+    };
+};
 module.exports = StatsCommand;

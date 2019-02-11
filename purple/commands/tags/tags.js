@@ -7,7 +7,9 @@ class AllTagsCommand extends Command {
             aliases: ['tags'],
             category: 'tags',
             description: {
-                content: 'Get all of your server tags'
+                content: 'Get all of your server tags',
+                usage: '[member]',
+                examples: ['@Purple']
             },
             channel: 'guild',
             ratelimit: 2,
@@ -18,7 +20,7 @@ class AllTagsCommand extends Command {
                 }
             ]
         });
-    }
+    };
 
     async exec(message, { member }) {
 
@@ -27,18 +29,17 @@ class AllTagsCommand extends Command {
             const tagString = tagList.map(t => `\`${t.tag_name}\``).join(', ') || '\u200b';
     
             const embed = new MessageEmbed().setAuthor(`Tags of ${member.user.tag}`, message.guild.iconURL()).setColor(16776960)
-            .setDescription(`${tagString}`)
+            .setDescription(`${tagString}`);
     
             return message.util.send(embed);
-        }
+        };
         const tagList = await this.client.Tags.findAll( { where: { guild: message.guild.id } }, { attributes: ['tag_name'] },);
         const tagString = tagList.map(t => `\`${t.tag_name}\``).join(', ') || '\u200b';
 
         const embed = new MessageEmbed().setAuthor(`Tags`, message.guild.iconURL()).setColor(16776960)
-        .setDescription(`${tagString}`)
+        .setDescription(`${tagString}`);
 
         return message.util.send(embed);
-    }
-}
-
+    };
+};
 module.exports = AllTagsCommand;

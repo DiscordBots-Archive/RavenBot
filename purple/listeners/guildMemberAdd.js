@@ -8,13 +8,13 @@ class GuildMemberAddListener extends Listener {
 			event: 'guildMemberAdd',
 			category: 'client'
 		});
-	}
+	};
 
 	async exec(member) {
 
 		const embed = new MessageEmbed().setColor('#49ca92')
 		.setTitle(`${member.user.tag} | ${member.id}`)
-		.setFooter('Joined', member.user.displayAvatarURL()).setTimestamp()
+		.setFooter('Joined', member.user.displayAvatarURL()).setTimestamp();
 
 		const channel = this.client.settings.get(member.guild.id, 'memberLog', undefined)
 		if (channel) {
@@ -23,7 +23,7 @@ class GuildMemberAddListener extends Listener {
 		const autoRole = this.client.settings.get(member.guild.id, 'autoRole', undefined);
 		if (autoRole) {
 			await member.roles.add(autoRole);
-		}
-	}
-}
+		};
+	};
+};
 module.exports = GuildMemberAddListener;

@@ -7,10 +7,10 @@ class ReconnectListener extends Listener {
 			event: 'reconnecting',
 			category: 'client'
 		});
-	}
+	};
 
 	async exec() {
 		this.client.logger.info("[RECONNECTING]");
-	}
-}
+	};
+};
 module.exports = ReconnectListener;

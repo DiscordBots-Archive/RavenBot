@@ -7,10 +7,10 @@ class ResumeListener extends Listener {
 			event: 'resumed',
 			category: 'client'
 		});
-	}
+	};
 
 	async exec(events) {
 		this.client.logger.info(`[RESUME] (replayed ${events} events)`);
-	}
-}
+	};
+};
 module.exports = ResumeListener;

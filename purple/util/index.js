@@ -1,8 +1,9 @@
-const { MessageEmbed, Util } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const ms = require('ms');
 const ytdl = require('ytdl-core');
 
-const Util_ = {
+const Util = {
+
     CONSTANTS : {
         COLORS : {
             BAN: 16718080,
@@ -23,7 +24,7 @@ const Util_ = {
         if (message) embed.setAuthor(`${message.member.user.tag} (${message.member.user.id})`, message.member.user.displayAvatarURL())
         .setDescription(`**Member:** ${member.user.tag} (${member.id})` + '\n' +
         `**Action:** ${action}${action === 'Mute' && duration ? `\n**Length:** ${ms(duration, { long: true })}` : ''}` + '\n' +
-        `**Reason:** ${reason}`)
+        `**Reason:** ${reason}`);
         return embed;
     },
 
@@ -46,16 +47,16 @@ const Util_ = {
     },
 
     handleVideo : async ({message, video, voice}) => { 
-        const embed = new MessageEmbed().setAuthor(video.channel.raw.snippet.channelTitle, video.thumbnails.default.url, `https://www.youtube.com/channel/${video.channel.raw.snippet.channelId}`)
+        const embed = new MessageEmbed().setAuthor(video.channel.raw.snippet.channelTitle, `https://cdn.discordapp.com/emojis/544469282952708096.png`, `https://www.youtube.com/channel/${video.channel.raw.snippet.channelId}`)
         .setThumbnail(video.thumbnails.default.url).setColor('#ee0808')
-        .setFooter('Now Playing', 'https://cdn.discordapp.com/emojis/544469282952708096.png?').setTitle(video.title).setURL(`https://www.youtube.com/watch?v=${video.id}`)
+        .setTitle(video.title).setURL(`https://www.youtube.com/watch?v=${video.id}`);
         try {
             let connection = await voice.join();
-            connection.play(ytdl(`https://www.youtube.com/watch?v=${video.id}`, { quality: 'highestaudio' }))
-            return message.channel.send({embed});
+            connection.play(ytdl(`https://www.youtube.com/watch?v=${video.id}`, { quality: 'highestaudio' }));
+            return message.channel.send(`*Now playing <:YouTube:544469282952708096>*`, {embed});
         } catch (error) {
             return message.channel.send(`*Something went wrong!*\n${error}`);
-        }
+        };
     }
 };
-module.exports = Util_;
+module.exports = Util;

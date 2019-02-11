@@ -23,7 +23,7 @@ class BlacklistCommand extends Command {
 				}
 			]
 		});
-	}
+	};
 
 	async exec(message, { user }) {
 		const blacklist = this.client.settings.get('global', 'blacklist', []);
@@ -40,6 +40,6 @@ class BlacklistCommand extends Command {
 		this.client.settings.set('global', 'blacklist', blacklist);
 
 		return message.util.send(`*${user.tag}, you are not worthy of Purple's luck~*`);
-	}
-}
+	};
+};
 module.exports = BlacklistCommand;

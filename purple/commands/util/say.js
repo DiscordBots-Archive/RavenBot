@@ -1,43 +1,38 @@
 const { Command } = require('discord-akairo');
-const { MessageEmbed } = require('discord.js');
 
 class SayCommand extends Command {
     constructor() {
         super('say', {
-           aliases: ['say'],
-           category: 'util',
-           description: {
-               content: 'Say Command',
-               usage: '<...text>',
-               examples: ['i want sex'],
-           },
-           ratelimit: 2,
-           clientPermissions: ['MANAGE_MESSAGES'],
-           args: [
-               {
-                   id: 'reason',
-                   match: 'rest',
-                   type: 'string',
-                   default: 'Hey send some message'
-               }
-           ]
+            aliases: ['say'],
+            category: 'util',
+            description: {
+                content: 'Echo your text',
+                usage: '<...text>',
+                examples: 'Hello World'
+            },
+            channel: 'guild',
+            ratelimit: 2,
+            clientPermissions: ['MANAGE_MESSAGES'],
+            args: [
+                {
+                    id: 'msg',
+                    match: 'rest',
+                }
+            ]
         });
-    }
+    };
 
-    exec(message, args) {
+    async exec(message, { msg }) {
 
-        const countChannel = this.client.settings.get(this.client.user.id, 'countChannel', undefined);
-        if (countChannel) {
-            let channel = this.client.channels.get(countChannel);
+        const count = this.client.settings.get(this.client.user.id, 'countChannel', undefined);
+        if (count) {
+            let channel = this.client.channels.get(count);
             if (message.channel.id === channel.id) {
                 return;
-            }
-        }
-
-        const sayMessage = args.reason;
-        message.delete().catch(O_o=>{}); 
-        return message.util.send(sayMessage);
-    }
-}
-
+            };
+        };
+        await message.delete().catch(e => {});
+        return message.util.send(msg);
+    };
+};
 module.exports = SayCommand;

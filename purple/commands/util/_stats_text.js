@@ -8,16 +8,13 @@ class DownloadStatsCommand extends Command {
             clientPermissions: ['ATTACH_FILES'],
             ownerOnly: true,
         });
-    }
+    };
 
     async exec(message) {
 
         const data = await this.client.prometheus.register.metrics();
-        
         let output = data.replace(/\n/g, '\r\n');
-
 		return message.util.send('*main_stats*', { files: [{ attachment: Buffer.from(output, 'utf8'), name: `${this.client.user.username.toLowerCase()}_stats.txt` }] } );
-    }
-}
-
+    };
+};
 module.exports = DownloadStatsCommand;

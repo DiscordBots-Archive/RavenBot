@@ -6,25 +6,28 @@ const youtube = new YouTube(process.env.YOUTUBE_API);
 class PlayCommand extends Command {
     constructor() {
         super('play', {
-           aliases: ['play'],
-           description: {
-               content: 'Plays music',
-               usage: '<query>'
-           },
-           category: 'music',
-           typing: true,
-           ratelimit: 2,
-           args: [
-               {
-                   id: 'searchString',
-                   match: 'rest'
-               }
-           ]
+            aliases: ['play', 'p'],
+            description: {
+                content: 'Searches and plays music, bruh',
+                usage: '<query>/<yt-url>',
+                examples: ['Shape of you', 'https://youtube.com/watch?v=query']
+            },
+            category: 'music',
+            channel: 'guild',
+            typing: true,
+            ratelimit: 2,
+            args: [
+                {
+                    id: 'searchString',
+                    match: 'rest'
+                }
+            ]
         });
-    }
+    };
 
     async exec(message, {searchString}) {
         const voice = message.member.voice.channel;
+        if (!voice) return message.util.send(`*${message.author}, you need to be in a voice channel to play music!*`)
         let video;
         try {
             video = await youtube.getVideo(url);
@@ -38,7 +41,6 @@ class PlayCommand extends Command {
             }
         }
         return Util.handleVideo({ message, video, voice });
-    }
-}
-
+    };
+};
 module.exports = PlayCommand;

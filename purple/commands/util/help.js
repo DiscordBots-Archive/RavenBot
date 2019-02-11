@@ -4,23 +4,23 @@ const { MessageEmbed } = require('discord.js');
 class HelpCommand extends Command {
     constructor() {
         super('help', {
-           aliases: ['help', 'commands', 'list'],
-           description: {
-               content: 'Displays a list of available commands, or detailed information for a specified command!',
-               usage: '<command>',
-               examples: ['kick', 'user']
-           },
-           category: 'util',
-           typing: true,
-           ratelimit: 2,
-           args: [
-               {
-                   id: 'command',
-                   type: 'commandAlias'
-               }
-           ]
+            aliases: ['help', 'commands', 'list'],
+            description: {
+                content: 'Displays a list of available commands, or detailed information for a specified command!',
+                usage: '<command>',
+                examples: ['kick', 'tag']
+            },
+            category: 'util',
+            typing: true,
+            ratelimit: 2,
+            args: [
+                {
+                    id: 'command',
+                    type: 'commandAlias'
+                }
+            ]
         });
-    }
+    };
 
     exec(message, { command }) {
         
@@ -47,7 +47,6 @@ class HelpCommand extends Command {
 		if (command.description.examples && command.description.examples.length) embed.addField('❯ Examples', `\`${command.aliases[0]} ${command.description.examples.join(`\`\n\`${command.aliases[0]} `)}\``, true);
 
 		return message.util.send(embed);
-    }
-}
-
+    };
+};
 module.exports = HelpCommand;

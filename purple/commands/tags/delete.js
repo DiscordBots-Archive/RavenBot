@@ -3,7 +3,6 @@ const { Command } = require('discord-akairo');
 class DeleteTagCommand extends Command {
     constructor() {
         super('tag-delete', {
-            //aliases: ['delete', 'delete-tag', 'del-tag'],
             category: 'tags',
             description: {
                 content: 'Add a tag bruh',
@@ -24,7 +23,7 @@ class DeleteTagCommand extends Command {
                 }
             ]
         });
-    }
+    };
 
     async exec(message, { name }) {
 
@@ -32,13 +31,11 @@ class DeleteTagCommand extends Command {
         if (data) {
             if (data.get('user') !== message.author.id) return message.util.reply('*you can only delete your own tags!*');
 
-            await this.client.Tags.destroy({ where: { name: data.get('name') } })
+            await this.client.Tags.destroy({ where: { name: data.get('name') } });
 
-            return message.util.send(`*Successfully deleted **${name}**...*`)
+            return message.util.send(`*Successfully deleted **${name}**...*`);
         }
-        return message.util.send(`*No result found with name **${name}**...*`)
-
-    }
-}
-
+        return message.util.send(`*No result found with name **${name}**...*`);
+    };
+};
 module.exports = DeleteTagCommand;

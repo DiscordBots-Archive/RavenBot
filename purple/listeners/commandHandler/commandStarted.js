@@ -8,10 +8,12 @@ class CommandStartedListener extends Listener {
 			event: 'commandStarted',
 			category: 'commandHandler'
 		});
-	}
+	};
 
 	exec(message, command, args) {
+
 		this.client.prometheus.commandCounter.inc();
+
 		Raven.captureBreadcrumb({
 			message: 'command_started',
 			category: command.category.id,
@@ -58,6 +60,6 @@ class CommandStartedListener extends Listener {
 				args
 			}
 		});
-	}
-}
+	};
+};
 module.exports = CommandStartedListener;

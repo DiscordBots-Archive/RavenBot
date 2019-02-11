@@ -17,10 +17,10 @@ class MessageUpdateListener extends Listener {
 		if (newMessage.author.id === this.client.ownerID) return;
 		if (Util.escapeMarkdown(oldMessage.content) === Util.escapeMarkdown(newMessage.content)) return;
 		const guildLogs = this.client.settings.get(newMessage.guild.id, 'guildLog', undefined);
-		const WebhookID = this.client.settings.get(newMessage.guild.id, 'WebhookID', undefined)
-		const WebhookToken = this.client.settings.get(newMessage.guild.id, 'WebhookToken', undefined)
+		const WebhookID = this.client.settings.get(newMessage.guild.id, 'WebhookID', undefined);
+		const WebhookToken = this.client.settings.get(newMessage.guild.id, 'WebhookToken', undefined);
 		if (guildLogs && WebhookID && WebhookToken) {
-            const webhook = new WebhookClient(WebhookID, WebhookToken)
+            const webhook = new WebhookClient(WebhookID, WebhookToken);
 			if (!webhook) return;
 			const embed = new MessageEmbed()
 				.setColor(0x306bff)
@@ -36,7 +36,7 @@ class MessageUpdateListener extends Listener {
 					if (part.value === '\n') continue;
 					const d = part.added ? '+ ' : part.removed ? '- ' : '';
 					msg += `${d}${part.value.replace(/\n/g, '')}\n`;
-				}
+				};
 				const prepend = '```diff\n';
 				const append = '\n```';
 				embed.addField('❯ Message', `${prepend}${msg.substring(0, 1000)}${append}`);
@@ -45,9 +45,9 @@ class MessageUpdateListener extends Listener {
 				for (const part of diffMessage) {
 					const markdown = part.added ? '**' : part.removed ? '~~' : '';
 					msg += `${markdown}${part.value}${markdown}`;
-				}
+				};
 				embed.addField('❯ Message', `${msg.substring(0, 1020)}` || '\u200b');
-			}
+			};
 			embed.addField('❯ Message', `[Jump To](${newMessage.url})`, true);
 			embed.setTimestamp(oldMessage.editedAt || newMessage.editedAt || new Date());
 			embed.setFooter('Edited');
@@ -57,7 +57,7 @@ class MessageUpdateListener extends Listener {
 				username: 'Logs: MESSAGE UPDATED',
 				avatarURL: 'https://i.imgur.com/wnC4KmC.png'
 			});
-		}
-	}
-}
+		};
+	};
+};
 module.exports = MessageUpdateListener;

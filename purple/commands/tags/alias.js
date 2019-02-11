@@ -33,7 +33,7 @@ class SearchTagCommand extends Command {
 				}
 			]
 		});
-	}
+	};
 
 	async exec(message, { name, content }) {
 		
@@ -49,7 +49,6 @@ class SearchTagCommand extends Command {
 			}
         } 
 		return message.util.send(`*No result found with name **${name}**...*`);
-        
-	}
-}
+	};
+};
 module.exports = SearchTagCommand;

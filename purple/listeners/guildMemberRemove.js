@@ -8,7 +8,7 @@ class GuildMemberRemoveListener extends Listener {
 			event: 'guildMemberRemove',
 			category: 'client'
 		});
-	}
+	};
 
 	async exec(member) {
 
@@ -19,7 +19,7 @@ class GuildMemberRemoveListener extends Listener {
 		const channel = this.client.settings.get(member.guild.id, 'memberLog', undefined)
 		if (channel) {
 			await (this.client.channels.get(channel)).send(embed);
-		}
-	}
-}
+		};
+	};
+};
 module.exports = GuildMemberRemoveListener;

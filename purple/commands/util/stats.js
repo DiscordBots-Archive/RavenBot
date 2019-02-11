@@ -20,7 +20,7 @@ class UtilCommand extends Command {
 
 			]
 		});
-	}
+	};
 
 	async exec(message, { method, name }) {
 
@@ -35,6 +35,6 @@ class UtilCommand extends Command {
 		})[method];
 
 		return this.handler.handleDirectCommand(message, name, command, true);
-	}
-}
+	};
+};
 module.exports = UtilCommand;

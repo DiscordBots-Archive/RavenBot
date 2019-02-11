@@ -8,7 +8,7 @@ class ReadyListener extends Listener {
 			event: 'ready',
 			category: 'client'
 		});
-	}
+	};
 
 	async exec() {
 
@@ -18,10 +18,10 @@ class ReadyListener extends Listener {
 		if (countChannel) {
 			let channel = this.client.channels.get(countChannel);
 			channel.messages.fetch(channel.lastMessageID).then(async msg => {
-				await this.client.settings.set(channel.id, 'authorID', msg.author.id)
-				await this.client.settings.set(channel.id, 'messageContent', msg.content)
-			}).catch(error => {})
-		}
+				await this.client.settings.set(channel.id, 'authorID', msg.author.id);
+				await this.client.settings.set(channel.id, 'messageContent', msg.content);
+			}).catch(error => {});
+		};
 
 		setInterval(async () => {
 			for (const guild of this.client.guilds.values()) {
@@ -31,12 +31,12 @@ class ReadyListener extends Listener {
 						const member = guild.members.get(mute.user);
 						const role = this.client.settings.get(guild.id, 'muteRole', undefined);
 						await member.roles.remove(role).then(() => {
-							this.client.Mute.destroy({where: {user: member.user.id}})
-						})
-					}
-				}
-			}
+							this.client.Mute.destroy({where: {user: member.user.id}});
+						});
+					};
+				};
+			};
 		}, 300000);
-	}
+	};
 }
 module.exports = ReadyListener;

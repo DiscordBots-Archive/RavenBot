@@ -4,8 +4,6 @@ const { logger, createLogger, transports, format } = require('winston');
 const DailyRotateFile = require('winston-daily-rotate-file');
 const { createServer } = require('http');
 const Sequelize = require('sequelize');
-const env = require('dotenv').config();
-const Raven_ = process.env.RAVEN;
 const moment = require('moment');
 const { parse } = require('url');
 const sqlite = require('sqlite');
@@ -13,9 +11,8 @@ const Raven = require('raven');
 
 class PurpleClient extends AkairoClient {
     constructor() {
-        super({ownerID: '444432489818357760'}, {disableEveryone: true});
+        super({ownerID: process.env.OWNER}, {disableEveryone: true});
 
-        // handlers => loading commands, events, etc
         this.commandHandler = new CommandHandler(this, {
             directory: './purple/commands/',
             prefix: message => {
@@ -46,7 +43,6 @@ class PurpleClient extends AkairoClient {
             directory: './purple/listeners/'
         });
 
-        // logger => keeps record of each events
         this.logger = createLogger({
             format: format.combine(
                 format.colorize({ level: true }),
@@ -70,9 +66,9 @@ class PurpleClient extends AkairoClient {
             ]
         });
 
-        // Raven => Bug Catcher
-        if (Raven_) {
-			Raven.config(Raven_, {
+        const RAVEN = process.env.RAVEN;
+        if (RAVEN) {
+			Raven.config(RAVEN, {
 				captureUnhandledRejections: true,
                 autoBreadcrumbs: true,
                 environment: 'purple-main',
@@ -80,9 +76,8 @@ class PurpleClient extends AkairoClient {
 			}).install();
 		} else {
 			process.on('unhandledRejection', err => this.logger.error(`[UNHANDLED REJECTION] ${err.message}`, err.stack));
-		}
+		};
 
-        // counter=> message counter
         this.prometheus = {
             messagesCounter: new Counter({ name: 'purple_messages_total', help: 'Total number of messages Purple has seen' }),
             commandCounter: new Counter({ name: 'purple_commands_total', help: 'Total number of commands used' }),
@@ -91,18 +86,16 @@ class PurpleClient extends AkairoClient {
         };
         this.prometheus.collectDefaultMetrics({ prefix: 'purple_', timeout: 30000 });
 
-        // SQLiteProvider=> database of guild settings
         const db = sqlite.open('./purple/database/database.sqlite').then(d => d.run('CREATE TABLE IF NOT EXISTS guilds (id TEXT NOT NULL UNIQUE, settings TEXT)').then(() => d));
         this.settings = new SQLiteProvider(db, 'guilds', { dataColumn: 'settings' });
         
-        // Sequelize=> database of tags
         const sequelize = new Sequelize('database', 'user', 'password', {
             host: 'localhost',
             dialect: 'sqlite',
             logging: false,
             operatorsAliases: false,
             storage: './purple/database/sql-database.sqlite'
-        })
+        });
         this.Tags = sequelize.define('tags', {
             name: {
                 type: Sequelize.STRING,
@@ -117,7 +110,7 @@ class PurpleClient extends AkairoClient {
                 type: Sequelize.INTEGER,
                 defaultValue: 0,
             }
-        })
+        });
         this.Mute = sequelize.define('mutes', {
             name: {
                 type: Sequelize.STRING,
@@ -127,10 +120,9 @@ class PurpleClient extends AkairoClient {
             user: Sequelize.STRING,
             author: Sequelize.STRING,
             time: Sequelize.DATE
-        })
-    }
+        });
+    };
 
-    // loader=> loading up all commands, events etc
     async setup() {
         this.commandHandler.useInhibitorHandler(this.inhibitorHandler);
         this.commandHandler.useListenerHandler(this.inhibitorHandler);
@@ -145,26 +137,24 @@ class PurpleClient extends AkairoClient {
 
         await this.settings.init();
         await this.Tags.sync();
-        await this.Mute.sync()
-    }
+        await this.Mute.sync();
+    };
 
-    // counter=> message & command counter
 	async metrics() {
 		createServer((req, res) => {
 			if (parse(req.url).pathname === '/metrics') {
 				res.writeHead(200, { 'Content-Type': this.prometheus.register.contentType });
 				res.write(this.prometheus.register.metrics());
-			}
+			};
 			res.end();
 		}).listen(8800);
-    }
+    };
     
-    // START=> logging in purple, and initializing databases
     async start(token) {
         await this.setup();
         await this.login(token);
         console.log(`[${moment(new Date()).format('DD-MM-YY kk:mm:ss')}] info: [NODE PROCESS STARTED]`);
-    }
+    };
 
-}
+};
 module.exports = PurpleClient;

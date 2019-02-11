@@ -3,7 +3,6 @@ const { Command } = require('discord-akairo');
 class AddTagCommand extends Command {
     constructor() {
         super('tag-show', {
-            //aliases: ['tag-show'],
             category: 'tags',
             description: {
                 content: 'It displays the tag content',
@@ -23,7 +22,7 @@ class AddTagCommand extends Command {
                 }
             ]
         });
-    }
+    };
 
     async exec(message, { name }) {
 
@@ -31,10 +30,9 @@ class AddTagCommand extends Command {
         if (data) {
             data.increment('usage_count');
             return message.util.send(data.get('tag_content'));
-        }
+        };
         return;
 
-    }
-}
-
+    };
+};
 module.exports = AddTagCommand;

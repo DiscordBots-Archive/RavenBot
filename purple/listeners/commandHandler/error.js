@@ -1,5 +1,5 @@
 const { Listener } = require('discord-akairo');
-const Raven = require('raven'); // tslint:disable-line
+const Raven = require('raven');
 
 class CommandErrorListener extends Listener {
 	constructor() {
@@ -8,11 +8,12 @@ class CommandErrorListener extends Listener {
 			event: 'error',
 			category: 'commandHandler'
 		});
-	}
+	};
 
 	exec(error, message, command) {
+
 		this.client.logger.error(`[COMMAND ERROR] ${error.message}`, error.stack);
-		console.log(error)
+
 		Raven.captureBreadcrumb({
 			message: 'command_errored',
 			category: command ? command.category.id : 'inhibitor',
@@ -37,6 +38,6 @@ class CommandErrorListener extends Listener {
 			}
 		});
 		Raven.captureException(error);
-	}
-}
+	};
+};
 module.exports = CommandErrorListener;

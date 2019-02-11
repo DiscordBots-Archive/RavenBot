@@ -3,25 +3,26 @@ const { Command } = require('discord-akairo');
 class PrefixCommand extends Command {
     constructor() {
         super('prefix', {
-           aliases: ['prefix'],
-           description: {
-               content: 'Displays or changes the prefix of the guild',
-               usage: '<prefix>',
-               examples: ['!', '?']
-           },
-           category: 'util',
-           channel: 'guild',
-           ratelimit: 2,
-           typing: true,
-           userPermissions: ['MANAGE_GUILD'],
-           args: [
-               {
-                   id: 'prefix',
-                   type: 'string'
-               }
-           ]
+            aliases: ['prefix'],
+            description: {
+                content: 'Displays or changes the prefix of the guild',
+                usage: '<prefix>',
+                examples: ['!', '?']
+            },
+            category: 'util',
+            channel: 'guild',
+            ratelimit: 2,
+            typing: true,
+            userPermissions: ['MANAGE_GUILD'],
+            channel: 'guild',
+            args: [
+                {
+                    id: 'prefix',
+                    type: 'string'
+                }
+            ]
         });
-    }
+    };
 
     async exec(message, { prefix }) {
 
@@ -31,7 +32,6 @@ class PrefixCommand extends Command {
 			return message.util.reply(`*the prefix has been reset to \`${prefix}\`*`);
 		}
 		return message.util.reply(`*the prefix has been set to \`${prefix}\`*`);
-    }
-}
-
+    };
+};
 module.exports = PrefixCommand;
