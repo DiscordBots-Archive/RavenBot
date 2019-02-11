@@ -13,12 +13,13 @@
     "common-tags": "^1.8.0",
     "diff": "^4.0.1",
     "discord-akairo": "github:1Computer1/discord-akairo",
-    "discord.js": "github:discordjs/discord.js",
+    "discord.js": "discordjs/discord.js",
     "dotenv": "^6.2.0",
     "moment": "^2.23.0",
     "moment-duration-format": "^2.2.2",
     "ms": "^2.1.1",
     "node-emoji": "^1.8.1",
+    "opusscript": "^0.0.6",
     "os-utils": "^0.0.14",
     "parse": "^2.1.0",
     "prom-client": "^11.2.1",
@@ -31,7 +32,8 @@
     "url": "^0.11.0",
     "util": "^0.11.1",
     "winston": "^3.1.0",
-    "winston-daily-rotate-file": "^3.5.2"
+    "winston-daily-rotate-file": "^3.5.2",
+    "ytdl-core": "^0.29.1"
   },
   "repository": {
     "type": "git",
