@@ -5,41 +5,38 @@ class BlacklistCommand extends Command {
 		super('blacklist', {
 			aliases: ['blacklist', 'unblacklist'],
 			description: {
-				content: 'Prohibit/Allow a user from using Purple',
-				usage: '<user>',
-				examples: ['Suvajit', '@Suvajit', '444432489818357760']
+				content: 'Prohibit/Allow a user/guild from using Purple',
+				usage: '<user>/<guild>',
+				examples: ['user 444432489818357760', 'guild 524672414261444623']
 			},
 			category: 'util',
-			ownerOnly: true,
-			ratelimit: 2,
+            ratelimit: 2,
+            ownerOnly: true,
 			args: [
 				{
-					id: 'user',
-					match: 'content',
-					type: 'user',
-					prompt: {
-						start: message => `${message.author}, who would you like to blacklist/unblacklist?`
-					}
-				}
+					id: 'method',
+					type: ['user', 'guild']
+                },
+                {
+                    id: 'name',
+                    match: 'rest',
+                    default: ''
+                }
 			]
 		});
 	};
 
-	async exec(message, { user }) {
-		const blacklist = this.client.settings.get('global', 'blacklist', []);
-		if (blacklist.includes(user.id)) {
-			const index = blacklist.indexOf(user.id);
-			blacklist.splice(index, 1);
-			if (blacklist.length === 0) this.client.settings.delete('global', 'blacklist');
-			else this.client.settings.set('global', 'blacklist', blacklist);
+	async exec(message, { method, name }) {
 
-			return message.util.send(`*${user.tag}, have you realized Purple's greatness? You've got good eyes~*`);
-		}
+        if (!method) return;
 
-		blacklist.push(user.id);
-		this.client.settings.set('global', 'blacklist', blacklist);
+		const command = ({
+			user: this.handler.modules.get('blacklist-user'),
+			guild: this.handler.modules.get('blacklist-guild'),
+			server: this.handler.modules.get('blacklist-guild'),
+		})[method];
 
-		return message.util.send(`*${user.tag}, you are not worthy of Purple's luck~*`);
+		return this.handler.handleDirectCommand(message, name, command, true);
 	};
 };
 module.exports = BlacklistCommand;
