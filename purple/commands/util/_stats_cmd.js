@@ -3,6 +3,7 @@ const { MessageEmbed } = require('discord.js');
 const os = require('os-utils');
 const moment = require('moment');
 const duration = require('moment-duration-format');
+const { version } = require('../../../package.json');
 
 class StatsCommand extends Command {
     constructor() {
@@ -28,9 +29,10 @@ class StatsCommand extends Command {
         .addField("❯ GENERAL STATS", `\n• Servers : ${this.client.guilds.size}` +
         `\n• Users : ${this.client.users.size}` + 
         `\n• Channels : ${this.client.channels.size}` )
-        .addField('❯ SINCE', `• ${moment(this.client.user.createdAt).format("DD-MM-YY kk:mm")}`)
+        //.addField('❯ SINCE', `• ${moment(this.client.user.createdAt).format("DD-MM-YY kk:mm")}`)
+        .addField('❯ VERSION', `• v${version}`)
 
-        .addField("❯ LIBRARY", `[• discord.js](https://discord.js.org)[-akairo](https://github.com/1Computer1/discord-akairo)`)
+        .addField("❯ LIBRARY", `• [discord.js](https://discord.js.org)[-akairo](https://github.com/1Computer1/discord-akairo)`)
 
         .setFooter('© 2018 ' + this.client.users.get(this.client.ownerID).tag, this.client.users.get(this.client.ownerID).displayAvatarURL())
 
