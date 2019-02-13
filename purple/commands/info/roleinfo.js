@@ -69,7 +69,7 @@ class RoleCommand extends Command {
         `• Hoisted: ${role.hoist ? 'Yes' : 'No'}` + '\n' +
         `• Mentionable: ${role.mentionable ? 'Yes' : 'No'}` + '\n' +
         `• Creation Date: ${moment.utc(role.createdAt).format('DD-MM-YY kk:mm:ss')}`)
-        .addField('❯ Permissions', `${ permission.length === 487 ? '• Administrator' : permission }`)
+        .addField('❯ Permissions', `${ permission.length === 487 ? '• Administrator' : permission || '• None' }`)
         .setThumbnail(message.guild.iconURL());
 
         return message.util.send(embed);
