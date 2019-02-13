@@ -8,7 +8,7 @@ class NPCommand extends Command {
         super('np', {
             aliases: ['np', 'now-playing'],
             description: {
-                content: 'Stops music and leaves voice channel',
+                content: 'Shows what song the bot is currently playing.',
             },
             category: 'music',
             channel: 'guild',

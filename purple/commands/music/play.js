@@ -1,5 +1,4 @@
 const { Command } = require('discord-akairo');
-const Util = require('../../util/index.js')
 const YouTube = require('simple-youtube-api');
 const youtube = new YouTube(process.env.YOUTUBE_API);
 
@@ -8,7 +7,7 @@ class PlayCommand extends Command {
         super('play', {
             aliases: ['play', 'p'],
             description: {
-                content: 'Searches and plays music, bruh',
+                content: 'Plays a song with the given name or url.',
                 usage: '<query>/<yt-url>',
                 examples: ['Shape of you', 'https://youtube.com/watch?v=query']
             },
@@ -28,6 +27,7 @@ class PlayCommand extends Command {
     };
 
     async exec(message, {searchString}) {
+        
         const voiceChannel = message.member.voice.channel;
         if (!voiceChannel) return message.util.send(`*${message.author}, you need to be in a voice channel to play music!*`);
 
@@ -38,7 +38,7 @@ class PlayCommand extends Command {
             const videos = await playlist.getVideos();
 			for (const video of Object.values(videos)) {
 				let video_ = await youtube.getVideoByID(video.id);
-				await handleVideo({ message, video: video_, voiceChannel, playlist: true });
+				await this.client.handleVideo({ message, video: video_, voiceChannel, playlist: true });
 			}
             return msg.channel.send(`✅ Playlist: **${playlist.title}** has been added to the queue!`);
             

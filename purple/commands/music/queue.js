@@ -6,7 +6,7 @@ class QueueCommand extends Command {
         super('queue', {
             aliases: ['queue'],
             description: {
-                content: 'Stops music',
+                content: 'View the queue list',
             },
             category: 'music',
             channel: 'guild',

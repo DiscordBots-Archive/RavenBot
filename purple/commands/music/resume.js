@@ -5,7 +5,7 @@ class ResumeCommand extends Command {
         super('resume', {
             aliases: ['resume'],
             description: {
-                content: 'Stops music',
+                content: 'Resume paused music.',
             },
             category: 'music',
             channel: 'guild',

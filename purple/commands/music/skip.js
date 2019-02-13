@@ -5,7 +5,7 @@ class SkipCommand extends Command {
         super('skip', {
             aliases: ['skip'],
             description: {
-                content: 'Stops music and leaves voice channel',
+                content: 'Skips the currently playing song.',
             },
             category: 'music',
             channel: 'guild',

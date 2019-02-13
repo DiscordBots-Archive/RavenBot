@@ -5,7 +5,7 @@ class PauseCommand extends Command {
         super('pause', {
             aliases: ['pause'],
             description: {
-                content: 'Stops music',
+                content: 'Pauses the currently playing track.',
             },
             category: 'music',
             channel: 'guild',

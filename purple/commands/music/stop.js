@@ -5,7 +5,7 @@ class StopCommand extends Command {
         super('stop', {
             aliases: ['stop', 'leave'],
             description: {
-                content: 'Stops music and leaves voice channel',
+                content: 'Disconnect the bot from the voice channel it is in and clear all queue.',
             },
             category: 'music',
             channel: 'guild',
