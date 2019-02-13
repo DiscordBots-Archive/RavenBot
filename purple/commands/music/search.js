@@ -41,11 +41,11 @@ class SearchCommand extends Command {
                 let videos = await youtube.searchVideos(searchString, 10);
                 let index = 0;
                 const embed = new MessageEmbed().setAuthor('YouTube Search').setColor('RED')
-                .setDescription(`${videos.map(video2 => `**${++index} -** ${video2.title}`).join('\n')}`);
+                .setDescription(`${videos.map(video_ => `**${++index} -** ${video_.title}`).join('\n')}`);
 
                 const m = await message.channel.send(embed);
 
-                const response = await message.channel.awaitMessages(msg => msg.content > 0 && msg.content < 11, {
+                const response = await message.channel.awaitMessages(msg => msg.content > 0 && msg.content < 11 && msg.author.id === message.author.id, {
                     max: 1, time: 15000
                 });
                 if (!response || response.size !== 1) return m.delete();
