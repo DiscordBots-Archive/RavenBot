@@ -28,21 +28,36 @@ class PlayCommand extends Command {
     };
 
     async exec(message, {searchString}) {
-        const voice = message.member.voice.channel;
-        if (!voice) return message.util.send(`*${message.author}, you need to be in a voice channel to play music!*`)
-        let video;
-        try {
-            video = await youtube.getVideo(url);
-        } catch (error) {
+        const voiceChannel = message.member.voice.channel;
+        if (!voiceChannel) return message.util.send(`*${message.author}, you need to be in a voice channel to play music!*`);
+
+        const url = searchString ? searchString.replace(/<(.+)>/g, '$1') : '';
+
+        if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
+			const playlist = await youtube.getPlaylist(url);
+            const videos = await playlist.getVideos();
+			for (const video of Object.values(videos)) {
+				let video_ = await youtube.getVideoByID(video.id);
+				await handleVideo({ message, video: video_, voiceChannel, playlist: true });
+			}
+            return msg.channel.send(`✅ Playlist: **${playlist.title}** has been added to the queue!`);
+            
+		} else {
+            let video;
             try {
-                let videos = await youtube.searchVideos(searchString, 2);
-                const videoIndex = parseInt(1);
-                video = await youtube.getVideoByID(videos[videoIndex - 1].id);
-            } catch (err) {
-                return message.channel.send(`*${message.author}, I could not find anything!*`);
+                video = await youtube.getVideo(url);
+            } catch (error) {
+                try {
+                    let videos = await youtube.searchVideos(searchString, 2);
+                    const videoIndex = parseInt(1);
+                    video = await youtube.getVideoByID(videos[videoIndex - 1].id);
+                } catch (err) {
+                    return message.channel.send(`*${message.author}, I could not find anything!*`);
+                }
             }
+            return this.client.handleVideo({ message, video, voiceChannel });
         }
-        return Util.handleVideo({ message, video, voice });
+
     };
 };
 module.exports = PlayCommand;

@@ -1,9 +1,9 @@
 const { Command } = require('discord-akairo');
 
-class StopCommand extends Command {
+class SkipCommand extends Command {
     constructor() {
-        super('stop', {
-            aliases: ['stop', 'leave'],
+        super('skip', {
+            aliases: ['skip'],
             description: {
                 content: 'Stops music and leaves voice channel',
             },
@@ -15,12 +15,9 @@ class StopCommand extends Command {
     };
 
     async exec(message) {
-        //await this.client.channels.get(message.guild.me.voice.channel.id).leave();
-        //return message.util.send('*Disconnected!*');
         if (!message.member.voice.channel) return message.util.send(`*You are not in a voice channel!*`);
         if (!this.client.Queue) return message.util.send(`*There is nothing playing that I could skip for you!*`);
-        this.client.Queue.songs = [];
-        await this.client.Queue.connection.dispatcher.end(`Stop command has been used by ${message.author.tag}`);
+        await this.client.Queue.connection.dispatcher.end(`Skip command has been used by ${message.author.tag}`);
     };
 };
-module.exports = StopCommand;
+module.exports = SkipCommand;

@@ -1,6 +1,5 @@
 const { MessageEmbed } = require('discord.js');
 const ms = require('ms');
-const ytdl = require('ytdl-core');
 
 const Util = {
 
@@ -44,19 +43,6 @@ const Util = {
         `${mute} mute${mute > 1 || mute === 0 ? 's' : ''}, ` +
         `${kick} kick${kick > 1 || kick === 0 ? 's' : ''}, ` +
         `and ${ban} ban${ban > 1 || ban === 0 ? 's' : ''}`);
-    },
-
-    handleVideo : async ({message, video, voice}) => { 
-        const embed = new MessageEmbed().setAuthor(video.channel.raw.snippet.channelTitle, `https://cdn.discordapp.com/emojis/544469282952708096.png`, `https://www.youtube.com/channel/${video.channel.raw.snippet.channelId}`)
-        .setThumbnail(video.thumbnails.default.url).setColor('#ee0808')
-        .setTitle(video.title).setURL(`https://www.youtube.com/watch?v=${video.id}`);
-        try {
-            let connection = await voice.join();
-            connection.play(ytdl(`https://www.youtube.com/watch?v=${video.id}`, { quality: 'highestaudio' }));
-            return message.channel.send(`*Now playing <:YouTube:544469282952708096>*`, {embed});
-        } catch (error) {
-            return message.channel.send(`*Something went wrong!*\n${error}`);
-        };
     }
 };
 module.exports = Util;
