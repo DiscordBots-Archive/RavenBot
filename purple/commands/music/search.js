@@ -40,28 +40,24 @@ class SearchCommand extends Command {
             try {
                 let videos = await youtube.searchVideos(searchString, 10);
                 let index = 0;
-                const embed = new MessageEmbed().setAuthor('YouTube Search')
+                const embed = new MessageEmbed().setAuthor('YouTube Search').setColor('RED')
                 .setDescription(`${videos.map(video2 => `**${++index} -** ${video2.title}`).join('\n')}`);
 
                 const m = await message.channel.send(embed);
 
-                let response;
-                try {
-                    response = await msg.channel.awaitMessages(msg2 => msg2.content > 0 && msg2.content < 11, {
-                        maxMatches: 1,
-                        time: 15000,
-                        errors: ['time']
-                    });
-                } catch (err) {
-                    m.delete();
-                }
+                const response = await message.channel.awaitMessages(msg => msg.content > 0 && msg.content < 11, {
+                    max: 1, time: 15000
+                });
+                if (!response || response.size !== 1) return m.delete();
+                const res = response.first();
+                if (parseInt(res) > 10) return;
 
-                const videoIndex = parseInt(response.first().content);
+                const videoIndex = parseInt(res);
 
                 video = await youtube.getVideoByID(videos[videoIndex - 1].id);
 
             } catch (err) {
-                return msg.channel.send(`*I could not find anything!*`);
+                return message.channel.send(`*I could not find anything!*` + err);
             }
         }
         return this.client.handleVideo({ message, video, voiceChannel });

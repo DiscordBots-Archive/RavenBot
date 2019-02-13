@@ -67,7 +67,7 @@ class PurpleClient extends AkairoClient {
                 queueConstruct.songs.push(song);
         
                 try {
-                    var connection = await voiceChannel.join();
+                    const connection = await voiceChannel.join();
                     queueConstruct.connection = connection;
                     this.play({guild: message.guild, song: queueConstruct.songs[0]});
                 } catch (error) {
@@ -77,7 +77,7 @@ class PurpleClient extends AkairoClient {
                 }
             } else {
                 this.Queue.songs.push(song);
-                if (playlist) return undefined;
+                if (playlist) return;
                 else return message.channel.send(`*Queued up : **${song.title}**\u200b*`);
             }
         }
@@ -133,7 +133,7 @@ class PurpleClient extends AkairoClient {
 				release: '0.1.0'
 			}).install();
 		} else {
-			//process.on('unhandledRejection', err => this.logger.error(`[UNHANDLED REJECTION] ${err.message}`, err.stack));
+			process.on('unhandledRejection', err => this.logger.error(`[UNHANDLED REJECTION] ${err.message}`, err.stack));
 		};
 
         this.prometheus = {
