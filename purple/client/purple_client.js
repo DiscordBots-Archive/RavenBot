@@ -11,6 +11,8 @@ const { parse } = require('url');
 const sqlite = require('sqlite');
 const Raven = require('raven');
 const queue = new Map();
+const { Client: Lavaqueue } = require('lavaqueue');
+const { Rejects, ReferenceType } = require('rejects')
 
 class PurpleClient extends AkairoClient {
     constructor() {
@@ -46,6 +48,53 @@ class PurpleClient extends AkairoClient {
             directory: './purple/listeners/'
         });
 
+        this.music = new Lavaqueue({
+            userID: '523848993076150304',
+            password: 'youshallnotpass',
+            hosts: {
+                rest: 'http://127.0.0.1:2333',
+                ws: 'http://127.0.0.1:2333',
+                redis: {
+                    port: 6379,
+                    host: '127.0.0.1',
+                    db: 0
+                }
+            },
+            send: async (guild, packet) => {
+                const shardGuild = this.guilds.get(guild);
+                if (shardGuild) return shardGuild.shard.send(packet);
+                return Promise.resolve();
+            }
+        });
+        this.redis = this.music.queues.redis;
+
+        this.storage = new Rejects(this.redis);
+        this.on('raw', async (packet) => {
+			switch (packet.t) {
+				case 'VOICE_STATE_UPDATE':
+					if (packet.d.user_id !== '523848993076150304') return;
+					this.music.voiceStateUpdate(packet.d);
+					const players = await this.storage.get('players', { type: ReferenceType.ARRAY });
+					let index = 0;
+					if (Array.isArray(players)) index = players.findIndex(player => player.guild_id === packet.d.guild_id);
+					if (((!players && !index) || index < 0) && packet.d.channel_id) {
+						this.storage.upsert('players', [{ guild_id: packet.d.guild_id, channel_id: packet.d.channel_id }]);
+					} else if (players && typeof index !== 'undefined' && index >= 0 && !packet.d.channel_id) {
+						players.splice(index, 1);
+						await this.storage.delete('players');
+						if (players.length) await this.storage.set('players', players);
+					}
+					break;
+				case 'VOICE_SERVER_UPDATE':
+					this.music.voiceServerUpdate(packet.d);
+					break;
+				case 'MESSAGE_CREATE':
+					this.prometheus.messagesCounter.inc();
+					break;
+				default:
+					break;
+			}
+		});
         
         this.handleVideo = async ({message, video, voiceChannel, playlist = false}) => {
             this.Queue = queue.get(message.guild.id);

@@ -1,11 +1,12 @@
-/*const { Command } = require('discord-akairo');
+/*import { Command } from 'discord-akairo';
+import { Message } from 'discord.js';
 
-export default class PauseCommand extends Command {
+export default class ResumeCommand extends Command {
 	public constructor() {
-		super('pause', {
-			aliases: ['pause'],
+		super('resume', {
+			aliases: ['resume'],
 			description: {
-				content: 'Pauses the queue.'
+				content: 'Resumes the queue.'
 			},
 			category: 'music',
 			channel: 'guild',
@@ -18,9 +19,9 @@ export default class PauseCommand extends Command {
 			return message.util!.reply('you have to be in a voice channel first, silly.');
 		}
 		const queue = this.client.music.queues.get(message.guild.id);
-		await queue.player.pause();
+		await queue.player.pause(false);
 
-		return message.util!.send('Paused the queue.');
+		return message.util!.send('Resumed the queue.');
 	}
 }
 */

@@ -10,3 +10,5 @@ metrics/
 .env
 package-lock.json
 start.bat
+Lavalink.jar
+logs/

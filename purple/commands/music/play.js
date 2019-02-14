@@ -1,63 +1,62 @@
-const { Command } = require('discord-akairo');
-const YouTube = require('simple-youtube-api');
-const youtube = new YouTube(process.env.YOUTUBE_API);
+const { Argument, Command } = require('discord-akairo');
+const url = require('url');
+const path = require('path');
 
 class PlayCommand extends Command {
-    constructor() {
-        super('play', {
-            aliases: ['play', 'p'],
-            description: {
-                content: 'Plays a song with the given name or url.',
-                usage: '<query>/<yt-url>',
-                examples: ['Shape of you', 'https://youtube.com/watch?v=query']
-            },
-            category: 'music',
-            channel: 'guild',
-            typing: true,
-            ratelimit: 2,
-            args: [
-                {
-                    id: 'searchString',
-                    match: 'rest',
-                    default: 'https://www.youtube.com/watch?v=F1_bv6Rac6A'
-                    
-                }
-            ]
-        });
-    };
+	constructor() {
+		super('play', {
+			aliases: ['play', 'p', 'add', '📥', '➕'],
+			description: {
+				content: 'Play a song from literally any source you can think of.',
+				usage: '<link/search>',
+				examples: ['justin bieber']
+			},
+			category: 'music',
+			channel: 'guild',
+			ratelimit: 2,
+			args: [
+				{
+					id: 'unshift',
+					match: 'flag',
+					flag: ['--start', '-s']
+				},
+				{
+					id: 'query',
+					match: 'rest',
+					type: Argument.compose('string', str => str ? str.replace(/<(.+)>/g, '$1') : ''),
+					default: ''
+				}
+			]
+		});
+	}
 
-    async exec(message, {searchString}) {
-        
-        const voiceChannel = message.member.voice.channel;
-        if (!voiceChannel) return message.util.send(`*${message.author}, you need to be in a voice channel to play music!*`);
+	async exec(message, { query, unshift }) {
+		if (!message.member.voice || !message.member.voice.channel) {
+			return message.util.reply('you have to be in a voice channel first, silly.');
+		} else if (!message.member.voice.channel.joinable) {
+			return message.util.reply("I don't seem to have permission to enter this voice channel.");
+		} else if (!message.member.voice.channel.speakable) {
+			return message.util.reply("I don't seem to have permission to talk in this voice channel.");
+		}
 
-        const url = searchString ? searchString.replace(/<(.+)>/g, '$1') : '';
-
-        if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
-			const playlist = await youtube.getPlaylist(url);
-            const videos = await playlist.getVideos();
-			for (const video of Object.values(videos)) {
-				let video_ = await youtube.getVideoByID(video.id);
-				await this.client.handleVideo({ message, video: video_, voiceChannel, playlist: true });
-			}
-            return msg.channel.send(`✅ Playlist: **${playlist.title}** has been added to the queue!`);
-            
+		// TODO: remove hack
+		const res = await this.client.music.load(`ytsearch:${query}`);
+		const queue = this.client.music.queues.get(message.guild.id);
+		if (!message.guild.me.voice.channel) await queue.player.join(message.member.voice.channel.id);
+		let msg;
+		if (['TRACK_LOADED', 'SEARCH_RESULT'].includes(res.loadType)) {
+			if (unshift) await queue.unshift(res.tracks[0].track);
+			else await queue.add(res.tracks[0].track);
+			msg = res.tracks[0].info.title;
+		} else if (res.loadType === 'PLAYLIST_LOADED') {
+			await queue.add(...res.tracks.map(track => track.track));
+			msg = res.playlistInfo.name;
 		} else {
-            let video;
-            try {
-                video = await youtube.getVideo(url);
-            } catch (error) {
-                try {
-                    let videos = await youtube.searchVideos(searchString, 2);
-                    const videoIndex = parseInt(1);
-                    video = await youtube.getVideoByID(videos[videoIndex - 1].id);
-                } catch (err) {
-                    return message.channel.send(`*${message.author}, I could not find anything!*`);
-                }
-            }
-            return this.client.handleVideo({ message, video, voiceChannel });
-        }
+			return message.util.send("I know you hate to hear that, but even searching the universe I couldn't find what you were looking for.");
+		}
+		if (!queue.player.playing && !queue.player.paused) await queue.start();
 
-    };
-};
+		return message.util.send(`${this.client.emojis.get('543984872092336128')} **Queued up:** \`${msg}\``);
+	}
+}
 module.exports = PlayCommand;
