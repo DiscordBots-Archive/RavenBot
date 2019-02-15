@@ -36,7 +36,7 @@ class RemoveCommand extends Command {
 	
 			queue.remove(tracks[num]);
 	
-			return message.util.send(`${this.client.emojis.get('545628508962029569')} **Removed:** \`${decoded[0].info.title}\``);
+			return message.util.send(`${this.client.emojis.get('545874377523068930')} **Removed:** \`${decoded[0].info.title}\``);
 		} catch (error) {}
 		
 

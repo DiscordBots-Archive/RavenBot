@@ -54,7 +54,7 @@ class SkipCommand extends Command {
 		const skip = await queue.next(num);
 		if (!skip) {
 			await queue.stop();
-			return message.util.send('*Skipped the last playing song*');
+			return message.util.send(`**Skipped Last Song:** ${this.client.emojis.get('545628508962029569')}`);
 		}
 		const decoded = await this.client.music.decode(tracks);
 		const totalLength = decoded.reduce((prev, song) => prev + song.info.length, 0);
