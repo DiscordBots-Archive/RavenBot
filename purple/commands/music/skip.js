@@ -44,7 +44,7 @@ class SkipCommand extends Command {
 
 	async exec(message, { num }) {
 		if (!message.member.voice || !message.member.voice.channel) {
-			return message.util.reply('you have to be in a voice channel first, silly.');
+			return message.util.reply('*you have to be in a voice channel first!*');
 		}
 		const queue = this.client.music.queues.get(message.guild.id);
 		let tracks;
@@ -54,15 +54,15 @@ class SkipCommand extends Command {
 		const skip = await queue.next(num);
 		if (!skip) {
 			await queue.stop();
-			return message.util.send('Skipped the last playing song.');
+			return message.util.send('*Skipped the last playing song*');
 		}
 		const decoded = await this.client.music.decode(tracks);
-		const totalLength = decoded.reduce((prev, song) => prev + song.info.length, 0); // tslint:disable-line
+		const totalLength = decoded.reduce((prev, song) => prev + song.info.length, 0);
 		const paginated = paginate({items: decoded, page: 1, pageLength: 10});
 		let index = (paginated.page - 1) * 10;
 
 		const embed = new MessageEmbed()
-			.setAuthor(`${message.author.tag} (${message.author.id})`, message.author.displayAvatarURL())
+			.setAuthor(`${message.author.tag} (${message.author.id})`, message.author.displayAvatarURL()).setColor('#8387db')
 			.setDescription(`**Skipped songs** \n\n` +
 
 				`${paginated.items.map(song => `**${++index}.** [${song.info.title}](${song.info.uri}) (${timeString({seconds: song.info.length})})`).join('\n')} \n\n`

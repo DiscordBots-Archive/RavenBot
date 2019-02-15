@@ -3,7 +3,7 @@ const { Command } = require('discord-akairo');
 class LeaveCommand extends Command {
 	constructor() {
 		super('leave', {
-			aliases: ['leave', '🚪'],
+			aliases: ['leave'],
 			description: {
 				content: 'Leaves the voice channel (`--clear` to clear the queue before leaving)',
 				usage: '[--clear/-c]',

@@ -6,7 +6,7 @@ const { timeString } = require('../../util/index.js');
 class QueueCommand extends Command {
 	constructor() {
 		super('queue', {
-			aliases: ['queue', 'q', 'nowplaying', 'np', 'ℹ'],
+			aliases: ['queue', 'q', 'nowplaying', 'np'],
 			description: {
 				content: 'Shows you the current queue.',
 				usage: '[page]',
@@ -38,7 +38,7 @@ class QueueCommand extends Command {
 		let index = (paginated.page - 1) * 10;
 
 		const embed = new MessageEmbed()
-			.setAuthor(`${message.author.tag} (${message.author.id})`, message.author.displayAvatarURL())
+			.setAuthor(`${message.author.tag} (${message.author.id})`, message.author.displayAvatarURL()).setColor('#8387db')
 			.setDescription(`**Now playing:** \n\n`+
 
 				`**❯** [${decoded[0].info.title}](${decoded[0].info.uri}) (${timeString({seconds: current.position})}/${timeString({seconds: decoded[0].info.length})}) \n\n` +

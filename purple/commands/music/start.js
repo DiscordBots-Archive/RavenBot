@@ -24,7 +24,7 @@ class StartCommand extends Command {
 
 	async exec(message, { force }) {
 		if (!message.member.voice || !message.member.voice.channel) {
-			return message.util.reply('you have to be in a voice channel first!');
+			return message.util.reply('*you have to be in a voice channel first!*');
 		} else if (!message.member.voice.channel.joinable) {
 			return message.util.reply("I don't seem to have permission to enter this voice channel.");
 		} else if (!message.member.voice.channel.speakable) {
@@ -33,7 +33,7 @@ class StartCommand extends Command {
 		const queue = this.client.music.queues.get(message.guild.id);
 		if (!message.guild.me.voice || !message.guild.me.voice.channel || force) {
 			await queue.player.join(message.member.voice.channel.id);
-			message.util.send(this.client.emojis.get('545628508962029569').toString());
+			message.util.send(this.client.emojis.get('545628508962029569'));
 		}
 		if ((!queue.player.playing && !queue.player.paused) || force) await queue.start();
 	}

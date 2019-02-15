@@ -9,7 +9,7 @@ class SetDJRoleCommand extends Command {
 				usage: '<role>',
 				examples: ['dj @DJ', 'dj DJ']
 			},
-			category: 'util',
+			category: 'music',
 			channel: 'guild',
 			userPermissions: ['MANAGE_GUILD'],
 			ratelimit: 2,
