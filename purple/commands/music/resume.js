@@ -1,8 +1,7 @@
-/*import { Command } from 'discord-akairo';
-import { Message } from 'discord.js';
+const { Command } = require('discord-akairo');
 
-export default class ResumeCommand extends Command {
-	public constructor() {
+class ResumeCommand extends Command {
+	constructor() {
 		super('resume', {
 			aliases: ['resume'],
 			description: {
@@ -14,14 +13,14 @@ export default class ResumeCommand extends Command {
 		});
 	}
 
-	public async exec(message: Message) {
+	async exec(message) {
 		if (!message.member.voice || !message.member.voice.channel) {
-			return message.util!.reply('you have to be in a voice channel first, silly.');
+			return message.util.reply('you have to be in a voice channel first, silly.');
 		}
 		const queue = this.client.music.queues.get(message.guild.id);
 		await queue.player.pause(false);
 
-		return message.util!.send('Resumed the queue.');
+		return message.util.send('Resumed the queue.');
 	}
 }
-*/
+module.exports = ResumeCommand;

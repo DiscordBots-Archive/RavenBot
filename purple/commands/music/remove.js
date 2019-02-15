@@ -1,8 +1,7 @@
-/*import { Argument, Command } from 'discord-akairo';
-import { Message } from 'discord.js';
+const { Argument, Command } = require('discord-akairo');
 
-export default class RemoveCommand extends Command {
-	public constructor() {
+class RemoveCommand extends Command {
+	constructor() {
 		super('remove', {
 			aliases: ['remove', 'rm', '📤'],
 			description: {
@@ -23,9 +22,9 @@ export default class RemoveCommand extends Command {
 		});
 	}
 
-	public async exec(message: Message, { num }: { num: number }) {
+	async exec(message, { num }) {
 		if (!message.member.voice || !message.member.voice.channel) {
-			return message.util!.reply('you have to be in a voice channel first, silly.');
+			return message.util.reply('you have to be in a voice channel first!');
 		}
 		const queue = this.client.music.queues.get(message.guild.id);
 		const tracks = await queue.tracks();
@@ -33,7 +32,7 @@ export default class RemoveCommand extends Command {
 		const decoded = await this.client.music.decode([tracks[num]]);
 		queue.remove(tracks[num]);
 
-		return message.util!.send(`${this.client.emojis.get('479430354759843841')} **Removed:** \`${decoded[0].info.title}\``);
+		return message.util.send(`${this.client.emojis.get('479430354759843841')} **Removed:** \`${decoded[0].info.title}\``);
 	}
 }
-*/
+module.exports = RemoveCommand;

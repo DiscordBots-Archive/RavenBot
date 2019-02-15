@@ -1,6 +1,6 @@
-/*const { Command } = require('discord-akairo');
+const { Command } = require('discord-akairo');
 
-export default class LeaveCommand extends Command {
+class LeaveCommand extends Command {
 	constructor() {
 		super('leave', {
 			aliases: ['leave', '🚪'],
@@ -26,14 +26,14 @@ export default class LeaveCommand extends Command {
 		if (!message.member.voice || !message.member.voice.channel) {
 			return message.util.reply('you have to be in a voice channel first, silly.');
 		}
-		const DJ = message.member.roles.has(this.client.settings.get(message.guild, 'djRole', undefined));
+		const DJ = message.member.roles.has(this.client.settings.get(message.guild.id, 'djRole', undefined));
 		const queue = this.client.music.queues.get(message.guild.id);
 		if (clear && DJ) await queue.clear();
 		await queue.player.stop();
 		await queue.player.destroy();
 		if (message.guild.me.voice || message.guild.me.voice.channel) await queue.player.leave();
 
-		return message.util.send(this.client.emojis.get('479430325169160193').toString());
+		return message.util.send(this.client.emojis.get('545628508962029569').toString());
 	}
 }
-*/
+module.exports = LeaveCommand;

@@ -1,12 +1,12 @@
-/*import HarunaClient from '../../client/HarunaClient';
-import { Argument, Control, Command } from 'discord-akairo';
-import { Message, MessageEmbed } from 'discord.js';
-import { stripIndents } from 'common-tags';
-import paginate from '../../../util/paginate';
-import timeString from '../../../util/timeString';
+//import HarunaClient from '../../client/HarunaClient';
+//import { Argument, Control, Command } from 'discord-akairo';
+const { Argument, Control, Command } = require('discord-akairo');
+const { MessageEmbed } = require('discord.js');
+const { paginate } = require('../../util/index.js');
+const { timeString } = require('../../util/index.js');
 
-export default class SkipCommand extends Command {
-	public constructor() {
+class SkipCommand extends Command {
+	constructor() {
 		super('skip', {
 			aliases: ['skip', '🚶', '🏃'],
 			description: {
@@ -23,7 +23,7 @@ export default class SkipCommand extends Command {
 					match: 'flag',
 					flag: ['--force', '-f']
 				},
-				Control.if((msg, args) => msg.member.roles.has((msg.client as HarunaClient).settings.get(msg.guild, 'djRole', undefined)) && args.force, [
+				Control.if((msg, args) => msg.member.roles.has((msg.client).settings.get(msg.guild.id, 'djRole', undefined)) && args.force, [
 					{
 						id: 'num',
 						match: 'rest',
@@ -42,9 +42,9 @@ export default class SkipCommand extends Command {
 		});
 	}
 
-	public async exec(message: Message, { num }: { num: number }) {
+	async exec(message, { num }) {
 		if (!message.member.voice || !message.member.voice.channel) {
-			return message.util!.reply('you have to be in a voice channel first, silly.');
+			return message.util.reply('you have to be in a voice channel first, silly.');
 		}
 		const queue = this.client.music.queues.get(message.guild.id);
 		let tracks;
@@ -54,24 +54,24 @@ export default class SkipCommand extends Command {
 		const skip = await queue.next(num);
 		if (!skip) {
 			await queue.stop();
-			return message.util!.send('Skipped the last playing song.');
+			return message.util.send('Skipped the last playing song.');
 		}
-		const decoded = await this.client.music.decode(tracks as any[]);
-		const totalLength = decoded.reduce((prev: number, song: any) => prev + song.info.length, 0); // tslint:disable-line
-		const paginated = paginate(decoded, 1, 10);
+		const decoded = await this.client.music.decode(tracks);
+		const totalLength = decoded.reduce((prev, song) => prev + song.info.length, 0); // tslint:disable-line
+		const paginated = paginate({items: decoded, page: 1, pageLength: 10});
 		let index = (paginated.page - 1) * 10;
 
 		const embed = new MessageEmbed()
 			.setAuthor(`${message.author.tag} (${message.author.id})`, message.author.displayAvatarURL())
-			.setDescription(stripIndents`
+			.setDescription(`
 				**Skipped songs**
 
-				${paginated.items.map(song => `**${++index}.** [${song.info.title}](${song.info.uri}) (${timeString(song.info.length)})`).join('\n')}
+				${paginated.items.map(song => `**${++index}.** [${song.info.title}](${song.info.uri}) (${timeString({seconds: song.info.length})})`).join('\n')}
 
-				**Total skipped time:** ${timeString(totalLength)}
+				**Total skipped time:** ${timeString({seconds: totalLength})}
 			`);
 
-		return message.util!.send(embed);
+		return message.util.send(embed);
 	}
 }
-*/
+module.exports = SkipCommand;

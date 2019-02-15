@@ -52,11 +52,11 @@ class PlayCommand extends Command {
 			await queue.add(...res.tracks.map(track => track.track));
 			msg = res.playlistInfo.name;
 		} else {
-			return message.util.send("I know you hate to hear that, but even searching the universe I couldn't find what you were looking for.");
+			return message.util.send("I couldn't find what you were looking for.");
 		}
 		if (!queue.player.playing && !queue.player.paused) await queue.start();
 
-		return message.util.send(`${this.client.emojis.get('543984872092336128')} **Queued up:** \`${msg}\``);
+		return message.util.send(`${this.client.emojis.get('545628508962029569')} **Queued up:** \`${msg}\``);
 	}
 }
 module.exports = PlayCommand;

@@ -43,6 +43,27 @@ const Util = {
         `${mute} mute${mute > 1 || mute === 0 ? 's' : ''}, ` +
         `${kick} kick${kick > 1 || kick === 0 ? 's' : ''}, ` +
         `and ${ban} ban${ban > 1 || ban === 0 ? 's' : ''}`);
+    },
+
+    paginate : ({ items, page = 1, pageLength = 10 }) => {
+        const maxPage = Math.ceil(items.length / pageLength);
+        if (page < 1) page = 1;
+        if (page > maxPage) page = maxPage;
+        const startIndex = (page - 1) * pageLength;
+    
+        return {
+            items: items.length > pageLength ? items.slice(startIndex, startIndex + pageLength) : items,
+            page,
+            maxPage,
+            pageLength
+        };
+    },
+    timeString : ({seconds, forceHours = false, ms = true}) => {
+        if (ms) seconds /= 1000;
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor(seconds % 3600 / 60);
+    
+        return `${forceHours || hours >= 1 ? `${hours}:` : ''}${hours >= 1 ? `0${minutes}`.slice(-2) : minutes}:${`0${Math.floor(seconds % 60)}`.slice(-2)}`;
     }
 };
 module.exports = Util;

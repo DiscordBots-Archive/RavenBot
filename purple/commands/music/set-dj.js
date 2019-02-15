@@ -1,8 +1,7 @@
-/*import { Command } from 'discord-akairo';
-import { Message, Role } from 'discord.js';
+const { Command } = require('discord-akairo');
 
-export default class SetDJRoleCommand extends Command {
-	public constructor() {
+class SetDJRoleCommand extends Command {
+	constructor() {
 		super('set-dj', {
 			aliases: ['set-dj', 'dj-role'],
 			description: {
@@ -24,9 +23,9 @@ export default class SetDJRoleCommand extends Command {
 		});
 	}
 
-	public async exec(message: Message, { role }: { role: Role }) {
-		this.client.settings.set(message.guild, 'djRole', role.id);
-		return message.util!.reply(`set DJ role to **${role.name}**`);
+	async exec(message, { role }) {
+		this.client.settings.set(message.guild.id, 'djRole', role.id);
+		return message.util.reply(`set DJ role to **${role.name}**`);
 	}
 }
-*/
+module.exports = SetDJRoleCommand;

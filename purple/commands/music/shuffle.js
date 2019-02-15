@@ -1,8 +1,8 @@
-/*import { Command } from 'discord-akairo';
-import { Message } from 'discord.js';
+const { Command } = require('discord-akairo');
 
-export default class ShuffleCommand extends Command {
-	public constructor() {
+
+class ShuffleCommand extends Command {
+	constructor() {
 		super('shuffle', {
 			aliases: ['shuffle', '🔀'],
 			description: {
@@ -14,14 +14,14 @@ export default class ShuffleCommand extends Command {
 		});
 	}
 
-	public async exec(message: Message) {
+	async exec(message) {
 		if (!message.member.voice || !message.member.voice.channel) {
-			return message.util!.reply('you have to be in a voice channel first, silly.');
+			return message.util.reply('you have to be in a voice channel first!');
 		}
 		const queue = this.client.music.queues.get(message.guild.id);
 		await queue.shuffle();
 
-		return message.util!.send('Shuffled the queue.');
+		return message.util.send('Shuffled the queue.');
 	}
 }
-*/
+module.exports = ShuffleCommand;
