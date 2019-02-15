@@ -39,18 +39,17 @@ class QueueCommand extends Command {
 
 		const embed = new MessageEmbed()
 			.setAuthor(`${message.author.tag} (${message.author.id})`, message.author.displayAvatarURL())
-			.setDescription(`
-				**Now playing:**
+			.setDescription(`**Now playing:** \n\n`+
 
-				**❯** [${decoded[0].info.title}](${decoded[0].info.uri}) (${timeString({seconds: current.position})}/${timeString({seconds: decoded[0].info.length})})
+				`**❯** [${decoded[0].info.title}](${decoded[0].info.uri}) (${timeString({seconds: current.position})}/${timeString({seconds: decoded[0].info.length})}) \n\n` +
 
-				**Song queue${paginated.page > 1 ? `, page ${paginated.page}` : ''}:**
+				`**Song queue${paginated.page > 1 ? `, page ${paginated.page}` : ''}:** \n\n` +
 
-				${paginated.items.length ? paginated.items.map(song => `**${++index}.** [${song.info.title}](${song.info.uri}) (${timeString({seconds: song.info.length})})`).join('\n') : 'No more songs in queue.'}
+				`${paginated.items.length ? paginated.items.map(song => `**${++index}.** [${song.info.title}](${song.info.uri}) (${timeString({seconds: song.info.length})})`).join('\n') : 'No more songs in queue.'} \n\n` +
 
-				**Total queue time:** ${timeString({seconds: totalLength})}
+				`**Total queue time:** ${timeString({seconds: totalLength})}
 			`);
-		if (paginated.maxPage > 1) embed.setFooter('Use queue <page> to view a specific page.');
+		if (paginated.maxPage > 1) embed.setFooter('Use queue <page> to view a specific page');
 
 		return message.util.send(embed);
 	}

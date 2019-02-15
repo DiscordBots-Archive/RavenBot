@@ -63,12 +63,11 @@ class SkipCommand extends Command {
 
 		const embed = new MessageEmbed()
 			.setAuthor(`${message.author.tag} (${message.author.id})`, message.author.displayAvatarURL())
-			.setDescription(`
-				**Skipped songs**
+			.setDescription(`**Skipped songs** \n\n` +
 
-				${paginated.items.map(song => `**${++index}.** [${song.info.title}](${song.info.uri}) (${timeString({seconds: song.info.length})})`).join('\n')}
+				`${paginated.items.map(song => `**${++index}.** [${song.info.title}](${song.info.uri}) (${timeString({seconds: song.info.length})})`).join('\n')} \n\n`
 
-				**Total skipped time:** ${timeString({seconds: totalLength})}
+				`**Total skipped time:** ${timeString({seconds: totalLength})}
 			`);
 
 		return message.util.send(embed);

@@ -15,12 +15,12 @@ class PauseCommand extends Command {
 
 	async exec(message) {
 		if (!message.member.voice || !message.member.voice.channel) {
-			return message.util.reply('you have to be in a voice channel first, silly.');
+			return message.util.reply('*you have to be in a voice channel first!*');
 		}
 		const queue = this.client.music.queues.get(message.guild.id);
 		await queue.player.pause();
 
-		return message.util.send('Paused the queue.');
+		return message.util.send('*Paused the queue*');
 	}
 }
 module.exports = PauseCommand;
