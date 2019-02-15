@@ -32,7 +32,7 @@ class RemoveCommand extends Command {
 		const decoded = await this.client.music.decode([tracks[num]]);
 		queue.remove(tracks[num]);
 
-		return message.util.send(`${this.client.emojis.get('479430354759843841')} **Removed:** \`${decoded[0].info.title}\``);
+		return message.util.send(`${this.client.emojis.get('545628508962029569')} **Removed:** \`${decoded[0].info.title}\``);
 	}
 }
 module.exports = RemoveCommand;
