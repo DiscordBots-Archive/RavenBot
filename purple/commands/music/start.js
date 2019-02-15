@@ -33,7 +33,7 @@ class StartCommand extends Command {
 		const queue = this.client.music.queues.get(message.guild.id);
 		if (!message.guild.me.voice || !message.guild.me.voice.channel || force) {
 			await queue.player.join(message.member.voice.channel.id);
-			message.util.send(this.client.emojis.get('545628508962029569'));
+			message.util.send(`${this.client.emojis.get('545628508962029569')}`);
 		}
 		if ((!queue.player.playing && !queue.player.paused) || force) await queue.start();
 	}
