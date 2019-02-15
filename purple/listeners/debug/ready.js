@@ -1,5 +1,5 @@
 const { Listener } = require('discord-akairo');
-const moment = require('moment');
+const { Rejects, ReferenceType } = require('rejects');
 
 class ReadyListener extends Listener {
 	constructor() {
@@ -37,6 +37,17 @@ class ReadyListener extends Listener {
 				};
 			};
 		}, 300000);
+
+		const players = await this.client.storage.get('players', { type: ReferenceType.ARRAY });
+		if (players) {
+			for (const player of players) {
+				if (player.channel_id) {
+					const queue = this.client.music.queues.get(player.guild_id);
+					await queue.player.join(player.channel_id);
+				}
+			}
+			await this.client.music.queues.start();
+		}
 	};
 }
 module.exports = ReadyListener;

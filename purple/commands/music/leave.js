@@ -24,7 +24,7 @@ class LeaveCommand extends Command {
 
 	async exec(message, { clear }) {
 		if (!message.member.voice || !message.member.voice.channel) {
-			return message.util.reply('you have to be in a voice channel first, silly.');
+			return message.util.reply('*you have to be in a voice channel first!*');
 		}
 		const DJ = message.member.roles.has(this.client.settings.get(message.guild.id, 'djRole', undefined));
 		const queue = this.client.music.queues.get(message.guild.id);
@@ -33,7 +33,7 @@ class LeaveCommand extends Command {
 		await queue.player.destroy();
 		if (message.guild.me.voice || message.guild.me.voice.channel) await queue.player.leave();
 
-		return message.util.send(this.client.emojis.get('545628508962029569').toString());
+		return message.util.send(this.client.emojis.get('545628508962029569'));
 	}
 }
 module.exports = LeaveCommand;
