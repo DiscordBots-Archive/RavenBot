@@ -1,5 +1,3 @@
-//import HarunaClient from '../../client/HarunaClient';
-//import { Argument, Control, Command } from 'discord-akairo';
 const { Argument, Control, Command } = require('discord-akairo');
 const { MessageEmbed } = require('discord.js');
 const { paginate } = require('../../util/index.js');
@@ -23,7 +21,7 @@ class SkipCommand extends Command {
 					match: 'flag',
 					flag: ['--force', '-f']
 				},
-				Control.if((msg, args) => msg.member.roles.has((msg.client).settings.get(msg.guild.id, 'djRole', undefined)) && args.force, [
+				Control.if((msg, args) => msg.member.roles.has(this.client.settings.get(msg.guild.id, 'djRole', undefined)) && args.force, [
 					{
 						id: 'num',
 						match: 'rest',
@@ -63,11 +61,11 @@ class SkipCommand extends Command {
 
 		const embed = new MessageEmbed()
 			.setAuthor(`${message.author.tag} (${message.author.id})`, message.author.displayAvatarURL()).setColor('#8387db')
-			.setDescription(`**Skipped songs** \n\n` +
+			.setDescription(`**Skipped songs**
 
-				`${paginated.items.map(song => `**${++index}.** [${song.info.title}](${song.info.uri}) (${timeString({seconds: song.info.length})})`).join('\n')} \n\n`
+				${paginated.items.map(song => `**${++index}.** [${song.info.title}](${song.info.uri}) (${timeString({seconds: song.info.length})})`).join('\n')}
 
-				`**Total skipped time:** ${timeString({seconds: totalLength})}
+				**Total skipped time:** ${timeString({seconds: totalLength})}
 			`);
 
 		return message.util.send(embed);
