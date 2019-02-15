@@ -2,17 +2,14 @@ const { AkairoClient, CommandHandler, InhibitorHandler, ListenerHandler, SQLiteP
 const { Counter, collectDefaultMetrics, register } = require('prom-client');
 const { logger, createLogger, transports, format } = require('winston');
 const DailyRotateFile = require('winston-daily-rotate-file');
-const { MessageEmbed, Util } = require('discord.js');
+const { Rejects, ReferenceType } = require('rejects');
+const { Client: Lavaqueue } = require('lavaqueue');
 const { createServer } = require('http');
 const Sequelize = require('sequelize');
-const ytdl = require('ytdl-core');
 const moment = require('moment');
 const { parse } = require('url');
 const sqlite = require('sqlite');
 const Raven = require('raven');
-const queue = new Map();
-const { Client: Lavaqueue } = require('lavaqueue');
-const { Rejects, ReferenceType } = require('rejects')
 
 class PurpleClient extends AkairoClient {
     constructor() {
@@ -66,9 +63,8 @@ class PurpleClient extends AkairoClient {
                 return Promise.resolve();
             }
         });
-        this.redis = this.music.queues.redis;
 
-        this.storage = new Rejects(this.redis);
+        this.storage = new Rejects(this.music.queues.redis);
         this.on('raw', async (packet) => {
 			switch (packet.t) {
 				case 'VOICE_STATE_UPDATE':
@@ -91,64 +87,9 @@ class PurpleClient extends AkairoClient {
 				case 'MESSAGE_CREATE':
 					this.prometheus.messagesCounter.inc();
 					break;
-				default:
-					break;
+				default: break;
 			}
 		});
-        
-        this.handleVideo = async ({message, video, voiceChannel, playlist = false}) => {
-            this.Queue = queue.get(message.guild.id);
-            const song = {
-                id: video.id,
-                title: Util.escapeMarkdown(video.title),
-                url: `https://www.youtube.com/watch?v=${video.id}`
-            };
-            if (!this.Queue) {
-                const queueConstruct = {
-                    textChannel: message.channel,
-                    voiceChannel: voiceChannel,
-                    connection: null,
-                    songs: [],
-                    volume: 5,
-                    playing: true
-                };
-                queue.set(message.guild.id, queueConstruct);
-                queueConstruct.songs.push(song);
-        
-                try {
-                    const connection = await voiceChannel.join();
-                    queueConstruct.connection = connection;
-                    this.play({guild: message.guild, song: queueConstruct.songs[0]});
-                } catch (error) {
-                    console.error(`I could not join the voice channel: ${error}`);
-                    queue.delete(message.guild.id);
-                    return message.channel.send(`I could not join the voice channel: ${error}`);
-                }
-            } else {
-                this.Queue.songs.push(song);
-                if (playlist) return;
-                else return message.channel.send(`*Queued up : **${song.title}**\u200b*`);
-            }
-        }
-        
-        this.play = async ({guild, song}) => {
-            this.Queue = queue.get(guild.id);
-        
-            if (!song) {
-                this.Queue.voiceChannel.leave();
-                queue.delete(guild.id);
-                return;
-            }
-        
-            const dispatcher = this.Queue.connection.play(ytdl(song.url, { quality: 'highestaudio' })).on('end', reason => {
-                if (reason === 'Stream is not generating quickly enough.') console.log('Song ended.'); else console.log(reason);
-                this.Queue.songs.shift();
-                this.play({guild: guild, song: this.Queue.songs[0]});
-            }).on('error', error => console.error(error));
-            dispatcher.setVolumeLogarithmic(this.Queue.volume / 5);
-        
-            this.Queue.textChannel.send(`*🎶 Now playing: **${song.title}**\u200b*`);
-        }
 
         this.logger = createLogger({
             format: format.combine(
