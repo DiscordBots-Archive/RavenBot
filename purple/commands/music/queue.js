@@ -39,15 +39,15 @@ class QueueCommand extends Command {
 
 		const embed = new MessageEmbed()
 			.setAuthor(`${message.author.tag} (${message.author.id})`, message.author.displayAvatarURL()).setColor('#8387db')
-			.setDescription(`**Now Playing** \n\n`+
+			.setDescription(`**NOW PLAYING** \n\n`+
 
 				`**❯** [${decoded[0].info.title}](${decoded[0].info.uri}) (${timeString({seconds: current.position})}/${timeString({seconds: decoded[0].info.length})}) \n\n` +
 
-				`**Song Queue${paginated.page > 1 ? `, Page ${paginated.page}` : ''}** \n\n` +
+				`**SONG QUEUE${paginated.page > 1 ? `, PAGE ${paginated.page}` : ''}** \n\n` +
 
 				`${paginated.items.length ? paginated.items.map(song => `**${++index}.** [${song.info.title}](${song.info.uri}) (${timeString({seconds: song.info.length})})`).join('\n') : 'No Queue'} \n\n` +
 
-				`**Total Queue Time** ${timeString({seconds: totalLength})}
+				`**TOTAL QUEUE TIME** ${timeString({seconds: totalLength})}
 			`);
 		if (paginated.maxPage > 1) embed.setFooter('Use queue <page> to view a specific page');
 
