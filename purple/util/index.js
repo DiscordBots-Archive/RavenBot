@@ -58,6 +58,7 @@ const Util = {
             pageLength
         };
     },
+    
     timeString : ({seconds, forceHours = false, ms = true}) => {
         if (ms) seconds /= 1000;
         const hours = Math.floor(seconds / 3600);

@@ -42,7 +42,7 @@ class SkipCommand extends Command {
 
 	async exec(message, { num }) {
 		if (!message.member.voice || !message.member.voice.channel) {
-			return message.util.reply('*you have to be in a voice channel first!*');
+			return message.util.reply(`you have to be in a voice channel first ${this.client.emojis.get('545968755423838209')}`);
 		}
 		const queue = this.client.music.queues.get(message.guild.id);
 		let tracks;
@@ -56,7 +56,7 @@ class SkipCommand extends Command {
 		}
 		const decoded = await this.client.music.decode(tracks);
 		const totalLength = decoded.reduce((prev, song) => prev + song.info.length, 0);
-		const paginated = paginate({items: decoded, page: 1, pageLength: 10});
+		const paginated = paginate({ items: decoded, page: 1, pageLength: 10 });
 		let index = (paginated.page - 1) * 10;
 
 		const embed = new MessageEmbed()

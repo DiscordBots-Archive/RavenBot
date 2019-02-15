@@ -1,6 +1,7 @@
 const { Argument, Command } = require('discord-akairo');
 const url = require('url');
 const path = require('path');
+const { parse } = require('url');
 
 class PlayCommand extends Command {
 	constructor() {
@@ -32,15 +33,21 @@ class PlayCommand extends Command {
 
 	async exec(message, { query, unshift }) {
 		if (!message.member.voice || !message.member.voice.channel) {
-			return message.util.reply('you have to be in a voice channel first, silly.');
+			return message.util.reply(`you have to be in a voice channel first ${this.client.emojis.get('545968755423838209')}`);
 		} else if (!message.member.voice.channel.joinable) {
-			return message.util.reply("I don't seem to have permission to enter this voice channel.");
+			return message.util.reply(`I don't have permission to enter this voice channel ${this.client.emojis.get('545968755423838209')}`);
 		} else if (!message.member.voice.channel.speakable) {
-			return message.util.reply("I don't seem to have permission to talk in this voice channel.");
+			return message.util.reply(`I don't have permission to talk in this voice channel ${this.client.emojis.get('545968755423838209')}`);
 		}
-
+		if (!query && message.attachments.first()) {
+			query = message.attachments.first().url;
+			if (!['.mp3', '.ogg', '.flac', '.m4a'].includes(path.parse(url.parse(query).path).ext)) return;
+		} else if (!query) {
+			return;
+		}
+		if (!['http:', 'https:'].includes(url.parse(query).protocol)) query = `ytsearch:${query}`;
 		// TODO: remove hack
-		const res = await this.client.music.load(`ytsearch:${query}`);
+		const res = await this.client.music.load(query);
 		const queue = this.client.music.queues.get(message.guild.id);
 		if (!message.guild.me.voice.channel) await queue.player.join(message.member.voice.channel.id);
 		let msg;
@@ -52,7 +59,7 @@ class PlayCommand extends Command {
 			await queue.add(...res.tracks.map(track => track.track));
 			msg = res.playlistInfo.name;
 		} else {
-			return message.util.send("I couldn't find what you were looking for.");
+			return message.util.send("I couldn't find what you were looking for");
 		}
 		if (!queue.player.playing && !queue.player.paused) await queue.start();
 

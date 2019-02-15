@@ -16,7 +16,7 @@ class ShuffleCommand extends Command {
 
 	async exec(message) {
 		if (!message.member.voice || !message.member.voice.channel) {
-			return message.util.reply('*you have to be in a voice channel first!*');
+			return message.util.reply(`you have to be in a voice channel first ${this.client.emojis.get('545968755423838209')}`);
 		}
 		const queue = this.client.music.queues.get(message.guild.id);
 		await queue.shuffle();

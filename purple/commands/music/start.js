@@ -24,11 +24,11 @@ class StartCommand extends Command {
 
 	async exec(message, { force }) {
 		if (!message.member.voice || !message.member.voice.channel) {
-			return message.util.reply('*you have to be in a voice channel first!*');
+			return message.util.reply(`you have to be in a voice channel first ${this.client.emojis.get('545968755423838209')}`);
 		} else if (!message.member.voice.channel.joinable) {
-			return message.util.reply("I don't seem to have permission to enter this voice channel.");
+			return message.util.reply(`I don't have permission to enter this voice channel ${this.client.emojis.get('545968755423838209')}`);
 		} else if (!message.member.voice.channel.speakable) {
-			return message.util.reply("I don't seem to have permission to talk in this voice channel.");
+			return message.util.reply(`I don't have permission to talk in this voice channel ${this.client.emojis.get('545968755423838209')}`);
 		}
 		const queue = this.client.music.queues.get(message.guild.id);
 		if (!message.guild.me.voice || !message.guild.me.voice.channel || force) {
