@@ -30,7 +30,7 @@ class LeaveCommand extends Command {
 		const queue = this.client.music.queues.get(message.guild.id);
 		if (clear && DJ) await queue.clear();
 		await queue.player.stop();
-		await queue.player.destroy();
+		//await queue.player.destroy();
 		if (message.guild.me.voice || message.guild.me.voice.channel) await queue.player.leave();
 
 		return message.util.send(`${this.client.emojis.get('545628508962029569')}`);
