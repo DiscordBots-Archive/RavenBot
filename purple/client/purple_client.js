@@ -46,7 +46,7 @@ class PurpleClient extends AkairoClient {
         });
 
         this.music = new Lavaqueue({
-            userID: '523848993076150304',
+            userID: process.env.CLIENT_ID,
             password: 'youshallnotpass',
             hosts: {
                 rest: 'http://127.0.0.1:2333',
@@ -68,7 +68,7 @@ class PurpleClient extends AkairoClient {
         this.on('raw', async (packet) => {
 			switch (packet.t) {
 				case 'VOICE_STATE_UPDATE':
-					if (packet.d.user_id !== '523848993076150304') return;
+					if (packet.d.user_id !== process.env.CLIENT_ID) return;
 					this.music.voiceStateUpdate(packet.d);
 					const players = await this.storage.get('players', { type: ReferenceType.ARRAY });
 					let index = 0;
