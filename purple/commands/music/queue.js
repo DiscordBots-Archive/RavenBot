@@ -39,15 +39,15 @@ class QueueCommand extends Command {
 
 		const embed = new MessageEmbed()
 			.setAuthor(`${message.author.tag} (${message.author.id})`, message.author.displayAvatarURL()).setColor('#8387db')
-			.setDescription(`**Now playing:** \n\n`+
+			.setDescription(`**Now Playing:** \n\n`+
 
 				`**❯** [${decoded[0].info.title}](${decoded[0].info.uri}) (${timeString({seconds: current.position})}/${timeString({seconds: decoded[0].info.length})}) \n\n` +
 
-				`**Song queue${paginated.page > 1 ? `, page ${paginated.page}` : ''}:** \n\n` +
+				`**Song Queue${paginated.page > 1 ? `, Page ${paginated.page}` : ''}:** \n\n` +
 
-				`${paginated.items.length ? paginated.items.map(song => `**${++index}.** [${song.info.title}](${song.info.uri}) (${timeString({seconds: song.info.length})})`).join('\n') : 'No more songs in queue.'} \n\n` +
+				`${paginated.items.length ? paginated.items.map(song => `**${++index}.** [${song.info.title}](${song.info.uri}) (${timeString({seconds: song.info.length})})`).join('\n') : 'No Queue'} \n\n` +
 
-				`**Total queue time:** ${timeString({seconds: totalLength})}
+				`**Total Queue Time:** ${timeString({seconds: totalLength})}
 			`);
 		if (paginated.maxPage > 1) embed.setFooter('Use queue <page> to view a specific page');
 
