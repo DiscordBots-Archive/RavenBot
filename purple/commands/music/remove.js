@@ -3,7 +3,7 @@ const { Argument, Command } = require('discord-akairo');
 class RemoveCommand extends Command {
 	constructor() {
 		super('remove', {
-			aliases: ['remove', 'rm', '📤'],
+			aliases: ['remove', 'rm'],
 			description: {
 				content: 'Removes a song from the queue.',
 				usage: '[num]',
@@ -28,11 +28,18 @@ class RemoveCommand extends Command {
 		}
 		const queue = this.client.music.queues.get(message.guild.id);
 		const tracks = await queue.tracks();
-		num = num >= 1 ? num - 1 : tracks.length - (~num + 1);
-		const decoded = await this.client.music.decode([tracks[num]]);
-		queue.remove(tracks[num]);
 
-		return message.util.send(`${this.client.emojis.get('545628508962029569')} **Removed:** \`${decoded[0].info.title}\``);
+		try {
+			num = num >= 1 ? num - 1 : tracks.length - (~num + 1);
+		
+			const decoded = await this.client.music.decode([tracks[num]]);
+	
+			queue.remove(tracks[num]);
+	
+			return message.util.send(`${this.client.emojis.get('545628508962029569')} **Removed:** \`${decoded[0].info.title}\``);
+		} catch (error) {}
+		
+
 	}
 }
 module.exports = RemoveCommand;
