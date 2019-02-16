@@ -31,7 +31,7 @@ class QueueCommand extends Command {
 		const queue = this.client.music.queues.get(message.guild.id);
 		const current = await queue.current();
 		const tracks = [(current || { track: null }).track].concat(await queue.tracks()).filter(track => track);
-		if (!tracks.length) return message.util.send(`**No Queue:** ${this.client.emojis.get('525237247599968278')}`);
+		if (!tracks.length) return message.util.send(`**No Queue** ${this.client.emojis.get('525237247599968278')}`);
 		const decoded = await this.client.music.decode(tracks);
 		const totalLength = decoded.reduce((prev, song) => prev + song.info.length, 0);
 		const paginated = paginate({items: decoded.slice(1), page});

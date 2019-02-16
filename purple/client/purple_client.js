@@ -46,15 +46,16 @@ class PurpleClient extends AkairoClient {
         });
 
         this.music = new Lavaqueue({
+
             userID: process.env.CLIENT_ID,
-            password: 'youshallnotpass',
+            password: process.env.LAVALINK_PASS,
             hosts: {
-                rest: 'http://127.0.0.1:2333',
-                ws: 'http://127.0.0.1:2333',
+                rest: process.env.LAVALINK_REST,
+                ws: process.env.LAVALINK_WS,
                 redis: {
-                    port: 6379,
-                    host: '127.0.0.1',
-                    db: 0
+                    port: process.env.REDIS_PORT,
+                    host: process.env.REDIS_HOST,
+                    db: process.env.REDIS_DB
                 }
             },
             send: async (guild, packet) => {

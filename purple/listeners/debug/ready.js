@@ -13,14 +13,16 @@ class ReadyListener extends Listener {
 	async exec() {
 
 		this.client.logger.info(`[READY] ${this.client.user.tag} (${this.client.user.id})`);
-		
-		const countChannel = this.client.settings.get(this.client.user.id, 'countChannel', undefined);
-		if (countChannel) {
-			let channel = this.client.channels.get(countChannel);
-			channel.messages.fetch(channel.lastMessageID).then(async msg => {
-				await this.client.settings.set(channel.id, 'authorID', msg.author.id);
-				await this.client.settings.set(channel.id, 'messageContent', msg.content);
-			}).catch(error => {});
+
+		for (const guild of this.client.guilds.values()) {
+			const countChannel = this.client.settings.get(guild.id, 'countChannel', undefined);
+			if (countChannel) {
+				let channel = this.client.channels.get(countChannel);
+				channel.messages.fetch(channel.lastMessageID).then(async msg => {
+					await this.client.settings.set(channel.id, 'authorID', msg.author.id);
+					await this.client.settings.set(channel.id, 'messageContent', msg.content);
+				}).catch(error => {});
+			};
 		};
 
 		setInterval(async () => {
@@ -36,7 +38,7 @@ class ReadyListener extends Listener {
 					};
 				};
 			};
-		}, 300000);
+		}, 60000);
 
 		const players = await this.client.storage.get('players', { type: ReferenceType.ARRAY });
 		if (players) {
@@ -47,7 +49,7 @@ class ReadyListener extends Listener {
 				}
 			}
 			await this.client.music.queues.start();
-		}
+		};
 	};
-}
+};
 module.exports = ReadyListener;

@@ -21,7 +21,7 @@ class ShuffleCommand extends Command {
 		const queue = this.client.music.queues.get(message.guild.id);
 		await queue.shuffle();
 
-		return message.util.send(`**Shuffled Queue:** ${this.client.emojis.get('545870932019773480')}`);
+		return message.util.send(`**Shuffled Queue** ${this.client.emojis.get('545870932019773480')}`);
 	}
 }
 module.exports = ShuffleCommand;

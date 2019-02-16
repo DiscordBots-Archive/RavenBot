@@ -28,9 +28,14 @@ class CountingCommand extends Command {
     }
 
     async exec(message, { channel }) {
-
-        this.client.settings.set(this.client.user.id, 'countChannel', channel.id);
-        return message.util.reply(`*set count channel to ${channel}*`);
+        
+        channel.messages.fetch(channel.lastMessageID).then(async msg => {console.log(msg.author.tag);
+            this.client.settings.set(message.guild.id, 'countChannel', channel.id);
+            this.client.settings.set(channel.id, 'authorID', msg.author.id);
+            this.client.settings.set(channel.id, 'messageContent', msg.content);
+            return message.util.reply(`*set count channel to ${channel} and last input is ${msg.content}*`);
+        }).catch(error => {console.log(error)});
+        
         
     }
 }
