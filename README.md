@@ -3,7 +3,7 @@
 
 I'll get into filling this out later, gotta stay tuned for now~
 
-[![JDA guild](https://discordapp.com/api/guilds/524672414261444623/embed.png?style=banner2)](https://discord.gg/jtAWrzU)
+[![ʙᴜɪʟᴛ ᴏᴘᴇʀᴀᴛᴇ ᴛʀᴀɴsғᴇʀ](https://discordapp.com/api/guilds/524672414261444623/embed.png?style=banner2)](https://discord.gg/PuGpC8W)
 
 ## Author
 
