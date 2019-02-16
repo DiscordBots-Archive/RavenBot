@@ -54,7 +54,7 @@ class SearchCommand extends Command {
 
             const embed = new MessageEmbed().setAuthor(`${message.author.tag} (${message.author.id})`, message.author.displayAvatarURL())
             .addField(`SEARCH RESULT`, `${paginated.items.map(track => `**${++index}.** ${track.info.title}`).join('\n\n')}`)
-            .setColor('#8387db')
+            .setColor('#8387db').setFooter('Enter Number Only')
             const m = await message.channel.send(embed);
 
             const responses = await message.channel.awaitMessages(msg => msg.author.id === message.author.id && msg.content > 0 && msg.content < 11, {
