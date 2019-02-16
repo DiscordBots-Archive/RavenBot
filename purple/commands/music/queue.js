@@ -47,8 +47,7 @@ class QueueCommand extends Command {
 
 				`${paginated.items.length ? paginated.items.map(song => `**${++index}.** [${song.info.title}](${song.info.uri}) (${timeString({seconds: song.info.length})})`).join('\n') : 'No Queue'} \n\n` +
 
-				`**TOTAL QUEUE TIME** ${timeString({seconds: totalLength})}
-			`);
+				`**TOTAL QUEUE TIME~ ${timeString({seconds: totalLength})}**`);
 		if (paginated.maxPage > 1) embed.setFooter('Use queue <page> to view a specific page');
 
 		return message.util.send(embed);

@@ -6,7 +6,7 @@ const { timeString } = require('../../util/index.js');
 class SkipCommand extends Command {
 	constructor() {
 		super('skip', {
-			aliases: ['skip', '🚶', '🏃'],
+			aliases: ['skip'],
 			description: {
 				content: 'Skips the amount of songs you specify (defaults to 1)',
 				usage: '<num>',
@@ -65,8 +65,7 @@ class SkipCommand extends Command {
 
 				`${paginated.items.map(song => `**${++index}.** [${song.info.title}](${song.info.uri}) (${timeString({seconds: song.info.length})})`).join('\n')} \n\n` +
 
-				`**SKIPPED TIME** ${timeString({seconds: totalLength})}
-			`);
+				`**SKIPPED TIME~ ${timeString({seconds: totalLength})}**`);
 
 		return message.util.send(embed);
 	}
