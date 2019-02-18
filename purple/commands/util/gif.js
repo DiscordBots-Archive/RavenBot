@@ -1,7 +1,7 @@
 const { Command } = require('discord-akairo');
-const { MessageEmbed, MessageAttachment } = require('discord.js');
+const { MessageAttachment } = require('discord.js');
 const GphApiClient = require('giphy-js-sdk-core');
-const gif = GphApiClient("N0PLpHHzMvsKB0Y4k9w4amOaeWTHuoBX");
+const gif = GphApiClient(process.env.GHIPY);
 
 class GifCommand extends Command {
     constructor() {
