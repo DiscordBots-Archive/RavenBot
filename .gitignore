@@ -12,3 +12,4 @@ package-lock.json
 start.bat
 Lavalink.jar
 logs/
+application.yml
