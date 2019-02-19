@@ -8,7 +8,7 @@ class GuildsCommand extends Command {
             ownerOnly: true,
             clientPermissions: ['ATTACH_FILES']
         });
-    }
+    };
 
     async exec(message) {
         const guilds = this.client.guilds;

@@ -11,7 +11,7 @@ class StopCommand extends Command {
 			channel: 'guild',
 			ratelimit: 2
 		});
-	}
+	};
 
 	async exec(message) {
 		if (!message.member.voice || !message.member.voice.channel) {
@@ -23,6 +23,6 @@ class StopCommand extends Command {
 		else await queue.player.pause();
 
 		return message.util.send(`**${DJ ? 'Stopped' : 'Paused'} Queue** ${this.client.emojis.get('545873319426260993')}`);
-	}
-}
+	};
+};
 module.exports = StopCommand;
