@@ -10,6 +10,7 @@ class ResumeListener extends Listener {
 	};
 
 	async exec(events) {
+		
 		this.client.logger.info(`[RESUME] (replayed ${events} events)`);
 	};
 };
