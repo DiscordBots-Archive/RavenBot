@@ -23,14 +23,17 @@ class AvatarCommand extends Command {
                }
            ]
         });
-    }
+    };
 
     async exec(message, args) {
         const member = args.member;
         const embed = new MessageEmbed().setColor('RANDOM')
         .setTitle(member.user.tag)
         .setURL(member.user.avatarURL())
-        .setImage(member.user.displayAvatarURL({ size: 2048 }))
+        .setImage(member.user.displayAvatarURL({ size: 2048 }));
+        if (message.channel.type === 'dm' || !(message.channel).permissionsFor(message.guild.me).has(['ADD_REACTIONS', 'MANAGE_MESSAGES'], false)) {
+			return message.util.send({ embed });
+		};
         const msg = await message.util.send({ embed });
 		msg.react('🗑');
 		let react;
@@ -41,13 +44,10 @@ class AvatarCommand extends Command {
 			);
 		} catch (error) {
 			msg.reactions.removeAll();
-
 			return message;
-		}
+		};
 		react.first().message.delete();
-
 		return message;
-    }
-}
-
+    };
+};
 module.exports = AvatarCommand;
