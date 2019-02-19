@@ -24,7 +24,7 @@ class QueueCommand extends Command {
 				}
 			]
 		});
-	}
+	};
 
 	async exec(message, { page }) {
 
@@ -49,6 +49,6 @@ class QueueCommand extends Command {
 			embed.setFooter(`Time~ ${timeString({seconds: totalLength})}${decoded.length > 10 ? `, Songs~ ${decoded.length}` : ``}`, message.guild.iconURL());
 
 		return message.util.send(embed);
-	}
-}
+	};
+};
 module.exports = QueueCommand;
