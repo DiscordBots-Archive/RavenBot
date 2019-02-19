@@ -31,9 +31,7 @@ class AvatarCommand extends Command {
         .setTitle(member.user.tag)
         .setURL(member.user.avatarURL())
         .setImage(member.user.displayAvatarURL({ size: 2048 }));
-        if (message.channel.type === 'dm' || !(message.channel).permissionsFor(message.guild.me).has(['ADD_REACTIONS', 'MANAGE_MESSAGES'], false)) {
-			return message.util.send({ embed });
-		};
+
         const msg = await message.util.send({ embed });
 		msg.react('🗑');
 		let react;
