@@ -32,7 +32,7 @@ class SearchCommand extends Command {
 				}
 			]
 		});
-	}
+	};
 
 	async exec(message, { query, unshift }) {
 		if (!message.member.voice || !message.member.voice.channel) {
@@ -41,7 +41,7 @@ class SearchCommand extends Command {
 			return message.util.reply(`I don't have permission to enter this voice channel ${this.client.emojis.get('545968755423838209')}`);
 		} else if (!message.member.voice.channel.speakable) {
 			return message.util.reply(`I don't have permission to talk in this voice channel ${this.client.emojis.get('545968755423838209')}`);
-		}
+		};
         
 		const res = await this.client.music.load(`ytsearch:${query}`);
 		const queue = this.client.music.queues.get(message.guild.id);
@@ -64,7 +64,7 @@ class SearchCommand extends Command {
 
             if (!responses || responses.size !== 1) {
                 return m.delete();
-            }
+            };
             const response = responses.first();
 
             const input = parseInt(response.content);
@@ -75,10 +75,10 @@ class SearchCommand extends Command {
 
 		} else {
 			return message.util.send("I couldn't find what you were looking for");
-        }
+        };
         if (!queue.player.playing && !queue.player.paused) await queue.start();
 
         return message.util.send(`${this.client.emojis.get('545628508962029569')} **Queued up:** \`${msg}\``);
-	}
-}
+	};
+};
 module.exports = SearchCommand;
