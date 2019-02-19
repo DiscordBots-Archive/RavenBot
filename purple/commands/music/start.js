@@ -20,7 +20,7 @@ class StartCommand extends Command {
 				}
 			]
 		});
-	}
+	};
 
 	async exec(message, { force }) {
 		if (!message.member.voice || !message.member.voice.channel) {
@@ -29,13 +29,13 @@ class StartCommand extends Command {
 			return message.util.reply(`I don't have permission to enter this voice channel ${this.client.emojis.get('545968755423838209')}`);
 		} else if (!message.member.voice.channel.speakable) {
 			return message.util.reply(`I don't have permission to talk in this voice channel ${this.client.emojis.get('545968755423838209')}`);
-		}
+		};
 		const queue = this.client.music.queues.get(message.guild.id);
 		if (!message.guild.me.voice || !message.guild.me.voice.channel || force) {
 			await queue.player.join(message.member.voice.channel.id);
 			message.util.send(`**Started** ${this.client.emojis.get('545628508962029569')}`);
-		}
+		};
 		if ((!queue.player.playing && !queue.player.paused) || force) await queue.start();
-	}
-}
+	};
+};
 module.exports = StartCommand;
