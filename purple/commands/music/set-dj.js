@@ -21,11 +21,11 @@ class SetDJRoleCommand extends Command {
 				}
 			]
 		});
-	}
+	};
 
 	async exec(message, { role }) {
 		this.client.settings.set(message.guild.id, 'djRole', role.id);
 		return message.util.reply(`set DJ role to **${role.name}**`);
-	}
-}
+	};
+};
 module.exports = SetDJRoleCommand;
