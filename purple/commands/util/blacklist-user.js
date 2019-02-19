@@ -33,7 +33,7 @@ class BlacklistUserCommand extends Command {
 			else this.client.settings.set('global', 'blacklist', blacklist);
 
 			return message.util.send(`*${user.tag}, have you realized Purple's greatness? You've got good eyes~*`);
-		}
+		};
 
 		blacklist.push(user.id);
 		this.client.settings.set('global', 'blacklist', blacklist);

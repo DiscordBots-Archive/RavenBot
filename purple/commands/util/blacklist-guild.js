@@ -33,7 +33,7 @@ class BlacklistGuildCommand extends Command {
 			else this.client.settings.set('global', 'blacklist-guild', blacklist);
 
 			return message.util.send(`*${guild.name}, have you realized Purple's greatness? You've got good eyes~*`);
-		}
+		};
 
 		blacklist.push(guild.id);
 		this.client.settings.set('global', 'blacklist-guild', blacklist);
