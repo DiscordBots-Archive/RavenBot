@@ -32,7 +32,7 @@ class HelpCommand extends Command {
 				.setDescription(`*A list of available commands. For additional info on a command: \`${prefix}help <command>\`*`);
 
 			for (const category of this.handler.categories.values()) {
-				embed.addField(`❯ ${category.id.replace(/(\b\w)/gi, lc => lc.toUpperCase())}`, `${category.filter(cmd => cmd.aliases.length > 0).map(cmd => `*\u200b**${prefix}${cmd.aliases[0]}** - ${cmd.description.content.toLowerCase().replace(/\n/g, '\n \u200b ').replace(/`/g, '').replace(/\*/g, '')}*`).join('\n')}`);
+				embed.addField(`❯ ${category.id.replace(/(\b\w)/gi, lc => lc.toUpperCase())}`, `${category.filter(cmd => cmd.aliases.length > 0).map(cmd => `*\u200b**${cmd.aliases[0]}**\u200b*`).join(', ')}`);
 			}
 
 			return message.util.send(embed);
