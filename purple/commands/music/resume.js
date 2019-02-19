@@ -11,7 +11,7 @@ class ResumeCommand extends Command {
 			channel: 'guild',
 			ratelimit: 2
 		});
-	}
+	};
 
 	async exec(message) {
 		if (!message.member.voice || !message.member.voice.channel) {
@@ -21,6 +21,6 @@ class ResumeCommand extends Command {
 		await queue.player.pause(false);
 
 		return message.util.send(`**Resumed** ${this.client.emojis.get('545870932019773480')}`);
-	}
-}
+	};
+};
 module.exports = ResumeCommand;
