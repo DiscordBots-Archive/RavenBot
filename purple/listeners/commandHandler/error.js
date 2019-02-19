@@ -10,7 +10,7 @@ class CommandErrorListener extends Listener {
 		});
 	};
 
-	exec(error, message, command) { console.log(error)
+	exec(error, message, command) { console.log(error);
 
 		this.client.logger.error(`[COMMAND ERROR] ${error.message}`, error.stack);
 
