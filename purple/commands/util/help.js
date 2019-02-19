@@ -43,8 +43,8 @@ class HelpCommand extends Command {
 			.setTitle(`\`${command.aliases[0]} ${command.description.usage ? command.description.usage : ''}\``)
 			.addField('❯ Description', command.description.content || '\u200b');
 
-		if (command.aliases.length > 1) embed.addField('❯ Aliases', `\`${command.aliases.join('` `')}\``, true);
-		if (command.description.examples && command.description.examples.length) embed.addField('❯ Examples', `\`${command.aliases[0]} ${command.description.examples.join(`\`\n\`${command.aliases[0]} `)}\``, true);
+		if (command.aliases.length > 1) embed.addField('❯ Aliases', `\`${command.aliases.join('` `')}\``);
+		if (command.description.examples && command.description.examples.length) embed.addField('❯ Examples', `\`${command.aliases[0]} ${command.description.examples.join(`\`\n\`${command.aliases[0]} `)}\``);
 
 		return message.util.send(embed);
     };
