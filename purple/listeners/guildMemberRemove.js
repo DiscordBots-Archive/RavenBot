@@ -14,7 +14,7 @@ class GuildMemberRemoveListener extends Listener {
 
 		const embed = new MessageEmbed().setColor('#fa0d0d')
 		.setTitle(`${member.user.tag} | ${member.id}`)
-		.setFooter('Left', member.user.displayAvatarURL()).setTimestamp()
+		.setFooter('Left', member.user.displayAvatarURL()).setTimestamp();
 
 		const channel = this.client.settings.get(member.guild.id, 'memberLog', undefined)
 		if (channel) {
