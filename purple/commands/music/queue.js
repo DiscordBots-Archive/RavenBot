@@ -38,17 +38,15 @@ class QueueCommand extends Command {
 		let index = (paginated.page - 1) * 10;
 
 		const embed = new MessageEmbed()
-			.setAuthor(`${message.author.tag} (${message.author.id})`, message.author.displayAvatarURL()).setColor('#8387db')
-			.setDescription(`**NOW PLAYING** \n\n`+
+			.setAuthor(`Queue for ${message.guild.name}`, message.guild.iconURL()).setColor('#8387db')
+			.setDescription(`**NOW PLAYING ${this.client.emojis.get('545628508962029569')}** \n\n`+
 
 				`**❯** [${decoded[0].info.title}](${decoded[0].info.uri}) (${timeString({seconds: current.position})}/${timeString({seconds: decoded[0].info.length})}) \n\n` +
 
-				`**SONG QUEUE${paginated.page > 1 ? `, PAGE ${paginated.page}` : ''}** \n\n` +
+				`**Queue${paginated.maxPage > 1 ? `, Page ${paginated.page}/${paginated.maxPage}` : ''}** \n\n` +
 
-				`${paginated.items.length ? paginated.items.map(song => `**${++index}.** [${song.info.title}](${song.info.uri}) (${timeString({seconds: song.info.length})})`).join('\n') : 'No Queue'} \n\n` +
-
-				`**TOTAL QUEUE TIME~ ${timeString({seconds: totalLength})}**`);
-		if (paginated.maxPage > 1) embed.setFooter('Use queue <page> to view a specific page');
+				`${paginated.items.length ? paginated.items.map(song => `**${++index}.** [${song.info.title}](${song.info.uri}) (${timeString({seconds: song.info.length})})`).join('\n') : 'No Queue'}`);
+			embed.setFooter(`Time~ ${timeString({seconds: totalLength})}${decoded.length > 10 ? `, Songs~ ${decoded.length}` : ``}`, message.guild.iconURL());
 
 		return message.util.send(embed);
 	}

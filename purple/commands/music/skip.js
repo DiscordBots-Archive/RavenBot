@@ -60,13 +60,9 @@ class SkipCommand extends Command {
 		let index = (paginated.page - 1) * 10;
 
 		const embed = new MessageEmbed()
-			.setAuthor(`${message.author.tag} (${message.author.id})`, message.author.displayAvatarURL()).setColor('#8387db')
-			.setDescription(`**SKIPPED** \n\n` +
-
-				`${paginated.items.map(song => `**${++index}.** [${song.info.title}](${song.info.uri}) (${timeString({seconds: song.info.length})})`).join('\n')} \n\n` +
-
-				`**SKIPPED TIME~ ${timeString({seconds: totalLength})}**`);
-
+			.setAuthor(`${message.author.tag}`, message.author.displayAvatarURL()).setColor('#8387db').setTimestamp()
+			.addField(`Skipped`, `${paginated.items.map(song => `**${++index}.** [${song.info.title}](${song.info.uri}) (${timeString({seconds: song.info.length})})`).join('\n')}`)
+			.setFooter(`Time~ ${timeString({seconds: totalLength})}`, message.guild.iconURL())
 		return message.util.send(embed);
 	}
 }

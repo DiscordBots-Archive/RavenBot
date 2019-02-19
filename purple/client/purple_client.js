@@ -13,7 +13,8 @@ const Raven = require('raven');
 
 class PurpleClient extends AkairoClient {
     constructor() {
-        super({ownerID: process.env.OWNER}, {disableEveryone: true});
+
+        super({ ownerID: process.env.OWNER }, { disableEveryone: true });
 
         this.commandHandler = new CommandHandler(this, {
             directory: './purple/commands/',
@@ -65,33 +66,6 @@ class PurpleClient extends AkairoClient {
             }
         });
 
-        this.storage = new Rejects(this.music.queues.redis);
-        this.on('raw', async (packet) => {
-			switch (packet.t) {
-				case 'VOICE_STATE_UPDATE':
-					if (packet.d.user_id !== process.env.CLIENT_ID) return;
-					this.music.voiceStateUpdate(packet.d);
-					const players = await this.storage.get('players', { type: ReferenceType.ARRAY });
-					let index = 0;
-					if (Array.isArray(players)) index = players.findIndex(player => player.guild_id === packet.d.guild_id);
-					if (((!players && !index) || index < 0) && packet.d.channel_id) {
-						this.storage.upsert('players', [{ guild_id: packet.d.guild_id, channel_id: packet.d.channel_id }]);
-					} else if (players && typeof index !== 'undefined' && index >= 0 && !packet.d.channel_id) {
-						players.splice(index, 1);
-						await this.storage.delete('players');
-						if (players.length) await this.storage.set('players', players);
-					}
-					break;
-				case 'VOICE_SERVER_UPDATE':
-					this.music.voiceServerUpdate(packet.d);
-					break;
-				case 'MESSAGE_CREATE':
-					this.prometheus.messagesCounter.inc();
-					break;
-				default: break;
-			}
-		});
-
         this.logger = createLogger({
             format: format.combine(
                 format.colorize({ level: true }),
@@ -134,6 +108,33 @@ class PurpleClient extends AkairoClient {
             register
         };
         this.prometheus.collectDefaultMetrics({ prefix: 'purple_', timeout: 30000 });
+
+        this.storage = new Rejects(this.music.queues.redis);
+        this.on('raw', async (packet) => {
+			switch (packet.t) {
+				case 'VOICE_STATE_UPDATE':
+					if (packet.d.user_id !== process.env.CLIENT_ID) return;
+					this.music.voiceStateUpdate(packet.d);
+					const players = await this.storage.get('players', { type: ReferenceType.ARRAY });
+					let index = 0;
+					if (Array.isArray(players)) index = players.findIndex(player => player.guild_id === packet.d.guild_id);
+					if (((!players && !index) || index < 0) && packet.d.channel_id) {
+						this.storage.upsert('players', [{ guild_id: packet.d.guild_id, channel_id: packet.d.channel_id }]);
+					} else if (players && typeof index !== 'undefined' && index >= 0 && !packet.d.channel_id) {
+						players.splice(index, 1);
+						await this.storage.delete('players');
+						if (players.length) await this.storage.set('players', players);
+					}
+					break;
+				case 'VOICE_SERVER_UPDATE':
+					this.music.voiceServerUpdate(packet.d);
+					break;
+				case 'MESSAGE_CREATE':
+					this.prometheus.messagesCounter.inc();
+					break;
+				default: break;
+			}
+		});
 
         const db = sqlite.open('./purple/database/database.sqlite').then(d => d.run('CREATE TABLE IF NOT EXISTS guilds (id TEXT NOT NULL UNIQUE, settings TEXT)').then(() => d));
         this.settings = new SQLiteProvider(db, 'guilds', { dataColumn: 'settings' });
