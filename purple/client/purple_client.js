@@ -12,6 +12,7 @@ const sqlite = require('sqlite');
 const Raven = require('raven');
 
 class PurpleClient extends AkairoClient {
+    
     constructor() {
 
         super({ ownerID: process.env.OWNER }, { disableEveryone: true });
@@ -32,7 +33,7 @@ class PurpleClient extends AkairoClient {
             defaultPrompt: {
                 modifyStart: str => `*${str}\ntype \`cancel\` to cancel the command...*`,
                 modifyRetry: str => `*${str}\ntype \`cancel\` to cancel the command...*`,
-                timeout: '*You took too long, the command has been cancelled..*',
+                timeout: '*Timed out, the command has been cancelled..*',
                 ended: "*Enough! The command has been cancelled..*",
                 cancel: '*The command has been cancelled...*',
                 retries: 3,
