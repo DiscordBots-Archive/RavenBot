@@ -16,6 +16,7 @@ class SetModRoleCommand extends Command {
             args: [
                 {
                     id: 'role',
+                    type: 'role',
                     match: 'content',
                     prompt: {
                         start: message => `${message.author}, what role you want to set?`,

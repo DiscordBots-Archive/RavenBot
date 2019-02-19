@@ -38,6 +38,9 @@ class WarnCommand extends Command {
 
         const member = args.member;
         const reason = args.reason;
+        
+        const staffRole = this.client.settings.get(message.guild.id, 'modRole', []);
+		if (!message.member.roles.some(role => staffRole.includes(role.id))) return;
 
         const embed = Util.historyEmbed({message, member, client: this.client}).setColor(Util.CONSTANTS.COLORS.WARN)
 		await message.channel.send('*You sure you want me to warn this member?*', { embed });
