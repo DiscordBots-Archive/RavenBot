@@ -15,8 +15,8 @@ class MessageDeleteListener extends Listener {
 		if (message.author.id === this.client.ownerID) return;
 		if (!message.content) return;
 		const guildLogs = this.client.settings.get(message.guild.id, 'guildLog', undefined);
-		const WebhookID = this.client.settings.get(message.guild.id, 'WebhookID', undefined)
-		const WebhookToken = this.client.settings.get(message.guild.id, 'WebhookToken', undefined)
+		const WebhookID = this.client.settings.get(message.guild.id, 'WebhookID', undefined);
+		const WebhookToken = this.client.settings.get(message.guild.id, 'WebhookToken', undefined);
 		if (guildLogs && WebhookID && WebhookToken) {
             const webhook = new WebhookClient(WebhookID, WebhookToken);
 			if (!webhook) return;
