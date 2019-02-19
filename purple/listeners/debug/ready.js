@@ -46,8 +46,8 @@ class ReadyListener extends Listener {
 				if (player.channel_id) {
 					const queue = this.client.music.queues.get(player.guild_id);
 					await queue.player.join(player.channel_id);
-				}
-			}
+				};
+			};
 			await this.client.music.queues.start();
 		};
 	};
