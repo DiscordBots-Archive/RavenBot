@@ -9,7 +9,7 @@ class MessageUpdateListener extends Listener {
 			event: 'messageUpdate',
 			category: 'client'
 		});
-	}
+	};
 
 	async exec(oldMessage, newMessage) {
 		if (oldMessage.author.bot || newMessage.author.bot) return;
