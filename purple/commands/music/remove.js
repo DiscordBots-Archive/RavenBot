@@ -20,12 +20,12 @@ class RemoveCommand extends Command {
 				}
 			]
 		});
-	}
+	};
 
 	async exec(message, { num }) {
 		if (!message.member.voice || !message.member.voice.channel) {
 			return message.util.reply(`you have to be in a voice channel ${this.client.emojis.get('545968755423838209')}`);
-		}
+		};
 		const queue = this.client.music.queues.get(message.guild.id);
 		const tracks = await queue.tracks();
 
@@ -37,9 +37,7 @@ class RemoveCommand extends Command {
 			queue.remove(tracks[num]);
 	
 			return message.util.send(`${this.client.emojis.get('545874377523068930')} **Removed:** \`${decoded[0].info.title}\``);
-		} catch (error) {}
-		
-
-	}
-}
+		} catch (error) {};
+	};
+};
 module.exports = RemoveCommand;
