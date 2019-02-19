@@ -29,7 +29,7 @@ class PlayCommand extends Command {
 				}
 			]
 		});
-	}
+	};
 
 	async exec(message, { query, unshift }) {
 		if (!message.member.voice || !message.member.voice.channel) {
@@ -38,13 +38,13 @@ class PlayCommand extends Command {
 			return message.util.reply(`I don't have permission to enter this voice channel ${this.client.emojis.get('545968755423838209')}`);
 		} else if (!message.member.voice.channel.speakable) {
 			return message.util.reply(`I don't have permission to talk in this voice channel ${this.client.emojis.get('545968755423838209')}`);
-		}
+		};
 		if (!query && message.attachments.first()) {
 			query = message.attachments.first().url;
 			if (!['.mp3', '.ogg', '.flac', '.m4a'].includes(path.parse(url.parse(query).path).ext)) return;
 		} else if (!query) {
 			return;
-		}
+		};
 		if (!['http:', 'https:'].includes(url.parse(query).protocol)) query = `ytsearch:${query}`;
 		// TODO: remove hack
 		const res = await this.client.music.load(query);
@@ -60,10 +60,10 @@ class PlayCommand extends Command {
 			msg = res.playlistInfo.name;
 		} else {
 			return message.util.send("I couldn't find what you were looking for");
-		}
+		};
 		if (!queue.player.playing && !queue.player.paused) await queue.start();
 
 		return message.util.send(`${this.client.emojis.get('545628508962029569')} **Queued up:** \`${msg}\``);
-	}
-}
+	};
+};
 module.exports = PlayCommand;
