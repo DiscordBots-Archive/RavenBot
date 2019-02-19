@@ -14,5 +14,5 @@ class ModerationInhibitor extends Inhibitor {
 		};
 		return false;
 	};
-}
+};
 module.exports = ModerationInhibitor;
