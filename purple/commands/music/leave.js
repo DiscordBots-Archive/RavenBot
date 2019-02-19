@@ -20,12 +20,12 @@ class LeaveCommand extends Command {
 				}
 			]
 		});
-	}
+	};
 
 	async exec(message, { clear }) {
 		if (!message.member.voice || !message.member.voice.channel) {
 			return message.util.reply(`you have to be in a voice channel ${this.client.emojis.get('545968755423838209')}`);
-		}
+		};
 		const DJ = message.member.roles.has(this.client.settings.get(message.guild.id, 'djRole', undefined));
 		const queue = this.client.music.queues.get(message.guild.id);
 		if (clear && DJ) await queue.clear();
@@ -34,6 +34,6 @@ class LeaveCommand extends Command {
 		if (message.guild.me.voice || message.guild.me.voice.channel) await queue.player.leave();
 
 		return message.util.send(`**${DJ && clear ? 'Cleared' : 'Stopped'} Queue** ${this.client.emojis.get('545873319426260993')}`);
-	}
-}
+	};
+};
 module.exports = LeaveCommand;
