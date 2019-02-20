@@ -29,12 +29,12 @@ class GifCommand extends Command {
         if (query) {
             const gifs = await gif.search('gifs', { "q": query, "limit" : 1 });
             for (const data of gifs.data) {
-                console.log(data.images.fixed_height.url);
+                //console.log(data.images.fixed_height.url);
                 send = data.images.fixed_height.url;
             }
         } else {
             const random = await gif.random('gifs', { "limit" : 1 });
-            console.log(random.data.images.fixed_height_downsampled.gif_url)
+            //console.log(random.data.images.fixed_height_downsampled.gif_url)
             send = random.data.images.fixed_height_downsampled.gif_url;
         }
 
