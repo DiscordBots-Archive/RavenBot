@@ -9,7 +9,7 @@ const { timeString } = require('../../util/index.js');
 class SearchCommand extends Command {
 	constructor() {
 		super('search', {
-			aliases: ['search', 's'],
+			aliases: ['search', 'sh'],
 			description: {
 				content: 'Play a song from literally any source you can think of.',
 				usage: '<link/search>',

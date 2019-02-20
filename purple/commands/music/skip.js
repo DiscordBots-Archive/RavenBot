@@ -6,7 +6,7 @@ const { timeString } = require('../../util/index.js');
 class SkipCommand extends Command {
 	constructor() {
 		super('skip', {
-			aliases: ['skip'],
+			aliases: ['skip', 's'],
 			description: {
 				content: 'Skips the amount of songs you specify (defaults to 1)',
 				usage: '<num>',
