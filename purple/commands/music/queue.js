@@ -37,16 +37,18 @@ class QueueCommand extends Command {
 		const paginated = paginate({items: decoded.slice(1), page});
 		let index = (paginated.page - 1) * 10;
 
-		const embed = new MessageEmbed()
-			.setAuthor(`Queue for ${message.guild.name}`, message.guild.iconURL()).setColor('#8387db')
-			.setDescription(`**NOW PLAYING ${this.client.emojis.get('545628508962029569')}** \n\n`+
+		const embed = new MessageEmbed().setColor('#8387db')
+		.setAuthor(`Queue for ${message.guild.name}`, message.guild.iconURL())
 
-				`**❯** [${decoded[0].info.title}](${decoded[0].info.uri}) (${timeString({seconds: current.position})}/${timeString({seconds: decoded[0].info.length})}) \n\n` +
+		.setDescription(`**NOW PLAYING ${this.client.emojis.get('545628508962029569')}** \n\n`+
 
-				`**Queue${paginated.maxPage > 1 ? `, Page ${paginated.page}/${paginated.maxPage}` : ''}** \n\n` +
+			`**❯** [${decoded[0].info.title}](${decoded[0].info.uri}) (${timeString({seconds: current.position})}/${timeString({seconds: decoded[0].info.length})}) \n\n` +
 
-				`${paginated.items.length ? paginated.items.map(song => `**${++index}.** [${song.info.title}](${song.info.uri}) (${timeString({seconds: song.info.length})})`).join('\n') : 'No Queue'}`);
-			embed.setFooter(`Time~ ${timeString({seconds: totalLength})}${decoded.length > 10 ? `, Songs~ ${decoded.length}` : ``}`, message.guild.iconURL());
+			`**Queue${paginated.maxPage > 1 ? `, Page ${paginated.page}/${paginated.maxPage}` : ''}** \n\n` +
+
+			`${paginated.items.length ? paginated.items.map(song => `**${++index}.** [${song.info.title}](${song.info.uri}) (${timeString({seconds: song.info.length})})`).join('\n') : 'No Queue'}\n\n` +
+
+			`Time~ ${timeString({seconds: totalLength})}${decoded.length > 10 ? `, Songs~ ${decoded.length}` : ``}`);
 
 		return message.util.send(embed);
 	};
