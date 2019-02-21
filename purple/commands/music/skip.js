@@ -52,7 +52,7 @@ class SkipCommand extends Command {
 		const skip = await queue.next(num);
 		if (!skip) {
 			await queue.stop();
-			return message.util.send(`**Skipped Last Song:** ${this.client.emojis.get('545628508962029569')}`);
+			return message.util.send(`**Skipped Last Song** ${this.client.emojis.get('545628508962029569')}`);
 		};
 		const decoded = await this.client.music.decode(tracks);
 		const totalLength = decoded.reduce((prev, song) => prev + song.info.length, 0);
@@ -61,8 +61,8 @@ class SkipCommand extends Command {
 
 		const embed = new MessageEmbed().setColor('#8387db').setTimestamp()
 			.setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
-			.setDescription(`Skipped \n\n${paginated.items.map(song => `**${++index}.** [${song.info.title}](${song.info.uri}) (${timeString({seconds: song.info.length})})`).join('\n')}\n\n` +
-			`Time~ ${timeString({seconds: totalLength})}`)
+			.setDescription(`**SKIPPED** \n${paginated.items.map(song => `**${++index}.** [${song.info.title}](${song.info.uri}) (${timeString({seconds: song.info.length})})`).join('\n')}\n`)
+			.setFooter(`(Time~ ${timeString({seconds: totalLength})})`)
 		return message.util.send(embed);
 	};
 };
