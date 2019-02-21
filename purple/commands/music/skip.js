@@ -61,7 +61,7 @@ class SkipCommand extends Command {
 
 		const embed = new MessageEmbed().setColor('#8387db').setTimestamp()
 			.setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
-			.addField(`Skipped`, `${paginated.items.map(song => `**${++index}.** [${song.info.title}](${song.info.uri}) (${timeString({seconds: song.info.length})})`).join('\n')}\n` +
+			.setDescription(`Skipped \n\n${paginated.items.map(song => `**${++index}.** [${song.info.title}](${song.info.uri}) (${timeString({seconds: song.info.length})})`).join('\n')}\n\n` +
 			`Time~ ${timeString({seconds: totalLength})}`)
 		return message.util.send(embed);
 	};

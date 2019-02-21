@@ -46,10 +46,12 @@ class QueueCommand extends Command {
 
 			`**Queue${paginated.maxPage > 1 ? `, Page ${paginated.page}/${paginated.maxPage}` : ''}** \n\n` +
 
-			`${paginated.items.length ? paginated.items.map(song => `**${++index}.** [${song.info.title}](${song.info.uri}) (${timeString({seconds: song.info.length})})`).join('\n') : 'No Queue'}\n\n` +
+			`${paginated.items.length ? paginated.items.map(song => `**${++index}.** [${song.info.title}](${song.info.uri}) (${timeString({seconds: song.info.length})})`).join('\n') : 'None'}\n\n` +
 
 			`Time~ ${timeString({seconds: totalLength})}${decoded.length > 10 ? `, Songs~ ${decoded.length}` : ``}`);
 
+			if (paginated.maxPage > 1) embed.setFooter(`\`queue <page>\` to view a specific page`);
+			
 		return message.util.send(embed);
 	};
 };
