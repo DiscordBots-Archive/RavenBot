@@ -12,7 +12,7 @@ class MessageDeleteListener extends Listener {
 
 	async exec(message) {
 		if (message.author.bot) return;
-		if (message.author.id === this.client.ownerID) return;
+		//if (message.author.id === this.client.ownerID) return;
 		if (!message.content) return;
 		const guildLogs = this.client.settings.get(message.guild.id, 'guildLog', undefined);
 		const WebhookID = this.client.settings.get(message.guild.id, 'WebhookID', undefined);

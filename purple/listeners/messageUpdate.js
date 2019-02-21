@@ -13,8 +13,8 @@ class MessageUpdateListener extends Listener {
 
 	async exec(oldMessage, newMessage) {
 		if (oldMessage.author.bot || newMessage.author.bot) return;
-		if (oldMessage.author.id === this.client.ownerID) return;
-		if (newMessage.author.id === this.client.ownerID) return;
+		//if (oldMessage.author.id === this.client.ownerID) return;
+		//if (newMessage.author.id === this.client.ownerID) return;
 		if (Util.escapeMarkdown(oldMessage.content) === Util.escapeMarkdown(newMessage.content)) return;
 		const guildLogs = this.client.settings.get(newMessage.guild.id, 'guildLog', undefined);
 		const WebhookID = this.client.settings.get(newMessage.guild.id, 'WebhookID', undefined);
