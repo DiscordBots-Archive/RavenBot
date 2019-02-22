@@ -3,7 +3,6 @@ const { Command } = require('discord-akairo');
 class SetDJRoleCommand extends Command {
 	constructor() {
 		super('set-dj', {
-			aliases: ['set-dj', 'dj-role'],
 			description: {
 				content: 'Sets the DJ role many of the commands use for permission checking.',
 				usage: '<role>',
@@ -16,8 +15,12 @@ class SetDJRoleCommand extends Command {
 			args: [
 				{
 					id: 'role',
-					match: 'content',
-					type: 'role'
+					type: 'role',
+					content: 'match',
+                    prompt: {
+                        start: message => `${message.author}, what role you want to set?`,
+                        retry: message => `${message.author}, please provide a valid role...`
+                    }
 				}
 			]
 		});

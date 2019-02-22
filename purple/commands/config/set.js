@@ -33,7 +33,7 @@ class SetCommand extends Command {
             args: [
                 {
                     id: 'method',
-                    type: ['modlog', 'guildlog', 'counting', 'memberlog', 'mod', 'mute', 'autorole']
+                    type: ['modlog', 'guildlog', 'counting', 'memberlog', 'mod', 'mute', 'autorole', 'DJ', 'dj']
                 },
                 {
                     id: 'name',
@@ -55,7 +55,9 @@ class SetCommand extends Command {
             memberlog: this.handler.modules.get('set-memberlog'),
             mod: this.handler.modules.get('set-modrole'),
             mute: this.handler.modules.get('set-muterole'),
-            autorole: this.handler.modules.get('set-autorole')
+            autorole: this.handler.modules.get('set-autorole'),
+            DJ: this.handler.modules.get('set-dj'),
+            dj: this.handler.modules.get('set-dj'),
         })[method];
         return this.handler.handleDirectCommand(message, name, command, true);
     }
