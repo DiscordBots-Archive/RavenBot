@@ -120,7 +120,7 @@ class PurpleClient extends AkairoClient {
 					let index = 0;
 					if (Array.isArray(players)) index = players.findIndex(player => player.guild_id === packet.d.guild_id);
 					if (((!players && !index) || index < 0) && packet.d.channel_id) {
-						this.storage.upsert('players', [{ guild_id: packet.d.guild_id, channel_id: packet.d.channel_id, user_id: packet.d.user_id }]);
+						this.storage.upsert('players', [{ guild_id: packet.d.guild_id, channel_id: packet.d.channel_id }]);
 					} else if (players && typeof index !== 'undefined' && index >= 0 && !packet.d.channel_id) {
 						players.splice(index, 1);
 						await this.storage.delete('players');
