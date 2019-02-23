@@ -38,7 +38,7 @@ class VolumeCommand extends Command {
 		const queue = this.client.music.queues.get(message.guild.id);
 		if (DJ) {
             await queue.setVolume(num);
-            return message.util.send(`**Set volume ${num}** ${this.client.emojis.get('545873319426260993')}`);
+            return message.util.send(`**Set volume ${num}** (Recommended: 60-70) ${this.client.emojis.get('545873319426260993')}`);
         }
 	};
 };
