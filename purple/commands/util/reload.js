@@ -3,11 +3,9 @@ const { Command } = require('discord-akairo');
 class ReloadCommand extends Command {
     constructor() {
         super('reload', {
-            aliases: ['reload'],
+            aliases: ['reload', 'reboot'],
             description: {
-                content: 'Reloaded all commandHandler, listenerHandler, inhibitorHandler',
-                usage: '<>',
-                examples: ['<>..']
+                content: 'Reload all commandHandler, listenerHandler, inhibitorHandler',
             },
             ownerOnly: true,
             category: 'util',
