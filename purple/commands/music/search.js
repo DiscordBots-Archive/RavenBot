@@ -22,7 +22,7 @@ class SearchCommand extends Command {
 				{
 					id: 'unshift',
 					match: 'flag',
-					flag: ['--start', '-s']
+					flag: ['--soundcloud', '-sc']
 				},
 				{
 					id: 'query',
@@ -42,8 +42,15 @@ class SearchCommand extends Command {
 		} else if (!message.member.voice.channel.speakable) {
 			return message.util.reply(`I don't have permission to talk in this voice channel ${this.client.emojis.get('545968755423838209')}`);
 		};
-        
-		const res = await this.client.music.load(`ytsearch:${query}`);
+
+		let res;
+
+		if (unshift) {
+			res = await this.client.music.load(`scsearch:${query}`);
+		} else {
+			res = await this.client.music.load(`ytsearch:${query}`);
+		}
+
 		const queue = this.client.music.queues.get(message.guild.id);
         if (!message.guild.me.voice.channel) await queue.player.join(message.member.voice.channel.id);
         
