@@ -6,6 +6,8 @@ class ReloadCommand extends Command {
             aliases: ['reload'],
             description: {
                 content: 'Reloaded all commandHandler, listenerHandler, inhibitorHandler',
+                usage: '<>',
+                examples: ['<>..']
             },
             ownerOnly: true,
             category: 'util',

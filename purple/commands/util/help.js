@@ -27,7 +27,7 @@ class HelpCommand extends Command {
 		const prefix = this.handler.prefix(message);
 		if (!command) {
 			const embed = new MessageEmbed()
-                .setColor('#c394f3').setFooter(`© 2018 ${this.client.user.username}`, this.client.user.displayAvatarURL())
+                .setColor('#8387db').setFooter(`© 2018 ${this.client.user.username}`, this.client.user.displayAvatarURL())
                 .setTitle('COMMANDS')
 				.setDescription(`*A list of available commands. For additional info on a command: \`${prefix}help <command>\`*`);
 
@@ -39,7 +39,7 @@ class HelpCommand extends Command {
 		}
 
 		const embed = new MessageEmbed()
-			.setColor('#c394f3')
+			.setColor('#8387db')
 			.setTitle(`\`${command.aliases[0]} ${command.description.usage ? command.description.usage : ''}\``)
 			.addField('❯ Description', command.description.content || '\u200b');
 
