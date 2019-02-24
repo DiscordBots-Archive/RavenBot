@@ -17,20 +17,25 @@ class HellCommand extends Command {
     };
 
     async exec(message) {
-        let spawn = require('child_process').spawn,
-      ls = spawn('start.bat', ['../../../start.bat', 'start.bat']);
+        function Process() {
+            const process = require('child_process');   
+            var ls = process.spawn('start.bat');
+            ls.stdout.on('data', function (data) {
+              console.log(data);
+            });
+            ls.stderr.on('data', function (data) {
+              console.log(data);
+            });
+            ls.on('close', function (code) {
+                  if (code == 0)
+                    console.log('Stop');
+                  else
+                    console.log('Start');
+            });
+            };
+            
+        Process();
 
-    ls.stdout.on('data', function (data) {
-      console.log('stdout: ' + data);
-    });
-
-    ls.stderr.on('data', function (data) {
-      console.log('stderr: ' + data);
-    });
-
-    ls.on('exit', function (code) {
-      console.log('child process exited with code ' + code);
-    });
     };
 };
 module.exports = HellCommand;
