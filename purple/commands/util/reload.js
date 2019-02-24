@@ -15,8 +15,8 @@ class ReloadCommand extends Command {
 
     async exec(message) {
 
-        this.client.inhibitorHandler.removeAll() && this.client.inhibitorHandler.reloadAll();
-        this.client.listenerHandler.removeAll() && this.client.listenerHandler.reloadAll();
+        this.client.inhibitorHandler.removeAll() && this.client.inhibitorHandler.loadAll();
+        this.client.listenerHandler.removeAll() && this.client.listenerHandler.loadAll();
         this.client.commandHandler.removeAll() && this.client.commandHandler.loadAll()
         
         return message.util.send(`*${message.author}, reloaded all commandHandler, listenerHandler & inhibitorHandler*`);
