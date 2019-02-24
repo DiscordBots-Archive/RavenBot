@@ -4,20 +4,21 @@ class ReloadCommand extends Command {
     constructor() {
         super('reload', {
             aliases: ['reload'],
-            args: [
-                {
-                    id: 'listenerID'
-                }
-            ],
+            description: {
+                content: 'Reloaded all commandHandler, listenerHandler, inhibitorHandler',
+            },
             ownerOnly: true,
-            category: 'owner'
+            category: 'util',
+            ratelimit: 2,
         });
     }
 
     exec(message, args) {
-        // `this` refers to the command object.
-        this.client.listenerHandler.reload(args.listenerID);
-        return message.reply(`Reloaded ${args.listenerID}!`);
+        //this.client.listenerHandler.reload(args.listenerID);
+        this.client.inhibitorHandler.reloadAll();
+        this.client.listenerHandler.reloadAll();
+        this.client.commandHandler.reloadAll();
+        return message.reply(`Reloaded all commandHandler, listenerHandler, inhibitorHandler`);
     }
 }
 
