@@ -4,43 +4,44 @@ const Util = require('../../util/index.js');
 class WarnCommand extends Command {
     constructor() {
         super('warn', {
-           aliases: ['warn'],
-           category: 'mod',
-           description: {
-               content: 'Warns a member, bruh!',
-               usage: '<member> <...reason>',
-               examples: ['@Purple']
-           },
-           channel: 'guild',
-           clientPermissions: ['MANAGE_ROLES', 'EMBED_LINKS'],
-           userPermissions: ['MANAGE_ROLES'],
-           ratelimit: 2,
-           args: [
-               {
-                   id: 'member',
-                   type: 'member',
-                   prompt: {
-                       start: message => `${message.author}, what member do you want to warn?`,
-                       retry: message => `${message.author}, please mention a member...`
-                   }
-               }, 
-               {
-                   id: 'reason',
-                   match: 'rest',
-                   type: 'string',
-                   default: 'Not Provided'
-               }
-           ]
+            aliases: ['warn'],
+            category: 'mod',
+            description: {
+                content: 'Warns a member, bruh!',
+                usage: '<member> <...reason>',
+                examples: ['@Purple', 'Purple']
+            },
+            channel: 'guild',
+            clientPermissions: ['MANAGE_ROLES', 'EMBED_LINKS'],
+            ratelimit: 2,
+            args: [
+                {
+                    id: 'member',
+                    type: 'member',
+                    prompt: {
+                        start: message => `${message.author}, what member do you want to warn?`,
+                        retry: message => `${message.author}, please mention a valid member..`
+                    }
+                },
+                {
+                    id: 'reason',
+                    match: 'rest',
+                    type: 'string',
+                    default: 'Not Provided'
+                }
+            ]
         });
     }
 
-    async exec(message, args) {
-
-        const member = args.member;
-        const reason = args.reason;
-        
+    userPermissions(message) {
         const staffRole = this.client.settings.get(message.guild.id, 'modRole', []);
-		if (!message.member.roles.some(role => staffRole.includes(role.id))) return;
+        if (!message.member.roles.some(role => staffRole.includes(role.id))) {
+            return 'Moderator';
+        }
+        return null; 
+    }
+
+    async exec(message, { member, reason }) {
 
         const embed = Util.historyEmbed({message, member, client: this.client}).setColor(Util.CONSTANTS.COLORS.WARN)
 		await message.channel.send('*You sure you want me to warn this member?*', { embed });

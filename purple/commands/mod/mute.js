@@ -2,51 +2,53 @@ const { Command } = require('discord-akairo');
 const Util = require('../../util/index.js');
 const ms = require('ms');
 
-
 class MuteCommand extends Command {
     constructor() {
         super('mute', {
-           aliases: ['mute'],
-           category: 'mod',
-           description: {
-               content: 'Mutes a member, bruh!',
-               usage: '<member> <...reason>',
-               examples: ['@Purple 10m posting ads', '@Purple 12h spamming']
-           },
-           channel: 'guild',
-           clientPermissions: ['MANAGE_ROLES', 'EMBED_LINKS'],
-           userPermissions: ['MANAGE_ROLES'],
-           ratelimit: 2,
-           args: [
-               {
-                   id: 'member',
-                   type: 'member',
-                   prompt: {
-                       start: message => `${message.author}, what member do you want to mute?`,
-                       retry: message => `${message.author}, please mention a member`
-                   }
-               },
-               {
-                   id: 'duration',
-                   type: str => {
-                       if (!str) return;
-                       const duration = ms(str);
-                       if (duration && duration >= 300000 && !isNaN(duration)) return duration;
-                       return;
-                   },
-                   prompt: {
-                       start: message => `${message.author}, for how long do you want the mute to last?`,
-                       retry: message => `${message.author}, please use proper time format...`
-                   }
-               },
-               {
-                   id: 'reason',
-                   match: 'rest',
-                   type: 'string',
-                   default: 'Not Provided', 
-               }
-           ]
+            aliases: ['mute'],
+            category: 'mod',
+            description: {
+                content: 'Mutes a member, bruh!',
+                usage: '<member> <...reason>',
+                examples: ['@Purple 10m posting ads', '@Purple 12h spamming']
+            },
+            channel: 'guild',
+            clientPermissions: ['MANAGE_ROLES', 'EMBED_LINKS'],
+            ratelimit: 2,
+            args: [
+                {
+                    id: 'member',
+                    type: 'member',
+                    prompt: {
+                        start: message => `${message.author}, what member do you want to kick?`,
+                        retry: message => `${message.author}, please mention a valid member..`
+                    }
+                },
+                {
+                    id: 'duration',
+                    type: str => {
+                        if (!str) return;
+                        const duration = ms(str);
+                        if (duration && duration >= 300000 && !isNaN(duration) ) return duration;
+                        return;
+                    }
+                },
+                {
+                    id: 'reason',
+                    match: 'rest',
+                    type: 'string',
+                    default: 'Not Provided'
+                }
+            ]
         });
+    }
+
+    userPermissions(message) {
+        const staffRole = this.client.settings.get(message.guild.id, 'modRole', []);
+        if (!message.member.roles.some(role => staffRole.includes(role.id))) {
+            return 'Moderator';
+        }
+        return null; 
     }
 
     async exec(message, { member, duration, reason}) {

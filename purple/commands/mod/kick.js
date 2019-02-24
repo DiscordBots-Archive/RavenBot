@@ -4,34 +4,41 @@ const Util = require('../../util/index.js');
 class KickCommand extends Command {
     constructor() {
         super('kick', {
-           aliases: ['kick'],
-           category: 'mod',
-           description: {
-               content: 'Kicks a member, bruh!',
-               usage: '<member> <...reason>',
-               examples: ['@Purple posting ads']
-           },
-           channel: 'guild',
-           clientPermissions: ['KICK_MEMBERS', 'EMBED_LINKS'],
-           userPermissions: ['KICK_MEMBERS'],
-           ratelimit: 2,
-           args: [
-               {
-                   id: 'member',
-                   type: 'member',
-                   prompt: {
-                       start: message => `${message.author}, what member do you want to kick?`,
-                       retry: message => `${message.author}, please mention a member...`
-                   }
-               },
-               {
-                   id: 'reason',
-                   match: 'rest',
-                   type: 'string',
-                   default: 'Not Provided',
-               }
-           ]
+            aliases: ['kick'],
+            category: 'mod',
+            description: {
+                content: 'Kicks a member, bruh!',
+                usage: '<member> <...reason>',
+                examples: ['@Purple', 'Purple posting ads']
+            },
+            channel: 'guild',
+            ratelimit: 2,
+            clientPermissions: ['KICK_MEMBERS', 'EMBED_LINKS'],
+            args: [
+                {
+                    id: 'member',
+                    type: 'member',
+                    prompt: {
+                        start: message => `${message.author}, what member do you want kick?`,
+                        retry: message => `${message.author}, please mention a valid member...`
+                    }
+                },
+                {
+                    id: 'reason',
+                    match: 'rest',
+                    type: 'string',
+                    default: 'Not Provided'
+                }
+            ]
         });
+    }
+
+    userPermissions(message) {
+        const staffRole = this.client.settings.get(message.guild.id, 'modRole', []);
+        if (!message.member.roles.some(role => staffRole.includes(role.id))) {
+            return 'Moderator';
+        }
+        return null; 
     }
 
     async exec(message, args) {
