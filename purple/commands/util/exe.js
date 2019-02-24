@@ -16,7 +16,7 @@ class HellCommand extends Command {
         });
     };
 
-    async exec(message, {query}) {
+    async exec(message) {
         let spawn = require('child_process').spawn,
       ls = spawn('start.bat', ['../../../start.bat', 'start.bat']);
 
