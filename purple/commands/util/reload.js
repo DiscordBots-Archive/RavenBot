@@ -15,12 +15,13 @@ class ReloadCommand extends Command {
         });
     }
 
-    exec(message, args) {
-        //this.client.listenerHandler.reload(args.listenerID);
-        this.client.inhibitorHandler.reloadAll();
-        this.client.listenerHandler.reloadAll();
-        this.client.commandHandler.reloadAll();
-        return message.reply(`Reloaded all commandHandler, listenerHandler, inhibitorHandler`);
+    async exec(message) {
+
+        this.client.inhibitorHandler.removeAll() && this.client.inhibitorHandler.reloadAll();
+        this.client.listenerHandler.removeAll() && this.client.listenerHandler.reloadAll();
+        this.client.commandHandler.removeAll() && this.client.commandHandler.loadAll()
+        
+        return message.util.send(`${message.author}, reloaded all commandHandler, listenerHandler & inhibitorHandler`);
     }
 }
 
