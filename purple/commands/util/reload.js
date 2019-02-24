@@ -21,7 +21,7 @@ class ReloadCommand extends Command {
         this.client.listenerHandler.removeAll() && this.client.listenerHandler.reloadAll();
         this.client.commandHandler.removeAll() && this.client.commandHandler.loadAll()
         
-        return message.util.send(`${message.author}, reloaded all commandHandler, listenerHandler & inhibitorHandler`);
+        return message.util.send(`*${message.author}, reloaded all commandHandler, listenerHandler & inhibitorHandler*`);
     }
 }
 
