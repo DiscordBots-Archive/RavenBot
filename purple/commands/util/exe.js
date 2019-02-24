@@ -17,7 +17,23 @@ class HellCommand extends Command {
     };
 
     async exec(message) {
-        function Process() {
+
+        const process = require('child_process');   
+        var ls = process.spawn('start.bat');
+        ls.stdout.on('data', function (data) {
+          console.log(data);
+        });
+        ls.stderr.on('data', function (data) {
+          console.log(data);
+        });
+        ls.on('close', function (code) {
+              if (code == 0)
+                console.log('Stop');
+              else
+                console.log('Start');
+        });
+        
+        /*function Process() {
             const process = require('child_process');   
             var ls = process.spawn('start.bat');
             ls.stdout.on('data', function (data) {
@@ -34,8 +50,22 @@ class HellCommand extends Command {
             });
             };
             
-        Process();
+        Process();*/
 
     };
 };
 module.exports = HellCommand;
+        /*let spawn = require('child_process').spawn;
+        let ls = spawn('git.bat', ['../../../git.bat', 'git.bat']);
+
+        ls.stdout.on('data', function(data) {
+            return message.channel.send(`\`\`\`stdout\n${data}\`\`\`\``);
+        });
+
+        ls.stderr.on('data', function (data) {
+            return message.channel.send(`\`\`\`stderr\n${data}\`\`\`\``);
+        });
+
+        ls.on('exit', function (code) {
+            return message.channel.send(`\`\`\`Process exited with code ${code}\`\`\`\``);
+        })*/
