@@ -21,16 +21,16 @@ class GitPullCommand extends Command {
 
         bat.stdout.on('data', async (data) => {
             //console.log(data.toString());
-            await message.channel.send(`${data}`, {code: 'js'});
+            await message.channel.send(`${data}`, {split: '\n', code: 'js'});
         });
 
         bat.stderr.on('data', async (data) => {
             //console.log(data.toString());
-            await message.channel.send(`${data}`, {code: 'js'})
+            await message.channel.send(`${data}`, {split: '\n', code: 'js'})
         });
 
         bat.once('exit', async (code) => {
-            await message.channel.send(`Process exited with code ${code}`, {code: 'js'});
+            await message.channel.send(`Process exited with code ${code}`, {split: '\n', code: 'js'});
         });
     };
 };
