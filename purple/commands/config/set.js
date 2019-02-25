@@ -42,7 +42,7 @@ class SetCommand extends Command {
                 }
             ]
         });
-    }
+    };
 
     async exec(message, { method, name}) {
 
@@ -60,7 +60,6 @@ class SetCommand extends Command {
             dj: this.handler.modules.get('set-dj'),
         })[method];
         return this.handler.handleDirectCommand(message, name, command, true);
-    }
-}
-
+    };
+};
 module.exports = SetCommand;

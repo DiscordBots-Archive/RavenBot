@@ -25,7 +25,7 @@ class ChannelCommand extends Command {
                }
            ]
         });
-    }
+    };
 
     exec(message, args) {
 
@@ -34,7 +34,7 @@ class ChannelCommand extends Command {
         const NSFW = {
             true : 'Yes',
             false : 'No'
-        }
+        };
 
         const embed = new MessageEmbed()
 
@@ -46,7 +46,6 @@ class ChannelCommand extends Command {
         .setThumbnail(message.guild.iconURL());
 
         return message.util.send(embed);
-    }
-}
-
+    };
+};
 module.exports = ChannelCommand;

@@ -28,7 +28,7 @@ class DisableCommand extends Command {
 
 			]
 		});
-	}
+	};
 
 	async exec(message, { method, name }) {
 
@@ -41,6 +41,6 @@ class DisableCommand extends Command {
 		})[method];
 
 		return this.handler.handleDirectCommand(message, name, command, true);
-	}
-}
+	};
+};
 module.exports = DisableCommand;

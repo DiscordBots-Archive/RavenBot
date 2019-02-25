@@ -13,7 +13,7 @@ class ConfigCommand extends Command {
             ratelimit: 2,
             typing: true
         });
-    }
+    };
 
     async exec(message) {
 
@@ -38,6 +38,6 @@ class ConfigCommand extends Command {
         .addField('Auto Role', autoRole ? message.guild.roles.get(autoRole) : 'Not Set', true)
         return message.util.send(embed)
         
-    }
-}
+    };
+};
 module.exports = ConfigCommand;
