@@ -13,7 +13,7 @@ const RESPONSES = [
 class PingCommand extends Command {
     constructor() {
         super('ping', {
-           aliases: ['ping'],
+           aliases: ['ping', 'pong'],
            category: 'util',
            description: {
                content: 'Checks the bot\'s ping to the Discord server',

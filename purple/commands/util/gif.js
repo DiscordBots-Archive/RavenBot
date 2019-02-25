@@ -25,21 +25,26 @@ class GifCommand extends Command {
     };
 
     async exec(message, { query }) {
-        let send;
-        if (query) {
-            const gifs = await gif.search('gifs', { "q": query, "limit" : 1 });
-            for (const data of gifs.data) {
-                //console.log(data.images.fixed_height.url);
-                send = data.images.fixed_height.url;
-            }
-        } else {
-            const random = await gif.random('gifs', { "limit" : 1 });
-            //console.log(random.data.images.fixed_height_downsampled.gif_url)
-            send = random.data.images.fixed_height_downsampled.gif_url;
-        }
 
-        const embed = new MessageAttachment(send);
-        return message.util.send(embed);
+        let send;
+        try {
+            if (query) {
+                const gifs = await gif.search('gifs', { "q": query, "limit" : 1 });
+                for (const data of gifs.data) {
+                    //console.log(data.images.fixed_height.url);
+                    send = data.images.fixed_height.url;
+                }
+            } else {
+                const random = await gif.random('gifs', { "limit" : 1 });
+                //console.log(random.data.images.fixed_height_downsampled.gif_url)
+                send = random.data.images.fixed_height_downsampled.gif_url;
+            }
+    
+            const embed = new MessageAttachment(send);
+            return message.util.send(embed);
+            
+        } catch {}
+
     };
 };
 module.exports = GifCommand;
