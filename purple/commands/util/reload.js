@@ -15,11 +15,15 @@ class ReloadCommand extends Command {
 
     async exec(message) {
 
+        const cmd = this.client.commandHandler.modules.size;
+        const listener = this.client.listenerHandler.modules.size;
+        const inhibitor = this.client.inhibitorHandler.modules.size;
+
         this.client.inhibitorHandler.removeAll() && this.client.inhibitorHandler.loadAll();
         this.client.listenerHandler.removeAll() && this.client.listenerHandler.loadAll();
-        this.client.commandHandler.removeAll() && this.client.commandHandler.loadAll()
+        this.client.commandHandler.removeAll() && this.client.commandHandler.loadAll();
         
-        return message.util.send(`*${message.author}, reloaded all commandHandler, listenerHandler & inhibitorHandler*`);
+        return message.util.send(`Reloaded: ${cmd} commandHandler \nReloaded: ${listener} listenerHandler \nReloaded: ${inhibitor} inhibitorHandler`, {code: 'js'});
     }
 }
 
