@@ -20,17 +20,17 @@ class GitPullCommand extends Command {
         const bat = spawn('cmd.exe', ['/c', 'git.bat']);
 
         bat.stdout.on('data', async (data) => {
-            console.log(data.toString());
+            //console.log(data.toString());
             await message.channel.send(`${data}`, {code: 'js'});
         });
 
         bat.stderr.on('data', async (data) => {
-            console.log(data.toString());
+            //console.log(data.toString());
             await message.channel.send(`${data}`, {code: 'js'})
         });
 
         bat.once('exit', async (code) => {
-            await message.channel.send(`${code}`, {code: 'js'});
+            await message.channel.send(`Process exited with code ${code}`, {code: 'js'});
         });
     };
 };
