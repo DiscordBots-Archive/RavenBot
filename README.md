@@ -8,4 +8,4 @@ I'll get into filling this out later, gotta stay tuned for now~
 ## Author
 
 **Purple** © [isuvajit](https://github.com/isuvajit) 
-Authored and maintained by Suvajit
+Authored and maintained by Suvajit..
