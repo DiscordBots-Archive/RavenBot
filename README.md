@@ -5,7 +5,7 @@ I'll get into filling this out later, gotta stay tuned for now~
 
 [![BUILT OPERATE TRANSFER](https://discordapp.com/api/guilds/524672414261444623/embed.png?style=banner2)](https://discord.gg/PuGpC8W)
 
-## Author
+## Author.
 
 **Purple** © [isuvajit](https://github.com/isuvajit) 
 Authored and maintained by Suvajit
