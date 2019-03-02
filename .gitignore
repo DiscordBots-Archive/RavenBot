@@ -6,7 +6,7 @@ tags.sqlite
 purple/database/
 logger/
 metrics/
-.vs
+.vs/
 .env
 package-lock.json
 Lavalink.jar
