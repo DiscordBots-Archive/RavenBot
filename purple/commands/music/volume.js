@@ -12,6 +12,7 @@ class VolumeCommand extends Command {
 			category: 'music',
 			channel: 'guild',
             ratelimit: 2,
+			ownerOnly: true,
             args: [
                 {
                     id: 'amount',
