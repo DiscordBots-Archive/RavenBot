@@ -21,7 +21,7 @@ class GuildMemberAddListener extends Listener {
 
 		const memberLog = this.client.settings.get(member.guild, 'memberLog', undefined);
 		if (memberLog) {
-			const embed = this.client.util.embed().setAuthor(`${member.user.tag} (${member.user.id})`, member.user.displayAvatarURl())
+			const embed = this.client.util.embed().setAuthor(`${member.user.tag} (${member.user.id})`, member.user.displayAvatarURL())
 			.setFooter(`User Joined`).setTimestamp().setColor('GREEN');
 			return member.guild.channels.get(memberLog).send(embed);
 		}
