@@ -16,7 +16,7 @@ class ReadyListener extends Listener {
 
 		Logger.info(`${this.client.user.tag} (${this.client.user.id})`, { tag: 'READY' });
 
-		this.client.user.setActivity('⚠');
+		//this.client.user.setActivity('⚠');
 
 		await this.client.muteScheduler.init(); // calls muteScheduler
 
