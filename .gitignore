@@ -1,14 +1,5 @@
 node_modules/
 yarn.lock
-auth.json
-database.sqlite
-tags.sqlite
-purple/database/
-logger/
-metrics/
-.vs/
+config.json
 .env
-package-lock.json
-Lavalink.jar
-logs/
-application.yml
+logger/

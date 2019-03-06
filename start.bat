@@ -1,3 +1,1 @@
-:a
-node purple.js
-goto:a
+start node index.js
