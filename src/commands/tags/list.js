@@ -28,7 +28,7 @@ class TagListCommand extends Command {
 				return message.util.reply(`**${member.displayName}** doesn't have any tags.`);
 			}
 			const embed = new MessageEmbed()
-				.setColor(0x30a9ed)
+				.setColor('#8387db')
 				.setAuthor(`${member.user.tag} (${member.id})`, member.user.displayAvatarURL())
 				.setDescription(tags.map(tag => `\`${tag.name}\``).sort().join(', '));
 
@@ -41,7 +41,7 @@ class TagListCommand extends Command {
 
 		const userTags = tags.filter(tag => !tag.hoisted).filter(tag => tag.authorID === message.author.id).map(tag => `\`${tag.name}\``).sort().join(', ');
 		
-		const embed = new MessageEmbed().setColor(0x30a9ed)
+		const embed = new MessageEmbed().setColor('#8387db')
 		.setAuthor(`${message.author.tag} (${message.author.id})`, message.author.displayAvatarURL());
 
 		if (hoistedTags) embed.addField('❯ Tags', hoistedTags);

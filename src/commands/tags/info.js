@@ -39,7 +39,7 @@ class TagInfoCommand extends Command {
 		}
 		const guild = this.client.guilds.get(tag.guildID);
 		const embed = new MessageEmbed()
-			.setColor(3447003)
+			.setColor('#8387db')
 			.addField('❯ Name', tag.name)
 			.addField('❯ User', user ? `${user.tag} (ID: ${user.id})` : "Couldn't fetch user.")
 			.addField('❯ Guild', guild ? `${guild.name}` : "Couldn't fetch guild.")
