@@ -38,6 +38,9 @@ class TagShowCommand extends Command {
 				{ aliases: { [Op.contains]: [name] } }
 			]
 		}});
+
+		await tag.update({ uses: tag.uses + 1 });
+
 		if (!tag) return;
 
 		return message.util.send(tag.content);
