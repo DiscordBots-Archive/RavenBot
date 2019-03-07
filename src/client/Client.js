@@ -76,7 +76,7 @@ class Client extends AkairoClient {
 		this.commandHandler.resolver.addType('tag', async (phrase, message) => {
 			if (!phrase) return null;
 			phrase = Util.cleanContent(phrase.toLowerCase(), message);
-			const tag = await Tags.findOne({ where: { name: phrase }});
+			const tag = await Tags.findOne({ where: { name: phrase, guildID: message.guild.id }});
 
 			return tag || null;
 		});
@@ -84,7 +84,7 @@ class Client extends AkairoClient {
 		this.commandHandler.resolver.addType('existingTag', async (phrase, message) => {
 			if (!phrase) return null;
 			phrase = Util.cleanContent(phrase.toLowerCase(), message);
-			const tag = await Tags.findOne({ where: {
+			const tag = await Tags.findOne({ where: { guildID: message.guild.id,
 				[Op.or]: [
 					{ name: phrase },
 					{ aliases: { [Op.contains]: [phrase] } }

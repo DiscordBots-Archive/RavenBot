@@ -36,10 +36,10 @@ class TagShowCommand extends Command {
 			[Op.or]: [
 				{ name: name },
 				{ aliases: { [Op.contains]: [name] } }
-			]
+			], guildID: message.guild.id
 		}});
 
-		await tag.update({ uses: tag.uses + 1 });
+		if (tag) await tag.update({ uses: tag.uses + 1 });
 
 		if (!tag) return;
 
