@@ -4,9 +4,10 @@ class VolumeCommand extends Command {
 	constructor() {
 		super('setvolume', {
 			aliases: ['volume', 'set-vol', 'vol'],
-			category: 'music',
+			category: 'owner',
 			channel: 'guild',
             ratelimit: 2,
+            ownerOnly: true,
             args: [
                 {
                     id: 'amount',

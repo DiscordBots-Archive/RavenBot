@@ -15,8 +15,8 @@ class RestrictEmojiCommand extends Command {
 					id: 'member',
 					type: 'member',
 					prompt: {
-						start: message => `${message.author}, what member do you want to restrict?`,
-						retry: message => `${message.author}, please mention a member.`
+						start: message => `what member do you want to restrict?`,
+						retry: message => `please mention a member.`
 					}
 				},
 				{

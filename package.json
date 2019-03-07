@@ -3,7 +3,7 @@
     "chalk": "^2.4.2",
     "diff": "^4.0.1",
     "discord-akairo": "github:1computer1/discord-akairo",
-    "discord.js": "github:discordjs/discord.js",
+    "discord.js": "discordjs/discord.js",
     "dotenv": "^6.2.0",
     "ioredis": "^4.6.2",
     "lavalink": "^2.4.0",

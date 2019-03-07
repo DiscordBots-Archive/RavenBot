@@ -25,19 +25,20 @@ class UserCommand extends Command {
 
     async exec(message, { member }) {
 
-        const { user } = member;
+        const {user} = member;
 
         const embed = this.client.util.embed().setColor('RED')
         .setAuthor(`${member.user.tag} (${member.user.id})`, user.displayAvatarURL())
         .setThumbnail(user.displayAvatarURL())
-        .addField('**::** Member Details', [
+        .addField('❯ Member Details', [
             `${member.nickname ? `• Nickname: ${member.nickname}` : ''}`,
-            `• Joined at: ${moment.utc(member.joinedAt).format('DD-MM-YY kk:mm:ss')}`,
+            `• Joined at: ${moment.utc(member.joinedAt).format('DD/MM/YYYY kk:mm:ss')}`,
             `• Role: ${member.roles.map(role=> `*${role}*`).join(', ')}`
         ])
-        .addField('**::** User Details', [
+        .addField('❯ User Details', [
             `${user.bot ? `• Bot Account` : ''}`,
-            `• Created at: ${moment.utc(user.createdAt).format('DD-MM-YY kk:mm:ss')}`,
+            `• ID: ${user.id}`,
+            `• Created at: ${moment.utc(user.createdAt).format('DD/MM/YYYY kk:mm:ss')}`,
             `• Status: ${user.presence.status.toUpperCase()}`,
             `• Activity: ${user.presence.activity ? user.presence.activity.name : 'None'}`
         ])

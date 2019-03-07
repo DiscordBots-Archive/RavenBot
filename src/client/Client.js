@@ -34,8 +34,8 @@ class Client extends AkairoClient {
 			handleEdits: true,
 			defaultCooldown: 3000,
 			defaultPrompt: {
-				modifyStart: (text, msg) => text && `${msg.author} **::** ${text}\nType \`cancel\` to cancel this command.`,
-				modifyRetry: (text, msg) => text && `${msg.author} **::** ${text}\nType \`cancel\` to cancel this command.`,
+				modifyStart: (text, msg) => text && `${msg.author} **::** ${text}\ntype \`cancel\` to cancel this command.`,
+				modifyRetry: (text, msg) => text && `${msg.author} **::** ${text}\ntype \`cancel\` to cancel this command.`,
 				timeout: msg => `${msg.author} **::** Time ran out, command has been cancelled.`,
 				ended: msg => `${msg.author} **::** Too many retries, command has been cancelled.`,
 				cancel: msg => `${msg.author} **::** Command has been cancelled.`,

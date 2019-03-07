@@ -57,12 +57,11 @@ class HelpCommand extends Command {
 	}
 
 	async execCommandList(message) {
+		const prefix = this.handler.prefix(message);
 		const embed = this.client.util.embed()
 			.setColor('RED')
-			.addField('Command List',[
-				'This is a list of commands.',
-				'To view details for a command, do `*help <command>`.',
-				`To view the guide which explains how to use ${this.client.user.username.replace(/(\b\w)/gi, lc => lc.toUpperCase())} in depth, use \`*guide\``
+			.addField('Command List', [
+				`To view details for a command, do \`${prefix}help <command>\``
 			]);
 
 		for (const category of this.handler.categories.values()) {

@@ -24,6 +24,7 @@ class SetGuildLogCommand extends Command {
 	}
 
 	async exec(message, { channel }) {
+		if (!channel) return;
 		this.client.settings.set(message.guild, 'guildLog', channel.id);
 		return message.util.reply(`set guild-log channel to **${channel.name}**`);
 	}

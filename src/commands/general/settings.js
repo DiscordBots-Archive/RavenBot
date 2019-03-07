@@ -28,7 +28,7 @@ class SettingsCommand extends Command {
 				`**Starboard**: ${(starboard && starboard.channel) || 'None'}`,
 				`**GuildLog**: ${message.guild.channels.get(guildlog) || 'None'}`,
 				`**ModLog**: ${message.guild.channels.get(modlog) || 'None'}`,
-				`**Member Log**: ${message.guild.channels.get(memberlog) || 'None'}`,
+				`**MemberLog**: ${message.guild.channels.get(memberlog) || 'None'}`,
 				`**Mod Role**: ${message.guild.roles.get(modrole) || 'None'}`,
 				`**Moderation**: ${this.client.settings.get(message.guild, 'moderation', undefined)}`,
 				`**Role State**: ${this.client.settings.get(message.guild, 'roleState', undefined)}`,
