@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "@naval-base/ms": "^2.2.1",
     "chalk": "^2.4.2",
     "diff": "^4.0.1",
     "discord-akairo": "github:1computer1/discord-akairo",
@@ -11,6 +10,7 @@
     "lavaqueue": "^3.1.0",
     "moment": "^2.24.0",
     "moment-duration-format": "^2.2.2",
+    "ms": "^2.1.1",
     "node-emoji": "^1.10.0",
     "node-fetch": "^2.3.0",
     "nodejs": "^0.0.0",
@@ -27,7 +27,7 @@
     "winston-daily-rotate-file": "^3.8.0"
   },
   "name": "new_project",
-  "version": "1.0.0",
+  "version": "0.1.1",
   "main": "index.js",
   "devDependencies": {},
   "scripts": {
