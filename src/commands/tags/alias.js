@@ -67,12 +67,12 @@ class TagAliasCommand extends Command {
 				return message.util.reply('messages have a limit of 2000 characters!');
 			}
 
-			await Tags.update({ aliases: new_alias }, { where: { name: first.name } });
+			await Tags.update({ aliases: new_alias, last_modified: message.author.id }, { where: { name: first.name } });
 
 		} else if (del) {
 
 			const removed_alias = await point.aliases.filter(id => id !== second);
-			await Tags.update({ aliases: removed_alias }, { where: { name: first.name } });
+			await Tags.update({ aliases: removed_alias, last_modified: message.author.id }, { where: { name: first.name } });
 
 		} else {
 			return message.util.reply('you have to either supply `--add` or `--del`');
