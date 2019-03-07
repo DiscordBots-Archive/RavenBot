@@ -1,7 +1,7 @@
 const { Command, Control } = require('discord-akairo');
 const { Util } = require('discord.js');
 const Tags = require('../../models/Tags');
-const moment = require('moment'); require('moment-duration-format');
+const moment = require('moment');
 
 class TagEditCommand extends Command {
 	constructor() {
@@ -68,7 +68,7 @@ class TagEditCommand extends Command {
 			hoisted: hoist && staffRole ? true : tag.hoisted || unhoist && staffRole ? false : tag.hoisted,
 			content: content ? Util.cleanContent(content, message) : tag.content,
 			last_modified: message.author.id,
-			updatedAt: Date.now()
+			updatedAt: moment.utc().toDate()
 		}, { where: { name: tag.name } });
 
 		return message.util.reply(`successfully edited **${tag.name}**${hoist && staffRole ? ' to be hoisted.' : '.'}`);
