@@ -31,7 +31,7 @@ class RawListener extends Listener {
 				this.client.music.voiceServerUpdate(packet.d);
 				break;
 			case 'MESSAGE_CREATE':
-				//this.prometheus.messagesCounter.inc();
+				this.client.prometheus.messagesCounter.inc();
 				break;
 			default: break;
 		}

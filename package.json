@@ -5,6 +5,7 @@
     "discord-akairo": "github:1computer1/discord-akairo",
     "discord.js": "discordjs/discord.js",
     "dotenv": "^6.2.0",
+    "http": "^0.0.0",
     "ioredis": "^4.6.2",
     "lavalink": "^2.4.0",
     "lavaqueue": "^3.1.0",
@@ -16,6 +17,7 @@
     "nodejs": "^0.0.0",
     "os-utils": "^0.0.14",
     "pg": "^7.8.1",
+    "prom-client": "^11.2.1",
     "punycode": "^2.1.1",
     "qs": "^6.6.0",
     "raven": "^2.6.4",
@@ -23,6 +25,7 @@
     "rejects": "^0.6.2",
     "sequelize": "^4.42.0",
     "turndown": "^5.0.3",
+    "url": "^0.11.0",
     "winston": "^3.2.1",
     "winston-daily-rotate-file": "^3.8.0"
   },

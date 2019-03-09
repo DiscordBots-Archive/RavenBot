@@ -1,14 +1,17 @@
 const { AkairoClient, CommandHandler, InhibitorHandler, ListenerHandler } = require('discord-akairo');
+const { Counter, collectDefaultMetrics, register } = require('prom-client');
 const SettingsProvider = require('../struct/SettingsProviders');
 const MuteScheduler = require('../struct/MuteScheduler');
 const { Client: Lavaqueue } = require('lavaqueue');
 const { Collection, Util } = require('discord.js');
 const Database = require('../struct/Database');
 const Setting = require('../models/settings');
+const { createServer } = require('http');
 const Case = require('../models/Case');
 const { Rejects } = require('rejects');
 const Tags = require('../models/Tags');
 const { Op } = require('sequelize');
+const { parse } = require('url');
 const path = require('path');
 
 class Client extends AkairoClient {
@@ -46,6 +49,14 @@ class Client extends AkairoClient {
 
 		this.inhibitorHandler = new InhibitorHandler(this, { directory: path.join(__dirname, '..', 'inhibitors') });
 		this.listenerHandler = new ListenerHandler(this, { directory: path.join(__dirname, '..', 'listeners') });
+
+		this.prometheus = {
+            messagesCounter: new Counter({ name: 'client_messages_total', help: 'Total number of messages have seen' }),
+            commandCounter: new Counter({ name: 'client_commands_total', help: 'Total number of commands used' }),
+            collectDefaultMetrics,
+            register
+        };
+        this.prometheus.collectDefaultMetrics({ prefix: 'client_', timeout: 30000 });
 
 		this.music = new Lavaqueue({
 			userID: process.env.ID,
@@ -124,6 +135,16 @@ class Client extends AkairoClient {
 		this.inhibitorHandler.loadAll();
 		this.listenerHandler.loadAll();
 	}
+
+	async metrics() {
+		createServer((req, res) => {
+			if (parse(req.url).pathname === '/metrics') {
+				res.writeHead(200, { 'Content-Type': 'application/json' });
+				res.write(this.prometheus.register.metrics());
+			};
+			res.end();
+		}).listen(8800);
+    };
 
 	async start() {
 		await Database.authenticate();

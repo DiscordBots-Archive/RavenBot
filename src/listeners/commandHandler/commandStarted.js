@@ -12,6 +12,8 @@ class CommandStartedListener extends Listener {
 	}
 
 	async exec(message, command, args) {
+		this.client.prometheus.commandCounter.inc();
+
 		const tag = message.guild ? message.guild.name : `${message.author.tag}/PM`;
 		Logger.log(`=> ${command.id}`, { tag });
 
