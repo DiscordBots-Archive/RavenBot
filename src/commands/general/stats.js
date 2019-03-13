@@ -6,7 +6,7 @@ const { version } = require('../../../package.json');
 
 class StatsCommand extends Command {
     constructor() {
-        super('stats-cmd', {
+        super('stats', {
             aliases: ['stats'],
             category: 'util',
             clientPermissions: ['EMBED_LINKS'],

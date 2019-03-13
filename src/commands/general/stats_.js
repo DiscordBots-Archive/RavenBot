@@ -5,7 +5,7 @@ const Star = require('../../models/stars');
 
 class StatsCommand extends Command {
 	constructor() {
-		super('stats', {
+		super('stats_', {
 			//aliases: ['stats'],
 			category: 'general',
 			clientPermissions: ['EMBED_LINKS'],
