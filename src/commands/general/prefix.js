@@ -6,17 +6,17 @@ class PrefixCommand extends Command {
 			aliases: ['prefix'],
 			category: 'general',
 			channel: 'guild',
-			userPermissions: ['MANAGE_GUILD'],
 			quoted: false,
 			args: [
 				{
 					id: 'method',
 				},
-				Control.if((_, args) => args.method, [
+				Control.if((msg, args) => msg.member.roles.has(this.client.settings.get(msg.guild, 'modRole', undefined)) && args.method, [
 					{
 						id: 'prefix',
 						match: 'content',
 						type: Argument.validate('string', p => !/\s/.test(p) && p.length <= 5),
+						default: '',
 						prompt: {
 							retry: `Please provide a prefix without spaces and less than 5 characters`
 						}

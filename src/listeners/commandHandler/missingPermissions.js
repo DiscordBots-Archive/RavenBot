@@ -18,7 +18,7 @@ class MissingPermissionsListener extends Listener {
 			},
 			user: () => {
 				const str = this.missingPermissions(message.channel, message.author, missing);
-				return `You are missing ${str} to use that command.`;
+				return `You are missing ${str === undefined ? 'moderator permission' : str} to use that command.`;
 			}
 		}[type];
 
