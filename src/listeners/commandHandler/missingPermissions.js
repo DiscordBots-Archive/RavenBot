@@ -22,7 +22,7 @@ class MissingPermissionsListener extends Listener {
 			}
 		}[type];
 
-		const tag = message.guild ? message.guild.name : `${message.author.tag}/PM`;
+		const tag = message.guild ? `${message.guild.name} :: ${message.author.tag} (${message.author.id})` : `${message.author.tag} (${message.author.id})`;
 		Logger.log(`=> ${command.id} ~ ${type}Permissions`, { tag });
 
 		if (!text) return;

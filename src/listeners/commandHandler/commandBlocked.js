@@ -16,7 +16,7 @@ class CommandBlockedListener extends Listener {
 			guild: () => 'You must be in a guild to use this command.'
 		}[reason];
 
-		const tag = message.guild ? message.guild.name : `${message.author.tag}/PM`;
+		const tag = message.guild ? `${message.guild.name} :: ${message.author.tag} (${message.author.id})` : `${message.author.tag} (${message.author.id})`;
 		Logger.log(`=> ${command.id} ~ ${reason}`, { tag });
 
 		if (!text) return;
