@@ -51,10 +51,9 @@ class MessageUpdateListener extends Listener {
 
 			webhook.send({
 				embeds: [embed],
-				files: [{ attachment: Buffer.from(output, 'utf8'), name: 'logs.txt' }],
-				username: 'Logs: MESSAGE DELETED BULK',
-				avatarURL: 'https://i.imgur.com/EUGvQJJ.png'
-			})
+				username: 'Logs: MESSAGE UPDATED',
+				avatarURL: 'https://i.imgur.com/wnC4KmC.png'
+			});
 			return this.client.channels.get(guildLogs).send({embed});
 		}
 	}
