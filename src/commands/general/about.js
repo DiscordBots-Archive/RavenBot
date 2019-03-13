@@ -21,9 +21,7 @@ class AboutCommand extends Command {
 			.setTitle(`About ${this.client.user.username}`)
 			.setDescription([
 				`${this.client.user.username} is developed by [${owner.tag}](https://github.com/isuvajit)`,
-				'',
 				`${this.client.user.username} uses the **[Discord.js](https://discord.js.org) (${Discord.version})** library and the **[Akairo](https://1computer1.github.io/discord-akairo) (${Akairo.version})** framework.`,
-				'',
 				`Use \`${prefix}stats\` for statistics and \`${prefix}invite\` for an invite link.`
 			]);
 
