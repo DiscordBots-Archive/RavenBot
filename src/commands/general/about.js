@@ -18,7 +18,7 @@ class AboutCommand extends Command {
 			.setColor(0xFFAC33)
 			.setTitle(`About ${this.client.user.username}`)
 			.setDescription([
-				`${this.client.user.username} is developed by **${owner.tag}**`,
+				`${this.client.user.username} is developed by [${owner.tag}](https://github.com/isuvajit)`,
 				'',
 				`${this.client.user.username} uses the **[Discord.js](https://discord.js.org)** library and the **[Akairo](https://1computer1.github.io/discord-akairo)** framework.`,
 				'',
