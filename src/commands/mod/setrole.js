@@ -5,6 +5,7 @@ class SetRoleCommand extends Command {
         super('set-role', {
             aliases: ['set-role'],
             category: 'mod',
+            channel: 'guild',
             clientPermissions: ['MANAGE_ROLES'],
             args: [
                 {

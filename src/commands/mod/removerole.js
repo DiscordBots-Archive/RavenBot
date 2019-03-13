@@ -5,6 +5,7 @@ class RemoveRoleCommand extends Command {
         super('remove-role', {
             aliases: ['remove-role'],
             category: 'mod',
+            channel: 'guild',
             clientPermissions: ['MANAGE_ROLES'],
             args: [
                 {
