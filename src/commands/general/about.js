@@ -1,5 +1,4 @@
 const { Command } = require('discord-akairo');
-const Client = require('../../client/Client');
 
 class AboutCommand extends Command {
 	constructor() {
