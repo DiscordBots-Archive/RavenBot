@@ -29,7 +29,7 @@ class PrefixCommand extends Command {
 					'The prefix must not contain spaces and be below 5 characters.'
 				],
 				usage: '<prefix>',
-				examples: ['*', '-']
+				examples: ['!', '?']
 			}
 		});
 	}

@@ -23,14 +23,14 @@ class StatsCommand extends Command {
         .addField("❯ Memory Usage", [
             `• Using : ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`,
             `• Free : ${Math.round(os.freemem())} MB`
-        ]) 
-        .addField("❯ Uptime", `• ${moment.duration(this.client.uptime).format("M [months], W [weeks], D [days], H [hrs], m [mins], s [secs]")}`)
+        ], true) 
+        .addField("❯ Uptime", `• ${moment.duration(this.client.uptime).format("M [months], W [weeks], D [days], H [hrs], m [mins], s [secs]")}`, true)
         .addField("❯ General Stats", [
             `• Users : ${this.client.users.size}`,
             `• Channels : ${this.client.channels.size}`
-        ])
-        .addField('❯ Version', `• v${version}`)
-        .addField("❯ Library", `• [discord.js](https://discord.js.org)[-akairo](https://github.com/1Computer1/discord-akairo)`)
+        ], true)
+        .addField('❯ Version', `• v${version}`, true)
+        .addField("❯ Library", `• [discord.js](https://discord.js.org)[-akairo](https://github.com/1Computer1/discord-akairo)`, true)
         .setFooter('© 2018 ' + this.client.users.get(this.client.ownerID).tag, this.client.users.get(this.client.ownerID).displayAvatarURL())
 
         if (message.channel.type === 'dm' || !(message.channel).permissionsFor(message.guild.me).has(['ADD_REACTIONS', 'MANAGE_MESSAGES'], false)) {
