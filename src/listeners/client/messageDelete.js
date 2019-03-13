@@ -1,5 +1,5 @@
 const { Listener } = require('discord-akairo');
-const { MessageEmbed } = require('discord.js');
+const { MessageEmbed, WebhookClient } = require('discord.js');
 
 class MessageDeleteListener extends Listener {
 	constructor() {
