@@ -80,16 +80,15 @@ class HelpCommand extends Command {
 			if (title) embed.addField(title, `${category.filter(cmd => cmd.aliases.length > 0).map(cmd => `\`${cmd.aliases[0]}\``).join(' ')}`);
 		}
 
-		/*const shouldReply = message.guild && message.channel.permissionsFor(this.client.user).has('SEND_MESSAGES');
+		const shouldReply = message.guild && message.channel.permissionsFor(this.client.user).has('SEND_MESSAGES');
 
 		try {
 			await message.author.send({ embed });
 			if (shouldReply) return message.util.reply('I\'ve sent you a DM with the command list.');
 		} catch (err) {
 			if (shouldReply) return message.util.reply('I could not send you the command list in DMs.');
-		}*/
+		}
 
-		await message.util.send({embed});
 		return undefined;
 	}
 }
