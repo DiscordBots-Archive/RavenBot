@@ -17,7 +17,7 @@ class AboutCommand extends Command {
 		const owner = this.client.users.get(this.client.ownerID);
 
 		const embed = this.client.util.embed()
-			.setColor(0xFFAC33)
+			.setColor('#8387db')
 			.setTitle(`About ${this.client.user.username}`)
 			.setDescription([
 				`${this.client.user.username} is developed by [${owner.tag}](https://github.com/isuvajit)`,

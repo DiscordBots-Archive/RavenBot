@@ -38,7 +38,7 @@ class HelpCommand extends Command {
 		}, command.description);
 
 		const embed = this.client.util.embed()
-			.setColor(0xFFAC33)
+			.setColor('#8387db')
 			.setTitle(`\`${prefix}${command.aliases[0]} ${description.usage}\``)
 			.addField('Description', description.content);
 
@@ -59,7 +59,7 @@ class HelpCommand extends Command {
 	async execCommandList(message) {
 		const prefix = this.handler.prefix(message);
 		const embed = this.client.util.embed()
-			.setColor('RED')
+			.setColor('#8387db')
 			.addField('Command List', [
 				`To view details for a command, do \`${prefix}help <command>\``
 			]);
