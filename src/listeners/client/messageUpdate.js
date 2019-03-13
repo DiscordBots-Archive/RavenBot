@@ -1,5 +1,5 @@
 const { Listener } = require('discord-akairo');
-const { MessageEmbed, Util } = require('discord.js');
+const { MessageEmbed, Util, WebhookClient } = require('discord.js');
 const diff = require('diff');
 
 class MessageUpdateListener extends Listener {
@@ -16,7 +16,8 @@ class MessageUpdateListener extends Listener {
 		if (oldMessage.author.bot || newMessage.author.bot) return;
 		if (Util.escapeMarkdown(oldMessage.content) === Util.escapeMarkdown(newMessage.content)) return;
 		const guildLogs = this.client.settings.get(newMessage.guild, 'guildLog', undefined);
-		if (guildLogs) {
+		const webhook = new WebhookClient(process.env.WebhookID, process.env.WebhookToken);
+		if (guildLogs || webhook) {
 			const embed = new MessageEmbed()
 				.setColor(0x306bff)
 				.setAuthor(`${newMessage.author.tag} (${newMessage.author.id})`, newMessage.author.displayAvatarURL())
@@ -48,6 +49,12 @@ class MessageUpdateListener extends Listener {
 			embed.setThumbnail('https://i.imgur.com/wnC4KmC.png');
 			embed.setFooter('Message Edited');
 
+			webhook.send({
+				embeds: [embed],
+				files: [{ attachment: Buffer.from(output, 'utf8'), name: 'logs.txt' }],
+				username: 'Logs: MESSAGE DELETED BULK',
+				avatarURL: 'https://i.imgur.com/EUGvQJJ.png'
+			})
 			return this.client.channels.get(guildLogs).send({embed});
 		}
 	}
