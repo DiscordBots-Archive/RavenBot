@@ -100,6 +100,7 @@ class LaunchCybernukeCommand extends Command {
 		await Promise.all(promises);
 		await statusMessage.edit('Cybernuke impact confirmed. Casuality report incoming...');
 		await response.reply([
+			'',
 			`__**Fatalities:**__`,
 			`${fatalities.length > 0 ? `${fatalities.length} confirmed KIA. \n${fatalities.map(fat => `**-** ${fat.displayName} (${fat.id})`).join('\n')}` : 'None'}`,
 			'',
