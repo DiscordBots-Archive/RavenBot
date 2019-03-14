@@ -13,7 +13,12 @@ class ImageCommand extends Command {
                     id: 'query',
                     match: 'content'
                 }
-            ]
+            ],
+            description: {
+                content: 'Receives or searches a random image.',
+                usage: '<query>',
+                examples: ['cat', 'dog', 'fox', 'sky']
+            }
         })
     }
 
