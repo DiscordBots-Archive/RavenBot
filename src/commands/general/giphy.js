@@ -1,5 +1,6 @@
 const { Command } = require('discord-akairo');
 const qs = require('querystring');
+const fetch = require('node-fetch');
 
 class GifCommand extends Command {
     constructor() {
