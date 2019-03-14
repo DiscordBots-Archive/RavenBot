@@ -12,7 +12,8 @@ class NSFWCommand extends Command {
             args: [
                 {
                     id: 'query',
-                    match: 'content'
+                    match: 'content',
+                    default: 'BigBoobsGW'
                 }
             ]
         })
