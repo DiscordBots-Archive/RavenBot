@@ -22,6 +22,7 @@ class NSFWCommand extends Command {
     async exec(message, { query }) {
 
         if (message.author.id !== this.client.ownerID) return;
+        if (!message.channel.nsfw) return;
         try {
             const url = "http://reddit.com/r/" + query + ".json?limit=100";
             request.get(url, (err, response) => {
