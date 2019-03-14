@@ -15,7 +15,9 @@ class GifCommand extends Command {
                 }
             ],
             description: {
-                content: 'Displays or searches a random gif.'
+                content: 'Displays or searches a random gif.',
+                usage: '<query>',
+                examples: ['cat', 'dog']
             }
         })
     }
