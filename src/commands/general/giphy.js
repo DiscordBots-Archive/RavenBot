@@ -13,7 +13,10 @@ class GifCommand extends Command {
                     id: 'query',
                     match: 'content'
                 }
-            ]
+            ],
+            description: {
+                content: 'Displays or searches a random gif.'
+            }
         })
     }
 

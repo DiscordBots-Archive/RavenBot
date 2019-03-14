@@ -15,7 +15,7 @@ class ImageCommand extends Command {
                 }
             ],
             description: {
-                content: 'Receives or searches a random image.',
+                content: 'Displays or searches a random image.',
                 usage: '<query>',
                 examples: ['cat', 'dog', 'fox', 'sky']
             }
