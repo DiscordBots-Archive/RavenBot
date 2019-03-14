@@ -1,6 +1,4 @@
 const { Command } = require('discord-akairo');
-const GphApiClient = require('giphy-js-sdk-core');
-const gif = GphApiClient(process.env.GIPHY);
 const qs = require('querystring');
 
 class GifCommand extends Command {
