@@ -20,48 +20,51 @@ class NSFWCommand extends Command {
 
     async exec(message, { query }) {
 
-        const url = "http://reddit.com/r/" + query + ".json?limit=100";
-		request.get(url, (err, response) => {
-			if (!err) {
-				const body = JSON.parse(response.body)
-				const validImageExtensions = ['.jpg', '.jpeg', '.gif', '.png']
-				let results = []
-				body.data.children.forEach(child => {
-					let imageUrl = child.data.url
-					let imageThumbnailUrl = child.data.thumbnail
-
-					if (imageUrl && !imageUrl.match("\/gallery\/|\/album\/|\/new\/|\/a\/|m.imgur.com\/") && imageThumbnailUrl && imageUrl.length > 1 && imageThumbnailUrl.length > 1) {
-						imageUrl = imageUrl.replace(/ /g,'')
-						imageThumbnailUrl = imageThumbnailUrl.replace(/ /g,'')
-
-						imageUrl = imageUrl.replace('.gifv', '.gif')
-
-						let imageThumbnailExtension = path.extname(imageThumbnailUrl)
-						let imageExtension = path.extname(imageUrl)
-
-						if (validImageExtensions.includes(imageThumbnailExtension)) {
-							const filename = imageUrl.replace(imageExtension, '')
-
-							if (!validImageExtensions.includes(imageExtension) && imageUrl.indexOf("imgur") > -1) {
-								imageExtension = imageThumbnailExtension
-							}
-
-							const childUrl = filename + imageExtension
-
-							if (validImageExtensions.includes(imageExtension)) {
-								results = [...results, {
-									url: childUrl,
-								}]
-							}
-						}
-					}
-				})
-
-                const img = results[Math.floor(Math.random() * results.length)].url;
-                const embed = this.client.util.embed().setImage(img);
-                return message.util.send(embed);
-			}
-		})
+        if (message.author.id !== this.client.ownerID) return;
+        try {
+            const url = "http://reddit.com/r/" + query + ".json?limit=100";
+            request.get(url, (err, response) => {
+                if (!err) {
+                    const body = JSON.parse(response.body)
+                    const validImageExtensions = ['.jpg', '.jpeg', '.gif', '.png']
+                    let results = []
+                    body.data.children.forEach(child => {
+                        let imageUrl = child.data.url
+                        let imageThumbnailUrl = child.data.thumbnail
+    
+                        if (imageUrl && !imageUrl.match("\/gallery\/|\/album\/|\/new\/|\/a\/|m.imgur.com\/") && imageThumbnailUrl && imageUrl.length > 1 && imageThumbnailUrl.length > 1) {
+                            imageUrl = imageUrl.replace(/ /g,'')
+                            imageThumbnailUrl = imageThumbnailUrl.replace(/ /g,'')
+    
+                            imageUrl = imageUrl.replace('.gifv', '.gif')
+    
+                            let imageThumbnailExtension = path.extname(imageThumbnailUrl)
+                            let imageExtension = path.extname(imageUrl)
+    
+                            if (validImageExtensions.includes(imageThumbnailExtension)) {
+                                const filename = imageUrl.replace(imageExtension, '')
+    
+                                if (!validImageExtensions.includes(imageExtension) && imageUrl.indexOf("imgur") > -1) {
+                                    imageExtension = imageThumbnailExtension
+                                }
+    
+                                const childUrl = filename + imageExtension
+    
+                                if (validImageExtensions.includes(imageExtension)) {
+                                    results = [...results, {
+                                        url: childUrl,
+                                    }]
+                                }
+                            }
+                        }
+                    })
+    
+                    const img = results[Math.floor(Math.random() * results.length)].url;
+                    const embed = this.client.util.embed().setImage(img);
+                    return message.util.send(embed);
+                }
+            })
+        } catch {}
     }
 }
 
