@@ -24,7 +24,7 @@ class GifCommand extends Command {
 
     async exec(message, { query }) {
         if (query) {
-            const queryString = qs.stringify({ q: query });
+            const queryString = qs.stringify({ q: query.replace(/[^a-zA-Z0-9]+/gi, ' ') });
             const res = await fetch(`http://api.giphy.com/v1/gifs/search?${queryString}`, { method: 'GET', headers: { api_key: process.env.GIPHY } });
             const gif = await res.json();
             for (const data of gif.data) {
