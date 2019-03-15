@@ -26,7 +26,7 @@ class ImageCommand extends Command {
 
         const page = Math.floor(Math.random() * 1000) + 1;
         if (query) {
-            const queryString = qs.stringify({ query: query });
+            const queryString = qs.stringify({ query: query.replace(/[^a-zA-Z0-9]+/gi, ' ') });
             const res = await fetch(`https://api.pexels.com/v1/search?${queryString}&per_page=1&page=${page}`, { method: 'GET', headers: { Authorization: process.env.PEXEL } });
             const data = await res.json();
             for (const photo of data.photos) {
