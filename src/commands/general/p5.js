@@ -1,8 +1,7 @@
-const request = require('request');
-const md5 = require('md5');
-const path = require('path');
-const qs = require('querystring');
 const { Command } = require('discord-akairo');
+const { MessageEmbed } = require('discord.js');
+const request = require('request');
+const path = require('path');
 
 class NSFWCommand extends Command {
     constructor() {
@@ -15,14 +14,19 @@ class NSFWCommand extends Command {
                     match: 'content',
                     default: 'BigBoobsGW'
                 }
-            ]
+            ],
+            description: {
+                content: 'Displays random boobs, uh!'
+            }
         })
     }
 
     async exec(message, { query }) {
 
-        if (message.author.id !== this.client.ownerID) return;
-        if (!message.channel.nsfw) return;
+        if (message.channel.id !== '555369247161843712') {
+            const att = new MessageEmbed().setImage('https://images-ext-1.discordapp.net/external/oh9rSfiKmoYaO46eXnDWDHCtMJOq9Ug6mfkL3p9y1vw/%3Fixlib%3Drb-1.2.1%26ixid%3DeyJhcHBfaWQiOjYxMjYwfQ/https/images.unsplash.com/photo-1471871480126-59ab253c49e9?width=799&height=533');
+            return message.channel.send(att);
+        }
         try {
             const url = "http://reddit.com/r/" + query + ".json?limit=100";
             request.get(url, (err, response) => {

@@ -26,7 +26,7 @@ class PhotoCommand extends Command {
         const queryString = qs.stringify({ query: query });
         const res = await fetch(`https://api.unsplash.com/search/photos?per_page=1&page=${page}&${queryString}&${process.env.UNSPLASH}`);
         const data = await res.json();
-        for (const image of data.results) {console.log(data)
+        for (const image of data.results) {
             const embed = this.client.util.embed()
             embed.setImage(image.urls.raw);
             return message.util.send(embed);
