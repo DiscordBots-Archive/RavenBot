@@ -48,15 +48,17 @@ class MessageUpdateListener extends Listener {
 		embed.setTimestamp(oldMessage.editedAt || newMessage.editedAt || new Date());
 		embed.setThumbnail('https://i.imgur.com/wnC4KmC.png');
 		embed.setFooter('Message Edited');
+
+		if (guildLogs) {
+			this.client.channels.get(guildLogs).send({embed});
+		}
+
 		if (webhook) {
 			return webhook.send({
 				embeds: [embed],
 				username: 'Logs: MESSAGE UPDATED',
 				avatarURL: 'https://i.imgur.com/wnC4KmC.png'
 			});
-		}
-		if (guildLogs) {
-			return this.client.channels.get(guildLogs).send({embed});
 		}
 	}
 }

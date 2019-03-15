@@ -29,6 +29,10 @@ class MessageDeleteBulkListener extends Listener {
 		.setTimestamp(new Date()).setThumbnail('https://i.imgur.com/EUGvQJJ.png')
 		.setFooter('Bulk Deleted');
 
+		if (guildLogs) {
+			this.client.channels.get(guildLogs).send({ embed, files: [{ attachment: Buffer.from(output, 'utf8'), name: 'logs.txt' }] });
+		}
+
 		if (webhook) {
 			return webhook.send({
 				embeds: [embed],
@@ -36,9 +40,6 @@ class MessageDeleteBulkListener extends Listener {
 				username: 'Logs: MESSAGE DELETED BULK',
 				avatarURL: 'https://i.imgur.com/EUGvQJJ.png'
 			});
-		}
-		if (guildLogs) {
-			return this.client.channels.get(guildLogs).send({ embed, files: [{ attachment: Buffer.from(output, 'utf8'), name: 'logs.txt' }] });
 		}
 	}
 }

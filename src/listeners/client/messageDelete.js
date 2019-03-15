@@ -25,6 +25,10 @@ class MessageDeleteListener extends Listener {
 		if (attachment) embed.addField('❯ Attachment(s)', attachment.url);
 		embed.setTimestamp(new Date());
 		embed.setFooter('Message Deleted');
+		
+		if (guildLogs) {
+			this.client.channels.get(guildLogs).send({embed});
+		}
 
 		if (webhook) {
 			return webhook.send({
@@ -32,9 +36,6 @@ class MessageDeleteListener extends Listener {
 				username: 'Logs: MESSAGE DELETED',
 				avatarURL: 'https://i.imgur.com/EUGvQJJ.png'
 			});
-		}
-		if (guildLogs) {
-			return this.client.channels.get(guildLogs).send({embed});
 		}
 	}
 }
