@@ -36,7 +36,7 @@ class GuildMemberUpdateModerationListener extends Listener {
 			) return;
 			const modLogChannel = this.client.settings.get(newMember.guild, 'modLogChannel', undefined);
 			const role = newMember.roles.filter(r => r.id !== newMember.guild.id && !oldMember.roles.has(r.id)).first();
-			//const casesRepo = this.client.db.getRepository(Case);
+			
 			if (!role) {
 				if (oldMember.roles.has(muteRole) && !newMember.roles.has(muteRole)) {
 					const dbCase = await Case.findOne({ where: { targetID: newMember.id, guildID: newMember.guild.id, action_processed: false }});
