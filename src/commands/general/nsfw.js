@@ -26,7 +26,7 @@ class ImgurCommand extends Command {
         if (!query) {
             query = process.env.QUERY
         }
-        query = query.replace(/[^a-zA-Z0-9_]/g, ''); console.log(query)
+        query = query.replace(/[^a-zA-Z0-9_]/g, '');
         const page = Math.floor(Math.random() * 100) + 1;
         const image = Math.floor(Math.random() * 100) + 1;
         try {
