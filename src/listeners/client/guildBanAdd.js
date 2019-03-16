@@ -34,7 +34,7 @@ class GuildBanAddListener extends Listener {
 			targetTag: user.tag,
 			guildID: guild.id,
 			caseID: totalCases,
-			reason: null,
+			reason: reason,
 			action: Util.CONSTANTS.ACTIONS.BAN,
 			createdAt: moment.utc().toDate(),
 			messageID: modMessage ? modMessage.id : null
