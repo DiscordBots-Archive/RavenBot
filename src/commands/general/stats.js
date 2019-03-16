@@ -21,7 +21,7 @@ class StatsCommand extends Command {
         const key = await request.post('https://hastebin.com/documents').send(this.client.prometheus.register.metrics()).then((r) => r.body.key);
         const embed = new MessageEmbed().setColor('#8387db').setTitle(`${this.client.user.username} Statistics`)
         .setThumbnail(this.client.user.displayAvatarURL())
-        .setURL(`https://discordapp.com/oauth2/authorize?client_id=${this.client.user.id}&scope=bot&permissions=2146958847`)
+        .setURL(`https://hastebin.com/${key}.js`)
         .addField("❯ Memory Usage", [
             `• Using : ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`,
             `• Free : ${Math.round(os.freemem())} MB`
@@ -31,7 +31,7 @@ class StatsCommand extends Command {
             `• Users : ${this.client.users.size}`,
             `• Channels : ${this.client.channels.size}`
         ], true)
-        .addField('❯ Version', `• [v${version}](https://hastebin.com/${key}.js)`, true)
+        .addField('❯ Version', `• [v${version}](https://github.com/isuvajit/raven)`, true)
         .addField("❯ Library", `• [discord.js](https://discord.js.org)[-akairo](https://github.com/1Computer1/discord-akairo)`, true)
         .setFooter('© 2018 ' + this.client.users.get(this.client.ownerID).tag, this.client.users.get(this.client.ownerID).displayAvatarURL())
 
