@@ -74,7 +74,8 @@ class HelpCommand extends Command {
 				tags: '\u200bTags',
 				music: '\u200bMusic',
 				mod: '\u200bMod',
-				config: '\u200bConfig'
+				config: '\u200bConfig',
+				fun: '\u200bFun'
 			}[category.id];
 
 			if (title) embed.addField(title, `${category.filter(cmd => cmd.aliases.length > 0).map(cmd => `\`${cmd.aliases[0]}\``).join(' ')}`);
