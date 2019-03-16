@@ -1,6 +1,7 @@
 const { Command } = require('discord-akairo');
 const { MessageEmbed } = require('discord.js');
 const os = require('os-utils');
+const request = require('snekfetch');
 const moment = require('moment'); require('moment-duration-format');
 const { version } = require('../../../package.json');
 
@@ -17,6 +18,7 @@ class StatsCommand extends Command {
 
     async exec(message) {
 
+        const key = await request.post('https://hastebin.com/documents').send(this.client.prometheus.register.metrics()).then((r) => r.body.key);
         const embed = new MessageEmbed().setColor('#8387db').setTitle(`${this.client.user.username} Statistics`)
         .setThumbnail(this.client.user.displayAvatarURL())
         .setURL(`https://discordapp.com/oauth2/authorize?client_id=${this.client.user.id}&scope=bot&permissions=2146958847`)
@@ -29,7 +31,7 @@ class StatsCommand extends Command {
             `• Users : ${this.client.users.size}`,
             `• Channels : ${this.client.channels.size}`
         ], true)
-        .addField('❯ Version', `• v${version}`, true)
+        .addField('❯ Version', `• [v${version}](https://hastebin.com/${key}.js)`, true)
         .addField("❯ Library", `• [discord.js](https://discord.js.org)[-akairo](https://github.com/1Computer1/discord-akairo)`, true)
         .setFooter('© 2018 ' + this.client.users.get(this.client.ownerID).tag, this.client.users.get(this.client.ownerID).displayAvatarURL())
 
