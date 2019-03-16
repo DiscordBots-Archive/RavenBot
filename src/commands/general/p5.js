@@ -5,8 +5,8 @@ const path = require('path');
 
 class NSFWCommand extends Command {
     constructor() {
-        super('nsfw', {
-            aliases: ['nsfw'],
+        super('nsfw_d', {
+            aliases: ['nsf'],
             category: 'nsfw',
             args: [
                 {
