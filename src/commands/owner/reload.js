@@ -11,8 +11,7 @@ class ReloadCommand extends Command {
 			args: [
 				{
 					id: 'type',
-					type: ['command', 'inhibitor', 'listener'],
-					default: 'command'
+					type: [['command', 'c'], ['inhibitor', 'i'], ['listener', 'l']],
 				},
 				{
 					id: 'module',
@@ -21,7 +20,7 @@ class ReloadCommand extends Command {
 						const resolver = this.handler.resolver.type({
 							command: 'commandAlias',
 							inhibitor: 'inhibitor',
-							listener: 'listener'
+							listener: 'listener',
 						}[type]);
 
 						return resolver(phrase);
@@ -29,13 +28,26 @@ class ReloadCommand extends Command {
 				}
 			],
 			description: {
-				content: 'Reloads a module.',
+				content: 'Reloads a/all module.',
 				usage: '<module> [type:]'
 			}
 		});
 	}
 
-	exec(message, { type, module: mod }) {
+	async exec(message, { type, module: mod }) {
+		if (!type) {
+			const  inhibitor = this.client.inhibitorHandler.removeAll() && this.client.inhibitorHandler.loadAll();
+			const listener = this.client.listenerHandler.removeAll() && this.client.listenerHandler.loadAll();
+			const command = this.client.commandHandler.removeAll() && this.client.commandHandler.loadAll();
+
+			if (inhibitor && listener && command) {
+				const cmd = await this.client.commandHandler.modules.size;
+				const listener = await this.client.listenerHandler.modules.size;
+				const inhibitor = await this.client.inhibitorHandler.modules.size;
+				return message.util.send(`Reloaded: ${cmd} commands ${listener} listeners ${inhibitor} inhibitors`, {code: 'js'});
+			}
+		}
+
 		if (!mod) {
 			return message.util.reply(`Invalid ${type} ${type === 'command' ? 'alias' : 'ID'} specified to reload.`);
 		}
