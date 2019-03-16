@@ -27,7 +27,7 @@ class ImgurCommand extends Command {
             query = process.env.QUERY
         }
         query = query.replace(/[^a-zA-Z0-9_]/g, '');
-        const _page = Math.floor(Math.random() * 100) + 1; console.log(_page)
+        const _page = Math.floor(Math.random() * 100) + 1;
         const image = Math.floor(Math.random() * 100) + 1;
         try {
             const res = await fetch(`https://api.imgur.com/3/gallery/r/${query}/all/${_page}`, { method: 'GET', headers: { Authorization: `Client-ID ${process.env.IMGUR}` }});
