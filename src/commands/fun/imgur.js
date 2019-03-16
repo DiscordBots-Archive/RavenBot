@@ -11,7 +11,6 @@ class ImgurImageCommand extends Command {
                 {
                     id: 'query',
                     match: 'content',
-                    default: 'nature'
                 }
             ],
             description: {
@@ -23,6 +22,8 @@ class ImgurImageCommand extends Command {
     }
 
     async exec(message, { query }) {
+
+        if (!query) { query = 'nature' }
 
         try {
             const page = Math.floor(Math.random() * 50) + 1;
