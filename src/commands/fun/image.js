@@ -6,7 +6,7 @@ class ImageCommand extends Command {
     constructor() {
         super('image', {
             aliases: ['image', 'img'],
-            category: 'general',
+            category: 'fun',
             clientPermissions: ['EMBED_LINKS', 'ATTACH_FILES'],
             args: [
                 {

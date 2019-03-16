@@ -5,7 +5,7 @@ class DogImageCommand extends Command {
     constructor() {
         super('dog-image', {
             aliases: ['dog', 'dog-img'],
-            category: 'general',
+            category: 'fun',
             clientPermissions: ['EMBED_LINKS', 'ATTACH_FILES'],
             description: {
                 content: 'Displays a random dog.',

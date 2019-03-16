@@ -6,7 +6,7 @@ class GifCommand extends Command {
     constructor() {
         super('gif-search', {
             aliases: ['gif', 'giphy'],
-            category: 'general',
+            category: 'fun',
             clientPermissions: ['ATTACH_FILES', 'EMBED_LINKS'],
             args: [
                 {

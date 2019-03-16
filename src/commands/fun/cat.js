@@ -5,7 +5,7 @@ class CatImageCommand extends Command {
     constructor() {
         super('cat-image', {
             aliases: ['cat', 'cat-img'],
-            category: 'general',
+            category: 'fun',
             clientPermissions: ['EMBED_LINKS', 'ATTACH_FILES'],
             description: {
                 content: 'Displays a random cat.',

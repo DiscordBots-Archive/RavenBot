@@ -40,16 +40,14 @@ class MuteScheduler {
 		let member;
 		try {
 			member = await guild.members.fetch(mute.targetID);
-		} catch {} // tslint:disable-line
-
+		} catch {} // eslint:disable-line
 		await Case.update({
 			action_processed : true
 		}, {where: { guildID: guild.id, targetID: member.id }});
-
 		if (member) {
 			try {
 				await member.roles.remove(muteRole, 'Unmuted automatically based on duration.');
-			} catch {} // tslint:disable-line
+			} catch {} // eslint:disable-line
 		}
 		const schedule = this.queuedSchedules.get(mute);
 		if (schedule) clearTimeout(schedule);
@@ -86,10 +84,8 @@ class MuteScheduler {
 	async _check() {
 		const mutes = await Case.findAll({ where: { action_duration: { [Op.lt] : (new Date(Date.now() + this.checkRate)) }, action_processed: false, action: 5 }});
 		const now = new Date();
-
 		for (const mute of mutes) {
 			if (this.queuedSchedules.has(mute)) continue;
-
 			if (mute.action_duration < now) {
 				this.cancelMute(mute);
 			} else {

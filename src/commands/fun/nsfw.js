@@ -6,13 +6,16 @@ class ImgurCommand extends Command {
     constructor() {
         super('nsfw', {
             aliases: ['nsfw'],
-            category: 'general',
+            category: 'fun',
             args: [
                 {
                     id: 'query',
                     match: 'content'
                 }
-            ]
+            ],
+            description: {
+                content: 'Receives random nsfw.'
+            }
         })
     }
 
