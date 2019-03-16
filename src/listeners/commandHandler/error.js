@@ -47,7 +47,7 @@ class ErrorListener extends Listener {
 		if (message.guild ? message.channel.permissionsFor(this.client.user).has('SEND_MESSAGES') : true) {
 			const owner = this.client.users.get(this.client.ownerID).tag;
 			message.channel.send([
-				`\`\`\`An error occured, please contact ${owner}\`\`\`` + '```js',
+				'```js',
 				error.toString(),
 				'```'
 			]);
