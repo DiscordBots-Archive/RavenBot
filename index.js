@@ -9,7 +9,7 @@ if (process.env.RAVEN) {
 	Raven.config(process.env.RAVEN, {
 		captureUnhandledRejections: true,
 		autoBreadcrumbs: true,
-		environment: 'STATIC',
+		environment: 'Raven',
 		release: '0.1.0'
 	}).install();
 }
