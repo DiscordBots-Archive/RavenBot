@@ -2,8 +2,6 @@ const { db } = require('../struct/Database');
 const Sequelize = require('sequelize');
 
 const Case = db.define('cases', {
-
-    //
     caseID: {
         type: Sequelize.INTEGER,
         allowNull: false
