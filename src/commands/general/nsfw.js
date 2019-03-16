@@ -32,8 +32,7 @@ class ImgurCommand extends Command {
         try {
             const res = await fetch(`https://api.imgur.com/3/gallery/r/${query}/all/${page}`, { method: 'GET', headers: { Authorization: `Client-ID ${process.env.IMGUR}` }});
             const data = await res.json();
-            const embed = this.client.util.embed().setImage(data.data[image].link);
-            return message.channel.send(embed);
+            return message.channel.send(data.data[image].link);
         } catch {}
     }
 }
