@@ -2,25 +2,27 @@ const { db } = require('../struct/Database');
 const Sequelize = require('sequelize');
 
 const Case = db.define('cases', {
-	caseID: {
+
+    //
+    caseID: {
         type: Sequelize.INTEGER,
         allowNull: false
-	},
-	targetID: {
-		type: Sequelize.STRING,
-		allowNull: false
+    },
+    targetID: {
+        type: Sequelize.STRING,
+        allowNull: false
     },
     targetTag: {
         type: Sequelize.TEXT,
         allowNull: true
     },
-	guildID: {
-		type: Sequelize.STRING,
-		allowNull: false
-	},
-	authorID: {
-		type: Sequelize.STRING,
-		allowNull: true
+    guildID: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    authorID: {
+        type: Sequelize.STRING,
+        allowNull: true
     },
     authorTag:{
         type: Sequelize.TEXT,
