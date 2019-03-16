@@ -2,21 +2,21 @@ const { db } = require('../struct/Database');
 const Sequelize = require('sequelize');
 
 const Tags = db.define('tags', {
-	authorID: {
-		type: Sequelize.STRING,
-		allowNull: false
-	},
-	guildID: {
-		type: Sequelize.STRING,
-		allowNull: false
-	},
-	name: {
-		type: Sequelize.STRING,
-		allowNull: false
-	},
-	aliases: {
-		type: Sequelize.ARRAY(Sequelize.TEXT), // eslint-disable-line new-cap
-		allowNull: true
+    authorID: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    guildID: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    name: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    aliases: {
+        type: Sequelize.ARRAY(Sequelize.TEXT), // eslint-disable-line new-cap
+        allowNull: true
     },
     hoisted: {
         allowNull: false,
