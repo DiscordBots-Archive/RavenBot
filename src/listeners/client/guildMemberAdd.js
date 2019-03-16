@@ -16,7 +16,7 @@ class GuildMemberAddListener extends Listener {
 			const user = await RoleState.findOne({ where: { userID: member.id, guildID: member.guild.id }});
 			try {
 				if (user) await member.roles.add(user.rolesID, 'Automatic Role State');
-			} catch {} // tslint:disable-line
+			} catch {} // eslint:disable-line
 		}
 
 		const memberLog = this.client.settings.get(member.guild, 'memberLog', undefined);
