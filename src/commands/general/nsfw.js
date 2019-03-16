@@ -29,10 +29,12 @@ class ImgurCommand extends Command {
         query = query.toLowerCase().replace(/[^a-z0-9]/g, '');
         const page = Math.floor(Math.random() * 100) + 1;
         const image = Math.floor(Math.random() * 100) + 1;
-        const res = await fetch(`https://api.imgur.com/3/gallery/r/${query}/all/${page}`, { method: 'GET', headers: { Authorization: `Client-ID ${process.env.IMGUR}` }});
-        const data = await res.json();
-        const embed = this.client.util.embed().setImage(data.data[image].link);
-        return message.channel.send(embed);
+        try {
+            const res = await fetch(`https://api.imgur.com/3/gallery/r/${query}/all/${page}`, { method: 'GET', headers: { Authorization: `Client-ID ${process.env.IMGUR}` }});
+            const data = await res.json();
+            const embed = this.client.util.embed().setImage(data.data[image].link);
+            return message.channel.send(embed);
+        } catch {}
     }
 }
 
