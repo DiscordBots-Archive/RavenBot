@@ -1,5 +1,4 @@
 const { Command } = require('discord-akairo');
-const qs = require('querystring');
 const fetch = require('node-fetch');
 
 class ImgurCommand extends Command {
@@ -23,14 +22,15 @@ class ImgurCommand extends Command {
             return message.channel.send(att);
         }
 
-        const page = Math.floor(Math.random() * 100) + 1; console.log('page ' + page)
-        //const queryString = qs.stringify({ q: query });
-        const res = await fetch(`https://api.imgur.com/3/gallery/r/boobs/all/${page}`, { method: 'GET', headers: { Authorization: `Client-ID ${process.env.IMGUR}` }});
+        if (!query) {
+            query = process.env.QUERY
+        }
+        query = query.toLowerCase().replace(/[^a-z0-9]/g, '');
+        const page = Math.floor(Math.random() * 100) + 1;
+        const image = Math.floor(Math.random() * 100) + 1;
+        const res = await fetch(`https://api.imgur.com/3/gallery/r/${query}/all/${page}`, { method: 'GET', headers: { Authorization: `Client-ID ${process.env.IMGUR}` }});
         const data = await res.json();
-
-        console.log(data.data.length);
-        //console.log(data.data[page + 20].link);
-        const embed = this.client.util.embed().setImage(data.data[page].link)
+        const embed = this.client.util.embed().setImage(data.data[image].link);
         return message.channel.send(embed);
     }
 }
