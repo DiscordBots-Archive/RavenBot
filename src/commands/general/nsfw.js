@@ -14,7 +14,7 @@ class ImgurCommand extends Command {
                 },
                 {
                     id: 'page',
-                    match: 'rest',
+                    match: 'content',
                     default: 100
                 }
             ]
