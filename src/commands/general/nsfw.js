@@ -1,5 +1,6 @@
 const { Command } = require('discord-akairo');
 const fetch = require('node-fetch');
+const { MessageEmbed } = require('discord.js');
 
 class ImgurCommand extends Command {
     constructor() {
