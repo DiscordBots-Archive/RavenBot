@@ -25,7 +25,7 @@ class ImgurCommand extends Command {
 
         const page = Math.floor(Math.random() * 19) + 1;
         //const queryString = qs.stringify({ q: query });
-        const res = await fetch(`https://api.imgur.com/3/gallery/r/boobs/top/all/200`, { method: 'GET', headers: { Authorization: `Client-ID ${process.env.IMGUR}` }});
+        const res = await fetch(`https://api.imgur.com/3/gallery/r/boobs/top/all/${page}`, { method: 'GET', headers: { Authorization: `Client-ID ${process.env.IMGUR}` }});
         const data = await res.json();
 
         //console.log(data);
