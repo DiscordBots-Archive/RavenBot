@@ -23,14 +23,15 @@ class ImgurCommand extends Command {
             return message.channel.send(att);
         }
 
-        const page = Math.floor(Math.random() * 19) + 1;
+        const page = Math.floor(Math.random() * 100) + 1; console.log('page ' + page)
         //const queryString = qs.stringify({ q: query });
-        const res = await fetch(`https://api.imgur.com/3/gallery/r/boobs/top/all/${page + 1}`, { method: 'GET', headers: { Authorization: `Client-ID ${process.env.IMGUR}` }});
+        const res = await fetch(`https://api.imgur.com/3/gallery/r/boobs/all/${page}`, { method: 'GET', headers: { Authorization: `Client-ID ${process.env.IMGUR}` }});
         const data = await res.json();
 
-        //console.log(data);
-        console.log(data.data[page].link);
-        return message.channel.send(data.data[page].link);
+        console.log(data.data.length);
+        //console.log(data.data[page + 20].link);
+        const embed = this.client.util.embed().setImage(data.data[page].link)
+        return message.channel.send(embed);
     }
 }
 
