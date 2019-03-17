@@ -67,7 +67,7 @@ class RoleInfoCommad extends Command {
             `• Mentionable: ${role.mentionable ? 'Yes' : 'No'}`,
             `• Creation Date: ${moment.utc(role.createdAt).format('DD-MM-YY kk:mm:ss')}`
         ])
-        .addField('❯ Permissions', `${ permission.length === 487 ? '• Administrator' : permission || '• None' }`)
+        .addField('❯ Permissions', `${permission.length === 487 ? '• Administrator' : permission || '• None' }`)
         .setThumbnail(message.guild.iconURL())
 
         if (message.channel.type === 'dm' || !(message.channel).permissionsFor(message.guild.me).has(['ADD_REACTIONS', 'MANAGE_MESSAGES'], false)) {
