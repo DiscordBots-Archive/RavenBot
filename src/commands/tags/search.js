@@ -41,7 +41,7 @@ class SearchTagCommand extends Command {
 			return message.util.reply('the output is way too big to display, make your search more specific and try again!');
 		}
 		const embed = new MessageEmbed()
-			.setColor('#8387db')
+			.setColor(0x8387db)
 			.setAuthor(`${message.author.tag} (${message.author.id})`, message.author.displayAvatarURL())
 			.setDescription(search);
 
