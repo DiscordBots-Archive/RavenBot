@@ -45,7 +45,7 @@ class EmojiInfoCommand extends Command {
 			embed.setDescription(`Info about ${emoji.name} (ID: ${emoji.id})`);
 			embed.setThumbnail(emoji.url);
 			embed.addField('❯ Info', [
-				`• Identifier: \`<${emoji.identifier}>\``,
+				`• Identifier: \`<${emoji.animated ? '' : ':'}${emoji.identifier}>\``,
 				`• Creation Date: ${moment.utc(emoji.createdAt).format('YYYY/MM/DD hh:mm:ss')}`,
 				`• URL: ${emoji.url}`
 			]);

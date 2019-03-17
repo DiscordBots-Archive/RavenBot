@@ -40,7 +40,7 @@ class ServerInfoCommand extends Command {
         ])
         .addField('❯ Other', [
             `• Region: ${message.guild.region.toUpperCase()}`,
-            `• Created at: ${moment.utc(message.guild.createdAt).format('DD-MM-YY kk:mm:ss')}`,
+            `• Created at: ${moment.utc(message.guild.createdAt).format('DD/MM/YYYY kk:mm:ss')}`,
             `• Owner: ${message.guild.owner.user.tag} (ID: ${message.guild.ownerID})`,
             `• Verification Level: ${HUMAN_LEVELS[message.guild.verificationLevel]}`
         ])
