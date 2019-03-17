@@ -44,7 +44,7 @@ class DocsCommand extends Command {
 		const res = await fetch(`https://djsdocs.sorta.moe/${project}/${branch}/embed?${queryString}`);
 		const embed = await res.json();
 		if (!embed) {
-			return message.util.reply("*I couldn't find the requested information*");
+			return message.util.reply("I couldn't find the requested information.");
 		}
 		if (message.channel.type === 'dm' || !(message.channel).permissionsFor(message.guild.me).has(['ADD_REACTIONS', 'MANAGE_MESSAGES'], false)) {
 			return message.util.send({ embed });
