@@ -17,12 +17,12 @@ class ShuffleCommand extends Command {
 
 	async exec(message) {
 		if (!message.member.voice || !message.member.voice.channel) {
-			return message.util.reply(`you have to be in a voice channel first ${this.client.emojis.get('545968755423838209')}`);
+			return message.util.reply(`you have to be in a voice channel first.`);
 		};
 		const queue = this.client.music.queues.get(message.guild.id);
 		await queue.shuffle();
 
-		return message.util.send(`**Shuffled Queue** ${this.client.emojis.get('545870932019773480')}`);
+		return message.util.send(`**Shuffled queue** ${this.client.emojis.get('545870932019773480')}`);
 	}
 }
 
