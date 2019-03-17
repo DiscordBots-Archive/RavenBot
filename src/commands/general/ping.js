@@ -5,9 +5,9 @@ const RESPONSES = [
 	'Not Happening...',
 	'Maybe Later...',
 	`Pong! \`$(ping)ms\` :: \`$(heartbeat)ms\``,
-	`Just you know, I'm not doing this for fun! \n\`$(ping)ms\` :: \`$(heartbeat)ms\``,
-	`Don't think this means anything special! \n\`$(ping)ms\` :: \`$(heartbeat)ms\``,
-	`Can we get on with this already? \n\`$(ping)ms\` :: \`$(heartbeat)ms\``
+	`Just you know, I'm not doing this for fun! \`$(ping)ms\` :: \`$(heartbeat)ms\``,
+	`Don't think this means anything special! \`$(ping)ms\` :: \`$(heartbeat)ms\``,
+	`Can we get on with this already? \`$(ping)ms\` :: \`$(heartbeat)ms\``
 ];
 
 class PingCommand extends Command {
