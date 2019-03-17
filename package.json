@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "chalk": "^2.4.2",
+    "common-tags": "^1.8.0",
     "diff": "^4.0.1",
     "discord-akairo": "github:1computer1/discord-akairo",
     "discord.js": "discordjs/discord.js",

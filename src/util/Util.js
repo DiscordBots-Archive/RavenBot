@@ -1,4 +1,5 @@
 const { MessageEmbed, User } = require('discord.js');
+const { oneLine, stripIndent } = require('common-tags');
 const ms = require('ms');
 const ACTIONS = ({
 	1: 'ban',
@@ -42,9 +43,9 @@ const Util = {
 
         const embed = new MessageEmbed().setTimestamp().setFooter(`Case ${caseNum}`)
         if (message) embed.setAuthor(`${message.member.user.tag} (${message.member.user.id})`, message.member.user.displayAvatarURL())
-        embed.setDescription(`**Member:** ${member instanceof User ? member.tag : member.user.tag} (${member.id})` + '\n' +
-        `**Action:** ${action}${action === 'Mute' && duration ? `\n**Length:** ${ms(duration, { long: true })}` : ''}` + '\n' +
-        `**Reason:** ${reason}`);
+        embed.setDescription(stripIndent`**Member:** ${member instanceof User ? member.tag : member.user.tag} (${member.id})
+        **Action:** ${action}${action === 'Mute' && duration ? `\n**Length:** ${ms(duration, { long: true })}` : ''}
+        **Reason:** ${reason}`);
         return embed;
     },
 
@@ -60,11 +61,11 @@ const Util = {
 		const colorIndex = Math.min(values.reduce((a, b) => a + b), colors.length - 1);
         return new MessageEmbed().setColor(colors[colorIndex])
         .setAuthor(`${member.user.tag} (${member.user.id})`, member.user.displayAvatarURL())
-        .setFooter(`${warn} warning${warn > 1 || warn === 0 ? 's' : ''}, ` +
-        `${restriction} restriction${restriction > 1 || restriction === 0 ? 's' : ''}, ` +
-        `${mute} mute${mute > 1 || mute === 0 ? 's' : ''}, ` +
-        `${kick} kick${kick > 1 || kick === 0 ? 's' : ''}, ` +
-        `and ${ban} ban${ban > 1 || ban === 0 ? 's' : ''}`);
+        .setFooter(oneLine`${warn} warning${warn > 1 || warn === 0 ? 's' : ''},
+        ${restriction} restriction${restriction > 1 || restriction === 0 ? 's' : ''},
+        ${mute} mute${mute > 1 || mute === 0 ? 's' : ''},
+        ${kick} kick${kick > 1 || kick === 0 ? 's' : ''},
+        and ${ban} ban${ban > 1 || ban === 0 ? 's' : ''}`);
     },
 
     paginate : ({ items, page = 1, pageLength = 10 }) => {
