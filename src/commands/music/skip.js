@@ -43,7 +43,7 @@ class SkipCommand extends Command {
 
 	async exec(message, { num }) {
 		if (!message.member.voice || !message.member.voice.channel) {
-			return message.util.reply(`you have to be in a voice channel first ${this.client.emojis.get('545968755423838209')}`);
+			return message.util.reply(`you have to be in a voice channel.`);
 		};
 		const queue = this.client.music.queues.get(message.guild.id);
 		let tracks;
