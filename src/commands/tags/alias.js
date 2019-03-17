@@ -63,8 +63,8 @@ class TagAliasCommand extends Command {
 
 		if (add) {
 
-			if (second && second.length >= 1900) {
-				return message.util.reply('messages have a limit of 2000 characters!');
+			if (second && second.length >= 256) {
+				return message.util.reply('messages have a limit of 256 characters!');
 			}
 
 			await Tags.update({ aliases: new_alias, last_modified: message.author.id }, { where: { name: first.name } });
@@ -78,7 +78,7 @@ class TagAliasCommand extends Command {
 			return message.util.reply('you have to either supply `--add` or `--del`');
 		}
 
-		return message.util.reply(`alias **${second.substring(0, 1900)}** ${add ? 'added to' : 'deleted from'} tag **${first.name}**.`);
+		return message.util.reply(`alias **${second.substring(0, 256)}** ${add ? 'added to' : 'deleted from'} tag **${first.name}**.`);
 	}
 }
 
