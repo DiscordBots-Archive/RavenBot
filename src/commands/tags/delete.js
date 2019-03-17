@@ -33,7 +33,7 @@ class TagDeleteCommand extends Command {
 		const Repo = await Tags.findOne({ where: { name: tag.name } });
 		await Repo.destroy();
 
-		return message.util.reply(`successfully deleted **${tag.name.substring(0, 1900)}**.`);
+		return message.util.reply(`successfully deleted **${tag.name.substring(0, 256)}**.`);
 	}
 }
 
