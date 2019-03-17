@@ -1,6 +1,6 @@
 const { Command, Argument } = require('discord-akairo');
 const { MessageEmbed } = require('discord.js');
-const Util = require('../../util/Util');
+const Base = require('../../util/Base');
 const Case = require('../../models/Case');
 const ms = require('ms');
 
@@ -60,10 +60,10 @@ class CaseCommand extends Command {
 		}
 
 		const moderator = await message.guild.members.fetch(db.authorID);
-		const color = Object.keys(Util.CONSTANTS.ACTIONS).find(key => Util.CONSTANTS.ACTIONS[key] === db.action).split(' ')[0].toUpperCase();
+		const color = Object.keys(Base.CONSTANTS.ACTIONS).find(key => Base.CONSTANTS.ACTIONS[key] === db.action).split(' ')[0].toUpperCase();
 		const embed = new MessageEmbed()
 			if (db.authorID !== null) embed.setAuthor(`${db.authorTag} (${db.authorID})`, moderator ? moderator.user.displayAvatarURL() : '')
-			embed.setColor(Util.CONSTANTS.COLORS[color])
+			embed.setColor(Base.CONSTANTS.COLORS[color])
 			embed.setDescription([
 				`**Member:** ${db.targetTag} (${db.targetID})`,
 				`**Action:** ${ACTIONS[db.action]}${db.action === 5 ? `\n**Length:** ${db.action_duration ? ms((db.action_duration - db.createdAt), { long: true }) : 'Not Set'}` : ''}`,

@@ -1,5 +1,5 @@
 const { Command } = require('discord-akairo');
-const Util = require('../../util/Util');
+const Base = require('../../util/Base');
 const Case = require('../../models/Case');
 const moment = require('moment');
 
@@ -75,7 +75,7 @@ class UnbanCommand extends Command {
 		const modLogChannel = this.client.settings.get(message.guild, 'modLogChannel', undefined);
 		let modMessage;
 		if (modLogChannel) {
-			const embed = Util.logEmbed({ message, member: user, action: 'Unban', caseNum: totalCases, reason }).setColor(Util.CONSTANTS.COLORS.UNBAN);
+			const embed = Base.logEmbed({ message, member: user, action: 'Unban', caseNum: totalCases, reason }).setColor(Base.CONSTANTS.COLORS.UNBAN);
 			modMessage = await (this.client.channels.get(modLogChannel)).send(embed);
 		}
 
@@ -87,7 +87,7 @@ class UnbanCommand extends Command {
 			authorID: message.author.id,
 			guildID: message.guild.id,
 			messageID: modMessage ? modMessage.id : undefined,
-			action: Util.CONSTANTS.ACTIONS.UNBAN,
+			action: Base.CONSTANTS.ACTIONS.UNBAN,
 			reason: reason,
 			createdAt: moment.utc().toDate()
 		});

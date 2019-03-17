@@ -1,6 +1,6 @@
 const { Command, Argument } = require('discord-akairo');
 const { MessageEmbed } = require('discord.js');
-const Util = require('../../util/Util');
+const Base = require('../../util/Base');
 const Case = require('../../models/Case');
 const ms = require('ms');
 
@@ -55,7 +55,7 @@ class DurationCommand extends Command {
 		const totalCases = this.client.settings.get(message.guild, 'caseTotal', 0);
 		const caseToFind = caseNum === 'latest' || caseNum === 'l' ? totalCases : caseNum;
 		if (isNaN(caseToFind)) return message.reply('at least provide me with a correct number.');
-		const dbCase = await Case.findOne({ where: { caseID: caseToFind, guildID: message.guild.id, action: Util.CONSTANTS.ACTIONS.MUTE, action_processed: false }});
+		const dbCase = await Case.findOne({ where: { caseID: caseToFind, guildID: message.guild.id, action: Base.CONSTANTS.ACTIONS.MUTE, action_processed: false }});
 		if (!dbCase) {
 			return message.reply('I looked where I could, but I couldn\'t find a case with that Id and action, maybe look for something that actually exists next time!');
 		}
@@ -89,7 +89,7 @@ class DurationCommand extends Command {
 			authorID: dbCase.authorID,
 			guildID: dbCase.guildID,
 			authorTag: dbCase.authorTag,
-			action: Util.CONSTANTS.ACTIONS.MUTE,
+			action: Base.CONSTANTS.ACTIONS.MUTE,
 			action_duration: new Date(Date.now() + duration),
 			action_processed: dbCase.action_processed,
 			reason: dbCase.reason

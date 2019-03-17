@@ -1,6 +1,6 @@
 const { Listener } = require('discord-akairo');
 const RoleState = require('../../models/Rolestate');
-const Util = require('../../util/Util');
+const Base = require('../../util/Base');
 const Case = require('../../models/Case');
 const moment = require('moment');
 
@@ -51,20 +51,20 @@ class GuildMemberUpdateModerationListener extends Listener {
 			switch (role.id) {
 				case muteRole:
 					actionName = 'Mute';
-					action = Util.CONSTANTS.ACTIONS.MUTE;
+					action = Base.CONSTANTS.ACTIONS.MUTE;
 					processed = false;
 					break;
 				case restrictRoles.embed:
 					actionName = 'Embed Restriction';
-					action = Util.CONSTANTS.ACTIONS.EMBED;
+					action = Base.CONSTANTS.ACTIONS.EMBED;
 					break;
 				case restrictRoles.emoji:
 					actionName = 'Emoji Restriction';
-					action = Util.CONSTANTS.ACTIONS.EMOJI;
+					action = Base.CONSTANTS.ACTIONS.EMOJI;
 					break;
 				case restrictRoles.reaction:
 					actionName = 'Reaction Restriction';
-					action = Util.CONSTANTS.ACTIONS.REACTION;
+					action = Base.CONSTANTS.ACTIONS.REACTION;
 					break;
 				default: return;
 			}
@@ -78,8 +78,8 @@ class GuildMemberUpdateModerationListener extends Listener {
 			let modMessage;
 			if (modLogChannel) {
 				// @ts-ignore
-				const color = Object.keys(Util.CONSTANTS.ACTIONS).find(key => Util.CONSTANTS.ACTIONS[key] === action).split(' ')[0].toUpperCase();
-				const embed = Util.logEmbed({ member: newMember, action: actionName, caseNum: totalCases, reason }).setColor(Util.CONSTANTS.COLORS[color]);
+				const color = Object.keys(Base.CONSTANTS.ACTIONS).find(key => Base.CONSTANTS.ACTIONS[key] === action).split(' ')[0].toUpperCase();
+				const embed = Base.logEmbed({ member: newMember, action: actionName, caseNum: totalCases, reason }).setColor(Base.CONSTANTS.COLORS[color]);
 				modMessage = await (this.client.channels.get(modLogChannel)).send(embed);
 			}
 			await Case.create({

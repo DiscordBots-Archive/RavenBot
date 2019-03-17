@@ -1,5 +1,5 @@
 const { Command } = require('discord-akairo');
-const Util = require('../../util/Util');
+const Base = require('../../util/Base');
 const Case = require('../../models/Case');
 const moment = require('moment');
 const ms = require('ms'); // tslint:disable-line
@@ -93,7 +93,7 @@ class MuteCommand extends Command {
 		const modLogChannel = this.client.settings.get(message.guild, 'modLogChannel', undefined);
 		let modMessage;
 		if (modLogChannel) {
-			const embed = Util.logEmbed({ message, member, action: 'Mute', duration, caseNum: totalCases, reason }).setColor(Util.CONSTANTS.COLORS.MUTE);
+			const embed = Base.logEmbed({ message, member, action: 'Mute', duration, caseNum: totalCases, reason }).setColor(Base.CONSTANTS.COLORS.MUTE);
 			modMessage = await (this.client.channels.get(modLogChannel)).send(embed);
 		}
 
@@ -105,7 +105,7 @@ class MuteCommand extends Command {
 			authorID: message.author.id,
 			guildID: message.guild.id,
 			authorTag: message.author.tag,
-			action: Util.CONSTANTS.ACTIONS.MUTE,
+			action: Base.CONSTANTS.ACTIONS.MUTE,
 			action_duration: new Date(Date.now() + duration),
 			action_processed: false,
 			reason: reason

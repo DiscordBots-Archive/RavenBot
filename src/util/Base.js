@@ -1,6 +1,7 @@
 const { MessageEmbed, User } = require('discord.js');
 const { oneLine } = require('common-tags');
 const ms = require('ms');
+
 const ACTIONS = ({
 	1: 'ban',
 	2: 'unban',
@@ -12,8 +13,8 @@ const ACTIONS = ({
 	8: 'restriction',
 	9: 'warn'
 });
-const Util = {
 
+const Base = {
     CONSTANTS : {
         ACTIONS: {
 			BAN: 1,
@@ -73,7 +74,6 @@ const Util = {
         if (page < 1) page = 1;
         if (page > maxPage) page = maxPage;
         const startIndex = (page - 1) * pageLength;
-    
         return {
             items: items.length > pageLength ? items.slice(startIndex, startIndex + pageLength) : items,
             page,
@@ -86,9 +86,8 @@ const Util = {
         if (ms) seconds /= 1000;
         const hours = Math.floor(seconds / 3600);
         const minutes = Math.floor(seconds % 3600 / 60);
-    
         return `${forceHours || hours >= 1 ? `${hours}:` : ''}${hours >= 1 ? `0${minutes}`.slice(-2) : minutes}:${`0${Math.floor(seconds % 60)}`.slice(-2)}`;
     }
 }
 
-module.exports = Util;
+module.exports = Base;

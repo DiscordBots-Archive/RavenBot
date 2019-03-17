@@ -1,5 +1,5 @@
 const { Command } = require('discord-akairo');
-const Util = require('../../util/Util');
+const Base = require('../../util/Base');
 const Case = require('../../models/Case');
 const moment = require('moment');
 
@@ -78,7 +78,7 @@ class RestrictEmojiCommand extends Command {
 		const modLogChannel = this.client.settings.get(message.guild, 'modLogChannel', undefined);
 		let modMessage;
 		if (modLogChannel) {
-			const embed = Util.logEmbed({ message, member, action: 'Emoji restriction', caseNum: totalCases, reason }).setColor(Util.CONSTANTS.COLORS.EMOJI);
+			const embed = Base.logEmbed({ message, member, action: 'Emoji restriction', caseNum: totalCases, reason }).setColor(Base.CONSTANTS.COLORS.EMOJI);
 			modMessage = await (this.client.channels.get(modLogChannel)).send(embed);
 		}
 
@@ -90,7 +90,7 @@ class RestrictEmojiCommand extends Command {
 			authorID: message.author.id,
 			guildID: message.guild.id,
 			messageID: modMessage ? modMessage.id : undefined,
-			action: Util.CONSTANTS.ACTIONS.EMOJI,
+			action: Base.CONSTANTS.ACTIONS.EMOJI,
 			reason: reason,
 			createdAt: moment.utc().toDate()
 		});
