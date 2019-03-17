@@ -2,7 +2,7 @@ const { Command } = require('discord-akairo');
 const moment = require('moment');
 const { MessageEmbed, GuildEmoji } = require('discord.js');
 const emojis = require('node-emoji');
-const punycode = require('punycode'); // tslint:disable-line
+const punycode = require('punycode'); // eslint:disable-line
 
 const EMOJI_REGEX = /<:\w+:(\d{17,19})>/;
 
