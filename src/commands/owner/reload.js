@@ -28,7 +28,7 @@ class ReloadCommand extends Command {
 				}
 			],
 			description: {
-				content: 'Reloads a/all module.',
+				content: 'Reloads a module or all modules at once.',
 				usage: '<module> [type:]'
 			}
 		});
