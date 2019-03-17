@@ -15,8 +15,8 @@ class AvatarCommand extends Command {
                 }
             ],
             description: {
-                content: 'Get avatar of a member.',
-                usage: '[member]',
+                content: 'Displays avatar of a member.',
+                usage: '<member>',
                 examples: ['@Suvajit', 'Suvajit', '444432489818357760']
             }
         })
