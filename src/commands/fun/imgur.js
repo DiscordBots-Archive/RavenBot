@@ -15,7 +15,7 @@ class ImgurImageCommand extends Command {
                 }
             ],
             description: {
-                content: 'Search Imgur Images.',
+                content: 'Searches imgur images.',
                 usage: '<query>',
                 examples: ['cat', 'beach', 'nature']
             }
@@ -31,7 +31,7 @@ class ImgurImageCommand extends Command {
             const res = await fetch(`https://api.imgur.com/3/gallery/search/all/${page}?${queryString}`, { method: 'GET', headers: { Authorization: `Client-ID ${process.env.IMGUR}` }});
             const data = await res.json();
             return message.util.send(data.data[image].link);
-        } catch {}
+        } catch {} // eslint-disable-line
     }
 }
 
