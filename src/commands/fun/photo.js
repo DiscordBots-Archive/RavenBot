@@ -16,6 +16,8 @@ class PhotoCommand extends Command {
             ],
             description: {
                 content: 'Searches any photo.',
+                usage: '<query>',
+                examples: ['cat', 'owl', 'dog']
             }
         })
     }
