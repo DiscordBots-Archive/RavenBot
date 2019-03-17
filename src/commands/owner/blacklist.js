@@ -18,7 +18,7 @@ class GlobalBlacklistCommand extends Command {
 					match: 'content',
 					type: 'user',
 					prompt: {
-						start: message => `who would you like to blacklist/unblacklist?`
+						start: `who would you like to blacklist/unblacklist?`
 					}
 				}
 			]
