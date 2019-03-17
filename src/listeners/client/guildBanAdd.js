@@ -1,5 +1,5 @@
 const { Listener } = require('discord-akairo');
-const Util = require('../../util/Util');
+const Base = require('../../util/Base');
 const Case = require('../../models/Case');
 const moment = require('moment');
 
@@ -25,7 +25,7 @@ class GuildBanAddListener extends Listener {
 		let modMessage;
 		if (modLogChannel) {
 			// @ts-ignore
-			const embed = Util.logEmbed({ member: user, action: 'Ban', caseNum: totalCases, reason }).setColor(Util.CONSTANTS.COLORS.BAN);
+			const embed = Base.logEmbed({ member: user, action: 'Ban', caseNum: totalCases, reason }).setColor(Base.CONSTANTS.COLORS.BAN);
 			modMessage = await (this.client.channels.get(modLogChannel)).send(embed);
 		}
 		await Case.create({
@@ -35,7 +35,7 @@ class GuildBanAddListener extends Listener {
 			guildID: guild.id,
 			caseID: totalCases,
 			reason: reason,
-			action: Util.CONSTANTS.ACTIONS.BAN,
+			action: Base.CONSTANTS.ACTIONS.BAN,
 			createdAt: moment.utc().toDate(),
 			messageID: modMessage ? modMessage.id : null
 		})

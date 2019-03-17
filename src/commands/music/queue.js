@@ -1,7 +1,6 @@
 const { Argument, Command } = require('discord-akairo');
 const { MessageEmbed } = require('discord.js');
-const { paginate } = require('../../util/Util');
-const { timeString } = require('../../util/Util');
+const { paginate, timeString } = require('../../util/Base');
 
 class QueueCommand extends Command {
 	constructor() {

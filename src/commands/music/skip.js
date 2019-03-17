@@ -1,8 +1,6 @@
 const { Argument, Control, Command } = require('discord-akairo');
 const { MessageEmbed } = require('discord.js');
-const { paginate } = require('../../util/Util');
-const { timeString } = require('../../util/Util');
-const Client = require('../../client/Client');
+const { paginate, timeString } = require('../../util/Base');
 
 class SkipCommand extends Command {
 	constructor() {

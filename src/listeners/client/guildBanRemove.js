@@ -1,5 +1,5 @@
 const { Listener } = require('discord-akairo');
-const Util = require('../../util/Util');
+const Base = require('../../util/Base');
 const Case = require('../../models/Case');
 const moment = require('moment');
 
@@ -25,7 +25,7 @@ class GuildBanRemoveListener extends Listener {
 		let modMessage;
 		if (modLogChannel) {
 			// @ts-ignore
-			const embed = Util.logEmbed({ member: user, action: 'Unban', caseNum: totalCases, reason }).setColor(Util.CONSTANTS.COLORS.UNBAN);
+			const embed = Base.logEmbed({ member: user, action: 'Unban', caseNum: totalCases, reason }).setColor(Base.CONSTANTS.COLORS.UNBAN);
 			modMessage = await (this.client.channels.get(modLogChannel)).send(embed);
 		}
 
@@ -35,7 +35,7 @@ class GuildBanRemoveListener extends Listener {
 			targetTag: user.tag,
 			guildID: guild.id,
 			reason: reason,
-			action: Util.CONSTANTS.ACTIONS.BAN,
+			action: Base.CONSTANTS.ACTIONS.BAN,
 			createdAt: moment.utc().toDate(),
 			messageID: modMessage ? modMessage.id : null
 		})

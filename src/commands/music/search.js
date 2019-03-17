@@ -1,10 +1,6 @@
 const { Argument, Command } = require('discord-akairo');
 const { MessageEmbed } = require('discord.js');
-const url = require('url');
-const path = require('path');
-const { parse } = require('url');
-const { paginate } = require('../../util/Util');
-const { timeString } = require('../../util/Util');
+const { paginate } = require('../../util/Base');
 
 class SearchCommand extends Command {
 	constructor() {
