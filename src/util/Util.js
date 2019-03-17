@@ -1,5 +1,5 @@
 const { MessageEmbed, User } = require('discord.js');
-const { oneLine, stripIndent } = require('common-tags');
+const { oneLine } = require('common-tags');
 const ms = require('ms');
 const ACTIONS = ({
 	1: 'ban',
@@ -43,9 +43,9 @@ const Util = {
 
         const embed = new MessageEmbed().setTimestamp().setFooter(`Case ${caseNum}`)
         if (message) embed.setAuthor(`${message.member.user.tag} (${message.member.user.id})`, message.member.user.displayAvatarURL())
-        embed.setDescription(stripIndent`**Member:** ${member instanceof User ? member.tag : member.user.tag} (${member.id})
-        **Action:** ${action}${action === 'Mute' && duration ? `\n**Length:** ${ms(duration, { long: true })}` : ''}
-        **Reason:** ${reason}`);
+        embed.setDescription([`**Member:** ${member instanceof User ? member.tag : member.user.tag} (${member.id})`,
+        `**Action:** ${action}${action === 'Mute' && duration ? `\n**Length:** ${ms(duration, { long: true })}` : ''}`,
+        `**Reason:** ${reason}`]);
         return embed;
     },
 
