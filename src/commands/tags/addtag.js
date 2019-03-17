@@ -40,8 +40,8 @@ class TagAddCommand extends Command {
 	}
 
 	async exec(message, { name, content, hoist }) {
-		if (name && name.length >= 1900) {
-			return message.util.reply('messages have a limit of 2000 characters!');
+		if (name && name.length >= 256) {
+			return message.util.reply('messages have a limit of 256 characters!');
 		}
 		if (content && content.length >= 1950) {
 			return message.util.reply('messages have a limit of 2000 characters!');
@@ -58,7 +58,7 @@ class TagAddCommand extends Command {
 			aliases: [name]
 		})
 
-		return message.util.reply(`a tag with the name **${name.substring(0, 1900)}** has been added.`);
+		return message.util.reply(`a tag with the name **${name.substring(0, 256)}** has been added.`);
 	}
 }
 
