@@ -31,11 +31,11 @@ class NPMCommand extends Command {
 
 		const res = await fetch(`https://registry.npmjs.com/${pkg}`);
 		if (res.status === 404) {
-			return message.util.reply("*i could not find anything...*");
+			return message.util.reply("I couldn't find the requested information.");
 		}
 		const body = await res.json();
 		if (body.time.unpublished) {
-			return message.util.reply('**commander of this package decided to unpublish it...*');
+			return message.util.reply('commander of this package decided to unpublish it.');
 		}
 		const version = body.versions[body['dist-tags'].latest];
 		const maintainers = this._trimArray(body.maintainers.map(user => user.name).join(', '));
