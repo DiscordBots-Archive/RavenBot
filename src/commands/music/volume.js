@@ -33,13 +33,13 @@ class VolumeCommand extends Command {
 
 	async exec(message, { amount }) {
 		if (!message.member.voice || !message.member.voice.channel) {
-			return message.util.reply(`you have to be in a voice channel ${this.client.emojis.get('545968755423838209')}`);
+			return message.util.reply(`you have to be in a voice channel.`);
 		}
 		const DJ = message.member.roles.has(this.client.settings.get(message.guild.id, 'djRole', undefined));
 		const queue = this.client.music.queues.get(message.guild.id);
 		if (DJ) {
             await queue.player.setVolume(amount);
-            return message.util.send(`**Set volume ${amount}** ${this.client.emojis.get('545873319426260993')}`);
+            return message.util.send(`**Set volume ${amount}**`);
         }
 	}
 }
