@@ -25,18 +25,13 @@ class ChannelInfoCommand extends Command {
 
     async exec(message, { channel }) {
 
-        const NSFW = {
-            true : 'Yes',
-            false : 'No'
-        };
-
         const embed = this.client.util.embed().setColor('RED')
         .setAuthor(`#${channel.name} (${channel.id})`)
         .setThumbnail(message.guild.iconURL())
         .addField('❯ Info', [
             `${channel.topic ? `• Topic: ${channel.topic}` : ''}`,
             `• Type: ${channel.type.toUpperCase()}`,
-            `• NSFW: ${NSFW[channel.nsfw]}`,
+            `• NSFW: ${channel.nsfw ? 'Yes' : 'No'}`,
             `• Creation Date: ${moment(channel.createdAt).format('D-MM-YY, k:mm:ss')}`
         ])
 
