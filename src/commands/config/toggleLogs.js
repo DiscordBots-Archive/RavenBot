@@ -3,7 +3,7 @@ const { Command } = require('discord-akairo');
 class ToggleLogsCommand extends Command {
 	constructor() {
 		super('toggle-logs', {
-			aliases: ['toggle-log'],
+			aliases: ['toggle-log', 'toggle-logs'],
 			category: 'config',
 			channel: 'guild',
 			userPermissions: ['MANAGE_GUILD'],
