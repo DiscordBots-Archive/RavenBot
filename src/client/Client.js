@@ -42,7 +42,7 @@ class Client extends AkairoClient {
 				timeout: msg => `${msg.author} **::** Time ran out, command has been cancelled.`,
 				ended: msg => `${msg.author} **::** Too many retries, command has been cancelled.`,
 				cancel: msg => `${msg.author} **::** Command has been cancelled.`,
-				retries: 3,
+				retries: 2,
 				time: 30000
 			}
 		});
