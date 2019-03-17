@@ -4,7 +4,8 @@ class TestCommand extends Command {
 	constructor() {
 		super('test', {
 			aliases: ['test'],
-            category: 'owner',
+			category: 'owner',
+			ownerOnly: true
 		});
 	}
 
