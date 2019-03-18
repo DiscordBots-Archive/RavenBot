@@ -33,7 +33,6 @@ class TagStatsCommand extends Command {
             
             const embed = this.client.util.embed().setAuthor(`${member.user.tag}`, member.user.displayAvatarURL())
             .addField(`Owned Tags`, tags.length).addField(`Owned Tag Uses`, totaluses)
-            .addField('Top Tag', `${top[0].name} ( ${top[0].uses} uses )`)
             .setFooter(message.guild.name, message.guild.iconURL()).setColor(0x8387db)
             return message.util.send({ embed });
         }
@@ -44,7 +43,7 @@ class TagStatsCommand extends Command {
         }, 0);
         
         const embed = this.client.util.embed().setAuthor(`${message.guild.name}`, message.guild.iconURL())
-        .addField(`Total Tags`, tags.length).addField(`Total Uses`, totaluses).addField('Top Tag', `${top[0].name} ( ${top[0].uses} uses)`).setColor(0x8387db)
+        .addField(`Total Tags`, tags.length).addField(`Total Uses`, totaluses).setColor(0x8387db)
         return message.util.send({ embed });
     }
 }

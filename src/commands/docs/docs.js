@@ -42,10 +42,11 @@ class DocsCommand extends Command {
 		}
 		const queryString = qs.stringify({ q: query.join(' '), force });
 		const res = await fetch(`https://djsdocs.sorta.moe/${project}/${branch}/embed?${queryString}`);
-		const embed = await res.json();
-		if (!embed) {
+		const data = await res.json();
+		if (!data) {
 			return message.util.reply("I couldn't find the requested information.");
-		}
+        }
+        const embed = this.client.util.embed(data).setColor(0x8387db)
 		if (message.channel.type === 'dm' || !(message.channel).permissionsFor(message.guild.me).has(['ADD_REACTIONS', 'MANAGE_MESSAGES'], false)) {
 			return message.util.send({ embed });
 		}
