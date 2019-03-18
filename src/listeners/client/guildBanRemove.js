@@ -24,7 +24,7 @@ class GuildBanRemoveListener extends Listener {
 
 		let modMessage;
 		if (modLogChannel) {
-			// @ts-ignore
+			// @es-ignore
 			const embed = Base.logEmbed({ member: user, action: 'Unban', caseNum: totalCases, reason }).setColor(Base.CONSTANTS.COLORS.UNBAN);
 			modMessage = await (this.client.channels.get(modLogChannel)).send(embed);
 		}
