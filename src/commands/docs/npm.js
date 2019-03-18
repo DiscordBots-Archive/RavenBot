@@ -33,7 +33,7 @@ class NPMCommand extends Command {
 		if (res.status === 404) {
 			return message.util.reply("I couldn't find the requested information.");
 		}
-		const body = await res.json(); console.log(body)
+		const body = await res.json();
 		if (body.time === undefined) {
 			return message.util.reply('commander of this package decided to unpublish it.');
 		}
