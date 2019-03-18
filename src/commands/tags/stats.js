@@ -7,12 +7,18 @@ class TagStatsCommand extends Command {
         super('tag-stats', {
             aliases: ['tag-stats'],
             category: 'tag',
+            channel: 'guild',
             args: [
                 {
                     id: 'member',
                     type: 'member'
                 }
-            ]
+            ],
+            description: {
+                content: 'Displays tag statistics of a member.',
+                usage: '<member>',
+                examples: ['@Suvajit']
+            }
         })
     }
 
