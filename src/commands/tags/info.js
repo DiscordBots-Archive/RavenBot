@@ -40,15 +40,14 @@ class TagInfoCommand extends Command {
 		const guild = this.client.guilds.get(tag.guildID);
 		const embed = new MessageEmbed()
 			.setColor(0x8387db)
-			.addField('❯ Name', tag.name)
-			.addField('❯ User', user ? `${user.tag} (ID: ${user.id})` : "Couldn't fetch user.")
-			.addField('❯ Guild', guild ? `${guild.name}` : "Couldn't fetch guild.")
-			.addField('❯ Aliases', tag.aliases.length ? tag.aliases.map(t => `\`${t}\``).sort().join(', ') : 'No aliases.')
-			.addField('❯ Uses', tag.uses)
-			.addField('❯ Created at', moment.utc(tag.createdAt).format('DD/MM/YYYY hh:mm:ss'))
-			.addField('❯ Modified at', moment.utc(tag.updatedAt).format('DD/MM/YYYY hh:mm:ss'));
-		if (lastModifiedBy) {
-			embed.addField('❯ Last modified by', lastModifiedBy ? `${lastModifiedBy.tag} (ID: ${lastModifiedBy.id})` : "Couldn't fetch user.");
+			.setAuthor(user ? user.tag : "Couldn't Fetch User", user ? user.displayAvatarURL() : null)
+			.setTitle(tag.name)
+			.addField('Aliases', tag.aliases.length ? tag.aliases.map(t => `\`${t}\``).sort().join(', ') : 'No Aliases')
+			.addField('Uses', tag.uses)
+			.addField('Created at', moment.utc(tag.createdAt).format('DD-MM-YYYY kk:mm:ss'))
+			.addField('Modified at', moment.utc(tag.updatedAt).format('DD-MM-YYYY kk:mm:ss'));
+		if (lastModifiedBy && lastModifiedBy.id !== tag.authorID) {
+			embed.addField('Last modified by', lastModifiedBy ? `${lastModifiedBy.tag}` : "Couldn't Fetch User");
 		}
 
 		return message.util.send(embed);

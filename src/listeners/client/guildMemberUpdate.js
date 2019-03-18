@@ -77,7 +77,6 @@ class GuildMemberUpdateModerationListener extends Listener {
 
 			let modMessage;
 			if (modLogChannel) {
-				// @ts-ignore
 				const color = Object.keys(Base.CONSTANTS.ACTIONS).find(key => Base.CONSTANTS.ACTIONS[key] === action).split(' ')[0].toUpperCase();
 				const embed = Base.logEmbed({ member: newMember, action: actionName, caseNum: totalCases, reason }).setColor(Base.CONSTANTS.COLORS[color]);
 				modMessage = await (this.client.channels.get(modLogChannel)).send(embed);

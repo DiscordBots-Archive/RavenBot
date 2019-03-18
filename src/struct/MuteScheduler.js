@@ -43,7 +43,7 @@ class MuteScheduler {
 		} catch {} // eslint:disable-line
 		await Case.update({
 			action_processed : true
-		}, {where: { guildID: guild.id, targetID: member.id }});
+		}, { where: { guildID: guild.id, targetID: member.id }});
 		if (member) {
 			try {
 				await member.roles.remove(muteRole, 'Unmuted automatically based on duration.');

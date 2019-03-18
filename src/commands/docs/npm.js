@@ -33,8 +33,8 @@ class NPMCommand extends Command {
 		if (res.status === 404) {
 			return message.util.reply("I couldn't find the requested information.");
 		}
-		const body = await res.json();
-		if (body.time.unpublished) {
+		const body = await res.json(); console.log(body)
+		if (body.time === undefined) {
 			return message.util.reply('commander of this package decided to unpublish it.');
 		}
 		const version = body.versions[body['dist-tags'].latest];
@@ -46,14 +46,14 @@ class NPMCommand extends Command {
 		.setTitle(body.name)
 		.setURL(`https://www.npmjs.com/package/${pkg}`)
 		.setDescription(body.description || 'No description.')
-		.addField('❯ Version', body['dist-tags'].latest, true)
-		.addField('❯ License', body.license || 'None', true)
-		.addField('❯ Author', body.author ? body.author.name : '???', true)
-		.addField('❯ Creation Date', moment.utc(body.time.created).format('DD-MM-YY kk:mm:ss'), true)
-		.addField('❯ Modification Date', moment.utc(body.time.modified).format('DD-MM-YY kk:mm:ss'), true)
-		.addField('❯ Main File', version.main || 'index.js', true)
-		.addField('❯ Dependencies', dependencies && dependencies.length ? dependencies.join(', ') : 'None')
-		.addField('❯ Maintainers', maintainers);
+		.addField('Version', body['dist-tags'].latest, true)
+		.addField('License', body.license || 'None', true)
+		.addField('Author', body.author ? body.author.name : '???', true)
+		.addField('Creation Date', moment.utc(body.time.created).format('DD-MM-YYYY kk:mm:ss'), true)
+		.addField('Modification Date', moment.utc(body.time.modified).format('DD-MM-YYYY kk:mm:ss'), true)
+		.addField('Main File', version.main || 'index.js', true)
+		.addField('Dependencies', dependencies && dependencies.length ? dependencies.join(', ') : 'None')
+		.addField('Maintainers', maintainers);
 
 		if (message.channel.type === 'dm' || !(message.channel).permissionsFor(message.guild.me).has(['ADD_REACTIONS', 'MANAGE_MESSAGES'], false)) {
 			return message.util.send({ embed });
