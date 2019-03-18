@@ -25,7 +25,6 @@ class TagStatsCommand extends Command {
     async exec(message, { member }) {
 
         if (member) {
-            const top = await Tags.findAll({ where: { uses: { [Op.lt] : 10000 }, guildID: message.guild.id, authorID: member.user.id }});
             const tags = await Tags.findAll({ where: { authorID: member.user.id, guildID: message.guild.id }});
             const totaluses = tags.reduce((count, c) => {
                 return count + c.uses;
@@ -36,7 +35,6 @@ class TagStatsCommand extends Command {
             .setFooter(message.guild.name, message.guild.iconURL()).setColor(0x8387db)
             return message.util.send({ embed });
         }
-        const top = await Tags.findAll({ where: { uses: { [Op.lt] : 10000 }, guildID: message.guild.id }});
         const tags = await Tags.findAll({ where: { guildID: message.guild.id }});
         const totaluses = tags.reduce((count, c) => {
 			return count + c.uses;
