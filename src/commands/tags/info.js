@@ -42,12 +42,12 @@ class TagInfoCommand extends Command {
 			.setColor(0x8387db)
 			.setAuthor(user ? user.tag : "Couldn't Fetch User", user ? user.displayAvatarURL() : null)
 			.setTitle(tag.name)
-			.addField('Aliases', tag.aliases.length ? tag.aliases.map(t => `\`${t}\``).sort().join(', ') : 'No Aliases')
+			.addField('Aliases', tag.aliases.length ? tag.aliases.map(t => `${t}`).sort().join(', ') : 'No Aliases')
 			.addField('Uses', tag.uses)
-			.addField('Created at', moment.utc(tag.createdAt).format('MMM Do YYYY kk:mm'))
-			.addField('Modified at', moment.utc(tag.updatedAt).format('MMM Do YYYY, kk:mm'));
+			.addField('Created', moment.utc(tag.createdAt).format('MMM Do YYYY kk:mm'))
+			.addField('Modified', moment.utc(tag.updatedAt).format('MMM Do YYYY, kk:mm'));
 		if (lastModifiedBy && lastModifiedBy.id !== tag.authorID) {
-			embed.addField('Last modified by', lastModifiedBy ? `${lastModifiedBy.tag}` : "Couldn't Fetch User");
+			embed.addField('Last Modified', lastModifiedBy ? `${lastModifiedBy.tag}` : "Couldn't Fetch User");
 		}
 
 		return message.util.send(embed);
