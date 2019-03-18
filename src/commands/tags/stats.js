@@ -1,6 +1,5 @@
 const { Command } = require('discord-akairo');
 const Tags = require('../../models/Tags');
-const { Op, fn, col } = require('sequelize');
 
 class TagStatsCommand extends Command {
     constructor() {
