@@ -1,6 +1,8 @@
 const { Listener } = require('discord-akairo');
 const Logger = require('../../util/Logger');
 const Raven = require('raven');
+const Levels = require('../../models/UserLevel');
+const Commands = require('../../models/Commands');
 
 class CommandStartedListener extends Listener {
 	constructor() {
@@ -14,7 +16,19 @@ class CommandStartedListener extends Listener {
 	async exec(message, command, args) {
 		this.client.prometheus.commandCounter.inc();
 
-		const tag = message.guild ? `${message.guild.name} :: ${message.author.tag} (${message.author.id})` : `${message.author.tag} (${message.author.id})`;
+		if (message.guild) {
+			const _command = await Commands.findOne({ where: { guildID: message.guild.id, commandID: command.id }});
+			if (_command) {
+				await Commands.update({ uses: _command.uses + 1 }, { where: { guildID: message.guild.id, commandID: command.id }});
+			} else await Commands.create({ commandID: command.id, guildID: message.guild.id, uses: 1 });
+			
+			const _user = await Levels.findOne({ where: { guildID: message.guild.id, userID: message.author.id }});
+			if (_user) {
+				await Levels.update({ uses: _user.uses + 1 }, { where: { guildID: message.guild.id, userID: message.author.id }});
+			} else await Levels.create({ guildID: message.guild.id, userID: message.author.id, uses: 1 });
+		}
+
+		const tag = message.guild ? `${message.guild.name} - ${message.author.tag}` : `${message.author.tag}`;
 		Logger.log(`=> ${command.id}`, { tag });
 
 		Raven.captureBreadcrumb({

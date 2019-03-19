@@ -4,7 +4,7 @@ const Tags = require('../../models/Tags');
 class TagAliasCommand extends Command {
 	constructor() {
 		super('tag-alias', {
-			aliases: ['alias'],
+			aliases: ['tag-alias'],
 			category: 'tags',
 			channel: 'guild',
 			ratelimit: 2,

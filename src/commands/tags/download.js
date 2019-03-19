@@ -4,7 +4,7 @@ const Tags = require('../../models/Tags');
 class TagDownloadCommand extends Command {
 	constructor() {
 		super('tag-download', {
-			aliases: ['download'],
+			aliases: ['tag-download'],
 			category: 'tags',
 			channel: 'guild',
 			ratelimit: 2,
