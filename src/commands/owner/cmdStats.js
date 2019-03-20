@@ -19,7 +19,7 @@ class CommandStatsCommand extends Command {
 
     async exec(message) {
 
-        const cmdTotal = await Commands.sum('uses', { where: { guildID: message.guild.id }}) || 0;
+        const cmdTotal = await Commands.sum('uses', { where: { guildID: message.guild.id, categoryID: { [Op.ne]: 'tags' } }}) || 0;
         const tagTotal = await Tags.sum('uses', { where: { guildID: message.guild.id }}) || 0;
         const tags = await Tags.findAll({ where: { guildID: message.guild.id }});
 
