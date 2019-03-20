@@ -19,8 +19,8 @@ class CommandStatsCommand extends Command {
 
     async exec(message) {
 
-        const cmdTotal = await Commands.sum('uses', { where: { guildID: message.guild.id }});
-        const tagTotal = await Tags.sum('uses', { where: { guildID: message.guild.id }});
+        const cmdTotal = await Commands.sum('uses', { where: { guildID: message.guild.id }}) || 0;
+        const tagTotal = await Tags.sum('uses', { where: { guildID: message.guild.id }}) || 0;
         const tags = await Tags.findAll({ where: { guildID: message.guild.id }});
 
         const _topTags = await Tags.findAll({
@@ -35,16 +35,17 @@ class CommandStatsCommand extends Command {
         }))
 
         const _topCommands = await Commands.findAll({
-            where: { guildID: message.guild.id },
+            where: { guildID: message.guild.id, categoryID: { [Op.ne]: 'tags' } },
             group: ['commands.id'],
             order: [ [ fn('max', col('uses')), 'DESC' ] ],
             limit: 3, offset: 0
         })
         const topCommands = await Promise.all(_topCommands.map(async row => {
-            return { uses: row.uses, name: row.commandAlias };
+            return { uses: row.uses, name: row.commandID };
         }))
 
-        /*const _topMaker = await Tags.findAll({
+        /* This method is not working.
+        const _topMaker = await Tags.findAll({
             group: ['authorID'], where: { guildID: message.guild.id },
             attributes: [ [literal(`(SELECT COUNT("authorID"))`), 'total'], "authorID" ],
             order: [ [literal('total'), 'DESC'] ], limit: 3, offset: 0
@@ -68,10 +69,8 @@ class CommandStatsCommand extends Command {
         })
         const topMaker = await Promise.all(_topMaker.map(async row => {
             const user = await this.client.users.fetch(row.authorID).catch(() => ({ tag: `Couldn't Fetch User`}));
-            console.log(JSON.stringify(row))
             return { tag: user.tag, total: row.total };
         }))
-        console.log(JSON.stringify(topMaker))
 
         const _topCmdUsers = await Levels.findAll({
             where: { guildID: message.guild.id },

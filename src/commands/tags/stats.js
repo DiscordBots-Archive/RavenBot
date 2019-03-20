@@ -6,7 +6,7 @@ class TagStatsCommand extends Command {
     constructor() {
         super('tag-stats', {
             aliases: ['tag-stats'],
-            category: 'tag',
+            category: 'tags',
             channel: 'guild',
             args: [
                 {
