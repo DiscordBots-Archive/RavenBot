@@ -29,7 +29,7 @@ class CommandStartedListener extends Listener {
 				commandAlias: command.aliases ? command.aliases[0] : command.id
 			});
 
-			if (command.categoryID === 'tags') {
+			if (command.id === 'tag-show') {
 				const _user = await Levels.findOne({ where: { guildID: message.guild.id, userID: message.author.id }});
 				if (_user) {
 					await Levels.update({
@@ -38,7 +38,7 @@ class CommandStartedListener extends Listener {
 
 				} else await Levels.create({ guildID: message.guild.id, userID: message.author.id, tagUses: 1 });
 
-			} else {
+			} else if (command.categoryID !== 'tags') {
 				const _user = await Levels.findOne({ where: { guildID: message.guild.id, userID: message.author.id }});
 				if (_user) {
 					await Levels.update({
