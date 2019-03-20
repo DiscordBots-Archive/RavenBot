@@ -53,7 +53,9 @@ class TagInfoCommand extends Command {
 			.addField('Aliases', tag.aliases.length ? tag.aliases.map(t => `${t}`).sort().join(', ') : 'No Aliases')
 			.addField('Uses', tag.uses).addField('Rank', index + 1)
 			.addField('Created', moment.utc(tag.createdAt).format('MMM Do YYYY kk:mm'))
-		if (tag.createdAt !== tag.updatedAt) embed.addField('Modified', moment.utc(tag.updatedAt).format('MMM Do YYYY, kk:mm'));
+		if (tag.createdAt !== tag.updatedAt) {
+			embed.addField('Modified', moment.utc(tag.updatedAt).format('MMM Do YYYY, kk:mm'));
+		}
 		if (lastModifiedBy && lastModifiedBy.id !== tag.authorID) {
 			embed.addField('Last Modified', lastModifiedBy ? `${lastModifiedBy.tag}` : "Couldn't Fetch User");
 		}
