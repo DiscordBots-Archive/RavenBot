@@ -33,8 +33,6 @@ class TagInfoCommand extends Command {
 	async exec(message, { tag }) {
 
 		const user = await this.client.users.fetch(tag.authorID);
-		const updatedAt = tag.updatedAt;
-		const createdAt = tag.updatedAt;
 		let lastModifiedBy;
 		try {
 			lastModifiedBy = await this.client.users.fetch(tag.last_modified);
@@ -50,14 +48,12 @@ class TagInfoCommand extends Command {
 		const index = position.findIndex(i => i.name === tag.name);
 		const embed = new MessageEmbed()
 			.setColor(0x8387db)
-			.setAuthor(user ? user.tag : "Couldn't Fetch User", user ? user.displayAvatarURL() : null)
+			.setAuthor(user ? user.tag : "Invalid#0000", user ? user.displayAvatarURL() : null)
 			.setTitle(tag.name)
 			.addField('Aliases', tag.aliases.length ? tag.aliases.map(t => `${t}`).sort().join(', ') : 'No Aliases')
 			.addField('Uses', tag.uses).addField('Rank', index + 1)
 			.addField('Created', moment.utc(tag.createdAt).format('MMM Do YYYY kk:mm'))
-		if (createdAt !== updatedAt) {
-			embed.addField('Modified', moment.utc(tag.updatedAt).format('MMM Do YYYY, kk:mm'));
-		}
+			.addField('Modified', moment.utc(tag.updatedAt).format('MMM Do YYYY, kk:mm'));
 		if (lastModifiedBy && lastModifiedBy.id !== tag.authorID) {
 			embed.addField('Last Modified', lastModifiedBy ? `${lastModifiedBy.tag}` : "Couldn't Fetch User");
 		}
