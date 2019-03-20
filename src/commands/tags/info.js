@@ -33,6 +33,8 @@ class TagInfoCommand extends Command {
 	async exec(message, { tag }) {
 
 		const user = await this.client.users.fetch(tag.authorID);
+		const updatedAt = tag.updatedAt;
+		const createdAt = tag.updatedAt;
 		let lastModifiedBy;
 		try {
 			lastModifiedBy = await this.client.users.fetch(tag.last_modified);
@@ -53,7 +55,7 @@ class TagInfoCommand extends Command {
 			.addField('Aliases', tag.aliases.length ? tag.aliases.map(t => `${t}`).sort().join(', ') : 'No Aliases')
 			.addField('Uses', tag.uses).addField('Rank', index + 1)
 			.addField('Created', moment.utc(tag.createdAt).format('MMM Do YYYY kk:mm'))
-		if (tag.createdAt !== tag.updatedAt) {
+		if (createdAt !== updatedAt) {
 			embed.addField('Modified', moment.utc(tag.updatedAt).format('MMM Do YYYY, kk:mm'));
 		}
 		if (lastModifiedBy && lastModifiedBy.id !== tag.authorID) {
