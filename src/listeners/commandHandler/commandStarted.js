@@ -33,10 +33,10 @@ class CommandStartedListener extends Listener {
 				const _user = await Levels.findOne({ where: { guildID: message.guild.id, userID: message.author.id }});
 				if (_user) {
 					await Levels.update({
-						tagUses: _user.tagUses + 1, commandUses: _user.commandUses + 1
+						tagUses: _user.tagUses + 1
 					}, { where: { guildID: message.guild.id, userID: message.author.id }});
 
-				} else await Levels.create({ guildID: message.guild.id, userID: message.author.id, tagUses: 1, commandUses: 1 });
+				} else await Levels.create({ guildID: message.guild.id, userID: message.author.id, tagUses: 1 });
 
 			} else {
 				const _user = await Levels.findOne({ where: { guildID: message.guild.id, userID: message.author.id }});
