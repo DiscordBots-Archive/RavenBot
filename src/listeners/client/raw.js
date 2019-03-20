@@ -54,17 +54,18 @@ class RawListener extends Listener {
 			return;
 		}
 
-		// if (packet.d.emoji.name !== '⭐') return;
+		if (packet.d.emoji.name !== '⭐') return;
 		const data = await ReactionRole.findAll({ where: { messageID: packet.d.message_id }});
 		const emojis = data.map(str => str.emoji);
-		if (!emojis.includes(packet.d.emoji.name) || packet.d.emoji.name !== '⭐') return;
+		//if (!emojis.includes(packet.d.emoji.name) || packet.d.emoji.name !== '⭐') return;
 		const user = await this.client.users.fetch(packet.d.user_id);
 
 		if (packet.t === 'MESSAGE_REACTION_ADD') {
-			this.client.emit('messageReactionAdd', {
+			/*this.client.emit('messageReactionAdd', {
 				message,
 				emoji: packet.d.emoji
-			}, user);
+			}, user);*/
+			this.client.emit('messageReactionAdd', message.reactions.get('⭐'), user);
 		} else if (packet.t === 'MESSAGE_REACTION_REMOVE') {
 			this.client.emit('messageReactionRemove', {
 				message,
