@@ -17,7 +17,7 @@ class RankCommand extends Command {
     }
 
     async exec(message, { member }) {
-        const data = await Level.update({ tagUses: 18 }, { where: { guildID: message.guild.id, userID: member.user.id }});
+        const data = await Level.update({ tagUses: 1 }, { where: { guildID: message.guild.id, userID: member.user.id }});
     }
 }
 
