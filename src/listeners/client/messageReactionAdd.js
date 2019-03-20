@@ -1,4 +1,5 @@
 const { Listener } = require('discord-akairo');
+const ReactionRole = require('../../models/ReactionRoles');
 
 class MessageReactionAddListener extends Listener {
 	constructor() {
@@ -27,6 +28,20 @@ class MessageReactionAddListener extends Listener {
 				if (error.length && reaction.message.channel.permissionsFor(this.client.user).has('SEND_MESSAGES')) {
 					reaction.message.channel.send(`${user} **::** ${error}`);
 				}
+			}
+		}
+
+		const data = await ReactionRole.findAll({ where: { guildID: reaction.message.guild.id }});
+		
+		const emojis = data.map(str => str.emoji);
+		const messages = data.map(str => str.messageID);
+		if (emojis.includes(reaction.emoji.name) && messages.includes(reaction.message.id)) {
+			const  role = await ReactionRole.findOne({ where: { guildID: reaction.message.guild.id, emoji: reaction.emoji.name, messageID: reaction.message.id }});
+			const member = await reaction.message.guild.members.fetch(user);
+			try {
+				await member.roles.add(role.roleID, 'Reaction Role Added');
+			} catch (error) {
+				if (error) console.log(error);
 			}
 		}
 	}

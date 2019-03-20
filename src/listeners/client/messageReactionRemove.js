@@ -1,4 +1,5 @@
 const { Listener } = require('discord-akairo');
+const ReactionRole = require('../../models/ReactionRoles');
 
 class MessageReactionRemoveListener extends Listener {
 	constructor() {
@@ -26,6 +27,19 @@ class MessageReactionRemoveListener extends Listener {
 				if (reaction.message.channel.permissionsFor(this.client.user).has('SEND_MESSAGES')) {
 					reaction.message.channel.send(`${user} **::** ${error}`);
 				}
+			}
+		}
+
+		const data = await ReactionRole.findAll({ where: { guildID: reaction.message.guild.id }});
+		const emojis = data.map(str => str.emoji);
+		const messages = data.map(str => str.messageID);
+		if (emojis.includes(reaction.emoji.name) && messages.includes(reaction.message.id)) {
+			const  role = await ReactionRole.findOne({ where: { guildID: reaction.message.guild.id, emoji: reaction.emoji.name, messageID: reaction.message.id }});
+			const member = await reaction.message.guild.members.fetch(user);
+			try {
+				await member.roles.remove(role.roleID, 'Reaction Role Removed');
+			} catch (error) {
+				if (error) console.log(error);
 			}
 		}
 	}
