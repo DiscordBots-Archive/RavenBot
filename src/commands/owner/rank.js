@@ -1,10 +1,9 @@
 const { Command } = require('discord-akairo');
-const Level = require('../../models/UserLevel');
 
-class RankCommand extends Command {
+class TestCommand extends Command {
     constructor() {
-        super('rank', {
-            aliases: ['rank'],
+        super('test', {
+            aliases: ['test'],
             category: 'owner',
             args: [
                 {
@@ -16,9 +15,7 @@ class RankCommand extends Command {
         })
     }
 
-    async exec(message, { member }) {
-        const data = await Level.update({ tagUses: 1 }, { where: { guildID: message.guild.id, userID: member.user.id }});
-    }
+    async exec(message, { member }) {}
 }
 
-module.exports = RankCommand;
+module.exports = TestCommand;
