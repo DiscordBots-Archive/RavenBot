@@ -17,10 +17,7 @@ class RankCommand extends Command {
     }
 
     async exec(message, { member }) {
-        const data = await Level.findOne({ where: { guildID: message.guild.id, userID: member.user.id }});
-        const embed = this.client.util.embed().setAuthor(member.user.tag, member.user.displayAvatarURL())
-        .addField('Level', data.level).addField('Commands Used', data.uses).setColor(0x8387db);
-        return message.util.send({ embed });
+        const data = await Level.update({ tagUses: 18 }, { where: { guildID: message.guild.id, userID: member.user.id }});
     }
 }
 
