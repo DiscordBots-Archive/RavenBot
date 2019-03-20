@@ -22,9 +22,16 @@ class AboutCommand extends Command {
 			.setColor('#8387db')
 			.setTitle(`About ${this.client.user.username}`)
 			.setDescription([
-				`${this.client.user.username} is developed by [${owner.tag}](https://github.com/isuvajit)`,
-				`${this.client.user.username} uses the **[Discord.js](https://discord.js.org) (${Discord.version})** library and the **[Akairo](https://1computer1.github.io/discord-akairo) (${Akairo.version})** framework.`,
-				`Use \`${prefix}stats\` for statistics and \`${prefix}invite\` for an invite link.`,
+				`**Dev**`,
+				`**${this.client.user.username}** is developed by [${owner.tag}](https://github.com/isuvajit)`,
+				`**Core**`,
+				`[Discord.js](https://discord.js.org) (${Discord.version}) library and [Akairo](https://1computer1.github.io/discord-akairo) (${Akairo.version.replace(/beta.1/g, 'dev')}) framework`,
+				`**Music**`,
+				`[Lavalink](https://github.com/lavalibs/lavalink.js) Audio player, along with [Lavaqueue](https://github.com/lavalibs/lavaqueue)`,
+				`**Database**`,
+				`[PostgreSQL](https://www.postgresql.org/) database, along with [Sequelize](http://docs.sequelizejs.com/)`,
+				`**Host**`,
+				`[Amazon EC2](https://aws.amazon.com/ec2/)`,
 				'```js',
 				`${raven.toString()}`,
 				'```'
