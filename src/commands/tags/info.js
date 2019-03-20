@@ -1,6 +1,8 @@
 const { Command } = require('discord-akairo');
 const { MessageEmbed } = require('discord.js');
 const moment = require('moment'); require('moment-duration-format');
+const Tags = require('../../models/Tags');
+const { fn, col } = require('sequelize');
 
 class TagInfoCommand extends Command {
 	constructor() {
@@ -38,12 +40,18 @@ class TagInfoCommand extends Command {
 			lastModifiedBy = null;
 		}
 		const guild = this.client.guilds.get(tag.guildID);
+		const position = await Tags.findAll({
+			where: { guildID: message.guild.id },
+			order: [ [fn('max', col('uses')), 'DESC' ] ],
+			group: ['tags.id']
+		})
+		const index = position.findIndex(i => i.name === tag.name)
 		const embed = new MessageEmbed()
 			.setColor(0x8387db)
 			.setAuthor(user ? user.tag : "Couldn't Fetch User", user ? user.displayAvatarURL() : null)
 			.setTitle(tag.name)
 			.addField('Aliases', tag.aliases.length ? tag.aliases.map(t => `${t}`).sort().join(', ') : 'No Aliases')
-			.addField('Uses', tag.uses)
+			.addField('Uses', tag.uses).addField('Rank', index + 1)
 			.addField('Created', moment.utc(tag.createdAt).format('MMM Do YYYY kk:mm'))
 			.addField('Modified', moment.utc(tag.updatedAt).format('MMM Do YYYY, kk:mm'));
 		if (lastModifiedBy && lastModifiedBy.id !== tag.authorID) {
