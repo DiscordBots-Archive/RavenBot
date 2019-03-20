@@ -1,5 +1,4 @@
 require('./src/util/Extensions'); require('dotenv').config();
-
 const Client = require('./src/client/Client');
 const Logger = require('./src/util/Logger');
 const Raven = require('raven');
