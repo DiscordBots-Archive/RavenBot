@@ -44,8 +44,8 @@ class CommandStatsCommand extends Command {
             return { uses: row.uses, name: row.commandID };
         }))
 
-        /* This method is not working.
-        const _topMaker = await Tags.findAll({
+        // This method is not working.
+        /*const _topMaker = await Tags.findAll({
             group: ['authorID'], where: { guildID: message.guild.id },
             attributes: [ [literal(`(SELECT COUNT("authorID"))`), 'total'], "authorID" ],
             order: [ [literal('total'), 'DESC'] ], limit: 3, offset: 0
