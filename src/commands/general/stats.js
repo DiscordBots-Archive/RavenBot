@@ -9,7 +9,7 @@ class StatsCommand extends Command {
     constructor() {
         super('stats', {
             aliases: ['stats'],
-            category: 'util',
+            category: 'general',
             clientPermissions: ['EMBED_LINKS'],
             ratelimit: 2,
             description: { content: 'Displays statistics about the bot' }

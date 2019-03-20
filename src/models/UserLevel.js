@@ -6,7 +6,11 @@ const Levels = db.define('userlevels', {
         type: Sequelize.STRING,
         allowNull: false
     },
-    uses: {
+    commandUses: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+    },
+    tagUses: {
         type: Sequelize.INTEGER,
         defaultValue: 0
     },

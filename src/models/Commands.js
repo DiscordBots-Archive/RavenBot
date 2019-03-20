@@ -6,13 +6,21 @@ const Commands = db.define('commands', {
         type: Sequelize.TEXT,
         allowNull: false
     },
+    categoryID: {
+        type: Sequelize.STRING,
+        defaultValue: ''
+    },
+    commandAlias: {
+        type: Sequelize.STRING,
+        defaultValue: ''
+    },
     uses: {
         type: Sequelize.INTEGER,
         defaultValue: 0
     },
     guildID: {
         type: Sequelize.STRING,
-        allowNull: true
+        allowNull: false
     }
 })
 

@@ -5,7 +5,7 @@ class RankCommand extends Command {
     constructor() {
         super('rank', {
             aliases: ['rank'],
-            category: 'rank',
+            category: 'owner',
             args: [
                 {
                     id: 'member',

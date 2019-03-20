@@ -6,7 +6,7 @@ class ImgurCommand extends Command {
     constructor() {
         super('nsfw', {
             aliases: ['nsfw'],
-            category: 'fun',
+            category: 'owner',
             args: [
                 {
                     id: 'query',
