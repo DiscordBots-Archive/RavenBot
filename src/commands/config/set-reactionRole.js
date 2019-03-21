@@ -5,21 +5,24 @@ const emojis = require('node-emoji');
 class SetReactionRoleCommand extends Command {
     constructor() {
         super('set-reaction-role', {
-            aliases: ['set-reaction', 'set-reaction-role', 's-r-s'],
+            aliases: ['set-reaction', 'set-reaction-role', 's-r-r'],
             category: 'config',
             userPermissions: ['ADMINISTRATOR'],
             args: [
                 {
                     id: 'emoji',
-                    content: 'match',
                     index: 0,
-                    type: (match, message) => {
-                        return emojis.find(match);
+                    content: 'match',
+                    type: async (match, message) => {
+                        const emoji = emojis.find(match);
+                        if (!emoji) return null;
+                        const uwu = await message.react(emoji.emoji).catch(() => false);
+                        if (uwu) return emoji;
                     },
                     prompt: {
-                        start: 'What is the emoji you would like to set as reaction role?',
-                        retry: 'Please provide a valid unicode emoji.'
-                    }
+						start: 'What is the emoji you would like to set as reaction role?',
+						retry: `Please provide a valid unicode emoji.`
+					}
                 },
                 {
                     id: 'role',
