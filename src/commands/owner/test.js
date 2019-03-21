@@ -1,4 +1,5 @@
 const { Command } = require('discord-akairo');
+const ReactionRole = require('../../models/ReactionRoles');
 
 class TestCommand extends Command {
     constructor() {
@@ -15,7 +16,10 @@ class TestCommand extends Command {
         })
     }
 
-    async exec(message, { member }) {}
+    async exec(message, { member }) {
+        const data = await ReactionRole.destroy({ where: { guildID: message.guild.id }});
+        console.log(JSON.stringify(data));
+    }
 }
 
 module.exports = TestCommand;

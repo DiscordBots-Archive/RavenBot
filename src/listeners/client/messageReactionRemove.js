@@ -30,14 +30,12 @@ class MessageReactionRemoveListener extends Listener {
 			}
 		}
 
-		const data = await ReactionRole.findAll({ where: { guildID: reaction.message.guild.id }});
-		const emojis = data.map(str => str.emoji);
-		const messages = data.map(str => str.messageID);
-		if (emojis.includes(reaction.emoji.name) && messages.includes(reaction.message.id)) {
-			const  role = await ReactionRole.findOne({ where: { guildID: reaction.message.guild.id, emoji: reaction.emoji.name, messageID: reaction.message.id }});
+		const data = await ReactionRole.findOne({ where: { guildID: reaction.message.guild.id, emoji: reaction.emoji.name, messageID: reaction.message.id, channelID: reaction.message.channel.id }});
+		
+		if (reaction.emoji.name === data.emoji && reaction.message.guild.id === data.guildID && reaction.message.channel.id === data.channelID && reaction.message.id === data.messageID) {
 			const member = await reaction.message.guild.members.fetch(user);
 			try {
-				await member.roles.remove(role.roleID, 'Reaction Role Removed');
+				await member.roles.add(data.roleID, 'Reaction Role Added');
 			} catch (error) {
 				if (error) console.log(error);
 			}
