@@ -2,6 +2,7 @@ const { AkairoClient, CommandHandler, InhibitorHandler, ListenerHandler } = requ
 const { Counter, collectDefaultMetrics, register } = require('prom-client');
 const SettingsProvider = require('../struct/SettingsProviders');
 const MuteScheduler = require('../struct/MuteScheduler');
+const ReactionRole = require('../models/ReactionRoles');
 const { Client: Lavaqueue } = require('lavaqueue');
 const { Collection, Util } = require('discord.js');
 const Database = require('../struct/Database');
@@ -112,6 +113,12 @@ class Client extends AkairoClient {
 
 			return phrase || null;
 		});
+
+		this.commandHandler.resolver.addType('reactionRole', async (phrase, message) => {
+			if (!phrase) return null;
+			const msg = await ReactionRole.findOne({ where: { guildID: message.guild.id, messageID: phrase }});
+			return msg || null;
+		})
 
 		this.setup();
 

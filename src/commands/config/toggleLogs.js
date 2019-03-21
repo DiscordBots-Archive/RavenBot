@@ -1,4 +1,5 @@
-const { Command } = require('discord-akairo');
+const { Command, Control } = require('discord-akairo');
+const ReactionRole = require('../../models/ReactionRoles');
 
 class ToggleLogsCommand extends Command {
 	constructor() {
@@ -23,13 +24,30 @@ class ToggleLogsCommand extends Command {
                     id: 'guildlog',
                     match: 'flag',
                     flag: ['--logs', '--guildlog']
-                }
+                },
+                {
+                    id: 'reactionrole',
+                    match: 'flag',
+                    flag: ['--reaction', '--reactionrole']
+                },
+                Control.if((_, args) => args.reactionrole, [
+					{
+                        id: 'msg',
+                        match: 'rest',
+                        type: 'reactionRole',
+                        prompt: {
+                            start: `what is the message id?`,
+                            retry: 'message id not not found.'
+						}
+					}
+				])
             ],
+
 			description: { content: 'Toggle logs features on the server.' }
 		});
 	}
 
-	async exec(message, { memberlog, modlog, guildlog }) {
+	async exec(message, { memberlog, modlog, guildlog, reactionrole, msg }) {
         if (memberlog) {
             this.client.settings.delete(message.guild, 'memberLog');
             return message.util.reply(`successfully disabled member log channel.`);
@@ -43,6 +61,11 @@ class ToggleLogsCommand extends Command {
         if (guildlog) {
             this.client.settings.delete(message.guild, 'guildLog');
             return message.util.reply(`successfully disabled guild log channel.`);
+        }
+
+        if (reactionrole) {
+            await ReactionRole.destroy({ where: { guildID: message.guild.id, messageID: msg.messageID }});
+            return message.util.reply(`successfully disabled this reaction role.`)
         }
 	}
 }
