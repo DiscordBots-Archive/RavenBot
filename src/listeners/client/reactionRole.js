@@ -37,13 +37,9 @@ class ReactionRoleListener extends Listener {
 
 		const user = await this.client.users.fetch(packet.d.user_id);
 
-		if (packet.t === 'MESSAGE_REACTION_ADD') {
-			/*this.client.emit('messageReactionAdd', {
-				message,
-				emoji: packet.d.emoji
-			}, user);*/
+		if (data && packet.t === 'MESSAGE_REACTION_ADD') {
 			this.client.emit('messageReactionAdd', message.reactions.get(data.emoji), user);
-		} else if (packet.t === 'MESSAGE_REACTION_REMOVE') {
+		} else if (data && packet.t === 'MESSAGE_REACTION_REMOVE') {
 			this.client.emit('messageReactionRemove', {
 				message,
 				emoji: packet.d.emoji

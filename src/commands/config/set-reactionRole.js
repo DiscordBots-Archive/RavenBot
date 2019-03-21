@@ -59,16 +59,16 @@ class SetReactionRoleCommand extends Command {
     }
 
     async exec(message, { emoji, message: msg, role, channel }) {
-        const data = await ReactionRole.findAll({});
-        console.log(JSON.stringify(data));
-        /*const data = await ReactionRole.create({
+        //const data = await ReactionRole.findAll({});
+        //console.log(JSON.stringify(data));
+        const data = await ReactionRole.create({
             messageID: msg.id,
             channelID: channel.id,
             guildID: message.guild.id,
             emoji: emoji.emoji,
             roleID: role.id
         });
-        return message.util.send(JSON.stringify(data), { code: 'json'});*/
+        return message.util.send(JSON.stringify(data), { code: 'json'});
     }
 }
 
