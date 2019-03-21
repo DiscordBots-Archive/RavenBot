@@ -35,7 +35,7 @@ class KickCommand extends Command {
 		});
 	}
 
-	// @ts-ignore
+	// @es-ignore
 	userPermissions(message) {
 		const staffRole = this.client.settings.get(message.guild, 'modRole', undefined);
 		const hasStaffRole = message.member.roles.has(staffRole);
@@ -61,7 +61,7 @@ class KickCommand extends Command {
 					`${reason ? `\n**Reason:** ${reason}\n` : ''}`,
 					`You may rejoin whenever.`
 				]);
-			} catch {} // tslint:disable-line
+			} catch {} // eslint:disable-line
 			await member.kick(`Kicked by ${message.author.tag} | Case #${totalCases}`);
 		} catch (error) {
 			return message.reply('I could not kick this user.');
@@ -70,7 +70,7 @@ class KickCommand extends Command {
 		this.client.settings.set(message.guild, 'caseTotal', totalCases);
 
 		if (!reason) {
-			// @ts-ignore
+			// @es-ignore
 			const prefix = this.handler.prefix(message);
 			reason = `Use \`${prefix}reason ${totalCases} <...reason>\` to set a reason for this case`;
 		}

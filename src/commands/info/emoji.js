@@ -24,8 +24,8 @@ class EmojiInfoCommand extends Command {
 						return message.guild.emojis.find(emoji => emoji.name === content);
 					},
 					prompt: {
-						start: message => `what emoji would you like information about?`,
-						retry: message => `please provide a valid emoji!`
+						start: `what emoji would you like information about?`,
+						retry: `Please provide a valid emoji!`
 					}
 				}
 			],

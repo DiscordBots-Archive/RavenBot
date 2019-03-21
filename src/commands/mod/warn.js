@@ -16,8 +16,8 @@ class WarnCommand extends Command {
 					id: 'member',
 					type: 'member',
 					prompt: {
-						start: message => `what member do you want to warn?`,
-						retry: message => `please mention a member...`
+						start: `What member do you want to warn?`,
+						retry: `Please mention a valid member.`
 					}
 				},
 				{
