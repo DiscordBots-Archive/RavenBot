@@ -74,6 +74,7 @@ class SetReactionRoleCommand extends Command {
             `[Jump To](${msg.url})`,
             msg.content.substring(0, 900)
         ])
+        msg.react(emoji.emoji);
         return message.util.send({ embed });
     }
 }
