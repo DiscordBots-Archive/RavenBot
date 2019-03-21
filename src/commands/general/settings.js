@@ -50,7 +50,7 @@ class SettingsCommand extends Command {
 				`**Blacklist**: ${blacklist.join(', ') || 'None'}`
 			]);
 		if (data.length) {
-			const desc = data.map(({ channel, message, emoji, role }, index) => `${1 + index}. \\${emoji} <@&${role}> ${message.url ? `[Jump To](${message.url}) ${channel}` : `${message.msg} (msg deleted)` }`)
+			const desc = data.map(({ channel, message, emoji, role }, index) => `${1 + index}. \\${emoji} ${message.url ? `[Jump To](${message.url}) ${channel} <@&${roley}>` : `${message.msg} (msg deleted)` }`)
 			embed.addField('Reaction Roles', desc)
 		}
 
