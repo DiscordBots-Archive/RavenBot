@@ -31,7 +31,7 @@ class SettingsCommand extends Command {
 		const data = await Promise.all(allReaction.map(async row => {
 			const channel = await this.client.channels.get(row.channelID);
 			const msg = await channel.messages.fetch(row.messageID).catch(() => ({ msg: false }));
-			if (channel && msg) return { channel: channel, message: msg, emoji: row.emoji };
+			return { channel: channel, message: msg, emoji: row.emoji };
 		}))
 
 		const embed = this.client.util.embed()
