@@ -1,4 +1,5 @@
 const { Command } = require('discord-akairo');
+const ReactionRole = require('../../models/ReactionRoles');
 
 class SettingsCommand extends Command {
 	constructor() {
@@ -11,7 +12,7 @@ class SettingsCommand extends Command {
 		});
 	}
 
-	exec(message) {
+	async exec(message) {
 		const prefix = this.handler.prefix(message);
 		const starboard = this.client.starboards.get(message.guild.id);
 		const guildlog = this.client.settings.get(message.guild, 'guildLog', undefined);
@@ -19,6 +20,19 @@ class SettingsCommand extends Command {
 		const memberlog = this.client.settings.get(message.guild, 'memberLog', undefined);
 		const modrole = this.client.settings.get(message.guild, 'modRole', undefined);
 		const blacklist = this.client.settings.get(message.guild, 'blacklist', []);
+
+		const toBeDeleted = await ReactionRole.findAll({ where: { guildID: message.guild.id }});
+		for (const channel of toBeDeleted) {
+			if (!this.client.channels.has(channel.channelID)) {
+				await ReactionRole.destroy({ where: { guildID: message.guild.id, channelID: channel.channelID }});
+			}
+		}
+		const allReaction = await ReactionRole.findAll({ where: { guildID: message.guild.id }});
+		const data = await Promise.all(allReaction.map(async row => {
+			const channel = await this.client.channels.get(row.channelID);
+			const msg = await channel.messages.fetch(row.messageID).catch(() => ({ msg: false }));
+			if (channel && msg) return { channel: channel, message: msg, emoji: row.emoji };
+		}))
 
 		const embed = this.client.util.embed()
 			.setColor(0xFFAC33)
@@ -35,6 +49,10 @@ class SettingsCommand extends Command {
 				`**Threshold**: ${(starboard && starboard.threshold) || 'None'}`,
 				`**Blacklist**: ${blacklist.join(', ') || 'None'}`
 			]);
+		if (data.length) {
+			const desc = data.map(({ channel, message, emoji }, index) => `${1 + index}. \\${emoji} [Jump To](${message.url}) ${channel}`)
+			embed.addField('Reaction Roles', desc)
+		}
 
 		return message.util.send({ embed });
 	}

@@ -32,7 +32,6 @@ class ReactionRoleListener extends Listener {
 		if (packet.d.emoji.name === '⭐') return;
 
 		const data = await ReactionRole.findOne({ where: { emoji: packet.d.emoji.name, channelID: packet.d.channel_id, messageID: packet.d.message_id, guildID: packet.d.guild_id }});
-		console.log({ emoji: packet.d.emoji.name, channelID: packet.d.channel_id, messageID: packet.d.message_id, guildID: packet.d.guild_id })
 		if (data && packet.d.emoji.name !== data.emoji) return;
 
 		const user = await this.client.users.fetch(packet.d.user_id);

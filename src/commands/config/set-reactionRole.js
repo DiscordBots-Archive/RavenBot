@@ -17,8 +17,8 @@ class SetReactionRoleCommand extends Command {
                         return emojis.find(match);
                     },
                     prompt: {
-                        start: 'what emoji would you like to set?',
-                        retry: 'please provide a valid unicode emoji.'
+                        start: 'What is the emoji you would like to set as reaction role?',
+                        retry: 'Please provide a valid unicode emoji.'
                     }
                 },
                 {
@@ -26,7 +26,7 @@ class SetReactionRoleCommand extends Command {
                     type: 'role',
                     index: 1,
                     prompt: {
-                        start: 'What is the Role you would like to set as reaction role?',
+                        start: 'What is the role you would like to set as reaction role?',
                         retry: 'Please provide a valid role.'
                     }
                 },
@@ -59,16 +59,22 @@ class SetReactionRoleCommand extends Command {
     }
 
     async exec(message, { emoji, message: msg, role, channel }) {
-        //const data = await ReactionRole.findAll({});
-        //console.log(JSON.stringify(data));
-        const data = await ReactionRole.create({
+
+        await ReactionRole.create({
             messageID: msg.id,
             channelID: channel.id,
             guildID: message.guild.id,
             emoji: emoji.emoji,
             roleID: role.id
         });
-        return message.util.send(JSON.stringify(data), { code: 'json'});
+        const embed = this.client.util.embed().setAuthor('Reaction Role').setColor(0x8387db)
+        .addField('Emoji', emoji.emoji).addField('Channel', msg.channel)
+        .addField('Role', role)
+        .addField('Message', [
+            `[Jump To](${msg.url})`,
+            msg.content.substring(0, 900)
+        ])
+        return message.util.send({ embed });
     }
 }
 
