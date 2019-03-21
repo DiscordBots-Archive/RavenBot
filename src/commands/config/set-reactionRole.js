@@ -5,7 +5,7 @@ const emojis = require('node-emoji');
 class SetReactionRoleCommand extends Command {
     constructor() {
         super('set-reaction-role', {
-            aliases: ['set-reaction', 'set-reaction-role'],
+            aliases: ['set-reaction', 'set-reaction-role', 's-r-s'],
             category: 'config',
             userPermissions: ['ADMINISTRATOR'],
             args: [
