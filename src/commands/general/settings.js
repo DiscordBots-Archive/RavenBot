@@ -30,9 +30,10 @@ class SettingsCommand extends Command {
 		const allReaction = await ReactionRole.findAll({ where: { guildID: message.guild.id }});
 		const data = await Promise.all(allReaction.map(async row => {
 			const channel = await this.client.channels.get(row.channelID);
-			const msg = await channel.messages.fetch(row.messageID).catch(() => ({ msg: false }));
+			const msg = await channel.messages.fetch(row.messageID).catch(() => ( { msg: row.messageID } ));
 			return { channel: channel, message: msg, emoji: row.emoji };
 		}))
+		console.log(data)
 
 		const embed = this.client.util.embed()
 			.setColor(0xFFAC33)
@@ -50,7 +51,7 @@ class SettingsCommand extends Command {
 				`**Blacklist**: ${blacklist.join(', ') || 'None'}`
 			]);
 		if (data.length) {
-			const desc = data.map(({ channel, message, emoji }, index) => `${1 + index}. \\${emoji} [Jump To](${message.url}) ${channel}`)
+			const desc = data.map(({ channel, message, emoji }, index) => `${1 + index}. \\${emoji} ${message.url ? `[Jump To](${message.url}) ${channel}` : `${message.msg} (msg deleted)` }`)
 			embed.addField('Reaction Roles', desc)
 		}
 
