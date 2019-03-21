@@ -33,7 +33,6 @@ class SettingsCommand extends Command {
 			const msg = await channel.messages.fetch(row.messageID).catch(() => ( { msg: row.messageID } ));
 			return { channel: channel, message: msg, emoji: row.emoji };
 		}))
-		console.log(data)
 
 		const embed = this.client.util.embed()
 			.setColor(0xFFAC33)
