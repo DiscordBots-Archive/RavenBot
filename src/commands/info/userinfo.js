@@ -25,7 +25,7 @@ class UserCommand extends Command {
 
     async exec(message, { member }) {
 
-        const {user} = member;
+        const { user } = member;
 
         const embed = this.client.util.embed().setColor('RED')
         .setAuthor(`${member.user.tag} (${member.user.id})`, user.displayAvatarURL())
