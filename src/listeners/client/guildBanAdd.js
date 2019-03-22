@@ -24,7 +24,6 @@ class GuildBanAddListener extends Listener {
 		
 		let modMessage;
 		if (modLogChannel) {
-			// @ts-ignore
 			const embed = Base.logEmbed({ member: user, action: 'Ban', caseNum: totalCases, reason }).setColor(Base.CONSTANTS.COLORS.BAN);
 			modMessage = await (this.client.channels.get(modLogChannel)).send(embed);
 		}
