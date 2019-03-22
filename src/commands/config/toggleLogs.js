@@ -4,7 +4,7 @@ const ReactionRole = require('../../models/ReactionRoles');
 class ToggleLogsCommand extends Command {
 	constructor() {
 		super('toggle-logs', {
-			aliases: ['toggle-log', 'toggle-logs'],
+			aliases: ['toggle-log', 'toggle-logs', 'disable'],
 			category: 'config',
 			channel: 'guild',
 			userPermissions: ['MANAGE_GUILD'],
