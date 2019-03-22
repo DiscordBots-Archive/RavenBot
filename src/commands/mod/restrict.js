@@ -42,7 +42,6 @@ class RestrictCommand extends Command {
 		});
 	}
 
-	// @ts-ignore
 	userPermissions(message) {
 		const staffRole = this.client.settings.get(message.guild, 'modRole', undefined);
 		const hasStaffRole = message.member.roles.has(staffRole);
@@ -52,7 +51,6 @@ class RestrictCommand extends Command {
 
 	async exec(message, { restriction, rest }) {
 		if (!restriction) {
-			// @ts-ignore
 			const prefix = this.handler.prefix(message);
 			return message.util.send([
 				`When you beg me so much I just can't not help you~`,
