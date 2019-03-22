@@ -41,7 +41,6 @@ const Base = {
     },
 
     logEmbed : ({message, member, duration, caseNum, action, reason}) => {
-
         const embed = new MessageEmbed().setTimestamp().setFooter(`Case ${caseNum}`)
         if (message) embed.setAuthor(`${message.member.user.tag} (${message.member.user.id})`, message.member.user.displayAvatarURL())
         embed.setDescription([`**Member:** ${member instanceof User ? member.tag : member.user.tag} (${member.id})`,
@@ -81,7 +80,6 @@ const Base = {
             pageLength
         };
     },
-    
     timeString : ({seconds, forceHours = false, ms = true}) => {
         if (ms) seconds /= 1000;
         const hours = Math.floor(seconds / 3600);
