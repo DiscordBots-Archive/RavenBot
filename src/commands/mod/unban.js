@@ -38,7 +38,6 @@ class UnbanCommand extends Command {
 		});
 	}
 
-	// @ts-ignore
 	userPermissions(message) {
 		const staffRole = this.client.settings.get(message.guild, 'modRole', undefined);
 		const hasStaffRole = message.member.roles.has(staffRole);
@@ -67,7 +66,6 @@ class UnbanCommand extends Command {
 		this.client.settings.set(message.guild, 'caseTotal', totalCases);
 
 		if (!reason) {
-			// @ts-ignore
 			const prefix = this.handler.prefix(message);
 			reason = `Use \`${prefix}reason ${totalCases} <...reason>\` to set a reason for this case`;
 		}
