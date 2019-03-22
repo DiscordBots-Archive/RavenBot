@@ -16,7 +16,6 @@ const { parse } = require('url');
 const path = require('path');
 
 class Client extends AkairoClient {
-
 	constructor(config) {
 		super({ ownerID: config.owner }, {
 			messageCacheMaxSize: 50,
