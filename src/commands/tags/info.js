@@ -19,7 +19,7 @@ class TagInfoCommand extends Command {
 					type: 'tag',
 					prompt: {
 						start: `what tag do you want information on?`,
-						retry: (message, _, provided, phrase) => `a tag with the name **${provided.phrase}** does not exist.`
+						retry: (msg, args, { phrase }) => `a tag with the name **${phrase}** does not exist.`
 					}
 				}
 			],

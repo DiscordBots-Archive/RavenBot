@@ -62,7 +62,6 @@ class TagCommand extends Command {
 
 	exec(message, { method, name }) {
 		if (!method) {
-			// @es-ignore
 			const prefix = this.handler.prefix(message);
 			return message.util.send(`Check \`${prefix}help tag\` for more information`);
 		}
