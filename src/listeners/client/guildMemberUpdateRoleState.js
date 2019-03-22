@@ -16,9 +16,9 @@ class GuildMemberUpdateRoleStateListener extends Listener {
 			await newMember.guild.members.fetch(newMember.id);
 			if (newMember.roles) {
 				const roles = newMember.roles.filter(role => role.id !== newMember.guild.id).map(role => role.id);
-				const Data = await RoleState.findOne({ where: { userID: newMember.id, guildID: newMember.guild.id }});
+				const data = await RoleState.findOne({ where: { userID: newMember.id, guildID: newMember.guild.id }});
 				if (roles.length) {
-					if (Data) {
+					if (data) {
 						await RoleState.update({
 							rolesID: roles
 						}, { where: { userID: newMember.id, guildID: newMember.guild.id }})
@@ -30,8 +30,8 @@ class GuildMemberUpdateRoleStateListener extends Listener {
 						})
 					}
 				} else {
-					if (Data) {
-						await Data.destroy();
+					if (data) {
+						await data.destroy();
 					}
 				}
 			}
