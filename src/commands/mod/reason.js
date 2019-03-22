@@ -34,7 +34,6 @@ class ReasonCommand extends Command {
 		});
 	}
 
-	// @ts-ignore
 	userPermissions(message) {
 		const staffRole = this.client.settings.get(message.guild, 'modRole', undefined);
 		const hasStaffRole = message.member.roles.has(staffRole);
