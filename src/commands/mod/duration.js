@@ -22,8 +22,8 @@ class DurationCommand extends Command {
 					id: 'caseNum',
 					type: Argument.union('number', 'string'),
 					prompt: {
-						start: message => `what case do you want to add a reason to?`,
-						retry: message => `please enter a case number.`
+						start: `what case do you want to add a reason to?`,
+						retry: `please enter a case number.`
 					}
 				},
 				{
@@ -35,15 +35,14 @@ class DurationCommand extends Command {
 						return null;
 					},
 					prompt: {
-						start: message => `for how long do you want the mute to last?`,
-						retry: message => `please use a proper time format.`
+						start: `for how long do you want the mute to last?`,
+						retry: `please use a proper time format.`
 					}
 				}
 			]
 		});
 	}
 
-	// @ts-ignore
 	userPermissions(message) {
 		const staffRole = this.client.settings.get(message.guild, 'modRole', undefined);
 		const hasStaffRole = message.member.roles.has(staffRole);
