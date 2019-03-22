@@ -34,7 +34,7 @@ class TagAliasCommand extends Command {
 						type: 'existingTag',
 						prompt: {
 							start: `what's the alias you want to apply to this tag?`,
-							retry: (message, _, provided, phrase) => `a tag with the name **${provided.phrase}** already exists.`
+							retry: (msg, args, { phrase }) => `a tag with the name **${phrase}** already exists.`
 						}
 					}
 				], [
@@ -44,7 +44,7 @@ class TagAliasCommand extends Command {
 						type: 'string',
 						prompt: {
 							start: `what's the alias you want to apply to this tag?`,
-							retry: (message, _, provided, phrase) => `a tag with the name **${provided.phrase}** already exists.`
+							retry: (msg, args, { phrase }) => `a tag with the name **${phrase}** already exists.`
 						}
 					}
 				])
