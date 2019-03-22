@@ -16,8 +16,8 @@ class BanCommand extends Command {
 					id: 'member',
 					type: 'member',
 					prompt: {
-						start: message => `what member do you want to ban?`,
-						retry: message => `please mention a member...`
+						start: `what member do you want to ban?`,
+						retry: `please mention a member...`
 					}
 				},
 				{
