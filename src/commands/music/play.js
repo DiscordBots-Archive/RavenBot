@@ -46,7 +46,7 @@ class PlayCommand extends Command {
 			return;
 		}
 		if (!['http:', 'https:'].includes(url.parse(query).protocol)) query = `ytsearch:${query}`;
-		// TODO: remove hack
+
 		const res = await this.client.music.load(query);
 		const queue = this.client.music.queues.get(message.guild.id);
 		if (!message.guild.me.voice.channel) await queue.player.join(message.member.voice.channel.id);
