@@ -2,7 +2,7 @@ const { Command } = require('discord-akairo');
 const Base = require('../../util/Base');
 const Case = require('../../models/Case');
 const moment = require('moment');
-const ms = require('ms'); // tslint:disable-line
+const ms = require('ms');
 
 class MuteCommand extends Command {
 	constructor() {
@@ -49,7 +49,6 @@ class MuteCommand extends Command {
 		});
 	}
 
-	// @ts-ignore
 	userPermissions(message) {
 		const staffRole = this.client.settings.get(message.guild, 'modRole', undefined);
 		const hasStaffRole = message.member.roles.has(staffRole);
@@ -85,7 +84,6 @@ class MuteCommand extends Command {
 		this.client.settings.set(message.guild, 'caseTotal', totalCases);
 
 		if (!reason) {
-			// @ts-ignore
 			const prefix = this.handler.prefix(message);
 			reason = `Use \`${prefix}reason ${totalCases} <...reason>\` to set a reason for this case`;
 		}
