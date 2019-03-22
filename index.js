@@ -24,4 +24,3 @@ process.on('unhandledRejection', err => {
 	Logger.error(`[UNHANDLED REJECTION] ${err.message}`);
 	Logger.stacktrace(err);
 });
-
