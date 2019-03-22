@@ -42,7 +42,6 @@ class BanCommand extends Command {
 		});
 	}
 
-	// @ts-ignore
 	userPermissions(message) {
 		const staffRole = this.client.settings.get(message.guild, 'modRole', undefined);
 		const hasStaffRole = message.member.roles.has(staffRole);
@@ -57,7 +56,7 @@ class BanCommand extends Command {
 			try {
 				await member.kick(`${message.author.tag} used a mod command on themselves.`);
 				await member.send('you asked for it, ok?');
-			} catch {} // tslint:disable-line
+			} catch {} // eslint:disable-line
 			return;
 		}
 		if (member.roles.has(staffRole)) {
@@ -100,7 +99,7 @@ class BanCommand extends Command {
 					`${reason ? `\n**Reason:** ${reason}\n` : ''}`,
 					`You can appeal your ban by DMing \`SUVAJIT#5580\` with a message why you think you deserve to have your ban lifted.`
 				]);
-			} catch {} // tslint:disable-line
+			} catch {} // eslint:disable-line
 			await member.ban({ days, reason: `Banned by ${message.author.tag} | Case #${totalCases}` });
 		} catch (error) {
 			this.client.cached.delete(key);
@@ -110,7 +109,6 @@ class BanCommand extends Command {
 		this.client.settings.set(message.guild, 'caseTotal', totalCases);
 
 		if (!reason) {
-			// @ts-ignore
 			const prefix = this.handler.prefix(message);
 			reason = `Use \`${prefix}reason ${totalCases} <...reason>\` to set a reason for this case`;
 		}
