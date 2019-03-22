@@ -21,7 +21,9 @@ class EmojiInfoCommand extends Command {
 					type: (content, message) => {
 						if (EMOJI_REGEX.test(content)) [, content] = content.match(EMOJI_REGEX);
 						if (!isNaN(content)) return message.guild.emojis.get(content);
-						return message.guild.emojis.find(emoji => emoji.name === content);
+						const emoji = emojis.find(content);
+						if (emoji) return emoji;
+						return message.guild.emojis.find(e => e.name === content);
 					},
 					prompt: {
 						start: `what emoji would you like information about?`,
@@ -52,8 +54,8 @@ class EmojiInfoCommand extends Command {
 		} else {
 			embed.setDescription(`Info about ${emoji.emoji}`);
 			embed.addField('❯ Info', [
-				`• Name: \`${emoji.key}\``,
-				`• Raw: \`${emoji.emoji}\``,
+				`• Name: ${emoji.key}`,
+				`• Raw: \\${emoji.emoji}`,
 				`• Unicode: \`${punycode.ucs2.decode(emoji.emoji).map(e => `\\u${e.toString(16).toUpperCase().padStart(4, '0')}`).join('')}\``
 			]);
 		}
