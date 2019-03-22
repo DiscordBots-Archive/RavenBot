@@ -51,12 +51,12 @@ class Client extends AkairoClient {
 		this.listenerHandler = new ListenerHandler(this, { directory: path.join(__dirname, '..', 'listeners') });
 
 		this.prometheus = {
-            messagesCounter: new Counter({ name: 'client_messages_total', help: 'Total number of messages have seen' }),
-            commandCounter: new Counter({ name: 'client_commands_total', help: 'Total number of commands used' }),
+            messagesCounter: new Counter({ name: 'raven_messages_total', help: 'Total number of messages have seen' }),
+            commandCounter: new Counter({ name: 'raven_commands_total', help: 'Total number of commands used' }),
             collectDefaultMetrics,
             register
         };
-        this.prometheus.collectDefaultMetrics({ prefix: 'client_', timeout: 30000 });
+        this.prometheus.collectDefaultMetrics({ prefix: 'raven_', timeout: 30000 });
 
 		this.music = new Lavaqueue({
 			userID: process.env.ID,
