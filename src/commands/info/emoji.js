@@ -27,7 +27,7 @@ class EmojiInfoCommand extends Command {
 					},
 					prompt: {
 						start: `what emoji would you like information about?`,
-						retry: `Please provide a valid emoji!`
+						retry: `please provide a valid emoji!`
 					}
 				}
 			],
