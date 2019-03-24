@@ -51,7 +51,9 @@ class DocsCommand extends Command {
 		if (!data) {
 			return message.util.reply("I couldn't find the requested information.");
         }
-        const embed = this.client.util.embed(data).setColor(0x8387db).setDescription(data.description.replace(/<p>(.+)<\/p>/g, '$1'))
+        const newData = JSON.stringify(data).replace(/<p>|<\/p>|<br>|<\/br>/g, '');
+        const oldEmbed = JSON.parse(newData);
+        const embed = this.client.util.embed(oldEmbed)//.setColor(0x8387db).setDescription(data.description.replace(/<p>(.+)<\/p>/g, '$1'))
 		if (message.channel.type === 'dm' || !(message.channel).permissionsFor(message.guild.me).has(['ADD_REACTIONS', 'MANAGE_MESSAGES'], false)) {
 			return message.util.send({ embed });
 		}
