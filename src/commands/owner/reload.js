@@ -22,7 +22,6 @@ class ReloadCommand extends Command {
 							inhibitor: 'inhibitor',
 							listener: 'listener',
 						}[type]);
-
 						return resolver(phrase);
 					}
 				}
