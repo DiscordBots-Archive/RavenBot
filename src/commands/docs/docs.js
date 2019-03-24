@@ -2,6 +2,8 @@ const { Command } = require('discord-akairo');
 const fetch =  require('node-fetch');
 const qs = require('querystring');
 
+const SOURCES = ['stable', 'master', 'rpc', 'commando', 'akairo', 'akairo-master'];
+
 class DocsCommand extends Command {
     constructor() {
         super('docs', {
@@ -40,8 +42,11 @@ class DocsCommand extends Command {
 			project = branch;
 			branch = 'master';
 		}
-		const queryString = qs.stringify({ q: query.join(' '), force });
-		const res = await fetch(`https://djsdocs.sorta.moe/${project}/${branch}/embed?${queryString}`);
+		//const queryString = qs.stringify({ q: query.join(' '), force });
+        //const res = await fetch(`https://djsdocs.sorta.moe/${project}/${branch}/embed?${queryString}`);
+        const source = SOURCES.includes(query.slice(-1)[0]) ? query.pop() : 'stable';
+		const queryString = qs.stringify({ src: source, q: query.join(' '), force });
+        const res = await fetch(`https://djsdocs.sorta.moe/v2/embed?${queryString}`);
 		const data = await res.json();
 		if (!data) {
 			return message.util.reply("I couldn't find the requested information.");
