@@ -6,6 +6,7 @@ const ReactionRole = require('../models/ReactionRoles');
 const { Client: Lavaqueue } = require('lavaqueue');
 const { Collection, Util } = require('discord.js');
 const Database = require('../struct/Database');
+const Playlist = require('../models/Playlist');
 const Setting = require('../models/settings');
 const { createServer } = require('http');
 const Case = require('../models/Case');
@@ -118,6 +119,22 @@ class Client extends AkairoClient {
 			const msg = await ReactionRole.findOne({ where: { guildID: message.guild.id, messageID: phrase }});
 			return msg || null;
 		})
+
+		this.commandHandler.resolver.addType('playlist', async (phrase, message) => {
+			if (!phrase) return null;
+			phrase = Util.cleanContent(phrase.toLowerCase(), message);
+			const playlist = await Playlist.findOne({ where: { name: phrase, guildID: message.guild.id }});
+
+			return playlist || null;
+		});
+		
+		this.commandHandler.resolver.addType('existingPlaylist', async (phrase, message) => {
+			if (!phrase) return null;
+			phrase = Util.cleanContent(phrase.toLowerCase(), message);
+			const playlist = await Playlist.findOne({ where: { name: phrase, guildID: message.guild.id }});
+
+			return playlist ? null : phrase;
+		});
 
 		this.setup();
 
