@@ -30,7 +30,6 @@ class PlaylistInfoCommand extends Command {
 	async exec(message, { playlist }) {
 		const user = await this.client.users.fetch(playlist.userID);
 		const guild = this.client.guilds.get(playlist.guildID);
-		console.log(JSON.stringify(playlist))
 		const embed = new MessageEmbed()
 			.setColor(3447003)
 			.setAuthor(user? user.tag : message.guild.name, user ? user.displayAvatarURL() : message.guild.iconURL())
