@@ -20,7 +20,8 @@ const Playlist = db.define('playlist', {
     },
     songs: {
         type: Sequelize.ARRAY(Sequelize.TEXT),
-        allowNull: true
+        defaultValue: Array,
+        allowNull: false
     },
     plays: {
         type: Sequelize.INTEGER,
