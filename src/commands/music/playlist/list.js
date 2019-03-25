@@ -33,7 +33,7 @@ class PlaylistListCommand extends Command {
 		if (!playlists.length) return message.util.send(`${member ? `${member.displayName}` : `${message.guild.name}`} doesn't have any playlists.`);
 		const paginated = paginate({items: playlists, page});
 
-		const embed = new MessageEmbed()
+		const embed = new MessageEmbed().setColor(3447003)
 			.setAuthor(`${message.author.tag} (${message.author.id})`, message.author.displayAvatarURL())
 			.setDescription([
 				`**Playlists${paginated.page > 1 ? `, page ${paginated.page}` : ''}**`,

@@ -43,7 +43,7 @@ class PlaylistShowCommand extends Command {
 		const paginated = paginate({items: decoded, page});
 		let index = (paginated.page - 1) * 10;
 
-		const embed = new MessageEmbed()
+		const embed = new MessageEmbed().setColor(3447003)
 			.setAuthor(`${message.author.tag} (${message.author.id})`, message.author.displayAvatarURL())
 			.setDescription([
 				`**Song list${paginated.page > 1 ? `, page ${paginated.page}` : ''}**`,
