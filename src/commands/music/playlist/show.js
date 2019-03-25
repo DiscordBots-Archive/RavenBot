@@ -36,7 +36,6 @@ class PlaylistShowCommand extends Command {
 	}
 
 	async exec(message, { playlist, page }) {
-		console.log(page)
 		if (!playlist.songs.length) return message.util.send('This playlist has no songs!');
 		const decoded = await this.client.music.decode(playlist.songs);
 		// TODO: remove hack
