@@ -166,7 +166,7 @@ class Client extends AkairoClient {
 				res.write(this.prometheus.register.metrics());
 			};
 			res.end();
-		}).listen(8800);
+		}).listen(80);
     };
 
 	async start() {
