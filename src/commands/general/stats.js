@@ -18,10 +18,10 @@ class StatsCommand extends Command {
 
     async exec(message) {
 
-        const key = await request.post('https://hastebin.com/documents').send(this.client.prometheus.register.metrics()).then((r) => r.body.key);
+        //const key = await request.post('https://hastebin.com/documents').send(this.client.prometheus.register.metrics()).then((r) => r.body.key);
         const embed = new MessageEmbed().setColor('#8387db').setTitle(`${this.client.user.username} Statistics`)
         .setThumbnail(this.client.user.displayAvatarURL())
-        .setURL(`https://hastebin.com/${key}.js`)
+        .setURL(`http://raven/almostsuvajit.xyz/metrics`)
         .addField("❯ Memory Usage", [
             `• Using : ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`,
             `• Free : ${Math.round(os.freemem())} MB`
