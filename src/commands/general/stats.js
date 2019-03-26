@@ -32,7 +32,7 @@ class StatsCommand extends Command {
             `• Channels : ${this.client.channels.size}`
         ], true)
         .addField('❯ Version', `• [v${version}](https://github.com/isuvajit/raven)`, true)
-        .addField("❯ Library", `• [discord.js](https://discord.js.org)[-akairo](https://github.com/1Computer1/discord-akairo)`, true)
+        .addField("❯ Library", `• [discord.js](https://discord.js.org)[-akairo](https://github.com/discord-akairo/discord-akairo)`, true)
         .setFooter('© 2018 ' + this.client.users.get(this.client.ownerID).tag, this.client.users.get(this.client.ownerID).displayAvatarURL())
 
         if (message.channel.type === 'dm' || !(message.channel).permissionsFor(message.guild.me).has(['ADD_REACTIONS', 'MANAGE_MESSAGES'], false)) {
