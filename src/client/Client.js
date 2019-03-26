@@ -162,7 +162,7 @@ class Client extends AkairoClient {
 	async metrics() {
 		createServer((req, res) => {
 			if (parse(req.url).pathname === '/metrics') {
-				res.writeHead(200, { 'Content-Type': 'application/json' });
+				res.writeHead(200, { 'Content-Type': this.prometheus.register.contentType });
 				res.write(this.prometheus.register.metrics());
 			};
 			res.end();
