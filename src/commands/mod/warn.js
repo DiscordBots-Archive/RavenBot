@@ -81,4 +81,5 @@ class WarnCommand extends Command {
 		return message.util.send(`Successfully warned **${member.user.tag}**`);
 	}
 }
+
 module.exports = WarnCommand;
