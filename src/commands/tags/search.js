@@ -29,7 +29,6 @@ class SearchTagCommand extends Command {
 	}
 
 	async exec(message, { name }) {
-
 		name = Util.cleanContent(name, message);
 		const tags = await Tags.findAll({ where: { name : { [Op.like] : `%${name}%` }, guildID: message.guild.id } });
 		if (!tags.length) return message.util.reply(`No results found with query ${name}.`);
