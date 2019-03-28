@@ -1,4 +1,4 @@
-const { Argument, Command } = require('discord-akairo');
+const { Command } = require('discord-akairo');
 
 class PlaylistCommand extends Command {
 	constructor() {
