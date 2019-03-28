@@ -8,9 +8,7 @@ class TestCommand extends Command {
         })
     }
 
-    async exec(message) {
-
-    }
+    async exec(message) {}
 }
 
 module.exports = TestCommand;
