@@ -23,7 +23,6 @@ class ImgurImageCommand extends Command {
     }
 
     async exec(message, { query }) {
-
         try {
             const page = Math.floor(Math.random() * 50) + 1;
             const image = Math.floor(Math.random() * 50) + 1;
