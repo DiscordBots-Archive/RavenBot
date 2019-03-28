@@ -15,9 +15,7 @@ class PlaylistCommand extends Command {
 					'• show `<playlist>` `[page]`',
 					'• info `<playlist>`',
 					'• list `[member]` `[page]`',
-
 					'Required: `<>` | Optional: `[]`',
-
 					'For additional `<...arguments>` usage refer to the examples below.'
 				],
 				usage: '<method> <...arguments>',
