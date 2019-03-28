@@ -31,7 +31,6 @@ class TagInfoCommand extends Command {
 	}
 
 	async exec(message, { tag }) {
-
 		const user = await this.client.users.fetch(tag.authorID);
 		let lastModifiedBy;
 		try {
