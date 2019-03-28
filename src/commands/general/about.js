@@ -31,7 +31,6 @@ class AboutCommand extends Command {
 				`${raven.toString()}`,
 				'```'
 			])
-
 		return message.util.send({ embed });
 	}
 }
