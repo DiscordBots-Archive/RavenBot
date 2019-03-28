@@ -50,8 +50,8 @@ class PlaylistAddCommand extends Command {
 		if (['TRACK_LOADED', 'SEARCH_RESULT'].includes(res.loadType)) {
 			const newTracks = await playlist.songs.concat([res.tracks[0].track]);
 			await playlist.update({ songs: newTracks });
-			//playlist.songs.push(res.tracks[0].track);
 			msg = res.tracks[0].info.title;
+			
 		} else if (res.loadType === 'PLAYLIST_LOADED') {
 			const newTracks = await playlist.songs.concat(res.tracks.map(track => track.track));
 			await playlist.update({ songs: newTracks });
