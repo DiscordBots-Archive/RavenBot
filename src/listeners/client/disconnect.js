@@ -11,6 +11,7 @@ class DisconnectListener extends Listener {
 	}
 
 	exec(event) {
+		
 		Logger.warn(`[DISCONNECT] (${event.code})`);
 	}
 }
