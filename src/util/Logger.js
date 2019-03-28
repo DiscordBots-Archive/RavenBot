@@ -24,7 +24,7 @@ class Logger {
 	}
 
 	static write(content, { color = 'grey', tag = 'Log', error = false } = {}) {
-		const timestamp = chalk.cyan(`[${moment().format('YYYY-MM-DD HH:mm:ss')}]:`);
+		const timestamp = chalk.cyan(`[${moment().format('DD-MM-YYYY HH:mm:ss')}]:`);
 		const levelTag = chalk.bold(`[${tag}]:`);
 		const text = chalk[color](this.clean(content));
 		const stream = error ? process.stderr : process.stdout;
