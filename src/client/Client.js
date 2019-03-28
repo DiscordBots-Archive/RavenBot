@@ -138,14 +138,16 @@ class Client extends AkairoClient {
 
 		this.setup();
 
+		/*
 		setInterval(() => {
 			for (const guild of this.guilds.values()) {
 				guild.presences.clear();
 			}
 		}, 900);
+		*/
 	}
 
-	setup() {
+	async setup() {
 		this.commandHandler.useInhibitorHandler(this.inhibitorHandler);
 		this.commandHandler.useListenerHandler(this.listenerHandler);
 		this.listenerHandler.setEmitters({
