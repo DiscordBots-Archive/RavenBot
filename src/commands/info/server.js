@@ -21,7 +21,6 @@ class ServerInfoCommand extends Command {
     }
 
     async exec(message) {
-
         const members = await message.guild.members.fetch();
 		const bot = members.filter(m => m.user.bot).size;
 
