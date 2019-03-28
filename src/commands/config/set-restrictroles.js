@@ -29,8 +29,8 @@ class SetRestrictRoles extends Command {
 					id: 'reaction',
 					type: 'role',
 					prompt: {
-						start: message => `what role should act as the reaction restricted role?`,
-						retry: message => `please mention a proper role to be the reaction restricted role.`
+						start: `what role should act as the reaction restricted role?`,
+						retry: `please mention a proper role to be the reaction restricted role.`
 					}
 				}
 			],
