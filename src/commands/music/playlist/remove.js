@@ -1,6 +1,4 @@
-const { Argument, Control, Command } = require('discord-akairo');
-const { MessageEmbed } = require('discord.js');
-const Playlist = require('../../../models/Playlist');
+const { Argument, Command } = require('discord-akairo');
 
 class PlaylistRemoveCommand extends Command {
 	constructor() {
