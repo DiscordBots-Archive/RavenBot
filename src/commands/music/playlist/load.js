@@ -1,6 +1,4 @@
 const { Command } = require('discord-akairo');
-const Playlist = require('../../../models/Playlist');
-const { Util } = require('discord.js');
 
 class PlaylistLoadCommand extends Command {
 	constructor() {
