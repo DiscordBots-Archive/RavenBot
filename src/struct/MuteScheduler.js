@@ -12,7 +12,7 @@ class MuteScheduler {
 
 	async addMute(mute, reschedule = false) {
 		Logger.info(`Muted ${mute.targetTag} on ${this.client.guilds.get(`${mute.guildID}`).name}`, { tag: 'MUTE' });
-		if (reschedule) Logger.info(`Rescheduled mute on ${mute.targetID} on ${this.client.guilds.get(mute.guildID)}`, { tag: 'MUTE' });
+		if (reschedule) Logger.info(`Rescheduled mute on ${mute.targetID} on ${this.client.guilds.get(mute.guildID)}`, { tag: 'Rescheduled Mute' });
 		if (!reschedule) {
 			await Case.create({
 				caseID: mute.caseID,
@@ -69,7 +69,7 @@ class MuteScheduler {
 	}
 
 	rescheduleMute(mute) {
-		Logger.info('Rescheduling Mute', { tag: 'MUTE' });
+		Logger.info('Rescheduling Mute', { tag: 'Rescheduling Mute' });
 		const schedule = this.queuedSchedules.get(mute);
 		if (schedule) clearTimeout(schedule);
 		this.queuedSchedules.delete(mute);
