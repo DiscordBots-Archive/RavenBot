@@ -65,6 +65,7 @@ class TagCommand extends Command {
 			const prefix = this.handler.prefix(message);
 			return message.util.send(`Check \`${prefix}help tag\` for more information`);
 		}
+		
 		const command = ({
 			show: this.handler.modules.get('tag-show'),
 			add: this.handler.modules.get('tag-add'),
