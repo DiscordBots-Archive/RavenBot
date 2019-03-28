@@ -12,7 +12,6 @@ class MessageDeleteBulkListener extends Listener {
 	}
 
 	async exec(messages) {
-
 		if (messages.first().author.bot) return;
 		const guildLogs = this.client.settings.get(messages.first().guild, 'guildLog', undefined);
 		const webhook = new WebhookClient(process.env.WebhookID, process.env.WebhookToken);
