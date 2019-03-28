@@ -14,7 +14,7 @@ class TagAliasCommand extends Command {
 					type: 'tag',
 					prompt: {
 						start: `what's the tag you want to alias?`,
-						retry: (message, _, provided, phrase) => `a tag with the name **${provided.phrase}** does not exist.`
+						retry: (msg, args, { phrase }) => `a tag with the name **${phrase}** does not exist.`
 					}
 				},
 				{
