@@ -19,8 +19,7 @@ class Database {
 			Logger.info('Database connection has been established successfully...', { tag: 'PostgreSQL' });
 			await this.loadModels(path.join(__dirname, '..', 'models'));
 		} catch (err) {
-			Logger.error('Unable to connect to the database...', { tag: 'PostgreSQL' });
-			//Logger.stacktrace(err, { tag: 'PostgreSQL' });
+			Logger.error('Unable to connect to the Database...', { tag: 'PostgreSQL' });
 			Logger.info('Attempting to connect again in 5 seconds...', { tag: 'PostgreSQL' });
 			setTimeout(this.authenticate, 5000);
 		}
