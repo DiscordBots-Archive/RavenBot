@@ -1,6 +1,6 @@
-const { Argument, Control, Command } = require('discord-akairo');
+const { Argument, Command } = require('discord-akairo');
 const { MessageEmbed } = require('discord.js');
-const { paginate, timeString } = require('../../../util/Base');
+const { paginate } = require('../../../util/Base');
 const Playlist = require('../../../models/Playlist');
 
 class PlaylistListCommand extends Command {
@@ -37,6 +37,7 @@ class PlaylistListCommand extends Command {
 			.setAuthor(`${message.author.tag} (${message.author.id})`, message.author.displayAvatarURL())
 			.setDescription([
 				`**Playlists${paginated.page > 1 ? `, page ${paginated.page}` : ''}**`,
+				'',
 				`${paginated.items.map(playlist => `** • ** ${playlist.name}`).join('\n')}`
 			])
 		if (paginated.maxPage > 1) embed.setFooter('use playlist list <member> <page> to view a specific page');
