@@ -84,4 +84,5 @@ class NPMCommand extends Command {
 		return arr;
 	}
 }
+
 module.exports = NPMCommand;
