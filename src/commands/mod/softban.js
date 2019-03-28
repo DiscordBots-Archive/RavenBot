@@ -16,8 +16,8 @@ class SoftbanCommand extends Command {
 					id: 'member',
 					type: 'member',
 					prompt: {
-						start: message => `what member do you want to softban?`,
-						retry: message => `please mention a member...`
+						start: `what member do you want to softban?`,
+						retry: `please mention a member...`
 					}
 				},
 				{
