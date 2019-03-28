@@ -23,7 +23,6 @@ class GifCommand extends Command {
     }
 
     async exec(message, { query }) {
-
         try {
             if (query) {
                 const queryString = qs.stringify({ q: query.replace(/[^a-zA-Z0-9]+/gi, ' ') });
