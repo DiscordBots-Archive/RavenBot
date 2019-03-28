@@ -23,7 +23,6 @@ class TagStatsCommand extends Command {
     }
 
     async exec(message, { member }) {
-
         if (member) {
             const allTags = await db.query(`
                 SELECT
