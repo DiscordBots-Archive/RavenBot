@@ -14,7 +14,6 @@ class DogImageCommand extends Command {
     }
 
     async exec(message) {
-
         const page = Math.floor(Math.random() * 1000) + 1;
         try {
             const res = await fetch(`https://api.pexels.com/v1/search?query=dog&per_page=1&page=${page}`, { method: 'GET', headers: { Authorization: process.env.PEXEL } });
