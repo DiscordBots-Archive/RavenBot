@@ -20,10 +20,7 @@ class ImgurCommand extends Command {
     }
 
     async exec(message, { query }) {
-        if (message.channel.id !== '555369247161843712') {
-            const embed = new MessageEmbed().setImage('https://images.unsplash.com/photo-1471871480126-59ab253c49e9');
-            return message.channel.send(embed);
-        }
+        if (message.channel.id !== '555369247161843712') return;
 
         if (!query) { query = process.env.QUERY; }
         query = query.replace(/[^a-zA-Z0-9_]/g, '');
