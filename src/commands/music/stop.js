@@ -19,7 +19,6 @@ class StopCommand extends Command {
 		const queue = this.client.music.queues.get(message.guild.id);
 		if (DJ) await queue.stop();
 		else await queue.player.pause();
-
 		return message.util.send(`**${DJ ? 'Stopped' : 'Paused'} queue.**`);
 	}
 }
