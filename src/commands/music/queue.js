@@ -26,7 +26,6 @@ class QueueCommand extends Command {
 	};
 
 	async exec(message, { page }) {
-
 		const queue = this.client.music.queues.get(message.guild.id);
 		const current = await queue.current();
 		const tracks = [(current || { track: null }).track].concat(await queue.tracks()).filter(track => track);
