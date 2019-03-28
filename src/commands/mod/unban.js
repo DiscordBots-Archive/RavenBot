@@ -19,8 +19,8 @@ class UnbanCommand extends Command {
 						return user;
 					},
 					prompt: {
-						start: message => `what member do you want to unban?`,
-						retry: message => `please mention a member...`
+						start: `what member do you want to unban?`,
+						retry: `please mention a member...`
 					}
 				},
 				{
