@@ -41,11 +41,9 @@ class AvatarCommand extends Command {
 			);
 		} catch (error) {
 			msg.reactions.removeAll();
-
 			return message;
 		}
 		react.first().message.delete();
-
 		return message;
     }
 }
