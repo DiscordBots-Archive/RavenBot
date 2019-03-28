@@ -11,7 +11,6 @@ class DebugListener extends Listener {
 	}
 
 	exec(event) {
-		
 		Logger.debug(`[DEBUG] ${event}`);
 	}
 }
