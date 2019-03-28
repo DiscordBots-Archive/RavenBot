@@ -33,8 +33,8 @@ class MuteCommand extends Command {
 						return null;
 					},
 					prompt: {
-						start: message => `for how long do you want the mute to last?`,
-						retry: message => `please use a proper time format.`
+						start: `for how long do you want the mute to last?`,
+						retry: `please use a proper time format.`
 					}
 				},
 				{
