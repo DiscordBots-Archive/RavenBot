@@ -17,6 +17,7 @@ class UptimeCommand extends Command {
         const duration = moment.duration(this.client.uptime).format("M [months], W [weeks], D [days], H [hrs], m [mins], s [secs]");
         const embed = this.client.util.embed()
         .setAuthor(duration).setColor(0x8387db)
+        
         return message.util.send({ embed });
     }
 }
