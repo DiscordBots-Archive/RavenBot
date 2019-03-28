@@ -9,7 +9,7 @@ class MessageListener extends Listener {
 		});
 	};
 
-	async exec(message) {
+	async exec() {
 		this.client.prometheus.messagesCounter.inc();
 	}
 }
