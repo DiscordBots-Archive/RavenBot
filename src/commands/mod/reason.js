@@ -16,8 +16,8 @@ class ReasonCommand extends Command {
 					id: 'caseNum',
 					type: Argument.union('number', 'string'),
 					prompt: {
-						start: message => `what case do you want to add a reason to?`,
-						retry: message => `please enter a case number...`
+						start: `what case do you want to add a reason to?`,
+						retry: `please enter a case number...`
 					}
 				},
 				{
