@@ -1,7 +1,6 @@
 const { Argument, Control, Command } = require('discord-akairo');
 const { MessageEmbed } = require('discord.js');
 const { paginate, timeString } = require('../../../util/Base');
-const Playlist = require('../../../models/Playlist');
 
 class PlaylistShowCommand extends Command {
 	constructor() {
@@ -39,7 +38,7 @@ class PlaylistShowCommand extends Command {
 		if (!playlist.songs.length) return message.util.send('This playlist has no songs!');
 		const decoded = await this.client.music.decode(playlist.songs);
 		// TODO: remove hack
-		const totalLength = decoded.reduce((prev, song) => prev + song.info.length, 0); // tslint:disable-line
+		const totalLength = decoded.reduce((prev, song) => prev + song.info.length, 0); // eslint:disable-line
 		const paginated = paginate({items: decoded, page});
 		let index = (paginated.page - 1) * 10;
 
@@ -58,4 +57,4 @@ class PlaylistShowCommand extends Command {
 	}
 }
 
-module.exports = PlaylistShowCommand
+module.exports = PlaylistShowCommand;
