@@ -17,8 +17,8 @@ class GuildBanAddListener extends Listener {
 		if (this.client.cached.delete(`${guild.id}:${user.id}:BAN`)) return;
 		const totalCases = this.client.settings.get(guild, 'caseTotal', 0) + 1;
 		this.client.settings.set(guild, 'caseTotal', totalCases);
-		const modLogChannel = this.client.settings.get(guild, 'modLogChannel', undefined);
 
+		const modLogChannel = this.client.settings.get(guild, 'modLogChannel', undefined);
 		const prefix = this.client.commandHandler.prefix({ guild });
 		const reason = `Use \`${prefix}reason ${totalCases} <...reason>\` to set a reason for this case`;
 		
