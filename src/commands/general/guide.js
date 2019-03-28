@@ -12,7 +12,6 @@ class GuideCommand extends Command {
 
 	async exec(message) {
 		const prefix = this.handler.prefix(message);
-
 		const embed = this.client.util.embed()
 			.setColor(0xFFAC33)
 			.setTitle('Guide')
