@@ -20,6 +20,7 @@ class ToggleRoleStateCommand extends Command {
 			await RoleState.destroy({ where: { guildID: message.guild.id }});
 			return message.util.reply('successfully removed all records!');
 		}
+		
 		this.client.settings.set(message.guild, 'roleState', true);
 		const members = await message.guild.members.fetch();
 		for (const member of members.values()) {
