@@ -31,11 +31,8 @@ class RemoveCommand extends Command {
 
 		try {
 			num = num >= 1 ? num - 1 : tracks.length - (~num + 1);
-		
 			const decoded = await this.client.music.decode([tracks[num]]);
-	
 			queue.remove(tracks[num]);
-	
 			return message.util.send(`**Removed:** \`${decoded[0].info.title}\``);
 		} catch (error) {};
 	}
