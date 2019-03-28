@@ -8,7 +8,7 @@ class ResumeListener extends Listener {
 			event: 'resumed',
 			category: 'client'
 		});
-	};
+	}
 
 	exec(events) {
 		Logger.info(`[RESUME] (replayed ${events} events)`);
