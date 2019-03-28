@@ -40,7 +40,6 @@ class PlaylistInfoCommand extends Command {
 			.addField('Plays', playlist.plays)
 			.addField('Created at', moment.utc(playlist.createdAt).format('DD-MM-YYYY kk:mm:ss'))
 			.addField('Modified at', moment.utc(playlist.updatedAt).format('DD-MM-YYYY kk:mm:ss'));
-
 		return message.util.send(embed);
 	}
 }
