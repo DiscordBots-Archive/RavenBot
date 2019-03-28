@@ -23,7 +23,6 @@ class ImageCommand extends Command {
     }
 
     async exec(message, { query }) {
-
         const page = Math.floor(Math.random() * 1000) + 1;
         try {
             if (query) {
