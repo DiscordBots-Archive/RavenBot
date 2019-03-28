@@ -15,6 +15,7 @@ class GuildMemberUpdateModerationListener extends Listener {
 
 	async exec(oldMember, newMember) {
 		const moderation = this.client.settings.get(newMember.guild, 'moderation', undefined);
+		
 		if (moderation) {
 			if (this.client.cached.delete(`${newMember.guild.id}:${newMember.id}:MUTE`)) return;
 			if (this.client.cached.delete(`${newMember.guild.id}:${newMember.id}:EMBED`)) return;
