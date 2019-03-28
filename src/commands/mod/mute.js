@@ -1,7 +1,5 @@
 const { Command } = require('discord-akairo');
 const Base = require('../../util/Base');
-const Case = require('../../models/Case');
-const moment = require('moment');
 const ms = require('ms');
 
 class MuteCommand extends Command {
