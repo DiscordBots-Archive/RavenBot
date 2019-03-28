@@ -23,7 +23,6 @@ class PhotoCommand extends Command {
     }
 
     async exec(message, { query }) {
-
         try {
             const page = Math.floor(Math.random() * 20) + 1;
             const queryString = qs.stringify({ query: query.replace(/[^a-zA-Z0-9]+/gi, ' ') });
