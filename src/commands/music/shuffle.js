@@ -1,6 +1,5 @@
 const { Command } = require('discord-akairo');
 
-
 class ShuffleCommand extends Command {
 	constructor() {
 		super('shuffle', {
