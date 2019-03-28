@@ -62,15 +62,12 @@ class TagAliasCommand extends Command {
 		const new_alias = await point.aliases.concat([second]);
 
 		if (add) {
-
 			if (second && second.length >= 256) {
 				return message.util.reply('messages have a limit of 256 characters!');
 			}
-
 			await Tags.update({ aliases: new_alias, last_modified: message.author.id }, { where: { name: first.name } });
 
 		} else if (del) {
-
 			const removed_alias = await point.aliases.filter(id => id !== second);
 			await Tags.update({ aliases: removed_alias, last_modified: message.author.id }, { where: { name: first.name } });
 
