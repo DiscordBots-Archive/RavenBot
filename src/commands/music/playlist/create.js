@@ -31,7 +31,6 @@ class PlaylistCreateCommand extends Command {
 	}
 
 	async exec(message, { playlist, info }) {
-
 		const pls = await Playlist.create({
 			userID: message.author.id,
 			guildID: message.guild.id,
