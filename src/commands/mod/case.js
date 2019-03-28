@@ -29,8 +29,8 @@ class CaseCommand extends Command {
 					id: 'caseNum',
 					type: Argument.union('number', 'string'),
 					prompt: {
-						start: message => `what case do you want to look up?`,
-						retry: message => `please enter a case number.`
+						start: `what case do you want to look up?`,
+						retry: `please enter a case number.`
 					}
 				}
 			],
