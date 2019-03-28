@@ -43,4 +43,4 @@ class GlobalBlacklistCommand extends Command {
 	}
 }
 
-module.exports = GlobalBlacklistCommand
+module.exports = GlobalBlacklistCommand;
