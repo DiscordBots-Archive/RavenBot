@@ -40,10 +40,12 @@ class AvatarCommand extends Command {
 				{ max: 1, time: 30000, errors: ['time'] }
 			);
 		} catch (error) {
-			msg.reactions.removeAll();
+            msg.reactions.removeAll();
+            
 			return message;
 		}
-		react.first().message.delete();
+        react.first().message.delete();
+        
 		return message;
     }
 }
