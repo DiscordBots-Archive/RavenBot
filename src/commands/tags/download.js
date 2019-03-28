@@ -24,7 +24,6 @@ class TagDownloadCommand extends Command {
 	}
 
 	async exec(message, { member }) {
-
 		const where = member ? { authorID: member.id, guildID: message.guild.id } : { guildID: message.guild.id };
 		const tags = await Tags.findAll({ where: where });
 		if (!tags.length) return;
