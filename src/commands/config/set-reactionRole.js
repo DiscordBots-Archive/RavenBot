@@ -62,7 +62,6 @@ class SetReactionRoleCommand extends Command {
     }
 
     async exec(message, { emoji, message: msg, role, channel }) {
-
         await ReactionRole.create({
             messageID: msg.id,
             channelID: channel.id,
