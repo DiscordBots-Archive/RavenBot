@@ -1,7 +1,6 @@
 const { Command } = require('discord-akairo');
 const { MessageEmbed } = require('discord.js');
 const os = require('os-utils');
-const request = require('snekfetch');
 const moment = require('moment'); require('moment-duration-format');
 const { version } = require('../../../package.json');
 
@@ -17,8 +16,6 @@ class StatsCommand extends Command {
     }
 
     async exec(message) {
-
-        //const key = await request.post('https://hastebin.com/documents').send(this.client.prometheus.register.metrics()).then((r) => r.body.key);
         const embed = new MessageEmbed().setColor('#8387db').setTitle(`${this.client.user.username} Statistics`)
         .setThumbnail(this.client.user.displayAvatarURL())
         .setURL(`http://raven.almostsuvajit.xyz/metrics`)
