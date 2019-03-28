@@ -14,7 +14,6 @@ class GuildMemberUpdateRoleStateListener extends Listener {
 		const roleState = this.client.settings.get(newMember.guild, 'roleState', undefined);
 		if (roleState) {
 			await newMember.guild.members.fetch(newMember.id);
-			
 			if (newMember.roles) {
 				const roles = newMember.roles.filter(role => role.id !== newMember.guild.id).map(role => role.id);
 				const data = await RoleState.findOne({ where: { userID: newMember.id, guildID: newMember.guild.id }});
