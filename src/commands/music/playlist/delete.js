@@ -17,7 +17,7 @@ class PlaylistDeleteCommand extends Command {
 					type: 'playlist',
 					prompt: {
 						start: `what playlist do you want to delete?`,
-						retry: (msg, args, { phrase }) => `a playlist with the name **${phrase}** does not exist.`
+						retry: (msg, { phrase }) => `a playlist with the name **${phrase}** does not exist.`
 					}
 				}
 			]

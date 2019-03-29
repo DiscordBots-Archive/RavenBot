@@ -34,16 +34,7 @@ class DocsCommand extends Command {
     }
 
     async exec(message, { query, force }) {
-
         query = query.split(' ');
-		/*let project = 'main';
-		let branch = ['stable', 'master', 'rpc', 'commando'].includes(query.slice(-1)[0]) ? query.pop() : 'stable';
-		if (['rpc', 'commando'].includes(branch)) {
-			project = branch;
-			branch = 'master';
-		}
-		const queryString = qs.stringify({ q: query.join(' '), force });
-        const res = await fetch(`https://djsdocs.sorta.moe/${project}/${branch}/embed?${queryString}`);*/
         const source = SOURCES.includes(query.slice(-1)[0]) ? query.pop() : 'stable';
 		const queryString = qs.stringify({ src: source, q: query.join(' '), force });
         const res = await fetch(`https://djsdocs.sorta.moe/v2/embed?${queryString}`);
@@ -51,9 +42,7 @@ class DocsCommand extends Command {
 		if (!data) {
 			return message.util.reply("I couldn't find the requested information.");
         }
-        const newData = JSON.stringify(data).replace(/<p>|<\/p>|<br>|<\/br>/g, '');
-        const oldEmbed = JSON.parse(newData);
-        const embed = this.client.util.embed(oldEmbed)//.setColor(0x8387db).setDescription(data.description.replace(/<p>(.+)<\/p>/g, '$1'))
+        const embed = this.client.util.embed(data)
 		if (message.channel.type === 'dm' || !(message.channel).permissionsFor(message.guild.me).has(['ADD_REACTIONS', 'MANAGE_MESSAGES'], false)) {
 			return message.util.send({ embed });
 		}

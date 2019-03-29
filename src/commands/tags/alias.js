@@ -1,4 +1,4 @@
-const { Command, Control } = require('discord-akairo');
+const { Command } = require('discord-akairo');
 const Tags = require('../../models/Tags');
 
 class TagAliasCommand extends Command {
@@ -8,52 +8,50 @@ class TagAliasCommand extends Command {
 			category: 'tags',
 			channel: 'guild',
 			ratelimit: 2,
-			args: [
-				{
-					id: 'first',
-					type: 'tag',
-					prompt: {
-						start: `what's the tag you want to alias?`,
-						retry: (msg, args, { phrase }) => `a tag with the name **${phrase}** does not exist.`
-					}
-				},
-				{
-					id: 'add',
-					match: 'flag',
-					flag: '--add'
-				},
-				{
-					id: 'del',
-					match: 'flag',
-					flag: '--del'
-				},
-				Control.if((_, args) => args.add, [
-					{
-						id: 'second',
-						match: 'rest',
-						type: 'existingTag',
-						prompt: {
-							start: `what's the alias you want to apply to this tag?`,
-							retry: (msg, args, { phrase }) => `a tag with the name **${phrase}** already exists.`
-						}
-					}
-				], [
-					{
-						id: 'second',
-						match: 'rest',
-						type: 'string',
-						prompt: {
-							start: `what's the alias you want to apply to this tag?`,
-							retry: (msg, args, { phrase }) => `a tag with the name **${phrase}** already exists.`
-						}
-					}
-				])
-			],
+			flags: ['--add', '--del', '--delete'],
 			description: {
 				usage: '<--add/--del> <tag> <tagalias>',
 				examples: ['--add Test1 Test2', '--del "Test 2" "Test 3"', '"Test 3" "Test 4" --add']
 			}
 		});
+	}
+	
+	async *args() {
+		const first = yield {
+			type: 'tag',
+			prompt: {
+				start: `what's the tag you want to alias?`,
+				retry: (msg, { phrase }) => `a tag with the name **${phrase}** does not exist.`
+			}
+		};
+		const add = yield {
+			match: 'flag',
+			flag: ['--add']
+		};
+		const del = yield {
+			match: 'flag',
+			flag: ['--del', '--delete']
+		};
+		const second = yield (
+			add ?
+			{
+				match: 'rest',
+				type: 'existingTag',
+				prompt: {
+					start: `what's the alias you want to apply to this tag?`,
+					retry: (msg, { phrase }) => `a tag with the name **${phrase}** already exists.`
+				}
+			} :
+			{
+				match: 'rest',
+				type: 'string',
+				prompt: {
+					start: `what's the alias you want to remove from this tag?`,
+					retry: (msg, { phrase }) => `a tag with the name **${phrase}** already exists.`
+				}
+			}
+		)
+		return { first, second, add, del };
 	}
 
 	async exec(message, { first, second, add, del }) {

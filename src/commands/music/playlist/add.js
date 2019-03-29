@@ -21,13 +21,13 @@ class PlaylistAddCommand extends Command {
 					type: 'playlist',
 					prompt: {
 						start: `what playlist should this song/playlist be added to?`,
-						retry: (msg, args, { phrase }) => `a playlist with the name **${phrase}** does not exist.`
+						retry: (msg, { phrase }) => `a playlist with the name **${phrase}** does not exist.`
 					}
 				},
 				{
 					id: 'query',
 					match: 'rest',
-					type: Argument.compose('string', str => str ? str.replace(/<(.+)>/g, '$1') : ''), // eslint-disable-line no-confusing-arrow
+					type: Argument.compose('string', (_, str) => str ? str.replace(/<(.+)>/g, '$1') : ''), // eslint-disable-line no-confusing-arrow
 					default: ''
 				}
 			]

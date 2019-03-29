@@ -17,13 +17,13 @@ class PlaylistRemoveCommand extends Command {
 					type: 'playlist',
 					prompt: {
 						start: `what playlist should this song/playlist be removed from?`,
-						retry: (msg, args, { phrase }) => `a playlist with the name **${phrase}** does not exist.`
+						retry: (msg, { phrase }) => `a playlist with the name **${phrase}** does not exist.`
 					}
 				},
 				{
 					id: 'position',
 					match: 'rest',
-					type: Argument.compose(str => str.replace(/\s/g, ''), Argument.range(Argument.union('number', 'emojint'), 1, Infinity)),
+					type: Argument.compose((_, str) => str.replace(/\s/g, ''), Argument.range(Argument.union('number', 'emojint'), 1, Infinity)),
 					default: 1
 				}
 			]

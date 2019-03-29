@@ -19,7 +19,7 @@ class TagSourceCommand extends Command {
 					type: 'tag',
 					prompt: {
 						start: `what tag would you like to see the source of?`,
-						retry: (msg, args, { phrase }) => `a tag with the name **${phrase}** does not exist.`
+						retry: (msg, { phrase }) => `a tag with the name **${phrase}** does not exist.`
 					}
 				}
 			],

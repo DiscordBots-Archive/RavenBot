@@ -8,29 +8,29 @@ class ReloadCommand extends Command {
 			category: 'owner',
 			ownerOnly: true,
 			quoted: false,
-			args: [
-				{
-					id: 'type',
-					type: [['command', 'c'], ['inhibitor', 'i'], ['listener', 'l']],
-				},
-				{
-					id: 'module',
-					type: (phrase, message, { type }) => {
-						if (!phrase) return null;
-						const resolver = this.handler.resolver.type({
-							command: 'commandAlias',
-							inhibitor: 'inhibitor',
-							listener: 'listener',
-						}[type]);
-						return resolver(phrase);
-					}
-				}
-			],
 			description: {
 				content: 'Reloads a module or all modules at once.',
 				usage: '<module> [type:]'
 			}
 		});
+	}
+
+	async *args() {
+		const type = yield {
+			type: [['command', 'c'], ['inhibitor', 'i'], ['listener', 'l']]
+		};
+		const module = yield {
+			type: (msg, phrase) => {
+				if (!phrase) return null;
+				const resolver = this.handler.resolver.type({
+					command: 'commandAlias',
+					inhibitor: 'inhibitor',
+					listener: 'listener'
+				}[type]);
+				return resolver(msg, phrase);
+			}
+		}
+		return { type, module };
 	}
 
 	async exec(message, { type, module: mod }) {
