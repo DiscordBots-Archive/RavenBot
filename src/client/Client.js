@@ -38,8 +38,8 @@ class Client extends AkairoClient {
 			handleEdits: true,
 			defaultCooldown: 3000,
 			defaultPrompt: {
-				modifyStart: (text, msg) => text && `${msg.author} **::** ${text}\ntype \`cancel\` to cancel this command.`,
-				modifyRetry: (text, msg) => text && `${msg.author} **::** ${text}\ntype \`cancel\` to cancel this command.`,
+				modifyStart: (msg, text) => text && `${msg.author} **::** ${text}\ntype \`cancel\` to cancel this command.`,
+				modifyRetry: (msg, text) => text && `${msg.author} **::** ${text}\ntype \`cancel\` to cancel this command.`,
 				timeout: msg => `${msg.author} **::** Time ran out, command has been cancelled.`,
 				ended: msg => `${msg.author} **::** Too many retries, command has been cancelled.`,
 				cancel: msg => `${msg.author} **::** Command has been cancelled.`,
@@ -85,7 +85,7 @@ class Client extends AkairoClient {
 		this.starboards = new Collection();
 		this.cached = new Set();
 
-		this.commandHandler.resolver.addType('tag', async (phrase, message) => {
+		this.commandHandler.resolver.addType('tag', async (message, phrase) => {
 			if (!phrase) return null;
 			phrase = Util.cleanContent(phrase.toLowerCase(), message);
 			const tag = await Tags.findOne({ where: { name: phrase, guildID: message.guild.id }});
@@ -93,7 +93,7 @@ class Client extends AkairoClient {
 			return tag || null;
 		});
 
-		this.commandHandler.resolver.addType('existingTag', async (phrase, message) => {
+		this.commandHandler.resolver.addType('existingTag', async (message, phrase) => {
 			if (!phrase) return null;
 			phrase = Util.cleanContent(phrase.toLowerCase(), message);
 			const tag = await Tags.findOne({ where: { guildID: message.guild.id,
@@ -106,7 +106,7 @@ class Client extends AkairoClient {
 			return tag ? null : phrase;
 		});
 
-		this.commandHandler.resolver.addType('tagContent', (phrase, message) => {
+		this.commandHandler.resolver.addType('tagContent', (message, phrase) => {
 			if (!phrase) phrase = '';
 			phrase = Util.cleanContent(phrase, message);
 			if (message.attachments.first()) phrase += `\n${message.attachments.first().url}`;
@@ -114,13 +114,13 @@ class Client extends AkairoClient {
 			return phrase || null;
 		});
 
-		this.commandHandler.resolver.addType('reactionRole', async (phrase, message) => {
+		this.commandHandler.resolver.addType('reactionRole', async (message, phrase) => {
 			if (!phrase) return null;
 			const msg = await ReactionRole.findOne({ where: { guildID: message.guild.id, messageID: phrase }});
 			return msg || null;
 		})
 
-		this.commandHandler.resolver.addType('playlist', async (phrase, message) => {
+		this.commandHandler.resolver.addType('playlist', async (message, phrase) => {
 			if (!phrase) return null;
 			phrase = Util.cleanContent(phrase.toLowerCase(), message);
 			const playlist = await Playlist.findOne({ where: { name: phrase, guildID: message.guild.id }});
@@ -128,7 +128,7 @@ class Client extends AkairoClient {
 			return playlist || null;
 		});
 		
-		this.commandHandler.resolver.addType('existingPlaylist', async (phrase, message) => {
+		this.commandHandler.resolver.addType('existingPlaylist', async (message, phrase) => {
 			if (!phrase) return null;
 			phrase = Util.cleanContent(phrase.toLowerCase(), message);
 			const playlist = await Playlist.findOne({ where: { name: phrase, guildID: message.guild.id }});
@@ -137,14 +137,6 @@ class Client extends AkairoClient {
 		});
 
 		this.setup();
-
-		/*
-		setInterval(() => {
-			for (const guild of this.guilds.values()) {
-				guild.presences.clear();
-			}
-		}, 900);
-		*/
 	}
 
 	async setup() {

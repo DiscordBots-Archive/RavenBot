@@ -18,7 +18,7 @@ class EmojiInfoCommand extends Command {
 				{
 					id: 'emoji',
 					match: 'content',
-					type: (content, message) => {
+					type: (message, content) => {
 						if (EMOJI_REGEX.test(content)) [, content] = content.match(EMOJI_REGEX);
 						if (!isNaN(content)) return message.guild.emojis.get(content);
 						const emoji = emojis.find(content);

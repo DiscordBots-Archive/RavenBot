@@ -7,22 +7,6 @@ class PrefixCommand extends Command {
 			category: 'general',
 			channel: 'guild',
 			quoted: false,
-			args: [
-				{
-					id: 'method',
-				},
-				Control.if((msg, args) => msg.member.roles.has(this.client.settings.get(msg.guild, 'modRole', undefined)) && args.method, [
-					{
-						id: 'prefix',
-						match: 'content',
-						type: Argument.validate('string', p => !/\s/.test(p) && p.length <= 5),
-						default: '',
-						prompt: {
-							retry: `Please provide a prefix without spaces and less than 5 characters`
-						}
-					}
-				])
-			],
 			description: {
 				content: [
 					'Displays or changes the prefix of the guild.',
@@ -32,6 +16,25 @@ class PrefixCommand extends Command {
 				examples: ['!', '?']
 			}
 		});
+	}
+
+	async *args(msg) {
+		const method = yield {
+			match: 'content'
+		};
+		const prefix = yield (
+			msg.member.roles.has(this.client.settings.get(msg.guild, 'modRole', undefined)) && method ?
+			{
+				type: Argument.validate('string', (_, p) => !/\s/.test(p) && p.length <= 5),
+				prompt: {
+					retry: `please provide a prefix without spaces and less than 5 characters` 
+				}
+			}:
+			{
+				type: (msg, phrase) => false
+			}
+		)
+		return { prefix };
 	}
 
 	async exec(message, { prefix }) {

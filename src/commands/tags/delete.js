@@ -15,7 +15,7 @@ class TagDeleteCommand extends Command {
 					type: 'tag',
 					prompt: {
 						start: `what tag do you want to delete?`,
-						retry: (msg, args, { phrase }) => `a tag with the name **${phrase}** does not exist.`
+						retry: (msg, { phrase }) => `a tag with the name **${phrase}** does not exist.`
 					}
 				}
 			],
