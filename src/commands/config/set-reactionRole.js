@@ -8,55 +8,57 @@ class SetReactionRoleCommand extends Command {
             aliases: ['set-reaction', 'set-reaction-role', 's-r-r'],
             category: 'config',
             userPermissions: ['ADMINISTRATOR'],
+            args: [
+                {
+                    id: 'emoji',
+                    index: 0,
+                    content: 'match',
+                    type: async (match, message) => {
+                        const emoji = emojis.find(match);
+                        if (!emoji) return null;
+                        const uwu = await message.react(emoji.emoji).catch(() => false);
+                        if (uwu) return emoji;
+                    },
+                    prompt: {
+						start: 'What is the emoji you would like to set as reaction role?',
+						retry: `Please provide a valid unicode emoji.`
+					}
+                },
+                {
+                    id: 'role',
+                    type: 'role',
+                    index: 1,
+                    prompt: {
+                        start: 'What is the role you would like to set as reaction role?',
+                        retry: 'Please provide a valid role.'
+                    }
+                },
+                {
+					id: 'channel',
+					index: 3,
+					match: 'rest',
+					type: 'textChannel',
+					default: message => message.channel,
+					prompt: {
+						start: 'That channel could not be found. What channel is the message you are trying to set as reaction role?',
+						retry: 'Please provide a valid text channel.',
+						optional: true
+					}
+				},
+				{
+					id: 'message',
+					index: 2,
+					type: (phrase, message, { channel }) => {
+						if (!phrase) return null;
+						return channel.messages.fetch(phrase).catch(() => null);
+					},
+					prompt: {
+						start: 'What is the ID of the message you would like to set as reaction role?',
+						retry: (msg, { channel }) => `Please provide a valid message ID in ${channel}.`
+					}
+				},
+            ]
         })
-    }
-    
-    async *args() {
-        const emoji = yield {
-            index: 0,
-            content: 'match',
-            type: async (msg, content) => {
-                const emoji = emojis.find(content);
-                if (!emoji) return null;
-                const uwu = await msg.react(emoji.emoji).catch(() => false);
-                if (uwu) return emoji;
-            },
-            prompt: {
-                start: 'What is the emoji you would like to set as reaction role?',
-                retry: 'Please provide a valid unicode emoji.'
-            }
-        };
-        const role = yield {
-            index: 1,
-            type: 'role',
-            prompt: {
-                start: 'What is the role you would like to set as reaction role?',
-                retry: 'Please provide a valid role.'
-            }
-        };
-        const channel = yield {
-            index: 3,
-            match: 'rest',
-            type: 'textChannel',
-            default: message => message.channel,
-            prompt: {
-                start: 'That channel could not be found. What channel is the message you are trying to set as reaction role?',
-                retry: 'Please provide a valid text channel.',
-                optional: true
-            }
-        };
-        const message = yield {
-            index: 2,
-            type: async (msg, phrase) => {
-                if (!phrase) return null;
-                return await channel.messages.fetch(phrase).catch(() => null)
-            },
-            prompt: {
-                start: 'What is the ID of the message you would like to set as reaction role?',
-                retry: `Please provide a valid message ID in ${channel}.`
-            }
-        }
-        return { emoji, role, channel, message };
     }
 
     async exec(message, { emoji, message: msg, role, channel }) {

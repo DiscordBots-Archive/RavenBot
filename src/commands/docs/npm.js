@@ -13,10 +13,10 @@ class NPMCommand extends Command {
 				{
 					id: 'pkg',
 					prompt: {
-						start: `what would you like to search for?`
+						start: message => `${message.author}, what would you like to search for?`
 					},
 					match: 'content',
-					type: (_, pkg) => pkg ? encodeURIComponent(pkg.replace(/ /g, '-')) : null
+					type: pkg => pkg ? encodeURIComponent(pkg.replace(/ /g, '-')) : null
 				}
 			],
 			description: {

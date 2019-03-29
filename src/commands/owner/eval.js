@@ -23,7 +23,7 @@ class EvalCommand extends Command {
 					match: 'content',
 					type: 'string',
 					prompt: {
-						start: `what would you like to evaluate?`
+						start: (message) => `what would you like to evaluate?`
 					}
 				}
 			],

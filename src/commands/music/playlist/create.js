@@ -18,7 +18,7 @@ class PlaylistCreateCommand extends Command {
 					type: 'existingPlaylist',
 					prompt: {
 						start: `what playlist do you want to create?`,
-						retry: (msg, { phrase }) => `a playlist with the name **${phrase}** already exists.`
+						retry: (msg, args, { phrase }) => `a playlist with the name **${phrase}** already exists.`
 					}
 				},
 				{

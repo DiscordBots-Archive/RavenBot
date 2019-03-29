@@ -20,7 +20,7 @@ class PlaylistInfoCommand extends Command {
 					type: 'playlist',
 					prompt: {
 						start: `what playlist do you want information on?`,
-						retry: (msg, { phrase }) => `a playlist with the name **${phrase}** does not exist.`
+						retry: (msg, args, { phrase }) => `a playlist with the name **${phrase}** does not exist.`
 					}
 				}
 			]

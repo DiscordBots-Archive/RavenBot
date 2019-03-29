@@ -28,7 +28,7 @@ class DurationCommand extends Command {
 				},
 				{
 					id: 'duration',
-					type: (_, str) => {
+					type: str => {
 						if (!str) return null;
 						const duration = ms(str);
 						if (duration && duration >= 300000 && !isNaN(duration)) return duration;

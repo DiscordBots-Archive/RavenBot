@@ -1,4 +1,4 @@
-const { Argument, Command } = require('discord-akairo');
+const { Argument, Control, Command } = require('discord-akairo');
 const { MessageEmbed } = require('discord.js');
 const { paginate, timeString } = require('../../util/Base');
 
@@ -9,35 +9,34 @@ class SkipCommand extends Command {
 			category: 'music',
 			channel: 'guild',
 			ratelimit: 2,
-			flags: ['--force', '-f'],
+			args: [
+				{
+					id: 'force',
+					match: 'flag',
+					flag: ['--force', '-f']
+				},
+				Control.if((msg, args) => msg.member.roles.has(this.client.settings.get(msg.guild, 'djRole', undefined)) && args.force, [
+					{
+						id: 'num',
+						match: 'rest',
+						type: Argument.compose(str => str.replace(/\s/g, ''), Argument.range(Argument.union('number', 'emojint'), 1, Infinity)),
+						default: 1
+					}
+				], [
+					{
+						id: 'num',
+						match: 'rest',
+						type: Argument.compose(str => str.replace(/\s/g, ''), Argument.range(Argument.union('number', 'emojint'), 1, 10)),
+						default: 1
+					}
+				])
+			],
 			description: {
 				content: 'Skips the amount of songs you specify (defaults to 1)',
 				usage: '<num>',
 				examples: ['3', '10', '--force 30', '-f 20']
 			}
 		});
-	}
-
-	async *args(msg) {
-		const force = yield {
-			match: 'flag',
-			flag: ['--force', '-f']
-		};
-		const num = yield (
-			msg.member.roles.has(this.client.settings.get(msg.guild, 'djRole', undefined)) && force ?
-			{
-				match: 'rest',
-				type: Argument.compose((_, str) => str.replace(/\s/g, ''), Argument.range(Argument.union('number', 'emojint'), 1, Infinity)),
-				default: 1
-			}:
-			{
-				match: 'rest',
-				type: Argument.compose((_, str) => str.replace(/\s/g, ''), Argument.range(Argument.union('number', 'emojint'), 1, 10)),
-				default: 1
-			}
-		)
-
-		return { num };
 	}
 
 	async exec(message, { num }) {

@@ -15,10 +15,10 @@ class MDNCommand extends Command {
 				{
 					id: 'query',
 					prompt: {
-						start: `what would you like to search for?`
+						start: (message) => `${message.author}, what would you like to search for?`
 					},
 					match: 'content',
-					type: (_, query) => query ? query.replace(/#/g, '.prototype.') : null
+					type: query => query ? query.replace(/#/g, '.prototype.') : null
 				}
 			],
 			description: {
