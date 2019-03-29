@@ -1,6 +1,5 @@
 const { Command, Control } = require('discord-akairo');
 const { Util } = require('discord.js');
-const Tags = require('../../models/Tags');
 const moment = require('moment');
 
 class TagEditCommand extends Command {
@@ -63,12 +62,12 @@ class TagEditCommand extends Command {
 			return message.util.reply('messages have a limit of 2000 characters!');
 		}
 
-		await Tags.update({
+		await tag.update({
 			hoisted: hoist && staffRole ? true : tag.hoisted || unhoist && staffRole ? false : tag.hoisted,
 			content: content ? Util.cleanContent(content, message) : tag.content,
 			last_modified: message.author.id,
 			updatedAt: moment.utc().toDate()
-		}, { where: { name: tag.name } });
+		});
 
 		return message.util.reply(`successfully edited **${tag.name}**${hoist && staffRole ? ' to be hoisted.' : '.'}`);
 	}

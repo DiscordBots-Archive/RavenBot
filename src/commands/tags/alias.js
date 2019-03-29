@@ -1,5 +1,4 @@
 const { Command, Control } = require('discord-akairo');
-const Tags = require('../../models/Tags');
 
 class TagAliasCommand extends Command {
 	constructor() {
@@ -58,18 +57,17 @@ class TagAliasCommand extends Command {
 
 	async exec(message, { first, second, add, del }) {
 
-		const point = await Tags.findOne({ where: { name: first.name } });
-		const new_alias = await point.aliases.concat([second]);
+		const new_alias = await first.aliases.concat([second]);
 
 		if (add) {
 			if (second && second.length >= 256) {
 				return message.util.reply('messages have a limit of 256 characters!');
 			}
-			await Tags.update({ aliases: new_alias, last_modified: message.author.id }, { where: { name: first.name } });
+			await first.update({ aliases: new_alias, last_modified: message.author.id });
 
 		} else if (del) {
-			const removed_alias = await point.aliases.filter(id => id !== second);
-			await Tags.update({ aliases: removed_alias, last_modified: message.author.id }, { where: { name: first.name } });
+			const removed_alias = await first.aliases.filter(id => id !== second);
+			await first.update({ aliases: removed_alias, last_modified: message.author.id });
 
 		} else {
 			return message.util.reply('you have to either supply `--add` or `--del`');
