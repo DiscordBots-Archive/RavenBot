@@ -14,11 +14,12 @@ if (process.env.RAVEN) {
 }
 
 client.on('disconnect', () => Logger.warn('[CLIENT DISCONNECTED]'))
-	.on('reconnect', () => Logger.info('[CLIENT RECONNECTING]'))
+.on('reconnect', () => Logger.info('[CLIENT RECONNECTING]'))
 .on('error', err => Logger.error(`[CLIENT ERROR] ${err.message}`))
 .on('warn', warn => Logger.warn(`[CLIENT WARN] ${warn}`));
 
-client.start(); client.metrics();
+client.start();
+client.metrics();
 
 process.on('unhandledRejection', err => {
 	Logger.error(`[UNHANDLED REJECTION] ${err.message}`);
