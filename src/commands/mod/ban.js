@@ -52,10 +52,12 @@ class BanCommand extends Command {
 	async exec(message, { member, days, reason }) {
 		const staffRole = this.client.settings.get(message.guild, 'modRole', undefined);
 		if (member.id === message.author.id) {
-			await message.reply('you asked for it, ok?');
 			try {
-				await member.kick(`${message.author.tag} used a mod command on themselves.`);
-				await member.send('you asked for it, ok?');
+				const done = await member.kick(`${message.author.tag} used a mod command on themselves.`);
+				if (done) {
+					await message.reply('you asked for it, ok?');
+					await member.send('you asked for it, ok?');
+				}
 			} catch {} // eslint:disable-line
 			return;
 		}
