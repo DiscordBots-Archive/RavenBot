@@ -1,5 +1,4 @@
 const { Command } = require('discord-akairo');
-const Logger = require('../../util/Logger');
 const { Util, MessageEmbed } = require('discord.js');
 const util = require('util');
 const NL = '!!NL!!';
