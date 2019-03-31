@@ -55,7 +55,7 @@ class CaseCommand extends Command {
 		if (isNaN(caseToFind)) return message.reply('at least provide me with a correct number.');
 		const db = await Case.findOne({ where: { caseID: caseToFind, guildID: message.guild.id }});
 		if (!db) {
-			return message.reply('I looked where I could, but I couldn\'t find a case with that Id, maybe look for something that actually exists!');
+			return message.reply('I couldn\'t find a case with that Id!');
 		}
 
 		const moderator = await message.guild.members.fetch(db.authorID);
