@@ -3,5 +3,4 @@ config.json
 .env
 logger/
 Lavalink.jar
-application.yml
 .vs/
