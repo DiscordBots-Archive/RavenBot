@@ -101,10 +101,10 @@ class LaunchCybernukeCommand extends Command {
 		await statusMessage.edit('Cybernuke impact confirmed. Casuality report incoming...');
 		await response.reply([
 			'',
-			`__**Fatalities**__`,
+			`**Fatalities**`,
 			`${fatalities.length > 0 ? `${fatalities.length} confirmed. \n${fatalities.map(fat => `**-** ${fat.displayName} (${fat.id})`).join('\n')}` : 'None'}`,
 			'',
-			`${survivors.length > 0 ? `__**Survivors**__ \n${survivors.length} left standing. \n${survivors.map(srv => `**-** ${srv.member.displayName} (${srv.member.id}): \`${srv.error}\``).join('\n')}` : ''}`
+			`${survivors.length > 0 ? `**Survivors** \n${survivors.length} left standing. \n${survivors.map(srv => `**-** ${srv.member.displayName} (${srv.member.id}): \`${srv.error}\``).join('\n')}` : ''}`
 		], { split: true });
 
 		return null;
