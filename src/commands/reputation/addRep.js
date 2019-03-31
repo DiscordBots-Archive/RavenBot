@@ -28,7 +28,7 @@ class AddRepCommand extends Command {
 					'Reusing this command will simply replace the reason.'
 				],
 				usage: '<user> [reason...]',
-				examples: ['@ABC because he is a cool dude', 'Jim#9327']
+				examples: ['@Suvajit because he is a cool dude', 'Jim#9327']
 			}
 		});
 	}
