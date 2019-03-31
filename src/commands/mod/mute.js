@@ -58,7 +58,7 @@ class MuteCommand extends Command {
 		const staffRole = this.client.settings.get(message.guild, 'modRole', undefined);
 		if (member.id === message.author.id) return;
 		if (member.roles.has(staffRole)) {
-			return message.reply('nuh-uh! You know you can\'t do this.');
+			return message.reply('uh-uh! You know you can\'t do this.');
 		}
 
 		const muteRole = this.client.settings.get(message.guild, 'muteRole', undefined);
