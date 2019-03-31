@@ -28,7 +28,7 @@ class TagDownloadCommand extends Command {
 		const tags = await Tags.findAll({ where: where });
 		if (!tags.length) return;
 		const output = tags.reduce((out, t) => {
-			out += `Name: ${t.name}\r\nContent:\r\n${t.content.replace(/\n/g, '\r\n')}\r\n\r\n========================================\r\n\r\n`;
+			out += `Name: ${t.name}\r\nUser:${}\r\nContent:\r\n${t.content.replace(/\n/g, '\r\n')}\r\n\r\n========================================\r\n\r\n`;
 			return out;
 		}, '');
 
