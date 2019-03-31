@@ -32,7 +32,6 @@ class TagCommand extends Command {
 					'• search `<tag>`',
 					'• list `[member]`',
 					'• download `[member]`',
-					'• stats [member]',
 					'Required: `<>` | Optional: `[]`',
 					'For additional `<...arguments>` usage refer to the examples below'
 				],
