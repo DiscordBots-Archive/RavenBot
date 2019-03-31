@@ -56,7 +56,7 @@ class DurationCommand extends Command {
 		if (isNaN(caseToFind)) return message.reply('at least provide me with a correct number.');
 		const dbCase = await Case.findOne({ where: { caseID: caseToFind, guildID: message.guild.id, action: Base.CONSTANTS.ACTIONS.MUTE, action_processed: false }});
 		if (!dbCase) {
-			return message.reply('I looked where I could, but I couldn\'t find a case with that Id and action, maybe look for something that actually exists next time!');
+			return message.reply('I couldn\'t find a case with that Id!');
 		}
 		if (dbCase.mod_id !== message.author.id && !message.member.permissions.has('MANAGE_GUILD')) {
 			return message.reply('you\'d be wrong in thinking I would let you fiddle with other peoples achievements!');
