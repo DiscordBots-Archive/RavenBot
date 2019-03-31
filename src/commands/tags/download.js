@@ -18,7 +18,7 @@ class TagDownloadCommand extends Command {
 			],
 			description: {
 				content: 'Downloads a/all tag(s).',
-				usage: '[member]'
+				usage: '<member]'
 			}
 		});
 	}
