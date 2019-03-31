@@ -53,7 +53,6 @@ class RestrictCommand extends Command {
 		if (!restriction) {
 			const prefix = this.handler.prefix(message);
 			return message.util.send([
-				`When you beg me so much I just can't not help you~`,
 				`Check \`${prefix}help restrict\` for more information.`
 			]);
 		}

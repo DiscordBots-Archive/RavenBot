@@ -48,7 +48,7 @@ class ReasonCommand extends Command {
 
 		const cases = await Case.findOne({ where: { caseID: caseToFind, guildID: message.guild.id }});
 		if (!cases) {
-			return message.reply('I looked where I could, but I couldn\'t find a case with that Id, maybe look for something that actually exists!');
+			return message.reply('I couldn\'t find a case with that Id!');
 		}
 		if (cases.authorID && (cases.authorID !== message.author.id && !message.member.permissions.has('MANAGE_GUILD'))) {
 			return message.reply('you\'d be wrong in thinking I would let you fiddle with other peoples achievements!');
