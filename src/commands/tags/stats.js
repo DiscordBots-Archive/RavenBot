@@ -5,7 +5,7 @@ const { db } = require('../../struct/Database');
 class TagStatsCommand extends Command {
     constructor() {
         super('tag-stats', {
-            aliases: ['tag-stats'],
+            //aliases: ['tag-stats'],
             category: 'tags',
             channel: 'guild',
             args: [
@@ -106,4 +106,4 @@ class TagStatsCommand extends Command {
     }
 }
 
-module.exports = TagStatsCommand;
+//module.exports = TagStatsCommand;
