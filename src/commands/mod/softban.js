@@ -61,6 +61,8 @@ class SoftbanCommand extends Command {
 		let sentMessage;
 		try {
 			sentMessage = await message.channel.send(`Softbanning **${member.user.tag}**...`);
+			await member.ban({ days: 1, reason: `Softbanned by ${message.author.tag} | Case #${totalCases}` });
+			await message.guild.members.unban(member, `Softbanned by ${message.author.tag} | Case #${totalCases}`);
 			try {
 				await member.send([
 					`**You have been softbanned from ${message.guild.name}**`,
@@ -69,8 +71,6 @@ class SoftbanCommand extends Command {
 					`You may rejoin whenever.`
 				]);
 			} catch {} // eslint:disable-line
-			await member.ban({ days: 1, reason: `Softbanned by ${message.author.tag} | Case #${totalCases}` });
-			await message.guild.members.unban(member, `Softbanned by ${message.author.tag} | Case #${totalCases}`);
 		} catch (error) {
 			this.client.cached.delete(keys[0]);
 			this.client.cached.delete(keys[1]);
