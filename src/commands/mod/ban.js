@@ -62,7 +62,7 @@ class BanCommand extends Command {
 			return;
 		}
 		if (member.roles.has(staffRole)) {
-			return message.reply('nuh-uh! You know you can\'t do this.');
+			return message.reply('uh-uh! You know you can\'t do this.');
 		}
 		const key = `${message.guild.id}:${member.id}:BAN`;
 		if (this.client.cached.has(key)) {
