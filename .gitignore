@@ -4,3 +4,4 @@ config.json
 logger/
 Lavalink.jar
 .vs/
+raven
