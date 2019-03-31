@@ -46,7 +46,7 @@ class WarnCommand extends Command {
 		const staffRole = this.client.settings.get(message.guild, 'modRole', undefined);
 		if (member.id === message.author.id) return;
 		if (member.roles.has(staffRole)) {
-			return message.reply('nuh-uh! You know you can\'t do this.');
+			return message.reply('uh-uh! You know you can\'t do this.');
 		}
 
 		const totalCases = this.client.settings.get(message.guild, 'caseTotal', 0) + 1;
