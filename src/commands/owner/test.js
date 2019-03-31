@@ -5,6 +5,7 @@ class TestCommand extends Command {
         super('test', {
             aliases: ['test'],
             category: 'owner',
+            ownerOnly: true
         })
     }
 
