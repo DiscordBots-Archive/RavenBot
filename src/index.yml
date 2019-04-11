@@ -106,3 +106,48 @@
       path: moderation.js
     - name: sendMessages
       path: sendMessages.js
+
+- name: struct
+  files:
+    - name: Database
+      path: Database.js
+    - name: MuteScheduler
+      path: MuteScheduler.js
+    - name: Queue
+      path: Queue.js
+    - name: SettingsProviders
+      path: SettingsProviders.js
+    - name: Starboard
+      path: Starboard.js
+
+- name: models
+  files:
+    - name: Case
+      path: Case.js
+    - name: Commands
+      path: Commands.js
+    - name: ReactionRoles
+      path: ReactionRoles.js
+    - name: Reputations
+      path: reputations.js
+    - name: Stars
+      path: stars.js
+    - name: Rolestate
+      path: Rolestate.js
+    - name: Settings
+      path: settings.js
+    - name: Tags
+      path: Tags.js
+    - name: UserLevel
+      path: UserLevel.js
+
+- name: util
+  files:
+    - name: Base
+      path: Base.js
+    - name: Extensions
+      path: Extensions.js
+    - name: Logger
+      path: Logger.js
+    - name: Winston
+      path: Winston.js
