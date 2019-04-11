@@ -1,5 +1,7 @@
 - name: client
   files:
+    - name: raven
+      path: ../index.js
     - name: Client
       path: Client.js
 - name: commands
@@ -47,6 +49,40 @@
     - name: user
       path: info/userinfo.js
 
+    - name: ban
+      path: mod/ban.js
+    - name: kick
+      path: mod/kick.js
+    - name: mute
+      path: mod/mute.js
+    - name: duration
+      path: mod/duration.js
+    - name: softban
+      path: mod/softban.js
+    - name: cybernuke
+      path: mod/cybernuke.js
+    - name: unban
+      path: mod/unban.js
+    - name: warn
+      path: mod/warn.js
+    - name: restrict
+      path: mod/restrict.js
+    - name: emoji-restrict
+      path: mod/emoji.js
+    - name: embed-restrict
+      path: mod/embed.js
+    - name: reaction-restrict
+      path: mod/reaction.js
+    - name: case
+      path: mod/case.js
+    - name: reason
+      path: mod/reason.js
+    - name: history
+      path: mod/history.js
+    - name: reset-history
+      path: mod/resethistory.js
+
+
 - name: Listeners
   files:
     - name: commandBlocked
@@ -61,3 +97,12 @@
       path: commandHandler/messageInvalid.js
     - name: missingPermissions
       path: commandHandler/missingPermissions.js
+
+- name: Inhibitors
+  files:
+    - name: blacklist
+      path: blacklist.js
+    - name: moderation
+      path: moderation.js
+    - name: sendMessages
+      path: sendMessages.js
