@@ -1,2 +1,3 @@
+# build docs for branch master
 node_modules/
 .env
