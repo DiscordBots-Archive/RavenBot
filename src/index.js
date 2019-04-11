@@ -1,6 +1,6 @@
-require('./src/util/Extensions'); require('dotenv').config();
-const Client = require('./src/client/Client');
-const Logger = require('./src/util/Logger');
+require('./util/Extensions'); require('dotenv').config();
+const Client = require('./client/Client');
+const Logger = require('./util/Logger');
 const Raven = require('raven');
 const client = new Client({ owner: process.env.OWNER, token: process.env.TOKEN });
 

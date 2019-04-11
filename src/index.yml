@@ -1,0 +1,8 @@
+- name: client
+  files:
+    - name: Client
+      path: Client.js
+- name: commands
+  files:
+    - name: Docs
+      path: docs/docs.js

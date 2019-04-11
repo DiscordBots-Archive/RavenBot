@@ -38,7 +38,8 @@
   "main": "index.js",
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node node_modules/docgen/src --custom src/index.yml --source src --output master.json --spaces 2",
+    "publish": "node node_modules/docgen/src --custom src/index.yml --source src --output master.json"
   },
   "keywords": [],
   "author": "Suvajit#5580",
