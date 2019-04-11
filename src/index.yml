@@ -17,3 +17,19 @@
       path: general/blacklist.js
     - name: GUIDE
       path: general/about.js
+    - name: HELP
+      path: general/help.js
+    - name: INVITE
+      path: general/invite.js
+    - name: PING
+      path: general/ping.js
+    - name: PREFIX
+      path: general/prefix.js
+    - name: RESET
+      path: general/reset.js
+    - name: SETTINGS
+      path: general/settings.js
+    - name: STATS
+      path: general/stats.js
+    - name: UPTIME
+      path: general/uptime.js
