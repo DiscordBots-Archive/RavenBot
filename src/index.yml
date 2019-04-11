@@ -4,32 +4,45 @@
       path: Client.js
 - name: commands
   files:
-    - name: DOCS
+    - name: docs
       path: docs/docs.js
-    - name: NPM
+    - name: npm
       path: docs/npm.js
-    - name: MDN
+    - name: mdn
       path: docs/mdn.js
 
-    - name: ABOUT
+    - name: about
       path: general/about.js
-    - name: BLACKLIST
+    - name: blacklist
       path: general/blacklist.js
-    - name: GUIDE
+    - name: guide
       path: general/about.js
-    - name: HELP
+    - name: help
       path: general/help.js
-    - name: INVITE
+    - name: invite
       path: general/invite.js
-    - name: PING
+    - name: ping
       path: general/ping.js
-    - name: PREFIX
+    - name: prefix
       path: general/prefix.js
-    - name: RESET
+    - name: reset
       path: general/reset.js
-    - name: SETTINGS
+    - name: settings
       path: general/settings.js
-    - name: STATS
+    - name: stats
       path: general/stats.js
-    - name: UPTIME
+    - name: uptime
       path: general/uptime.js
+
+    - name: avatar
+      path: info/avatar.js
+    - name: channel
+      path: info/channel.js
+    - name: emoji
+      path: info/emoji.js
+    - name: role-info
+      path: info/roleinfo.js
+    - name: server
+      path: info/server.js
+    - name: user
+      path: info/userinfo.js
