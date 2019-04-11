@@ -46,3 +46,18 @@
       path: info/server.js
     - name: user
       path: info/userinfo.js
+
+- name: Listeners
+  files:
+    - name: commandBlocked
+      path: commandHandler/commandBlocked.js
+    - name: commandStarted
+      path: commandHandler/commandStarted.js
+    - name: cooldown
+      path: commandHandler/cooldown.js
+    - name: error
+      path: commandHandler/error.js
+    - name: messageInvalid
+      path: commandHandler/messageInvalid.js
+    - name: missingPermissions
+      path: commandHandler/missingPermissions.js
