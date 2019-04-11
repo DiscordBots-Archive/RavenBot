@@ -5,6 +5,7 @@
     "diff": "^4.0.1",
     "discord-akairo": "8.0.0-beta.1",
     "discord.js": "discordjs/discord.js",
+    "docgen": "devs-net/docgen",
     "dotenv": "^7.0.0",
     "http": "^0.0.0",
     "ioredis": "^4.6.2",
