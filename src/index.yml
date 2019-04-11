@@ -4,5 +4,16 @@
       path: Client.js
 - name: commands
   files:
-    - name: Docs
+    - name: DOCS
       path: docs/docs.js
+    - name: NPM
+      path: docs/npm.js
+    - name: MDN
+      path: docs/mdn.js
+
+    - name: ABOUT
+      path: general/about.js
+    - name: BLACKLIST
+      path: general/blacklist.js
+    - name: GUIDE
+      path: general/about.js
