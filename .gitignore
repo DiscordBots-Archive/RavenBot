@@ -1,7 +1,2 @@
 node_modules/
-config.json
 .env
-logger/
-Lavalink.jar
-.vs/
-raven
