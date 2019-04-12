@@ -16,6 +16,9 @@ const { Op } = require('sequelize');
 const { parse } = require('url');
 const path = require('path');
 
+/**
+ * Client
+ */
 class Client extends AkairoClient {
 	constructor(config) {
 		super({ ownerID: config.owner }, {

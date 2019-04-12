@@ -1,6 +1,6 @@
 - name: client
   files:
-    - name: raven
+    - name: Raven
       path: ../index.js
     - name: Client
       path: Client.js
