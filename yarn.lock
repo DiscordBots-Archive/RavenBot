@@ -173,12 +173,7 @@ bintrees@1.0.1:
   resolved "https://registry.yarnpkg.com/bintrees/-/bintrees-1.0.1.tgz#0e655c9b9c2435eaab68bf4027226d2b55a34524"
   integrity sha1-DmVcm5wkNeqraL9AJyJtK1WjRSQ=
 
-bluebird@^3.4.6, bluebird@^3.5.0:
-  version "3.5.3"
-  resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.3.tgz#7d01c6f9616c9a51ab0f8c549a79dfe6ec33efa7"
-  integrity sha512-/qKPUQlaW1OyR51WeCPBvRnAlnZFUJkCSG5HzGnuIqhgyJtF+T94lFnn33eiazjRm2LAHVy2guNnaq48X9SJuw==
-
-bluebird@~3.5.0:
+bluebird@^3.4.6, bluebird@^3.5.0, bluebird@~3.5.0:
   version "3.5.4"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.4.tgz#d6cc661595de30d5b3af5fcedd3c0b3ef6ec5714"
   integrity sha512-FG+nFEZChJrbQ9tIccIfZJBz3J7mLrAhxakAbnrJWn8d7aKOC+LWifa0G+p4ZqKp4y13T7juYvdhq9NzKdsrjw==
@@ -1792,9 +1787,9 @@ semver@^5.5.0, semver@^5.6.0:
   integrity sha512-RS9R6R35NYgQn++fkDWaOmqGoj4Ek9gGs+DPxNUZKuwE183xjJroKvyo1IzVFeXvUrvmALy6FWD5xrdJT25gMg==
 
 sequelize@^4.43.0:
-  version "4.43.0"
-  resolved "https://registry.yarnpkg.com/sequelize/-/sequelize-4.43.0.tgz#41c36c7684b0ea23ca7be1c3af3d65f2309a4ca6"
-  integrity sha512-GkwGFVREKBf/ql6W6RXwXy1fzb/HOk0lmOBbcQrJMvJtB65Jfg7CUh+sENh0deuWk5s79JedgZJ/yEjvtzHXaQ==
+  version "4.43.1"
+  resolved "https://registry.yarnpkg.com/sequelize/-/sequelize-4.43.1.tgz#90afc7383469b6ae3bc76e189c92b62a0c1fda16"
+  integrity sha512-c3FSv/UWu0yjQ0ClMTIABKLto+1ppkLc9pb5sPyl0mfYoWri5oyXbgwclys1Mdr2of6Tdg/i3xMme3uzY05TAw==
   dependencies:
     bluebird "^3.5.0"
     cls-bluebird "^2.1.0"
