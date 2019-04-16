@@ -540,7 +540,8 @@ dmd@^3.0.10:
 
 docgen@devs-net/docgen:
   version "0.2.0"
-  resolved "https://codeload.github.com/devs-net/docgen/tar.gz/8545ac744a497eddd5d6936b881c9f674269d710"
+  uid "8b74a1aef89529fce9d923d3a696bce98158a94c"
+  resolved "https://codeload.github.com/devs-net/docgen/tar.gz/8b74a1aef89529fce9d923d3a696bce98158a94c"
   dependencies:
     js-yaml "^3.10.0"
     jsdoc-to-markdown "^4.0.1"
