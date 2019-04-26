@@ -65,7 +65,7 @@ class MuteScheduler {
 	}
 
 	rescheduleMute(mute) {
-		Logger.info('Rescheduling Mute', { tag: 'Rescheduling Mute' });
+		Logger.info('Rescheduling Mute', { tag: 'RESCHEDULING MUTE' });
 
 		const schedule = this.queuedSchedules.get(mute);
 		if (schedule) clearTimeout(schedule);

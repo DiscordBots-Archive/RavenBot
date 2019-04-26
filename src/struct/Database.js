@@ -15,11 +15,11 @@ class Database {
 	static async authenticate() {
 		try {
 			await db.authenticate();
-			Logger.info('Database connection has been established successfully...', { tag: 'PostgreSQL' });
+			Logger.info('Database connection has been established successfully.', { tag: 'POSTGRESQL' });
 			await this.loadModels(path.join(__dirname, '..', 'models'));
 		} catch (err) {
-			Logger.error('Unable to connect to the Database...', { tag: 'PostgreSQL' });
-			Logger.info('Attempting to connect again in 5 seconds...', { tag: 'PostgreSQL' });
+			Logger.error('Unable to connect to the Database.', { tag: 'POSTGRESQL' });
+			Logger.info('Attempting to connect again in 5 seconds.', { tag: 'POSTGRESQL' });
 			setTimeout(this.authenticate, 5000);
 		}
 	}
