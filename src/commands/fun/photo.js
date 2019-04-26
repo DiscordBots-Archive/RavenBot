@@ -26,7 +26,7 @@ class PhotoCommand extends Command {
 		try {
 			const page = Math.floor(Math.random() * 20) + 1;
 			const queryString = qs.stringify({ query: query.replace(/[^a-zA-Z0-9]+/gi, ' ') });
-			const res = await fetch(`https://api.unsplash.com/search/photos?per_page=1&page=${page}&${queryString}&${process.env.UNSPLASH}`);
+			const res = await fetch(`https://api.unsplash.com/search/photos?per_page=1&page=${page}&${queryString}`, { method: 'GET', headers: { Authorization: `Client-ID ${process.env.UNSPLASH}` } });
 			const data = await res.json();
 			for (const image of data.results) {
 				const embed = this.client.util.embed();

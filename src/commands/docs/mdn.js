@@ -2,7 +2,7 @@ const { Command } = require('discord-akairo');
 const { MessageEmbed } = require('discord.js');
 const fetch = require('node-fetch');
 const qs = require('querystring');
-const Turndown = require('turndown'); // eslint:disable-line
+const Turndown = require('turndown');
 
 class MDNCommand extends Command {
 	constructor() {
