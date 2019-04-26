@@ -35,7 +35,7 @@ logging:
   file:
     max-history: 14
     max-size: 1GB
-  path: ./logs/
+  path: ./logger/
 
   level:
     root: INFO
