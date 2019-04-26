@@ -10,7 +10,8 @@ class ReloadCommand extends Command {
 			quoted: false,
 			description: {
 				content: 'Reloads a module or all modules at once.',
-				usage: '<module> [type:]'
+				usage: '<module> [type:]',
+				examples: ['commmand ping', 'listener ready', 'c stats', 'l raw', 'i moderation']
 			}
 		});
 	}
