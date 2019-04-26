@@ -15,8 +15,7 @@ class TagAliasCommand extends Command {
 		});
 	}
 
-	// eslint-disable-next-line require-await
-	async *args() {
+	*args() {
 		const first = yield {
 			type: 'tag',
 			prompt: {
