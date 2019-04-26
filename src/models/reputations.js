@@ -20,5 +20,4 @@ const Reputation = db.define('reputations', {
 	}
 });
 
-
 module.exports = Reputation;
