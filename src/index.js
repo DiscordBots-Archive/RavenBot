@@ -15,10 +15,10 @@ if (process.env.RAVEN) {
 	}).install();
 }
 
-client.on('disconnect', () => Logger.warn('[CLIENT DISCONNECTED]'))
-	.on('reconnect', () => Logger.info('[CLIENT RECONNECTING]'))
-	.on('error', err => Logger.error(`[CLIENT ERROR] ${err.message}`))
-	.on('warn', warn => Logger.warn(`[CLIENT WARN] ${warn}`));
+client.on('disconnect', () => Logger.warn('Please Restart Me', { tag: 'CLIENT DISCONNECTED' }))
+	.on('reconnect', () => Logger.info('I\'m Reconnecting', { tag: 'CLIENT RECONNECTING' }))
+	.on('error', err => Logger.error(err, { tag: 'CLIENT ERROR' }, err.stack))
+	.on('warn', warn => Logger.warn(warn, { tag: 'CLIENT WARN' }));
 
 client.start();
 client.metrics();
