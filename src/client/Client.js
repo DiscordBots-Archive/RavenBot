@@ -52,12 +52,12 @@ class Client extends AkairoClient {
 		this.listenerHandler = new ListenerHandler(this, { directory: path.join(__dirname, '..', 'listeners') });
 
 		this.prometheus = {
-            messagesCounter: new Counter({ name: 'raven_messages_total', help: 'Total number of messages have seen' }),
-            commandCounter: new Counter({ name: 'raven_commands_total', help: 'Total number of commands used' }),
-            collectDefaultMetrics,
-            register
-        };
-        this.prometheus.collectDefaultMetrics({ prefix: 'raven_', timeout: 30000 });
+			messagesCounter: new Counter({ name: 'raven_messages_total', help: 'Total number of messages have seen' }),
+			commandCounter: new Counter({ name: 'raven_commands_total', help: 'Total number of commands used' }),
+			collectDefaultMetrics,
+			register
+		};
+		this.prometheus.collectDefaultMetrics({ prefix: 'raven_', timeout: 30000 });
 
 		this.music = new Lavaqueue({
 			userID: process.env.ID,
@@ -76,7 +76,7 @@ class Client extends AkairoClient {
 				if (shardGuild) return shardGuild.shard.send(packet);
 				return Promise.resolve();
 			}
-		})
+		});
 
 		this.config = config;
 		this.storage = new Rejects(this.music.queues.redis);
@@ -88,7 +88,7 @@ class Client extends AkairoClient {
 		this.commandHandler.resolver.addType('tag', async (phrase, message) => {
 			if (!phrase) return null;
 			phrase = Util.cleanContent(phrase.toLowerCase(), message);
-			const tag = await Tags.findOne({ where: { name: phrase, guildID: message.guild.id }});
+			const tag = await Tags.findOne({ where: { name: phrase, guildID: message.guild.id } });
 
 			return tag || null;
 		});
@@ -96,12 +96,15 @@ class Client extends AkairoClient {
 		this.commandHandler.resolver.addType('existingTag', async (phrase, message) => {
 			if (!phrase) return null;
 			phrase = Util.cleanContent(phrase.toLowerCase(), message);
-			const tag = await Tags.findOne({ where: { guildID: message.guild.id,
-				[Op.or]: [
-					{ name: phrase },
-					{ aliases: { [Op.contains]: [phrase] } }
-				]
-			}});
+			const tag = await Tags.findOne({
+				where: {
+					guildID: message.guild.id,
+					[Op.or]: [
+						{ name: phrase },
+						{ aliases: { [Op.contains]: [phrase] } }
+					]
+				}
+			});
 
 			return tag ? null : phrase;
 		});
@@ -116,22 +119,22 @@ class Client extends AkairoClient {
 
 		this.commandHandler.resolver.addType('reactionRole', async (phrase, message) => {
 			if (!phrase) return null;
-			const msg = await ReactionRole.findOne({ where: { guildID: message.guild.id, messageID: phrase }});
+			const msg = await ReactionRole.findOne({ where: { guildID: message.guild.id, messageID: phrase } });
 			return msg || null;
-		})
+		});
 
 		this.commandHandler.resolver.addType('playlist', async (phrase, message) => {
 			if (!phrase) return null;
 			phrase = Util.cleanContent(phrase.toLowerCase(), message);
-			const playlist = await Playlist.findOne({ where: { name: phrase, guildID: message.guild.id }});
+			const playlist = await Playlist.findOne({ where: { name: phrase, guildID: message.guild.id } });
 
 			return playlist || null;
 		});
-		
+
 		this.commandHandler.resolver.addType('existingPlaylist', async (phrase, message) => {
 			if (!phrase) return null;
 			phrase = Util.cleanContent(phrase.toLowerCase(), message);
-			const playlist = await Playlist.findOne({ where: { name: phrase, guildID: message.guild.id }});
+			const playlist = await Playlist.findOne({ where: { name: phrase, guildID: message.guild.id } });
 
 			return playlist ? null : phrase;
 		});
@@ -166,10 +169,10 @@ class Client extends AkairoClient {
 			if (parse(req.url).pathname === '/metrics') {
 				res.writeHead(200, { 'Content-Type': this.prometheus.register.contentType });
 				res.write(this.prometheus.register.metrics());
-			};
+			}
 			res.end();
 		}).listen(8080);
-    };
+	}
 
 	async start() {
 		await Database.authenticate();

@@ -29,9 +29,9 @@ class PlaylistListCommand extends Command {
 
 	async exec(message, { member, page }) {
 		const where = member ? { userID: member.id, guildID: message.guild.id } : { guildID: message.guild.id };
-		const playlists = await Playlist.findAll({ where: where });
+		const playlists = await Playlist.findAll({ where });
 		if (!playlists.length) return message.util.send(`${member ? `${member.displayName}` : `${message.guild.name}`} doesn't have any playlists.`);
-		const paginated = paginate({items: playlists, page});
+		const paginated = paginate({ items: playlists, page });
 
 		const embed = new MessageEmbed().setColor(3447003)
 			.setAuthor(`${message.author.tag} (${message.author.id})`, message.author.displayAvatarURL())
@@ -39,11 +39,11 @@ class PlaylistListCommand extends Command {
 				`**Playlists${paginated.page > 1 ? `, page ${paginated.page}` : ''}**`,
 				'',
 				`${paginated.items.map(playlist => `** • ** ${playlist.name}`).join('\n')}`
-			])
+			]);
 		if (paginated.maxPage > 1) embed.setFooter('use playlist list <member> <page> to view a specific page');
 
 		return message.util.send(embed);
 	}
 }
 
-module.exports = PlaylistListCommand
+module.exports = PlaylistListCommand;

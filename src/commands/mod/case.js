@@ -29,8 +29,8 @@ class CaseCommand extends Command {
 					id: 'caseNum',
 					type: Argument.union('number', 'string'),
 					prompt: {
-						start: `what case do you want to look up?`,
-						retry: `please enter a case number.`
+						start: 'what case do you want to look up?',
+						retry: 'please enter a case number.'
 					}
 				}
 			],
@@ -53,23 +53,23 @@ class CaseCommand extends Command {
 		const totalCases = this.client.settings.get(message.guild, 'caseTotal', 0);
 		const caseToFind = caseNum === 'latest' || caseNum === 'l' ? totalCases : caseNum;
 		if (isNaN(caseToFind)) return message.reply('at least provide me with a correct number.');
-		const db = await Case.findOne({ where: { caseID: caseToFind, guildID: message.guild.id }});
+		const db = await Case.findOne({ where: { caseID: caseToFind, guildID: message.guild.id } });
 		if (!db) {
 			return message.reply('I couldn\'t find a case with that Id!');
 		}
 
 		const moderator = await message.guild.members.fetch(db.authorID);
 		const color = Object.keys(Base.CONSTANTS.ACTIONS).find(key => Base.CONSTANTS.ACTIONS[key] === db.action).split(' ')[0].toUpperCase();
-		const embed = new MessageEmbed()
-			if (db.authorID !== null) embed.setAuthor(`${db.authorTag} (${db.authorID})`, moderator ? moderator.user.displayAvatarURL() : '')
-			embed.setColor(Base.CONSTANTS.COLORS[color])
-			embed.setDescription([
-				`**Member:** ${db.targetTag} (${db.targetID})`,
-				`**Action:** ${ACTIONS[db.action]}${db.action === 5 ? `\n**Length:** ${db.action_duration ? ms((db.action_duration - db.createdAt), { long: true }) : 'Not Set'}` : ''}`,
-				`**Reason:** ${db.reason}${db.ref_id ? `\n**Ref case:** ${db.ref_id}` : ''}`
-			])
-			embed.setFooter(`Case ${db.caseID}`)
-			embed.setTimestamp(new Date(db.createdAt));
+		const embed = new MessageEmbed();
+		if (db.authorID !== null) embed.setAuthor(`${db.authorTag} (${db.authorID})`, moderator ? moderator.user.displayAvatarURL() : '');
+		embed.setColor(Base.CONSTANTS.COLORS[color]);
+		embed.setDescription([
+			`**Member:** ${db.targetTag} (${db.targetID})`,
+			`**Action:** ${ACTIONS[db.action]}${db.action === 5 ? `\n**Length:** ${db.action_duration ? ms(db.action_duration - db.createdAt, { long: true }) : 'Not Set'}` : ''}`,
+			`**Reason:** ${db.reason}${db.ref_id ? `\n**Ref case:** ${db.ref_id}` : ''}`
+		]);
+		embed.setFooter(`Case ${db.caseID}`);
+		embed.setTimestamp(new Date(db.createdAt));
 
 		return message.util.send(embed);
 	}

@@ -16,8 +16,8 @@ class KickCommand extends Command {
 					id: 'member',
 					type: 'member',
 					prompt: {
-						start: message => `what member do you want to kick?`,
-						retry: message => `please mention a member...`
+						start: message => 'what member do you want to kick?',
+						retry: message => 'please mention a member...'
 					}
 				},
 				{
@@ -59,7 +59,7 @@ class KickCommand extends Command {
 				await member.send([
 					`**You have been kicked from ${message.guild.name}**`,
 					`${reason ? `\n**Reason:** ${reason}\n` : ''}`,
-					`You may rejoin whenever.`
+					'You may rejoin whenever.'
 				]);
 			} catch {} // eslint:disable-line
 		} catch (error) {
@@ -77,7 +77,7 @@ class KickCommand extends Command {
 		let modMessage;
 		if (modLogChannel) {
 			const embed = Base.logEmbed({ message, member, action: 'Kick', caseNum: totalCases, reason }).setColor(Base.CONSTANTS.COLORS.KICK);
-			modMessage = await (this.client.channels.get(modLogChannel)).send(embed);
+			modMessage = await this.client.channels.get(modLogChannel).send(embed);
 		}
 
 		await Case.create({
@@ -89,7 +89,7 @@ class KickCommand extends Command {
 			guildID: message.guild.id,
 			messageID: modMessage ? modMessage.id : undefined,
 			action: Base.CONSTANTS.ACTIONS.KICK,
-			reason: reason,
+			reason,
 			createdAt: moment.utc().toDate()
 		});
 

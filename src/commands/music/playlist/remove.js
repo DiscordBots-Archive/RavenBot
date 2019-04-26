@@ -16,7 +16,7 @@ class PlaylistRemoveCommand extends Command {
 					id: 'playlist',
 					type: 'playlist',
 					prompt: {
-						start: `what playlist should this song/playlist be removed from?`,
+						start: 'what playlist should this song/playlist be removed from?',
 						retry: (msg, args, { phrase }) => `a playlist with the name **${phrase}** does not exist.`
 					}
 				},

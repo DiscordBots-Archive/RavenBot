@@ -18,9 +18,9 @@ class MessageUpdateListener extends Listener {
 		const webhook = new WebhookClient(process.env.WebhookID, process.env.WebhookToken);
 
 		const embed = new MessageEmbed()
-		.setColor(0x306bff)
-		.setAuthor(`${newMessage.author.tag} (${newMessage.author.id})`, newMessage.author.displayAvatarURL())
-		.addField('❯ Channel', newMessage.channel);
+			.setColor(0x306bff)
+			.setAuthor(`${newMessage.author.tag} (${newMessage.author.id})`, newMessage.author.displayAvatarURL())
+			.addField('❯ Channel', newMessage.channel);
 		let msg = '';
 		if (/```(.*?)```/s.test(oldMessage.content) && /```(.*?)```/s.test(newMessage.content)) {
 			const strippedOldMessage = oldMessage.content.match(/```(?:(\S+)\n)?\s*([^]+?)\s*```/)[2];
@@ -31,25 +31,26 @@ class MessageUpdateListener extends Listener {
 				if (part.value === '\n') continue;
 				const d = part.added ? '+ ' : part.removed ? '- ' : '';
 				msg += `${d}${part.value.replace(/\n/g, '')}\n`;
-			};
+			}
 			const prepend = '```diff\n';
 			const append = '\n```';
 			embed.addField('❯ Message', `${prepend}${msg.substring(0, 1000)}${append}`);
 		} else {
-			const diffMessage = diff.diffWords(Util.escapeMarkdown(oldMessage.content), Util.escapeMarkdown(newMessage.content));
+			const diffMessage = diff.diffWords(Util.escapeMarkdown(oldMessage.content),
+				Util.escapeMarkdown(newMessage.content));
 			for (const part of diffMessage) {
 				const markdown = part.added ? '**' : part.removed ? '~~' : '';
 				msg += `${markdown}${part.value}${markdown}`;
-			};
+			}
 			embed.addField('❯ Message', `${msg.substring(0, 1020)}` || '\u200b');
-		};
+		}
 		embed.addField('❯ Message', `[Jump To](${newMessage.url})`, true);
 		embed.setTimestamp(oldMessage.editedAt || newMessage.editedAt || new Date());
 		embed.setThumbnail('https://i.imgur.com/wnC4KmC.png');
 		embed.setFooter('Message Edited');
 
 		if (guildLogs) {
-			this.client.channels.get(guildLogs).send({embed});
+			this.client.channels.get(guildLogs).send({ embed });
 		}
 
 		if (webhook) {

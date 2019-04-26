@@ -1,3 +1,4 @@
+/* eslint-disable multiline-ternary */
 const { Command } = require('discord-akairo');
 
 class TagSourceCommand extends Command {
@@ -18,7 +19,7 @@ class TagSourceCommand extends Command {
 					match: 'rest',
 					type: 'tag',
 					prompt: {
-						start: `what tag would you like to see the source of?`,
+						start: 'what tag would you like to see the source of?',
 						retry: (msg, args, { phrase }) => `a tag with the name **${phrase}** does not exist.`
 					}
 				}

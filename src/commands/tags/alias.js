@@ -12,7 +12,7 @@ class TagAliasCommand extends Command {
 					id: 'first',
 					type: 'tag',
 					prompt: {
-						start: `what's the tag you want to alias?`,
+						start: 'what\'s the tag you want to alias?',
 						retry: (msg, args, { phrase }) => `a tag with the name **${phrase}** does not exist.`
 					}
 				},
@@ -32,7 +32,7 @@ class TagAliasCommand extends Command {
 						match: 'rest',
 						type: 'existingTag',
 						prompt: {
-							start: `what's the alias you want to apply to this tag?`,
+							start: 'what\'s the alias you want to apply to this tag?',
 							retry: (msg, args, { phrase }) => `a tag with the name **${phrase}** already exists.`
 						}
 					}
@@ -42,7 +42,7 @@ class TagAliasCommand extends Command {
 						match: 'rest',
 						type: 'string',
 						prompt: {
-							start: `what's the alias you want to apply to this tag?`,
+							start: 'what\'s the alias you want to apply to this tag?',
 							retry: (msg, args, { phrase }) => `a tag with the name **${phrase}** already exists.`
 						}
 					}
@@ -56,7 +56,6 @@ class TagAliasCommand extends Command {
 	}
 
 	async exec(message, { first, second, add, del }) {
-
 		const new_alias = await first.aliases.concat([second]);
 
 		if (add) {
@@ -64,11 +63,9 @@ class TagAliasCommand extends Command {
 				return message.util.reply('messages have a limit of 256 characters!');
 			}
 			await first.update({ aliases: new_alias, last_modified: message.author.id });
-
 		} else if (del) {
 			const removed_alias = await first.aliases.filter(id => id !== second);
 			await first.update({ aliases: removed_alias, last_modified: message.author.id });
-
 		} else {
 			return message.util.reply('you have to either supply `--add` or `--del`');
 		}

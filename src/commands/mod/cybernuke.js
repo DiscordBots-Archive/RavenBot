@@ -14,16 +14,16 @@ class LaunchCybernukeCommand extends Command {
 					id: 'join',
 					type: Argument.range('number', 0.1, 120, true),
 					prompt: {
-						start: `how old (in minutes) should a member be for the cybernuke to ignore them (server join date)?`,
-						retry: `the minimum is \`0.1\` and the maximum \`120\` minutes.`
+						start: 'how old (in minutes) should a member be for the cybernuke to ignore them (server join date)?',
+						retry: 'the minimum is `0.1` and the maximum `120` minutes.'
 					}
 				},
 				{
 					id: 'age',
 					type: Argument.range('number', 0.1, Infinity, true),
 					prompt: {
-						start: `how old (in minutes) should a member's account be for the cybernuke to ignore them (account age)?`,
-						retry: `the minimum is \`0.1\` minutes.`
+						start: 'how old (in minutes) should a member\'s account be for the cybernuke to ignore them (account age)?',
+						retry: 'the minimum is `0.1` minutes.'
 					}
 				}
 			],
@@ -74,26 +74,26 @@ class LaunchCybernukeCommand extends Command {
 			promises.push(
 				member.send([
 					`Sorry, but you've been automatically targetted by the cybernuke in the "${message.guild.name}" server.`,
-					`This means that you have been banned, likely in the case of a server raid.`,
-					`Please contact them if you believe this ban to be in error.`
+					'This means that you have been banned, likely in the case of a server raid.',
+					'Please contact them if you believe this ban to be in error.'
 				]).catch(error => Logger.error(`[CYBERNUKE ERROR] ${error.message}`, { tag: 'Cybernyke' }))
-				.then(async () => member.ban())
-				.then(() => {
-					fatalities.push(member);
-				})
-				.catch(err => {
-					Logger.error(`[CYBERNUKE ERROR] ${err.message}`, { tag: 'Cybernuke' });
-					survivors.push({
-						member,
-						error: err
-					});
-				})
-				.then(async () => {
-					if (members.size <= 5) return;
-					if (promises.length % 5 === 0) {
-						await statusMessage.edit(`Launching cyber nuke (${Math.round(promises.length / members.size * 100)}%)...`);
-					}
-				})
+					.then(async () => member.ban())
+					.then(() => {
+						fatalities.push(member);
+					})
+					.catch(err => {
+						Logger.error(`[CYBERNUKE ERROR] ${err.message}`, { tag: 'Cybernuke' });
+						survivors.push({
+							member,
+							error: err
+						});
+					})
+					.then(async () => {
+						if (members.size <= 5) return;
+						if (promises.length % 5 === 0) {
+							await statusMessage.edit(`Launching cyber nuke (${Math.round(promises.length / members.size * 100)}%)...`);
+						}
+					})
 			);
 		}
 
@@ -101,7 +101,7 @@ class LaunchCybernukeCommand extends Command {
 		await statusMessage.edit('Cybernuke impact confirmed. Casuality report incoming...');
 		await response.reply([
 			'',
-			`**Fatalities**`,
+			'**Fatalities**',
 			`${fatalities.length > 0 ? `${fatalities.length} confirmed. \n${fatalities.map(fat => `**-** ${fat.displayName} (${fat.id})`).join('\n')}` : 'None'}`,
 			'',
 			`${survivors.length > 0 ? `**Survivors** \n${survivors.length} left standing. \n${survivors.map(srv => `**-** ${srv.member.displayName} (${srv.member.id}): \`${srv.error}\``).join('\n')}` : ''}`

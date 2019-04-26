@@ -20,7 +20,7 @@ class EvalCommand extends Command {
 					match: 'content',
 					type: 'string',
 					prompt: {
-						start: (message) => `what would you like to evaluate?`
+						start: message => 'what would you like to evaluate?'
 					}
 				}
 			],
@@ -34,7 +34,7 @@ class EvalCommand extends Command {
 	async exec(message, { code }) {
 		const msg = message;
 		const { client, lastResult } = this;
-		const doReply = (val) => {
+		const doReply = val => {
 			if (val instanceof Error) {
 				message.util.send(`*Callback error:* \`${val}\``);
 			} else {
@@ -44,12 +44,12 @@ class EvalCommand extends Command {
 				}
 				message.util.send(result);
 			}
-		}
+		};
 
 		let hrDiff;
 		try {
 			const hrStart = process.hrtime();
-			this.lastResult = eval(code);
+			this.lastResult = eval(code); // eslint-disable-line
 			hrDiff = process.hrtime(hrStart);
 		} catch (error) {
 			return message.util.send(`*Error while evaluating:* \`${error}\``);
@@ -62,18 +62,17 @@ class EvalCommand extends Command {
 	}
 
 	_result(result, hrDiff, input) {
-        
-        const inspected = util.inspect(result, { depth: 0 }).replace(NL_PATTERN, '\n').replace(this.sensitivePattern, '--🙄--');
-        
+		const inspected = util.inspect(result, { depth: 0 }).replace(NL_PATTERN, '\n').replace(this.sensitivePattern, '--🙄--');
+
 		const split = inspected.split('\n');
 		const last = inspected.length - 1;
-		const prependPart = inspected[0] !== '{' && inspected[0] !== '[' && inspected[0] !== "'" ? split[0] : inspected[0];
-		const appendPart = inspected[last] !== '}' && inspected[last] !== ']' && inspected[last] !== "'" ? split[split.length - 1] : inspected[last];
+		const prependPart = inspected[0] !== '{' && inspected[0] !== '[' && inspected[0] !== '\'' ? split[0] : inspected[0];
+		const appendPart = inspected[last] !== '}' && inspected[last] !== ']' && inspected[last] !== '\'' ? split[split.length - 1] : inspected[last];
 		const prepend = `\`\`\`javascript\n${prependPart}\n`;
 		const append = `\n${appendPart}\n\`\`\``;
 		if (input) {
-			return Util.splitMessage(`*Executed in ${hrDiff[0] > 0 ? `${hrDiff[0]}s ` : ''}${hrDiff[1] / 1000000}ms* \`\`\`javascript\n${inspected}\`\`\`` , { maxLength: 1900, prepend, append });
-		};
+			return Util.splitMessage(`*Executed in ${hrDiff[0] > 0 ? `${hrDiff[0]}s ` : ''}${hrDiff[1] / 1000000}ms* \`\`\`javascript\n${inspected}\`\`\``, { maxLength: 1900, prepend, append });
+		}
 		return Util.splitMessage(`*Callback executed after ${hrDiff[0] > 0 ? `${hrDiff[0]}s ` : ''}${hrDiff[1] / 1000000}ms* \`\`\`javascript\n${inspected}\`\`\``, { maxLength: 1900, prepend, append });
 	}
 
@@ -82,7 +81,7 @@ class EvalCommand extends Command {
 			const token = this.client.token.split('').join('[^]{0,2}');
 			const revToken = this.client.token.split('').reverse().join('[^]{0,2}');
 			Object.defineProperty(this, '_sensitivePattern', { value: new RegExp(`${token}|${revToken}`, 'g') });
-		};
+		}
 		return this._sensitivePattern;
 	}
 }

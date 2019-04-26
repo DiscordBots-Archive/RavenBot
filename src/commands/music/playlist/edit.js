@@ -16,7 +16,7 @@ class PlaylistEditCommand extends Command {
 					id: 'playlist',
 					type: 'playlist',
 					prompt: {
-						start: `what playlists description do you want to edit?`,
+						start: 'what playlists description do you want to edit?',
 						retry: (msg, args, { phrase }) => `a playlist with the name **${phrase}** does not exist.`
 					}
 				},
@@ -25,7 +25,7 @@ class PlaylistEditCommand extends Command {
 					match: 'rest',
 					type: 'string',
 					prompt: {
-						start: `what should the new description be?`
+						start: 'what should the new description be?'
 					}
 				}
 			]
@@ -39,4 +39,4 @@ class PlaylistEditCommand extends Command {
 	}
 }
 
-module.exports = PlaylistEditCommand
+module.exports = PlaylistEditCommand;

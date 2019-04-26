@@ -16,8 +16,8 @@ class BanCommand extends Command {
 					id: 'member',
 					type: 'member',
 					prompt: {
-						start: `what member do you want to ban?`,
-						retry: `please mention a valid member.`
+						start: 'what member do you want to ban?',
+						retry: 'please mention a valid member.'
 					}
 				},
 				{
@@ -70,9 +70,9 @@ class BanCommand extends Command {
 		}
 		this.client.cached.add(key);
 
-		const cases = await Case.findAll({ where: { targetID: member.id, guildID: message.guild.id }});
-		const embed = Base.historyEmbed({member, cases});
-		await message.channel.send('You sure you want me to ban this [no gender specified]?', {embed});
+		const cases = await Case.findAll({ where: { targetID: member.id, guildID: message.guild.id } });
+		const embed = Base.historyEmbed({ member, cases });
+		await message.channel.send('You sure you want me to ban this [no gender specified]?', { embed });
 		const responses = await message.channel.awaitMessages(msg => msg.author.id === message.author.id, {
 			max: 1,
 			time: 10000
@@ -99,7 +99,7 @@ class BanCommand extends Command {
 				await member.send([
 					`**You have been banned from ${message.guild.name}**`,
 					`${reason ? `\n**Reason:** ${reason}\n` : ''}`,
-					`You can appeal your ban by DMing \`SUVAJIT#5580\` with a message why you think you deserve to have your ban lifted.`
+					'You can appeal your ban by DMing `SUVAJIT#5580` with a message why you think you deserve to have your ban lifted.'
 				]);
 			} catch {} // eslint:disable-line
 			await member.ban({ days, reason: `Banned by ${message.author.tag} | Case #${totalCases}` });
@@ -119,7 +119,7 @@ class BanCommand extends Command {
 		let modMessage;
 		if (modLogChannel) {
 			const embed = Base.logEmbed({ message, member, action: 'Ban', caseNum: totalCases, reason }).setColor(Base.CONSTANTS.COLORS.BAN);
-			modMessage = await (this.client.channels.get(modLogChannel)).send(embed);
+			modMessage = await this.client.channels.get(modLogChannel).send(embed);
 		}
 
 		await Case.create({
@@ -131,7 +131,7 @@ class BanCommand extends Command {
 			guildID: message.guild.id,
 			messageID: modMessage ? modMessage.id : undefined,
 			action: Base.CONSTANTS.ACTIONS.BAN,
-			reason: reason,
+			reason,
 			createdAt: moment.utc().toDate()
 		});
 

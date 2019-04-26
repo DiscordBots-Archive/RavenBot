@@ -15,8 +15,8 @@ class RestrictReactionCommand extends Command {
 					id: 'member',
 					type: 'member',
 					prompt: {
-						start: message => `what member do you want to restrict?`,
-						retry: message => `please mention a member.`
+						start: message => 'what member do you want to restrict?',
+						retry: message => 'please mention a member.'
 					}
 				},
 				{
@@ -77,7 +77,7 @@ class RestrictReactionCommand extends Command {
 		let modMessage;
 		if (modLogChannel) {
 			const embed = Base.logEmbed({ message, member, action: 'Reaction restriction', caseNum: totalCases, reason }).setColor(Base.CONSTANTS.COLORS.REACTION);
-			modMessage = await (this.client.channels.get(modLogChannel)).send(embed);
+			modMessage = await this.client.channels.get(modLogChannel).send(embed);
 		}
 
 		await Case.create({
@@ -89,7 +89,7 @@ class RestrictReactionCommand extends Command {
 			guildID: message.guild.id,
 			messageID: modMessage ? modMessage.id : undefined,
 			action: Base.CONSTANTS.ACTIONS.REACTION,
-			reason: reason,
+			reason,
 			createdAt: moment.utc().toDate()
 		});
 

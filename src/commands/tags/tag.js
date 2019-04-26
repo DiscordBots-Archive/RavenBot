@@ -64,8 +64,8 @@ class TagCommand extends Command {
 			const prefix = this.handler.prefix(message);
 			return message.util.send(`Check \`${prefix}help tag\` for more information`);
 		}
-		
-		const command = ({
+
+		const command = {
 			show: this.handler.modules.get('tag-show'),
 			add: this.handler.modules.get('tag-add'),
 			alias: this.handler.modules.get('tag-alias'),
@@ -77,8 +77,8 @@ class TagCommand extends Command {
 			search: this.handler.modules.get('tag-search'),
 			list: this.handler.modules.get('tag-list'),
 			download: this.handler.modules.get('tag-download'),
-			dl: this.handler.modules.get('tag-download'),
-		})[method];
+			dl: this.handler.modules.get('tag-download')
+		}[method];
 
 		return this.handler.handleDirectCommand(message, name, command, true);
 	}

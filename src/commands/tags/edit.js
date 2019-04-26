@@ -14,7 +14,7 @@ class TagEditCommand extends Command {
 					id: 'tag',
 					type: 'tag',
 					prompt: {
-						start: `what tag do you want to edit?`,
+						start: 'what tag do you want to edit?',
 						retry: (msg, args, { phrase }) => `a tag with the name **${phrase}** does not exist.`
 					}
 				},
@@ -40,7 +40,7 @@ class TagEditCommand extends Command {
 						match: 'rest',
 						type: 'tagContent',
 						prompt: {
-							start: `what should the new content be?`
+							start: 'what should the new content be?'
 						}
 					}
 				])
@@ -63,6 +63,7 @@ class TagEditCommand extends Command {
 		}
 
 		await tag.update({
+			// eslint-disable-next-line no-mixed-operators
 			hoisted: hoist && staffRole ? true : tag.hoisted || unhoist && staffRole ? false : tag.hoisted,
 			content: content ? Util.cleanContent(content, message) : tag.content,
 			last_modified: message.author.id,

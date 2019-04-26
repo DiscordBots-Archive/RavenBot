@@ -19,8 +19,8 @@ class UnbanCommand extends Command {
 						return user;
 					},
 					prompt: {
-						start: `what member do you want to unban?`,
-						retry: `please mention a member...`
+						start: 'what member do you want to unban?',
+						retry: 'please mention a member...'
 					}
 				},
 				{
@@ -74,19 +74,19 @@ class UnbanCommand extends Command {
 		let modMessage;
 		if (modLogChannel) {
 			const embed = Base.logEmbed({ message, member: user, action: 'Unban', caseNum: totalCases, reason }).setColor(Base.CONSTANTS.COLORS.UNBAN);
-			modMessage = await (this.client.channels.get(modLogChannel)).send(embed);
+			modMessage = await this.client.channels.get(modLogChannel).send(embed);
 		}
 
 		await Case.create({
 			caseID: totalCases,
-			targetID: member.id,
-			targetTag: member.user.tag,
+			targetID: user.id,
+			targetTag: user.tag,
 			authorTag: message.author.tag,
 			authorID: message.author.id,
 			guildID: message.guild.id,
 			messageID: modMessage ? modMessage.id : undefined,
 			action: Base.CONSTANTS.ACTIONS.UNBAN,
-			reason: reason,
+			reason,
 			createdAt: moment.utc().toDate()
 		});
 

@@ -8,10 +8,11 @@ const Setting = db.define('settings', {
 		allowNull: false
 	},
 	settings: {
-		'type': Sequelize.JSONB,
-		'allowNull': false,
-		'default': {}
+		type: Sequelize.JSONB,
+		allowNull: false,
+		default: {}
 	}
 });
+
 
 module.exports = Setting;

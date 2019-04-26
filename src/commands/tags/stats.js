@@ -3,28 +3,28 @@ const Tags = require('../../models/Tags');
 const { db } = require('../../struct/Database');
 
 class TagStatsCommand extends Command {
-    constructor() {
-        super('tag-stats', {
-            //aliases: ['tag-stats'],
-            category: 'tags',
-            channel: 'guild',
-            args: [
-                {
-                    id: 'member',
-                    type: 'member'
-                }
-            ],
-            description: {
-                content: 'Displays tag statistics of a member.',
-                usage: '<member>',
-                examples: ['@Suvajit']
-            }
-        })
-    }
+	constructor() {
+		super('tag-stats', {
+			// aliases: ['tag-stats'],
+			category: 'tags',
+			channel: 'guild',
+			args: [
+				{
+					id: 'member',
+					type: 'member'
+				}
+			],
+			description: {
+				content: 'Displays tag statistics of a member.',
+				usage: '<member>',
+				examples: ['@Suvajit']
+			}
+		});
+	}
 
-    async exec(message, { member }) {
-        if (member) {
-            const allTags = await db.query(`
+	async exec(message, { member }) {
+		if (member) {
+			const allTags = await db.query(`
                 SELECT
                     MAX("uses") AS toptag,
                     "authorID",
@@ -35,37 +35,35 @@ class TagStatsCommand extends Command {
                 OFFSET :offset
                 LIMIT :limit
             `, {
-                type: db.Sequelize.QueryTypes.SELECT,
-                replacements: {
-                    authorID: member.user.id,
-                    guildID: message.guild.id,
-                    offset: 0,
-                    limit: 3
-                }
-            })
-            const tags = await Tags.findAll({ where: { authorID: member.user.id, guildID: message.guild.id }});
-            const totaluses = tags.reduce((count, c) => {
-                return count + c.uses;
-            }, 0);
-    
-            const users = await Promise.all(allTags.map(async row => {
-                const user = await this.client.users.fetch(row.authorID).catch(() => ({ tag: 'Could not fetch user.'}));
-    
-                return { tag: user.tag, toptag: row.toptag, name: row.name }
-            }))
-    
-            const embed = this.client.util.embed().setColor(0x8387db)
-            .setAuthor(`${member.user.tag}`, member.user.displayAvatarURL())
-    
-            if (users.length) {
-                const desc = users.map(({ tag, toptag, name }, index) => `**${name}** (${toptag} uses)`);
-                embed.addField(`Owned Tags`, tags.length).addField(`Owned Tag Uses`, totaluses)
-                .addField('Top Tags', desc)
-            }
-            return message.util.send({ embed });
-        }
+				type: db.Sequelize.QueryTypes.SELECT,
+				replacements: {
+					authorID: member.user.id,
+					guildID: message.guild.id,
+					offset: 0,
+					limit: 3
+				}
+			});
+			const tags = await Tags.findAll({ where: { authorID: member.user.id, guildID: message.guild.id } });
+			const totaluses = tags.reduce((count, c) => count + c.uses, 0);
 
-        const allTags = await db.query(`
+			const users = await Promise.all(allTags.map(async row => {
+				const user = await this.client.users.fetch(row.authorID).catch(() => ({ tag: 'Could not fetch user.' }));
+
+				return { tag: user.tag, toptag: row.toptag, name: row.name };
+			}));
+
+			const embed = this.client.util.embed().setColor(0x8387db)
+				.setAuthor(`${member.user.tag}`, member.user.displayAvatarURL());
+
+			if (users.length) {
+				const desc = users.map(({ tag, toptag, name }, index) => `**${name}** (${toptag} uses)`);
+				embed.addField('Owned Tags', tags.length).addField('Owned Tag Uses', totaluses)
+					.addField('Top Tags', desc);
+			}
+			return message.util.send({ embed });
+		}
+
+		const allTags = await db.query(`
             SELECT
                 MAX("uses") AS toptag,
                 "authorID",
@@ -76,34 +74,32 @@ class TagStatsCommand extends Command {
             OFFSET :offset
             LIMIT :limit
         `, {
-            type: db.Sequelize.QueryTypes.SELECT,
-            replacements: {
-                guildID: message.guild.id,
-                offset: 0,
-                limit: 3
-            }
-        });
-        const tags = await Tags.findAll({ where: { guildID: message.guild.id }});
-        const totaluses = tags.reduce((count, c) => {
-            return count + c.uses;
-        }, 0);
+			type: db.Sequelize.QueryTypes.SELECT,
+			replacements: {
+				guildID: message.guild.id,
+				offset: 0,
+				limit: 3
+			}
+		});
+		const tags = await Tags.findAll({ where: { guildID: message.guild.id } });
+		const totaluses = tags.reduce((count, c) => count + c.uses, 0);
 
-        const users = await Promise.all(allTags.map(async row => {
-            const user = await this.client.users.fetch(row.authorID).catch(() => ({ tag: 'Could not fetch user.'}));
+		const users = await Promise.all(allTags.map(async row => {
+			const user = await this.client.users.fetch(row.authorID).catch(() => ({ tag: 'Could not fetch user.' }));
 
-            return { tag: user.tag, toptag: row.toptag, name: row.name }
-        }))
+			return { tag: user.tag, toptag: row.toptag, name: row.name };
+		}));
 
-        const embed = this.client.util.embed().setColor(0x8387db)
-        .setAuthor(`${message.guild.name}`, message.guild.iconURL())
+		const embed = this.client.util.embed().setColor(0x8387db)
+			.setAuthor(`${message.guild.name}`, message.guild.iconURL());
 
-        if (users.length) {
-            const desc = users.map(({ tag, toptag, name }, index) => `**${name}** (${toptag} uses)`);
-            embed.addField(`Total Tags`, tags.length).addField(`Total Uses`, totaluses)
-            .addField('Top Tags', desc)
-        }
-        return message.util.send({ embed });
-    }
+		if (users.length) {
+			const desc = users.map(({ tag, toptag, name }, index) => `**${name}** (${toptag} uses)`);
+			embed.addField('Total Tags', tags.length).addField('Total Uses', totaluses)
+				.addField('Top Tags', desc);
+		}
+		return message.util.send({ embed });
+	}
 }
 
-//module.exports = TagStatsCommand;
+// module.exports = TagStatsCommand;

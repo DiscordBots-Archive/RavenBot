@@ -11,7 +11,7 @@ class ReconnectListener extends Listener {
 	}
 
 	exec() {
-		Logger.info("[RECONNECTING]");
+		Logger.info('[RECONNECTING]');
 	}
 }
 

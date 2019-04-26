@@ -11,7 +11,7 @@ class ReloadCommand extends Command {
 			args: [
 				{
 					id: 'type',
-					type: [['command', 'c'], ['inhibitor', 'i'], ['listener', 'l']],
+					type: [['command', 'c'], ['inhibitor', 'i'], ['listener', 'l']]
 				},
 				{
 					id: 'module',
@@ -20,7 +20,7 @@ class ReloadCommand extends Command {
 						const resolver = this.handler.resolver.type({
 							command: 'commandAlias',
 							inhibitor: 'inhibitor',
-							listener: 'listener',
+							listener: 'listener'
 						}[type]);
 						return resolver(phrase);
 					}
@@ -35,7 +35,7 @@ class ReloadCommand extends Command {
 
 	async exec(message, { type, module: mod }) {
 		if (!type) {
-			const  inhibitor = this.client.inhibitorHandler.removeAll() && this.client.inhibitorHandler.loadAll();
+			const inhibitor = this.client.inhibitorHandler.removeAll() && this.client.inhibitorHandler.loadAll();
 			const listener = this.client.listenerHandler.removeAll() && this.client.listenerHandler.loadAll();
 			const command = this.client.commandHandler.removeAll() && this.client.commandHandler.loadAll();
 
@@ -43,7 +43,7 @@ class ReloadCommand extends Command {
 				const cmd = await this.client.commandHandler.modules.size;
 				const listener = await this.client.listenerHandler.modules.size;
 				const inhibitor = await this.client.inhibitorHandler.modules.size;
-				return message.util.send(`Reloaded: ${cmd} commands ${listener} listeners ${inhibitor} inhibitors`, {code: 'js'});
+				return message.util.send(`Reloaded: ${cmd} commands ${listener} listeners ${inhibitor} inhibitors`, { code: 'js' });
 			}
 		}
 

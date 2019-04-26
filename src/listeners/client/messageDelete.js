@@ -11,7 +11,6 @@ class MessageDeleteListener extends Listener {
 	}
 
 	async exec(message) {
-
 		if (message.author.bot) return;
 		if (!message.content) return;
 		const guildLogs = this.client.settings.get(message.guild, 'guildLog', undefined);
@@ -20,14 +19,15 @@ class MessageDeleteListener extends Listener {
 		const attachment = message.attachments.first();
 		const embed = new MessageEmbed().setColor(0x824aee)
 			.setAuthor(`${message.author.tag} (${message.author.id})`, message.author.displayAvatarURL())
-			.addField('❯ Channel', message.channel).setThumbnail('https://i.imgur.com/EUGvQJJ.png')
+			.addField('❯ Channel', message.channel)
+			.setThumbnail('https://i.imgur.com/EUGvQJJ.png')
 			.addField('❯ Message', `${message.content.substring(0, 1020)}`);
 		if (attachment) embed.addField('❯ Attachment(s)', attachment.url);
 		embed.setTimestamp(new Date());
 		embed.setFooter('Message Deleted');
-		
+
 		if (guildLogs) {
-			this.client.channels.get(guildLogs).send({embed});
+			this.client.channels.get(guildLogs).send({ embed });
 		}
 
 		if (webhook) {

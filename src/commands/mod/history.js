@@ -31,7 +31,7 @@ class HistoryCommand extends Command {
 		if (!staffRole && message.author.id !== member.id) return message.reply('you know, I know, we should just leave it at that.');
 
 		const cases = await Case.findAll({ where: { targetID: member.id, guildID: message.guild.id } });
-		const embed = Base.historyEmbed({member, cases});
+		const embed = Base.historyEmbed({ member, cases });
 
 		return message.util.send(embed);
 	}

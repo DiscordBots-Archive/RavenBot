@@ -3,35 +3,35 @@ const fetch = require('node-fetch');
 const { MessageEmbed } = require('discord.js');
 
 class ImgurCommand extends Command {
-    constructor() {
-        super('nsfw', {
-            aliases: ['nsfw'],
-            category: 'owner',
-            args: [
-                {
-                    id: 'query',
-                    match: 'content'
-                }
-            ],
-            description: {
-                content: 'Receives random nsfw xD.'
-            }
-        })
-    }
+	constructor() {
+		super('nsfw', {
+			aliases: ['nsfw'],
+			category: 'owner',
+			args: [
+				{
+					id: 'query',
+					match: 'content'
+				}
+			],
+			description: {
+				content: 'Receives random nsfw xD.'
+			}
+		});
+	}
 
-    async exec(message, { query }) {
-        if (message.channel.id !== '555369247161843712') return;
+	async exec(message, { query }) {
+		if (message.channel.id !== '555369247161843712') return;
 
-        if (!query) { query = process.env.QUERY; }
-        query = query.replace(/[^a-zA-Z0-9_]/g, '');
-        const page = Math.floor(Math.random() * 100) + 1;
-        const image = Math.floor(Math.random() * 100) + 1;
-        try {
-            const res = await fetch(`https://api.imgur.com/3/gallery/r/${query}/all/${page}`, { method: 'GET', headers: { Authorization: `Client-ID ${process.env.IMGUR}` }});
-            const data = await res.json();
-            return message.channel.send(data.data[image].link);
+		if (!query) query = process.env.QUERY;
+		query = query.replace(/[^a-zA-Z0-9_]/g, '');
+		const page = Math.floor(Math.random() * 100) + 1;
+		const image = Math.floor(Math.random() * 100) + 1;
+		try {
+			const res = await fetch(`https://api.imgur.com/3/gallery/r/${query}/all/${page}`, { method: 'GET', headers: { Authorization: `Client-ID ${process.env.IMGUR}` } });
+			const data = await res.json();
+			return message.channel.send(data.data[image].link);
         } catch {} // eslint-disable-line
-    }
+	}
 }
 
 module.exports = ImgurCommand;

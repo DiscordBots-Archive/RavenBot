@@ -3,7 +3,7 @@ const Case = require('../models/Case');
 const Logger = require('../util/Logger');
 
 class MuteScheduler {
-	constructor(client, { checkRate =  5 * 60 * 1000 } = {}) {
+	constructor(client, { checkRate = 5 * 60 * 1000 } = {}) {
 		this.client = client;
 		this.checkRate = checkRate;
 		this.checkInterval;
@@ -42,8 +42,8 @@ class MuteScheduler {
 			member = await guild.members.fetch(mute.targetID);
 		} catch {} // eslint:disable-line
 		await Case.update({
-			action_processed : true
-		}, { where: { guildID: guild.id, targetID: member.id }});
+			action_processed: true
+		}, { where: { guildID: guild.id, targetID: member.id } });
 		if (member) {
 			try {
 				await member.roles.remove(muteRole, 'Unmuted automatically based on duration.');
@@ -82,7 +82,9 @@ class MuteScheduler {
 	}
 
 	async _check() {
-		const mutes = await Case.findAll({ where: { action_duration: { [Op.lt] : (new Date(Date.now() + this.checkRate)) }, action_processed: false, action: 5 }});
+		const mutes = await Case.findAll({
+			where: { action_duration: { [Op.lt]: new Date(Date.now() + this.checkRate) }, action_processed: false, action: 5 }
+		});
 		const now = new Date();
 		for (const mute of mutes) {
 			if (this.queuedSchedules.has(mute)) continue;

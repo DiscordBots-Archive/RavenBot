@@ -23,33 +23,33 @@ class QueueCommand extends Command {
 				examples: ['1', '3']
 			}
 		});
-	};
+	}
 
 	async exec(message, { page }) {
 		const queue = this.client.music.queues.get(message.guild.id);
 		const current = await queue.current();
 		const tracks = [(current || { track: null }).track].concat(await queue.tracks()).filter(track => track);
-		if (!tracks.length) return message.util.send(`**No queue.**`);
+		if (!tracks.length) return message.util.send('**No queue.**');
 		const decoded = await this.client.music.decode(tracks);
 		const totalLength = decoded.reduce((prev, song) => prev + song.info.length, 0);
-		const paginated = paginate({items: decoded.slice(1), page});
+		const paginated = paginate({ items: decoded.slice(1), page });
 		let index = (paginated.page - 1) * 10;
 
 		const embed = new MessageEmbed().setColor('#8387db')
-		.setAuthor(`Queue for ${message.guild.name}`, message.guild.iconURL())
+			.setAuthor(`Queue for ${message.guild.name}`, message.guild.iconURL())
 
-		.setDescription(`**NOW PLAYING ${this.client.emojis.get('545628508962029569')}** \n\n`+
+			.setDescription(`**NOW PLAYING ${this.client.emojis.get('545628508962029569')}** \n\n` +
 
-			`**❯** [${decoded[0].info.title}](${decoded[0].info.uri}) (${timeString({seconds: current.position})}/${timeString({seconds: decoded[0].info.length})}) \n\n` +
+			`**❯** [${decoded[0].info.title}](${decoded[0].info.uri}) (${timeString({ seconds: current.position })}/${timeString({ seconds: decoded[0].info.length })}) \n\n` +
 
 			`**Queue${paginated.maxPage > 1 ? `, Page ${paginated.page}/${paginated.maxPage}` : ''}** \n\n` +
 
-			`${paginated.items.length ? paginated.items.map(song => `**${++index}.** [${song.info.title}](${song.info.uri}) (${timeString({seconds: song.info.length})})`).join('\n') : 'None'}\n\n` +
+			`${paginated.items.length ? paginated.items.map(song => `**${++index}.** [${song.info.title}](${song.info.uri}) (${timeString({ seconds: song.info.length })})`).join('\n') : 'None'}\n\n` +
 
-			`Time~ ${timeString({seconds: totalLength})}${decoded.length > 10 ? `, Songs~ ${decoded.length}` : ``}`);
+			`Time~ ${timeString({ seconds: totalLength })}${decoded.length > 10 ? `, Songs~ ${decoded.length}` : ''}`);
 
-			if (paginated.maxPage > 1) embed.setFooter(`\`queue <page>\` to view a specific page`);
-			
+		if (paginated.maxPage > 1) embed.setFooter('`queue <page>` to view a specific page');
+
 		return message.util.send(embed);
 	}
 }

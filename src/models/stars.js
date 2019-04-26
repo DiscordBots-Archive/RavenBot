@@ -34,4 +34,5 @@ const Star = db.define('stars', {
 	}
 });
 
+
 module.exports = Star;

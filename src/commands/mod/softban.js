@@ -16,8 +16,8 @@ class SoftbanCommand extends Command {
 					id: 'member',
 					type: 'member',
 					prompt: {
-						start: `what member do you want to softban?`,
-						retry: `please mention a member...`
+						start: 'what member do you want to softban?',
+						retry: 'please mention a member...'
 					}
 				},
 				{
@@ -67,8 +67,8 @@ class SoftbanCommand extends Command {
 				await member.send([
 					`**You have been softbanned from ${message.guild.name}**`,
 					`${reason ? `\n**Reason:** ${reason}\n` : ''}`,
-					`A softban is a kick that uses ban + unban to remove your messages from the server.`,
-					`You may rejoin whenever.`
+					'A softban is a kick that uses ban + unban to remove your messages from the server.',
+					'You may rejoin whenever.'
 				]);
 			} catch {} // eslint:disable-line
 		} catch (error) {
@@ -88,7 +88,7 @@ class SoftbanCommand extends Command {
 		let modMessage;
 		if (modLogChannel) {
 			const embed = Base.logEmbed({ message, member, action: 'Softban', caseNum: totalCases, reason }).setColor(Base.CONSTANTS.COLORS.SOFTBAN);
-			modMessage = await (this.client.channels.get(modLogChannel)).send(embed);
+			modMessage = await this.client.channels.get(modLogChannel).send(embed);
 		}
 
 		await Case.create({
@@ -100,7 +100,7 @@ class SoftbanCommand extends Command {
 			guildID: message.guild.id,
 			messageID: modMessage ? modMessage.id : undefined,
 			action: Base.CONSTANTS.ACTIONS.SOFTBAN,
-			reason: reason,
+			reason,
 			createdAt: moment.utc().toDate()
 		});
 

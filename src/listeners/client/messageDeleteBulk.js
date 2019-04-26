@@ -1,6 +1,7 @@
 const { Listener } = require('discord-akairo');
 const { MessageEmbed, WebhookClient } = require('discord.js');
-const moment = require('moment'); require('moment-duration-format');
+const moment = require('moment');
+require('moment-duration-format');
 
 class MessageDeleteBulkListener extends Listener {
 	constructor() {
@@ -22,11 +23,12 @@ class MessageDeleteBulkListener extends Listener {
 			return out;
 		}, '');
 		const embed = new MessageEmbed()
-		.setColor(0x824aee)
-		.setAuthor(`${messages.first().author.tag} (${messages.first().author.id})`, messages.first().author.displayAvatarURL())
-		.addField('❯ Logs', 'See attachment file for full logs (possibly above this embed)')
-		.setTimestamp(new Date()).setThumbnail('https://i.imgur.com/EUGvQJJ.png')
-		.setFooter('Bulk Deleted');
+			.setColor(0x824aee)
+			.setAuthor(`${messages.first().author.tag} (${messages.first().author.id})`, messages.first().author.displayAvatarURL())
+			.addField('❯ Logs', 'See attachment file for full logs (possibly above this embed)')
+			.setTimestamp(new Date())
+			.setThumbnail('https://i.imgur.com/EUGvQJJ.png')
+			.setFooter('Bulk Deleted');
 
 		if (guildLogs) {
 			this.client.channels.get(guildLogs).send({ embed, files: [{ attachment: Buffer.from(output, 'utf8'), name: 'logs.txt' }] });

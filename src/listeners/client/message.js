@@ -7,9 +7,9 @@ class MessageListener extends Listener {
 			event: 'message',
 			category: 'client'
 		});
-	};
+	}
 
-	async exec(message) {
+	async exec() {
 		this.client.prometheus.messagesCounter.inc();
 	}
 }

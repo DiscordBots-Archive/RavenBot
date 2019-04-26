@@ -25,14 +25,14 @@ class TagDownloadCommand extends Command {
 
 	async exec(message, { member }) {
 		const where = member ? { authorID: member.id, guildID: message.guild.id } : { guildID: message.guild.id };
-		const tags = await Tags.findAll({ where: where });
+		const tags = await Tags.findAll({ where });
 		if (!tags.length) return;
 		const output = tags.reduce((out, t) => {
 			out += `Name: ${t.name}\r\nContent:\r\n${t.content.replace(/\n/g, '\r\n')}\r\n\r\n========================================\r\n\r\n`;
 			return out;
 		}, '');
 
-		return message.util.send('Haiiiii~', { files: [{ attachment: Buffer.from(output, 'utf8'), name: `${member ? `${member.displayName}s_tags` : 'all_tags' }.txt` }] });
+		return message.util.send('Haiiiii~', { files: [{ attachment: Buffer.from(output, 'utf8'), name: `${member ? `${member.displayName}s_tags` : 'all_tags'}.txt` }] });
 	}
 }
 

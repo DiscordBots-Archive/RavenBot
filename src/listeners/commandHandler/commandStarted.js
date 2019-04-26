@@ -1,3 +1,4 @@
+/* eslint-disable multiline-ternary */
 const { Listener } = require('discord-akairo');
 const Logger = require('../../util/Logger');
 const Raven = require('raven');
@@ -17,35 +18,33 @@ class CommandStartedListener extends Listener {
 		this.client.prometheus.commandCounter.inc();
 
 		if (message.guild && command.categoryID && command.categoryID !== 'owner') {
-			const _command = await Commands.findOne({ where: { guildID: message.guild.id, commandID: command.id }});
+			const _command = await Commands.findOne({ where: { guildID: message.guild.id, commandID: command.id } });
 			if (_command) {
 				await Commands.update({
 					uses: _command.uses + 1, categoryID: command.categoryID,
 					commandAlias: command.aliases ? command.aliases[0] : command.id
-				}, { where: { guildID: message.guild.id, commandID: command.id }});
-
-			} else await Commands.create({
-				commandID: command.id, guildID: message.guild.id, uses: 1, categoryID: command.categoryID,
-				commandAlias: command.aliases ? command.aliases[0] : command.id
-			});
+				}, { where: { guildID: message.guild.id, commandID: command.id } });
+			} else {
+				await Commands.create({
+					commandID: command.id, guildID: message.guild.id, uses: 1, categoryID: command.categoryID,
+					commandAlias: command.aliases ? command.aliases[0] : command.id
+				});
+			}
 
 			if (command.id === 'tag-show') {
-				const _user = await Levels.findOne({ where: { guildID: message.guild.id, userID: message.author.id }});
+				const _user = await Levels.findOne({ where: { guildID: message.guild.id, userID: message.author.id } });
 				if (_user) {
 					await Levels.update({
 						tagUses: _user.tagUses + 1
-					}, { where: { guildID: message.guild.id, userID: message.author.id }});
-
-				} else await Levels.create({ guildID: message.guild.id, userID: message.author.id, tagUses: 1 });
-
+					}, { where: { guildID: message.guild.id, userID: message.author.id } });
+				} else { await Levels.create({ guildID: message.guild.id, userID: message.author.id, tagUses: 1 }); }
 			} else if (command.categoryID !== 'tags') {
-				const _user = await Levels.findOne({ where: { guildID: message.guild.id, userID: message.author.id }});
+				const _user = await Levels.findOne({ where: { guildID: message.guild.id, userID: message.author.id } });
 				if (_user) {
 					await Levels.update({
 						commandUses: _user.commandUses + 1
-					}, { where: { guildID: message.guild.id, userID: message.author.id }});
-
-				} else await Levels.create({ guildID: message.guild.id, userID: message.author.id, commandUses: 1 });
+					}, { where: { guildID: message.guild.id, userID: message.author.id } });
+				} else { await Levels.create({ guildID: message.guild.id, userID: message.author.id, commandUses: 1 }); }
 			}
 		}
 

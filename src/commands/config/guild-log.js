@@ -12,7 +12,7 @@ class SetGuildLogCommand extends Command {
 				{
 					id: 'channel',
 					match: 'content',
-					type: 'textChannel',
+					type: 'textChannel'
 				}
 			],
 			description: {

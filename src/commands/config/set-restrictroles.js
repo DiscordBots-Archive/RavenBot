@@ -13,24 +13,24 @@ class SetRestrictRoles extends Command {
 					id: 'embed',
 					type: 'role',
 					prompt: {
-						start: message => `what role should act as the embed restricted role?`,
-						retry: message => `please mention a proper role to be the embed restricted role.`
+						start: message => 'what role should act as the embed restricted role?',
+						retry: message => 'please mention a proper role to be the embed restricted role.'
 					}
 				},
 				{
 					id: 'emoji',
 					type: 'role',
 					prompt: {
-						start: message => `what role should act as the emoji restricted role?`,
-						retry: message => `please mention a proper role to be the emoji restricted role.`
+						start: message => 'what role should act as the emoji restricted role?',
+						retry: message => 'please mention a proper role to be the emoji restricted role.'
 					}
 				},
 				{
 					id: 'reaction',
 					type: 'role',
 					prompt: {
-						start: `what role should act as the reaction restricted role?`,
-						retry: `please mention a proper role to be the reaction restricted role.`
+						start: 'what role should act as the reaction restricted role?',
+						retry: 'please mention a proper role to be the reaction restricted role.'
 					}
 				}
 			],

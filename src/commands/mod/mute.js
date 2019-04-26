@@ -20,8 +20,8 @@ class MuteCommand extends Command {
 					id: 'member',
 					type: 'member',
 					prompt: {
-						start: `what member do you want to mute?`,
-						retry: `please mention a member.`
+						start: 'what member do you want to mute?',
+						retry: 'please mention a member.'
 					}
 				},
 				{
@@ -33,8 +33,8 @@ class MuteCommand extends Command {
 						return null;
 					},
 					prompt: {
-						start: `for how long do you want the mute to last?`,
-						retry: `please use a proper time format.`
+						start: 'for how long do you want the mute to last?',
+						retry: 'please use a proper time format.'
 					}
 				},
 				{
@@ -90,7 +90,7 @@ class MuteCommand extends Command {
 		let modMessage;
 		if (modLogChannel) {
 			const embed = Base.logEmbed({ message, member, action: 'Mute', duration, caseNum: totalCases, reason }).setColor(Base.CONSTANTS.COLORS.MUTE);
-			modMessage = await (this.client.channels.get(modLogChannel)).send(embed);
+			modMessage = await this.client.channels.get(modLogChannel).send(embed);
 		}
 
 		await this.client.muteScheduler.addMute({
@@ -104,8 +104,8 @@ class MuteCommand extends Command {
 			action: Base.CONSTANTS.ACTIONS.MUTE,
 			action_duration: new Date(Date.now() + duration),
 			action_processed: false,
-			reason: reason
-		})
+			reason
+		});
 
 		return message.util.send(`Successfully muted **${member.user.tag}**`);
 	}

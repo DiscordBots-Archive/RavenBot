@@ -4,8 +4,7 @@ const readdir = require('util').promisify(require('fs').readdir);
 const Sequelize = require('sequelize');
 
 const db = new Sequelize(process.env.PostgreSQL, {
-	logging: false,
-	operatorsAliases: Sequelize.Op
+	logging: false
 });
 
 class Database {

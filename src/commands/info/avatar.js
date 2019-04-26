@@ -1,34 +1,33 @@
 const { Command } = require('discord-akairo');
 
 class AvatarCommand extends Command {
-    constructor() {
-        super('avatar', {
-            aliases: ['avatar'],
-            category: 'info',
-            clientPermissions: ['EMBED_LINKS'],
-            channel: 'guild',
-            args: [
-                {
-                    id: 'member',
-                    type: 'member',
-                    default: message => message.member
-                }
-            ],
-            description: {
-                content: 'Displays avatar of a member.',
-                usage: '<member>',
-                examples: ['@Suvajit', 'Suvajit', '444432489818357760']
-            }
-        })
-    }
+	constructor() {
+		super('avatar', {
+			aliases: ['avatar'],
+			category: 'info',
+			clientPermissions: ['EMBED_LINKS'],
+			channel: 'guild',
+			args: [
+				{
+					id: 'member',
+					type: 'member',
+					default: message => message.member
+				}
+			],
+			description: {
+				content: 'Displays avatar of a member.',
+				usage: '<member>',
+				examples: ['@Suvajit', 'Suvajit', '444432489818357760']
+			}
+		});
+	}
 
-    async exec(message, { member }) {
+	async exec(message, { member }) {
+		const embed = this.client.util.embed().setColor('RANDOM')
+			.setAuthor(member.user.tag)
+			.setImage(member.user.avatarURL({ size: 2048 }));
 
-        const embed = this.client.util.embed().setColor('RANDOM')
-        .setAuthor(member.user.tag)
-        .setImage(member.user.avatarURL({ size: 2048 }))
-
-        if (message.channel.type === 'dm' || !(message.channel).permissionsFor(message.guild.me).has(['ADD_REACTIONS', 'MANAGE_MESSAGES'], false)) {
+		if (message.channel.type === 'dm' || !message.channel.permissionsFor(message.guild.me).has(['ADD_REACTIONS', 'MANAGE_MESSAGES'], false)) {
 			return message.util.send({ embed });
 		}
 		const msg = await message.util.send({ embed });
@@ -40,14 +39,14 @@ class AvatarCommand extends Command {
 				{ max: 1, time: 30000, errors: ['time'] }
 			);
 		} catch (error) {
-            msg.reactions.removeAll();
-            
+			msg.reactions.removeAll();
+
 			return message;
 		}
-        react.first().message.delete();
-        
+		react.first().message.delete();
+
 		return message;
-    }
+	}
 }
 
 module.exports = AvatarCommand;
