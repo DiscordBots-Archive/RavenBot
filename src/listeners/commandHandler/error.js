@@ -2,6 +2,7 @@
 const { Listener } = require('discord-akairo');
 const Logger = require('../../util/Logger');
 const Raven = require('raven');
+const Winston = require('../../util/Winston');
 
 class ErrorListener extends Listener {
 	constructor() {
@@ -13,11 +14,9 @@ class ErrorListener extends Listener {
 	}
 
 	async exec(error, message, command) {
-		Logger.error('An error occured in a command.');
-
-		const tag = message.guild ? `${message.guild.name} :: ${message.author.tag} (${message.author.id})` : `${message.author.tag} (${message.author.id})`;
-		Logger.error(message.content, { tag });
-		Logger.stacktrace(error);
+		const tag = message.guild ? `${message.guild.name}/${message.author.tag}` : `${message.author.tag}`;
+		Logger.error(`[${message.content}] ${error}`, { tag });
+		Winston.debug(`[COMMAND STARTED] [${tag}] [${message.content}] ${error}`, error.stack);
 
 		Raven.captureBreadcrumb({
 			message: 'command_errored',

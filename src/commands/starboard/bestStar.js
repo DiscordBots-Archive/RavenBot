@@ -1,6 +1,6 @@
 const { Command } = require('discord-akairo');
 const Sequelize = require('sequelize');
-const Star = require('../../models/stars');
+const Star = require('../../models/Stars');
 const Starboard = require('../../struct/Starboard');
 
 class BestStarCommand extends Command {
@@ -27,7 +27,7 @@ class BestStarCommand extends Command {
 			order: Sequelize.literal('"starCount" DESC')
 		});
 
-		const embed = this.client.util.embed().setColor(0xFFAC33);
+		const embed = this.client.util.embed().setColor(0x8387db);
 
 		if (bestStar) {
 			const msg = await message.guild.channels.get(bestStar.channelID)

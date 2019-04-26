@@ -12,10 +12,10 @@ class TopStarsCommand extends Command {
 			quoted: false,
 			args: [
 				{
-					'id': 'page',
-					'type': Argument.range('integer', 0, Infinity),
-					'default': 1,
-					'prompt': {
+					id: 'page',
+					type: Argument.range('integer', 0, Infinity),
+					default: 1,
+					prompt: {
 						start: 'Invalid page. Which page would you like to view?',
 						retry: 'Please provide a valid page number.',
 						optional: true
@@ -77,7 +77,7 @@ class TopStarsCommand extends Command {
 		}));
 
 		const embed = this.client.util.embed()
-			.setColor(0xFFAC33)
+			.setColor(0x8387db)
 			.setTitle(`Star Leaderboard — Page ${page} of ${Math.ceil(total / this.perPage)}`);
 
 		if (users.length) {

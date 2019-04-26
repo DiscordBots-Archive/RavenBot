@@ -13,10 +13,11 @@ class CommandBlockedListener extends Listener {
 	exec(message, command, reason) {
 		const text = {
 			owner: () => 'You must be the owner to use this command.',
-			guild: () => 'You must be in a guild to use this command.'
+			guild: () => 'You must be in a guild to use this command.',
+			moderation: () => 'Moderation commands are disabled, type `?moderation` to enable it.'
 		}[reason];
 
-		const tag = message.guild ? `${message.guild.name} :: ${message.author.tag} (${message.author.id})` : `${message.author.tag} (${message.author.id})`;
+		const tag = message.guild ? `${message.guild.name}/${message.author.tag}` : `${message.author.tag}`;
 		Logger.log(`=> ${command.id} ~ ${reason}`, { tag });
 
 		if (!text) return;

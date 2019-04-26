@@ -1,5 +1,5 @@
 const { Command } = require('discord-akairo');
-const Reputation = require('../../models/reputations');
+const Reputation = require('../../models/Reputations');
 
 class AddRepCommand extends Command {
 	constructor() {
@@ -27,8 +27,8 @@ class AddRepCommand extends Command {
 					'You can only give one rep to a person.',
 					'Reusing this command will simply replace the reason.'
 				],
-				usage: '<user> [reason...]',
-				examples: ['@Suvajit because he is a cool dude', 'Jim#9327']
+				usage: '<user> <...reason>',
+				examples: ['@Suvajit because he is a cool dude', 'Suvajit#5580']
 			}
 		});
 	}

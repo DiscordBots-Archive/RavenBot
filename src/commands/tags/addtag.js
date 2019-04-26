@@ -14,7 +14,7 @@ class TagAddCommand extends Command {
 					type: 'existingTag',
 					prompt: {
 						start: 'what should the tag be named?',
-						retry: (msg, args, { phrase }) => `a tag with the name **${phrase}** already exists.`
+						retry: (msg, { phrase }) => `a tag with the name **${phrase}** already exists.`
 					}
 				},
 				{

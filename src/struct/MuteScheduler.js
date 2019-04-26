@@ -13,6 +13,7 @@ class MuteScheduler {
 	async addMute(mute, reschedule = false) {
 		Logger.info(`Muted ${mute.targetTag} on ${this.client.guilds.get(`${mute.guildID}`).name}`, { tag: 'MUTE' });
 		if (reschedule) Logger.info(`Rescheduled mute on ${mute.targetID} on ${this.client.guilds.get(mute.guildID)}`, { tag: 'Rescheduled Mute' });
+
 		if (!reschedule) {
 			await Case.create({
 				caseID: mute.caseID,
@@ -35,15 +36,18 @@ class MuteScheduler {
 
 	async cancelMute(mute) {
 		Logger.info(`Unmuted ${mute.targetID} on ${this.client.guilds.get(mute.guildID)}`, { tag: 'UNMUTE' });
+
 		const guild = await this.client.guilds.get(`${mute.guildID}`);
 		const muteRole = await this.client.settings.get(guild, 'muteRole', undefined);
 		let member;
 		try {
 			member = await guild.members.fetch(mute.targetID);
 		} catch {} // eslint:disable-line
+
 		await Case.update({
 			action_processed: true
 		}, { where: { guildID: guild.id, targetID: member.id } });
+
 		if (member) {
 			try {
 				await member.roles.remove(muteRole, 'Unmuted automatically based on duration.');
@@ -54,14 +58,6 @@ class MuteScheduler {
 		return this.queuedSchedules.delete(mute);
 	}
 
-	async deleteMute(mute) {
-		const schedule = this.queuedSchedules.get(mute);
-		if (schedule) clearTimeout(schedule);
-		this.queuedSchedules.delete(mute);
-		const deleted = await Case.destroy({ where: mute });
-		return deleted;
-	}
-
 	queueMute(mute) {
 		this.queuedSchedules.set(mute, setTimeout(() => {
 			this.cancelMute(mute);
@@ -70,6 +66,7 @@ class MuteScheduler {
 
 	rescheduleMute(mute) {
 		Logger.info('Rescheduling Mute', { tag: 'Rescheduling Mute' });
+
 		const schedule = this.queuedSchedules.get(mute);
 		if (schedule) clearTimeout(schedule);
 		this.queuedSchedules.delete(mute);

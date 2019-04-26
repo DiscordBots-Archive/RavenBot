@@ -1,5 +1,4 @@
 const { Command } = require('discord-akairo');
-const { MessageEmbed } = require('discord.js');
 
 class TagCommand extends Command {
 	constructor() {
@@ -11,7 +10,7 @@ class TagCommand extends Command {
 			args: [
 				{
 					id: 'method',
-					type: ['show', 'add', 'alias', 'del', 'delete', 'edit', 'source', 'info', 'search', 'list', 'download', 'dl']
+					type: ['show', 'add', 'alias', 'del', 'delete', 'edit', 'source', 'info', 'search', 'list', 'download', 'dl', 'stats']
 				},
 				{
 					id: 'name',
@@ -32,6 +31,7 @@ class TagCommand extends Command {
 					'• search `<tag>`',
 					'• list `[member]`',
 					'• download `[member]`',
+					'• stats [member]',
 					'Required: `<>` | Optional: `[]`',
 					'For additional `<...arguments>` usage refer to the examples below'
 				],
@@ -77,7 +77,8 @@ class TagCommand extends Command {
 			search: this.handler.modules.get('tag-search'),
 			list: this.handler.modules.get('tag-list'),
 			download: this.handler.modules.get('tag-download'),
-			dl: this.handler.modules.get('tag-download')
+			dl: this.handler.modules.get('tag-download'),
+			stats: this.handler.modules.get('tag-stats')
 		}[method];
 
 		return this.handler.handleDirectCommand(message, name, command, true);

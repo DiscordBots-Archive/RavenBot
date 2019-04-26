@@ -3,15 +3,15 @@ const Logger = require('../../util/Logger');
 
 class ResumeListener extends Listener {
 	constructor() {
-		super('resumed', {
+		super('resume', {
 			emitter: 'client',
-			event: 'resumed',
+			event: 'resume',
 			category: 'client'
 		});
 	}
 
-	exec(events) {
-		Logger.info(`[RESUME] (replayed ${events} events)`);
+	exec(events, shardID) {
+		Logger.info(`(replayed ${events} events) (Shard ID ${shardID})`, { tag: 'RESUME' });
 	}
 }
 

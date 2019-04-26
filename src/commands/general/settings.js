@@ -1,5 +1,4 @@
 const { Command } = require('discord-akairo');
-const ReactionRole = require('../../models/ReactionRoles');
 
 class SettingsCommand extends Command {
 	constructor() {

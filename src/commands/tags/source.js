@@ -1,4 +1,3 @@
-/* eslint-disable multiline-ternary */
 const { Command } = require('discord-akairo');
 
 class TagSourceCommand extends Command {
@@ -20,7 +19,7 @@ class TagSourceCommand extends Command {
 					type: 'tag',
 					prompt: {
 						start: 'what tag would you like to see the source of?',
-						retry: (msg, args, { phrase }) => `a tag with the name **${phrase}** does not exist.`
+						retry: (msg, { phrase }) => `a tag with the name **${phrase}** does not exist.`
 					}
 				}
 			],
@@ -31,12 +30,12 @@ class TagSourceCommand extends Command {
 		});
 	}
 
-	async exec(message, { tag, file }) {
+	exec(message, { tag, file }) {
 		return message.util.send(tag.content, {
 			code: 'md',
+			// eslint-disable-next-line multiline-ternary
 			files: file ? [{
-				attachment: Buffer.from(tag.content.replace(/\n/g, '\r\n'), 'utf8'),
-				name: `${tag.name}_source.txt`
+				attachment: Buffer.from(tag.content.replace(/\n/g, '\r\n'), 'utf8'), name: `${tag.name}_source.txt`
 			}] : undefined
 		});
 	}

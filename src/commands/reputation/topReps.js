@@ -60,7 +60,7 @@ class TopRepsCommand extends Command {
 		});
 
 		const users = await Promise.all(topReps.map(async row => {
-			const user = await this.client.users.fetch(row.targetID).catch(() => ({ tag: 'Unknown#????' }));
+			const user = await this.client.users.fetch(row.targetID).catch(() => ({ tag: 'Invalid#0000' }));
 
 			return {
 				tag: user.tag,
@@ -69,7 +69,7 @@ class TopRepsCommand extends Command {
 		}));
 
 		const embed = this.client.util.embed()
-			.setColor(0xFFAC33)
+			.setColor(0x8387db)
 			.setTitle(`Reputation Leaderboard — Page ${page} of ${Math.ceil(total / this.perPage)}`);
 
 		if (users.length) {

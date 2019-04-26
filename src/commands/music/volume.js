@@ -11,15 +11,15 @@ class VolumeCommand extends Command {
 			args: [
 				{
 					id: 'amount',
-					type: phrase => {
+					type: (_, phrase) => {
 						if (!phrase || isNaN(phrase)) return null;
 						const num = parseInt(phrase); // eslint-disable-line
 						if (num < 10 && num > 100) return null;
 						return num;
 					},
 					prompt: {
-						start: message => `${message.author}, what is the limit?`,
-						retry: message => `${message.author}, please provide a valid number...`
+						start: 'what is the limit?',
+						retry: 'please provide a valid number...'
 					}
 				}
 			],

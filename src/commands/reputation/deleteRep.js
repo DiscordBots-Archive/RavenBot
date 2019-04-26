@@ -1,5 +1,5 @@
 const { Command } = require('discord-akairo');
-const Reputation = require('../../models/reputations');
+const Reputation = require('../../models/Reputations');
 
 class DeleteRepCommand extends Command {
 	constructor() {
@@ -9,30 +9,30 @@ class DeleteRepCommand extends Command {
 			channel: 'guild',
 			userPermissions: ['MANAGE_MESSAGES'],
 			clientPermissions: ['MANAGE_MESSAGES'],
-			args: [
-				{
-					id: 'source',
-					type: 'member',
-					prompt: {
-						start: 'Which user gave the reputation you would like to delete?',
-						retry: 'Please provide a valid user.'
-					}
-				},
-				{
-					id: 'target',
-					type: 'member',
-					prompt: {
-						start: (msg, { source }) => `Which user's rep by **${source.user.tag}** would you like to delete?`,
-						retry: 'Please provide a valid user.'
-					}
-				}
-			],
 			description: {
 				content: 'Deletes a reputation from someone to someone else.',
 				usage: '<source user> <target user>',
 				examples: ['@badrepper @innocentperson']
 			}
 		});
+	}
+
+	async *args() {
+		const source = yield {
+			type: 'member',
+			prompt: {
+				start: 'Which user gave the reputation you would like to delete?',
+				retry: 'Please provide a valid user.'
+			}
+		};
+		const target = yield {
+			type: 'member',
+			prompt: {
+				start: `Which user's rep by **${source.user.tag}** would you like to delete?`,
+				retry: 'Please provide a valid user.'
+			}
+		};
+		return { source, target };
 	}
 
 	async exec(message, { source, target }) {

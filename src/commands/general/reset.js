@@ -1,5 +1,5 @@
 const { Command } = require('discord-akairo');
-const Reputation = require('../../models/reputations');
+const Reputation = require('../../models/Reputations');
 
 class ResetCommand extends Command {
 	constructor() {
@@ -17,8 +17,7 @@ class ResetCommand extends Command {
 		});
 	}
 
-	// eslint-disable-next-line require-await
-	async *args() {
+	*args() {
 		const mode = yield {
 			match: 'content',
 			type: [['stars', 'star'], ['reps', 'rep'], 'all'],

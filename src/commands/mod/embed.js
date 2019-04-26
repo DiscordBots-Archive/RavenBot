@@ -15,8 +15,8 @@ class RestrictEmbedCommand extends Command {
 					id: 'member',
 					type: 'member',
 					prompt: {
-						start: message => 'what member do you want to restrict?',
-						retry: message => 'please mention a member.'
+						start: 'what member do you want to restrict?',
+						retry: 'please mention a member.'
 					}
 				},
 				{

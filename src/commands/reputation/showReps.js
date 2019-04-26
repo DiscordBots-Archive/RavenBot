@@ -1,5 +1,5 @@
 const { Argument, Command } = require('discord-akairo');
-const Reputation = require('../../models/reputations');
+const Reputation = require('../../models/Reputations');
 
 class ShowRepsCommand extends Command {
 	constructor() {
