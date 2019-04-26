@@ -19,7 +19,7 @@ class StatsCommand extends Command {
 	async exec(message) {
 		const embed = new MessageEmbed().setColor('#8387db').setTitle(`${this.client.user.username} Statistics`)
 			.setThumbnail(this.client.user.displayAvatarURL())
-			.setURL('http://raven.almostsuvajit.xyz/metrics')
+			.setURL('http://almostsuvajit.xyz/raven')
 			.addField('❯ Memory Usage', [
 				`• Using : ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`,
 				`• Free : ${Math.round(os.freemem())} MB`
