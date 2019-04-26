@@ -41,8 +41,8 @@ class SkipCommand extends Command {
 
 	async exec(message, { num }) {
 		if (!message.member.voice || !message.member.voice.channel) {
-			return message.util.reply(`you have to be in a voice channel.`);
-		};
+			return message.util.reply('you have to be in a voice channel.');
+		}
 		const queue = this.client.music.queues.get(message.guild.id);
 		let tracks;
 		if (num > 1) tracks = await this.client.music.queues.redis.lrange(`playlists.${message.guild.id}`, 0, num - 2);
@@ -52,7 +52,7 @@ class SkipCommand extends Command {
 		if (!skip) {
 			await queue.stop();
 			return message.util.send(`**Skipped Last Song** ${this.client.emojis.get('545628508962029569')}`);
-		};
+		}
 		const decoded = await this.client.music.decode(tracks);
 		const totalLength = decoded.reduce((prev, song) => prev + song.info.length, 0);
 		const paginated = paginate({ items: decoded, page: 1, pageLength: 10 });
@@ -60,8 +60,8 @@ class SkipCommand extends Command {
 
 		const embed = new MessageEmbed().setColor('#8387db').setTimestamp()
 			.setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
-			.setDescription(`**SKIPPED** \n${paginated.items.map(song => `**${++index}.** [${song.info.title}](${song.info.uri}) (${timeString({seconds: song.info.length})})`).join('\n')}\n`)
-			.setFooter(`(Time~ ${timeString({seconds: totalLength})})`)
+			.setDescription(`**SKIPPED** \n${paginated.items.map(song => `**${++index}.** [${song.info.title}](${song.info.uri}) (${timeString({ seconds: song.info.length })})`).join('\n')}\n`)
+			.setFooter(`(Time~ ${timeString({ seconds: totalLength })})`);
 		return message.util.send(embed);
 	}
 }

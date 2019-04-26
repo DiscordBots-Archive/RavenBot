@@ -1,6 +1,7 @@
 const { Command } = require('discord-akairo');
 const { MessageEmbed } = require('discord.js');
-const moment = require('moment'); require('moment-duration-format');
+const moment = require('moment');
+require('moment-duration-format');
 
 class PlaylistInfoCommand extends Command {
 	constructor() {
@@ -19,7 +20,7 @@ class PlaylistInfoCommand extends Command {
 					match: 'content',
 					type: 'playlist',
 					prompt: {
-						start: `what playlist do you want information on?`,
+						start: 'what playlist do you want information on?',
 						retry: (msg, args, { phrase }) => `a playlist with the name **${phrase}** does not exist.`
 					}
 				}
@@ -32,10 +33,10 @@ class PlaylistInfoCommand extends Command {
 		const guild = this.client.guilds.get(playlist.guildID);
 		const embed = new MessageEmbed()
 			.setColor(3447003)
-			.setAuthor(user? user.tag : message.guild.name, user ? user.displayAvatarURL() : message.guild.iconURL())
+			.setAuthor(user ? user.tag : message.guild.name, user ? user.displayAvatarURL() : message.guild.iconURL())
 			.setTitle(playlist.name)
 			.addField('Description', playlist.description ? playlist.description.substring(0, 1020) : 'No description')
-			.addField('Guild', guild ? `${guild.name}` : "Couldn't Fetch Guild")
+			.addField('Guild', guild ? `${guild.name}` : 'Couldn\'t Fetch Guild')
 			.addField('Songs', playlist.songs.length || 'No songs')
 			.addField('Plays', playlist.plays)
 			.addField('Created at', moment.utc(playlist.createdAt).format('DD-MM-YYYY kk:mm:ss'))

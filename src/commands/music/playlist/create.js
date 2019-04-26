@@ -17,7 +17,7 @@ class PlaylistCreateCommand extends Command {
 					id: 'playlist',
 					type: 'existingPlaylist',
 					prompt: {
-						start: `what playlist do you want to create?`,
+						start: 'what playlist do you want to create?',
 						retry: (msg, args, { phrase }) => `a playlist with the name **${phrase}** already exists.`
 					}
 				},
@@ -36,7 +36,7 @@ class PlaylistCreateCommand extends Command {
 			guildID: message.guild.id,
 			name: playlist,
 			description: info ? Util.cleanContent(info, message) : ''
-		})
+		});
 
 		return message.util.reply(`successfully created **${pls.name}**.`);
 	}

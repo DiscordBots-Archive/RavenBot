@@ -12,7 +12,7 @@ class SetModRoleCommand extends Command {
 				{
 					id: 'role',
 					match: 'content',
-					type: 'role',
+					type: 'role'
 				}
 			],
 			description: {

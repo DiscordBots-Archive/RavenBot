@@ -17,7 +17,7 @@ class PlaylistLoadCommand extends Command {
 					match: 'content',
 					type: 'playlist',
 					prompt: {
-						start: `what playlist should be played?`,
+						start: 'what playlist should be played?',
 						retry: (msg, args, { phrase }) => `a playlist with the name **${phrase}** does not exist.`
 					}
 				}
@@ -29,9 +29,9 @@ class PlaylistLoadCommand extends Command {
 		if (!message.member.voice || !message.member.voice.channel) {
 			return message.util.reply('you have to be in a voice channel.');
 		} else if (!message.member.voice.channel.joinable) {
-			return message.util.reply("I don't seem to have permission to enter this voice channel.");
+			return message.util.reply('I don\'t seem to have permission to enter this voice channel.');
 		} else if (!message.member.voice.channel.speakable) {
-			return message.util.reply("I don't seem to have permission to talk in this voice channel.");
+			return message.util.reply('I don\'t seem to have permission to talk in this voice channel.');
 		}
 		const user = await this.client.users.fetch(playlist.userID);
 		const queue = this.client.music.queues.get(message.guild.id);

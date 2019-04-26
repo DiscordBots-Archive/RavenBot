@@ -24,7 +24,7 @@ class SetCasesCommand extends Command {
 	}
 
 	async exec(message, { cases }) {
-		if (!cases) return; 
+		if (!cases) return;
 		this.client.settings.set(message.guild, 'caseTotal', cases);
 		return message.util.reply(`set cases to **${cases}**`);
 	}

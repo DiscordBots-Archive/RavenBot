@@ -16,8 +16,8 @@ class ReasonCommand extends Command {
 					id: 'caseNum',
 					type: Argument.union('number', 'string'),
 					prompt: {
-						start: `what case do you want to add a reason to?`,
-						retry: `please enter a case number...`
+						start: 'what case do you want to add a reason to?',
+						retry: 'please enter a case number...'
 					}
 				},
 				{
@@ -46,7 +46,7 @@ class ReasonCommand extends Command {
 		const caseToFind = caseNum === 'latest' || caseNum === 'l' ? totalCases : caseNum;
 		if (isNaN(caseToFind)) return message.reply('at least provide me with a correct number.');
 
-		const cases = await Case.findOne({ where: { caseID: caseToFind, guildID: message.guild.id }});
+		const cases = await Case.findOne({ where: { caseID: caseToFind, guildID: message.guild.id } });
 		if (!cases) {
 			return message.reply('I couldn\'t find a case with that Id!');
 		}
@@ -56,7 +56,7 @@ class ReasonCommand extends Command {
 
 		const modLogChannel = this.client.settings.get(message.guild, 'modLogChannel', undefined);
 		if (modLogChannel) {
-			const caseEmbed = await (this.client.channels.get(modLogChannel)).messages.fetch(cases.messageID);
+			const caseEmbed = await this.client.channels.get(modLogChannel).messages.fetch(cases.messageID);
 			if (!caseEmbed) return message.reply('looks like the message doesn\'t exist anymore!');
 			const embed = new MessageEmbed(caseEmbed.embeds[0]);
 			embed.setAuthor(`${message.author.tag} (${message.author.id})`, message.author.displayAvatarURL())
@@ -68,9 +68,9 @@ class ReasonCommand extends Command {
 			await Case.update({
 				authorID: message.author.id,
 				authorTag: message.author.tag,
-				reason: reason,
+				reason,
 				updatedAt: moment.utc().toDate()
-			}, { where : { caseID: caseToFind, guildID: message.guild.id }});
+			}, { where: { caseID: caseToFind, guildID: message.guild.id } });
 		}
 
 		return message.util.send(`Successfully set reason for case **#${caseToFind}**`);

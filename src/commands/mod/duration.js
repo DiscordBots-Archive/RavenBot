@@ -22,8 +22,8 @@ class DurationCommand extends Command {
 					id: 'caseNum',
 					type: Argument.union('number', 'string'),
 					prompt: {
-						start: `what case do you want to add a reason to?`,
-						retry: `please enter a case number.`
+						start: 'what case do you want to add a reason to?',
+						retry: 'please enter a case number.'
 					}
 				},
 				{
@@ -35,8 +35,8 @@ class DurationCommand extends Command {
 						return null;
 					},
 					prompt: {
-						start: `for how long do you want the mute to last?`,
-						retry: `please use a proper time format.`
+						start: 'for how long do you want the mute to last?',
+						retry: 'please use a proper time format.'
 					}
 				}
 			]
@@ -54,7 +54,11 @@ class DurationCommand extends Command {
 		const totalCases = this.client.settings.get(message.guild, 'caseTotal', 0);
 		const caseToFind = caseNum === 'latest' || caseNum === 'l' ? totalCases : caseNum;
 		if (isNaN(caseToFind)) return message.reply('at least provide me with a correct number.');
-		const dbCase = await Case.findOne({ where: { caseID: caseToFind, guildID: message.guild.id, action: Base.CONSTANTS.ACTIONS.MUTE, action_processed: false }});
+		const dbCase = await Case.findOne({
+			where: {
+				caseID: caseToFind, guildID: message.guild.id, action: Base.CONSTANTS.ACTIONS.MUTE, action_processed: false
+			}
+		});
 		if (!dbCase) {
 			return message.reply('I couldn\'t find a case with that Id!');
 		}
@@ -64,7 +68,7 @@ class DurationCommand extends Command {
 
 		const modLogChannel = this.client.settings.get(message.guild, 'modLogChannel', undefined);
 		if (modLogChannel) {
-			const caseEmbed = await (this.client.channels.get(modLogChannel)).messages.fetch(dbCase.messageID);
+			const caseEmbed = await this.client.channels.get(modLogChannel).messages.fetch(dbCase.messageID);
 			if (!caseEmbed) return message.reply('looks like the message doesn\'t exist anymore!');
 			const embed = new MessageEmbed(caseEmbed.embeds[0]);
 			if (dbCase.action_duration) {
@@ -74,11 +78,11 @@ class DurationCommand extends Command {
 			}
 			await caseEmbed.edit(embed);
 		}
-		
+
 		await Case.update({
 			action_duration: new Date(Date.now() + duration),
 			createdAt: new Date(Date.now())
-		}, { where: { caseID: caseToFind, guildID: message.guild.id }});
+		}, { where: { caseID: caseToFind, guildID: message.guild.id } });
 
 		await this.client.muteScheduler.rescheduleMute({
 			messageID: dbCase.messageID,

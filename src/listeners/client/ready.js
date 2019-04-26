@@ -13,10 +13,9 @@ class ReadyListener extends Listener {
 	}
 
 	async exec() {
-
 		Logger.info(`${this.client.user.tag} (${this.client.user.id})`, { tag: 'READY' });
 
-		//this.client.user.setActivity('⚠');
+		// this.client.user.setActivity('⚠');
 		this.client.user.setStatus('dnd');
 
 		await this.client.muteScheduler.init(); // calls muteScheduler
@@ -32,10 +31,10 @@ class ReadyListener extends Listener {
 				if (player.channel_id) {
 					const queue = this.client.music.queues.get(player.guild_id);
 					await queue.player.join(player.channel_id);
-				};
-			};
+				}
+			}
 			await this.client.music.queues.start();
-		};
+		}
 	}
 }
 

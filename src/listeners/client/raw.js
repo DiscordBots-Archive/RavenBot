@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 const { Listener } = require('discord-akairo');
 const { ReferenceType } = require('rejects');
 const ReactionRole = require('../../models/ReactionRoles');
@@ -12,7 +13,6 @@ class RawListener extends Listener {
 	}
 
 	async exec(packet) {
-
 		switch (packet.t) {
 			case 'VOICE_STATE_UPDATE':
 				if (packet.d.user_id !== process.env.ID) return;

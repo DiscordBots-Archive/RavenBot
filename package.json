@@ -1,11 +1,13 @@
 {
+  "name": "raven",
+  "version": "2.0.0",
+  "main": "index.js",
   "dependencies": {
     "chalk": "^2.4.2",
     "common-tags": "^1.8.0",
     "diff": "^4.0.1",
-    "discord-akairo": "discord-akairo/discord-akairo",
-    "discord.js": "discordjs/discord.js",
-    "docgen": "ravencrawl/docgen",
+    "discord-akairo": "github:discord-akairo/discord-akairo",
+    "discord.js": "github:discordjs/discord.js",
     "dotenv": "^7.0.0",
     "http": "^0.0.0",
     "ioredis": "^4.6.2",
@@ -33,16 +35,25 @@
     "winston": "^3.2.1",
     "winston-daily-rotate-file": "^3.8.0"
   },
-  "name": "raven",
-  "version": "2.0.5",
-  "main": "index.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-aqua": "^5.0.0"
+  },
   "scripts": {
-    "test": "node node_modules/docgen/src --custom src/index.yml --source src --spaces 2 --output master.json",
-    "start": "node node_modules/docgen/src --custom src/index.yml --source src --output master.json"
+    "test": "eslint ./",
+    "fix": "eslint --fix src/",
+    "start": "node src/index.js"
   },
   "keywords": [],
   "author": "Suvajit#5580",
   "license": "ISC",
-  "description": ""
+  "description": "(Deprecated Right Now. But I'm making it again, according to new version of Akairo) A discord bot with fully functional music system, in-depth moderation commands, tag system, custom commands and  much more. Made in JavaScript and discord.js library &amp; discord-akairo framework.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/almostsuvajit/ravenbot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/almostsuvajit/ravenbot/issues"
+  },
+  "homepage": "https://github.com/almostsuvajit/ravenbot#readme"
 }

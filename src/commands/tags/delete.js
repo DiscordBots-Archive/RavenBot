@@ -13,7 +13,7 @@ class TagDeleteCommand extends Command {
 					match: 'content',
 					type: 'tag',
 					prompt: {
-						start: `what tag do you want to delete?`,
+						start: 'what tag do you want to delete?',
 						retry: (msg, args, { phrase }) => `a tag with the name **${phrase}** does not exist.`
 					}
 				}
@@ -26,7 +26,6 @@ class TagDeleteCommand extends Command {
 	}
 
 	async exec(message, { tag }) {
-
 		const staffRole = message.member.roles.has(this.client.settings.get(message.guild, 'modRole', undefined));
 		if (tag.authorID !== message.author.id && !staffRole) return message.util.reply('you can only delete your own tags.');
 		await tag.destroy();

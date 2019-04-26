@@ -13,7 +13,7 @@ class TagAddCommand extends Command {
 					id: 'name',
 					type: 'existingTag',
 					prompt: {
-						start: `what should the tag be named?`,
+						start: 'what should the tag be named?',
 						retry: (msg, args, { phrase }) => `a tag with the name **${phrase}** already exists.`
 					}
 				},
@@ -22,7 +22,7 @@ class TagAddCommand extends Command {
 					match: 'rest',
 					type: 'tagContent',
 					prompt: {
-						start: `what should the content of the tag be?`
+						start: 'what should the content of the tag be?'
 					}
 				},
 				{
@@ -49,14 +49,14 @@ class TagAddCommand extends Command {
 		const staffRole = message.member.roles.has(this.client.settings.get(message.guild, 'modRole', undefined));
 
 		await Tags.create({
-			name: name,
-			content: content,
+			name,
+			content,
 			hoisted: hoist && staffRole ? true : false,
 			authorID: message.author.id,
 			guildID: message.guild.id,
 			last_modified: message.author.id,
 			aliases: [name]
-		})
+		});
 
 		return message.util.reply(`a tag with the name **${name.substring(0, 256)}** has been added.`);
 	}

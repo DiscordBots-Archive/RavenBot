@@ -9,7 +9,7 @@ class PrefixCommand extends Command {
 			quoted: false,
 			args: [
 				{
-					id: 'method',
+					id: 'method'
 				},
 				Control.if((msg, args) => msg.member.roles.has(this.client.settings.get(msg.guild, 'modRole', undefined)) && args.method, [
 					{
@@ -18,7 +18,7 @@ class PrefixCommand extends Command {
 						type: Argument.validate('string', p => !/\s/.test(p) && p.length <= 5),
 						default: '',
 						prompt: {
-							retry: `Please provide a prefix without spaces and less than 5 characters`
+							retry: 'Please provide a prefix without spaces and less than 5 characters'
 						}
 					}
 				])
@@ -35,7 +35,6 @@ class PrefixCommand extends Command {
 	}
 
 	async exec(message, { prefix }) {
-
 		if (!prefix) return message.util.send(`The current prefix for this guild is: \`${this.handler.prefix(message)}\``);
 		this.client.settings.set(message.guild, 'prefix', prefix);
 		if (prefix === this.handler.prefix(message)) {

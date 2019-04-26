@@ -20,7 +20,7 @@ class RestrictCommand extends Command {
 				}
 			],
 			description: {
-				content:[
+				content: [
 					'Restrict a members ability to post embeds/use custom emojis/react.',
 					'Available restrictions:',
 					'• embed \`<member> <...reason>\`',
@@ -38,7 +38,7 @@ class RestrictCommand extends Command {
 					'emoji @Nuke dumb',
 					'reaction @Riday why though'
 				]
-			},
+			}
 		});
 	}
 
@@ -56,7 +56,7 @@ class RestrictCommand extends Command {
 				`Check \`${prefix}help restrict\` for more information.`
 			]);
 		}
-		const command = ({
+		const command = {
 			embed: this.handler.modules.get('restrict-embed'),
 			embeds: this.handler.modules.get('restrict-embed'),
 			image: this.handler.modules.get('restrict-embed'),
@@ -65,7 +65,7 @@ class RestrictCommand extends Command {
 			emoji: this.handler.modules.get('restrict-emoji'),
 			reaction: this.handler.modules.get('restrict-reaction'),
 			react: this.handler.modules.get('restrict-reaction')
-		})[restriction];
+		}[restriction];
 
 		return this.handler.handleDirectCommand(message, rest, command, true);
 	}

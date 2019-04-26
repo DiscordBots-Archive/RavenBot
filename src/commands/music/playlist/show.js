@@ -20,7 +20,7 @@ class PlaylistShowCommand extends Command {
 					content: 'match',
 					type: 'playlist',
 					prompt: {
-						start: `what playlist do you want information on?`,
+						start: 'what playlist do you want information on?',
 						retry: (msg, args, { phrase }) => `a playlist with the name **${phrase}** does not exist.`
 					}
 				},
@@ -39,7 +39,7 @@ class PlaylistShowCommand extends Command {
 		const decoded = await this.client.music.decode(playlist.songs);
 		// TODO: remove hack
 		const totalLength = decoded.reduce((prev, song) => prev + song.info.length, 0); // eslint:disable-line
-		const paginated = paginate({items: decoded, page});
+		const paginated = paginate({ items: decoded, page });
 		let index = (paginated.page - 1) * 10;
 
 		const embed = new MessageEmbed().setColor(3447003)
@@ -47,10 +47,10 @@ class PlaylistShowCommand extends Command {
 			.setDescription([
 				`**Song list${paginated.page > 1 ? `, page ${paginated.page}` : ''}**`,
 				'',
-				`${paginated.items.map(song => `**${++index}.** [${song.info.title}](${song.info.uri}) (${timeString({seconds: song.info.length})})`).join('\n')}`,
+				`${paginated.items.map(song => `**${++index}.** [${song.info.title}](${song.info.uri}) (${timeString({ seconds: song.info.length })})`).join('\n')}`,
 				'',
-				`**Total list time:** ${timeString({seconds: totalLength})}`
-			])
+				`**Total list time:** ${timeString({ seconds: totalLength })}`
+			]);
 		if (paginated.maxPage > 1) embed.setFooter('Use playlist show <playlist> <page> to view a specific page.');
 
 		return message.util.send(embed);

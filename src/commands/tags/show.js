@@ -16,14 +16,14 @@ class TagShowCommand extends Command {
 					match: 'content',
 					type: 'lowercase',
 					prompt: {
-						start: `what tag would you like to see?`
+						start: 'what tag would you like to see?'
 					}
 				}
 			],
 			description: {
 				content: 'Displays a tag.',
 				usage: '<tag>'
-			},
+			}
 		});
 	}
 
@@ -31,12 +31,14 @@ class TagShowCommand extends Command {
 		if (!name) return;
 		name = Util.cleanContent(name, message);
 
-		const tag = await Tags.findOne({ where: {
-			[Op.or]: [
-				{ name: name },
-				{ aliases: { [Op.contains]: [name] } }
-			], guildID: message.guild.id
-		}});
+		const tag = await Tags.findOne({
+			where: {
+				[Op.or]: [
+					{ name },
+					{ aliases: { [Op.contains]: [name] } }
+				], guildID: message.guild.id
+			}
+		});
 
 		if (tag) await tag.update({ uses: tag.uses + 1 });
 

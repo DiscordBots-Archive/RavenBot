@@ -18,10 +18,10 @@ class SetDJRoleCommand extends Command {
 					id: 'role',
 					type: 'role',
 					content: 'match',
-                    prompt: {
-                        start: message => `${message.author}, what role you want to set?`,
-                        retry: message => `${message.author}, please provide a valid role.`
-                    }
+					prompt: {
+						start: message => `${message.author}, what role you want to set?`,
+						retry: message => `${message.author}, please provide a valid role.`
+					}
 				}
 			]
 		});

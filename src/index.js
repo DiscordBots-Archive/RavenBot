@@ -1,4 +1,5 @@
-require('./util/Extensions'); require('dotenv').config();
+require('./util/Extensions');
+require('dotenv').config();
 const Client = require('./client/Client');
 const Logger = require('./util/Logger');
 const Raven = require('raven');
@@ -14,9 +15,9 @@ if (process.env.RAVEN) {
 }
 
 client.on('disconnect', () => Logger.warn('[CLIENT DISCONNECTED]'))
-.on('reconnect', () => Logger.info('[CLIENT RECONNECTING]'))
-.on('error', err => Logger.error(`[CLIENT ERROR] ${err.message}`))
-.on('warn', warn => Logger.warn(`[CLIENT WARN] ${warn}`));
+	.on('reconnect', () => Logger.info('[CLIENT RECONNECTING]'))
+	.on('error', err => Logger.error(`[CLIENT ERROR] ${err.message}`))
+	.on('warn', warn => Logger.warn(`[CLIENT WARN] ${warn}`));
 
 client.start();
 client.metrics();

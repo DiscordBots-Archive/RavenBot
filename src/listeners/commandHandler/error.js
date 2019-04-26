@@ -1,3 +1,4 @@
+/* eslint-disable multiline-ternary */
 const { Listener } = require('discord-akairo');
 const Logger = require('../../util/Logger');
 const Raven = require('raven');
@@ -12,7 +13,6 @@ class ErrorListener extends Listener {
 	}
 
 	async exec(error, message, command) {
-
 		Logger.error('An error occured in a command.');
 
 		const tag = message.guild ? `${message.guild.name} :: ${message.author.tag} (${message.author.id})` : `${message.author.tag} (${message.author.id})`;

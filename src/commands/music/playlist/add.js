@@ -20,7 +20,7 @@ class PlaylistAddCommand extends Command {
 					id: 'playlist',
 					type: 'playlist',
 					prompt: {
-						start: `what playlist should this song/playlist be added to?`,
+						start: 'what playlist should this song/playlist be added to?',
 						retry: (msg, args, { phrase }) => `a playlist with the name **${phrase}** does not exist.`
 					}
 				},
@@ -51,14 +51,12 @@ class PlaylistAddCommand extends Command {
 			const newTracks = await playlist.songs.concat([res.tracks[0].track]);
 			await playlist.update({ songs: newTracks });
 			msg = res.tracks[0].info.title;
-
 		} else if (res.loadType === 'PLAYLIST_LOADED') {
 			const newTracks = await playlist.songs.concat(res.tracks.map(track => track.track));
 			await playlist.update({ songs: newTracks });
 			msg = res.playlistInfo.name;
-
 		} else {
-			return message.util.send("I couldn't find what you were looking for.");
+			return message.util.send('I couldn\'t find what you were looking for.');
 		}
 
 		return message.util.send(`**Added to playlist:** \`${msg}\``);

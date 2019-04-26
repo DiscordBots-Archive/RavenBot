@@ -26,7 +26,9 @@ class GuildMemberUpdateModerationListener extends Listener {
 			const muteRole = this.client.settings.get(newMember.guild, 'muteRole', undefined);
 			const restrictRoles = this.client.settings.get(newMember.guild, 'restrictRoles', undefined);
 			if (!muteRole && !restrictRoles) return;
-			const automaticRoleState = await RoleState.findOne({where: { userID: newMember.id, guildID: newMember.guild.id }});
+			const automaticRoleState = await RoleState.findOne({
+				where: { userID: newMember.id, guildID: newMember.guild.id }
+			});
 			if (
 				automaticRoleState &&
 				(automaticRoleState.rolesID.includes(muteRole) ||
@@ -36,10 +38,12 @@ class GuildMemberUpdateModerationListener extends Listener {
 			) return;
 			const modLogChannel = this.client.settings.get(newMember.guild, 'modLogChannel', undefined);
 			const role = newMember.roles.filter(r => r.id !== newMember.guild.id && !oldMember.roles.has(r.id)).first();
-			
+
 			if (!role) {
 				if (oldMember.roles.has(muteRole) && !newMember.roles.has(muteRole)) {
-					const dbCase = await Case.findOne({ where: { targetID: newMember.id, guildID: newMember.guild.id, action_processed: false }});
+					const dbCase = await Case.findOne({
+						where: { targetID: newMember.id, guildID: newMember.guild.id, action_processed: false }
+					});
 					if (dbCase) this.client.muteScheduler.cancelMute(dbCase);
 				}
 				return;
@@ -78,20 +82,21 @@ class GuildMemberUpdateModerationListener extends Listener {
 			let modMessage;
 			if (modLogChannel) {
 				const color = Object.keys(Base.CONSTANTS.ACTIONS).find(key => Base.CONSTANTS.ACTIONS[key] === action).split(' ')[0].toUpperCase();
-				const embed = Base.logEmbed({ member: newMember, action: actionName, caseNum: totalCases, reason }).setColor(Base.CONSTANTS.COLORS[color]);
-				modMessage = await (this.client.channels.get(modLogChannel)).send(embed);
+				const embed = Base.logEmbed({ member: newMember, action: actionName, caseNum: totalCases, reason })
+					.setColor(Base.CONSTANTS.COLORS[color]);
+				modMessage = await this.client.channels.get(modLogChannel).send(embed);
 			}
 			await Case.create({
 				caseID: totalCases,
 				targetID: newMember.id,
 				targetTag: newMember.user.tag,
 				guildID: newMember.guild.id,
-				action: action,
-				reason: reason,
+				action,
+				reason,
 				action_processed: processed,
 				createdAt: moment.utc().toDate(),
 				messageID: modMessage ? modMessage.id : null
-			})
+			});
 		}
 	}
 }

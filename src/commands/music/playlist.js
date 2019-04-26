@@ -51,7 +51,7 @@ class PlaylistCommand extends Command {
 
 	exec(message, { method, args }) {
 		if (!method) return;
-		const command = ({
+		const command = {
 			create: this.handler.modules.get('playlist-create'),
 			load: this.handler.modules.get('playlist-load'),
 			add: this.handler.modules.get('playlist-add'),
@@ -63,7 +63,7 @@ class PlaylistCommand extends Command {
 			show: this.handler.modules.get('playlist-show'),
 			info: this.handler.modules.get('playlist-info'),
 			list: this.handler.modules.get('playlist-list')
-		})[method];
+		}[method];
 
 		return this.handler.handleDirectCommand(message, args, command, true);
 	}

@@ -16,8 +16,8 @@ class WarnCommand extends Command {
 					id: 'member',
 					type: 'member',
 					prompt: {
-						start: `What member do you want to warn?`,
-						retry: `Please mention a valid member.`
+						start: 'What member do you want to warn?',
+						retry: 'Please mention a valid member.'
 					}
 				},
 				{
@@ -61,7 +61,7 @@ class WarnCommand extends Command {
 		let modMessage;
 		if (modLogChannel) {
 			const embed = Base.logEmbed({ message, member, action: 'Warn', caseNum: totalCases, reason }).setColor(Base.CONSTANTS.COLORS.WARN);
-			modMessage = await (this.client.channels.get(modLogChannel)).send(embed);
+			modMessage = await this.client.channels.get(modLogChannel).send(embed);
 		}
 
 		await Case.create({
@@ -74,7 +74,7 @@ class WarnCommand extends Command {
 			messageID: modMessage ? modMessage.id : undefined,
 			warn: 1,
 			action: Base.CONSTANTS.ACTIONS.WARN,
-			reason: reason,
+			reason,
 			createdAt: moment.utc().toDate()
 		});
 

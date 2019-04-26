@@ -17,10 +17,10 @@ class ToggleRoleStateCommand extends Command {
 		const roleState = this.client.settings.get(message.guild, 'roleState', undefined);
 		if (roleState) {
 			this.client.settings.set(message.guild, 'roleState', false);
-			await RoleState.destroy({ where: { guildID: message.guild.id }});
+			await RoleState.destroy({ where: { guildID: message.guild.id } });
 			return message.util.reply('successfully removed all records!');
 		}
-		
+
 		this.client.settings.set(message.guild, 'roleState', true);
 		const members = await message.guild.members.fetch();
 		for (const member of members.values()) {
@@ -29,7 +29,7 @@ class ToggleRoleStateCommand extends Command {
 				guildID: message.guild.id,
 				userID: member.id,
 				rolesID: roles
-			})
+			});
 		}
 
 		return message.util.reply('successfully inserted all the records!');

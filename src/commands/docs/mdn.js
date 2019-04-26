@@ -15,7 +15,7 @@ class MDNCommand extends Command {
 				{
 					id: 'query',
 					prompt: {
-						start: `what would you like to search for?`
+						start: 'what would you like to search for?'
 					},
 					match: 'content',
 					type: (_, query) => query ? query.replace(/#/g, '.prototype.') : null
@@ -35,7 +35,7 @@ class MDNCommand extends Command {
 		const res = await fetch(`https://mdn.pleb.xyz/search?${queryString}`);
 		const body = await res.json();
 		if (!body.URL || !body.Title || !body.Summary) {
-			return message.util.reply("I couldn't find the requested information.");
+			return message.util.reply('I couldn\'t find the requested information.');
 		}
 		const turndown = new Turndown();
 		turndown.addRule('hyperlink', {
@@ -45,13 +45,13 @@ class MDNCommand extends Command {
 		const summary = body.Summary.replace(/<code><strong>(.+)<\/strong><\/code>/g, '<strong><code>$1<\/code><\/strong>');
 
 		const embed = new MessageEmbed()
-		.setColor(0x066FAD)
-		.setAuthor('MDN', 'https://i.imgur.com/DFGXabG.png', 'https://developer.mozilla.org/')
-		.setURL(`https://developer.mozilla.org${body.URL}`)
-		.setTitle(body.Title)
-		.setDescription(turndown.turndown(summary));
+			.setColor(0x066FAD)
+			.setAuthor('MDN', 'https://i.imgur.com/DFGXabG.png', 'https://developer.mozilla.org/')
+			.setURL(`https://developer.mozilla.org${body.URL}`)
+			.setTitle(body.Title)
+			.setDescription(turndown.turndown(summary));
 
-		if (message.channel.type === 'dm' || !(message.channel).permissionsFor(message.guild.me).has(['ADD_REACTIONS', 'MANAGE_MESSAGES'], false)) {
+		if (message.channel.type === 'dm' || !message.channel.permissionsFor(message.guild.me).has(['ADD_REACTIONS', 'MANAGE_MESSAGES'], false)) {
 			return message.util.send({ embed });
 		}
 		const msg = await message.util.send({ embed });

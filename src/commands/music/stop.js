@@ -13,7 +13,7 @@ class StopCommand extends Command {
 
 	async exec(message) {
 		if (!message.member.voice || !message.member.voice.channel) {
-			return message.util.reply(`you have to be in a voice channel.`);
+			return message.util.reply('you have to be in a voice channel.');
 		}
 		const DJ = message.member.roles.has(this.client.settings.get(message.guild.id, 'djRole', undefined));
 		const queue = this.client.music.queues.get(message.guild.id);
