@@ -1,4 +1,4 @@
-const { Argument, Command, Control } = require('discord-akairo');
+const { Argument, Command } = require('discord-akairo');
 
 class PrefixCommand extends Command {
 	constructor() {
@@ -9,19 +9,9 @@ class PrefixCommand extends Command {
 			quoted: false,
 			args: [
 				{
-					id: 'method'
-				},
-				Control.if((msg, args) => msg.member.roles.has(this.client.settings.get(msg.guild, 'modRole', undefined)) && args.method, [
-					{
-						id: 'prefix',
-						match: 'content',
-						type: Argument.validate('string', p => !/\s/.test(p) && p.length <= 5),
-						default: '',
-						prompt: {
-							retry: 'Please provide a prefix without spaces and less than 5 characters'
-						}
-					}
-				])
+					id: 'prefix',
+					type: Argument.validate('string', (_, p) => !/\s/.test(p) && p.length <= 5)
+				}
 			],
 			description: {
 				content: [
