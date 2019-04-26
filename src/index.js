@@ -3,14 +3,15 @@ require('dotenv').config();
 const Client = require('./client/Client');
 const Logger = require('./util/Logger');
 const Raven = require('raven');
+const { name, version } = require('../package.json');
 const client = new Client({ owner: process.env.OWNER, token: process.env.TOKEN });
 
 if (process.env.RAVEN) {
 	Raven.config(process.env.RAVEN, {
 		captureUnhandledRejections: true,
 		autoBreadcrumbs: true,
-		environment: 'Raven',
-		release: '0.1.0'
+		environment: name,
+		release: version
 	}).install();
 }
 
