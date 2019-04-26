@@ -20,9 +20,9 @@ class ImgurCommand extends Command {
 	}
 
 	async exec(message, { query }) {
-		if (message.channel.id !== '555369247161843712') return;
+		if (message.channel.nsfw) return message.util.send('This is not an NSFW channel \\😒');
 
-		if (!query) query = process.env.QUERY;
+		if (!query) query = process.env.QUERY; // Do it Yourself.
 		query = query.replace(/[^a-zA-Z0-9_]/g, '');
 		const page = Math.floor(Math.random() * 100) + 1;
 		const image = Math.floor(Math.random() * 100) + 1;
