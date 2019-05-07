@@ -8,7 +8,7 @@
     "diff": "^4.0.1",
     "discord-akairo": "github:discord-akairo/discord-akairo",
     "discord.js": "github:discordjs/discord.js",
-    "dotenv": "^7.0.0",
+    "dotenv": "^8.0.0",
     "http": "^0.0.0",
     "ioredis": "^4.6.2",
     "lavalink": "^2.4.1",
