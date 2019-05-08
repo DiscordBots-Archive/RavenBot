@@ -29,7 +29,7 @@ class PhotoCommand extends Command {
 			const res = await fetch(`https://api.unsplash.com/search/photos?per_page=1&page=${page}&${queryString}`, { method: 'GET', headers: { Authorization: `Client-ID ${process.env.UNSPLASH}` } });
 			const data = await res.json();
 			for (const image of data.results) {
-				const embed = this.client.util.embed();
+				const embed = this.client.util.embed().setColor(0X8387DB);
 				embed.setImage(image.urls.raw);
 				return message.util.send(embed);
 			}

@@ -8,7 +8,7 @@ class DogImageCommand extends Command {
 			category: 'fun',
 			clientPermissions: ['EMBED_LINKS', 'ATTACH_FILES'],
 			description: {
-				content: 'Displays a random dog.'
+				content: 'Displays a random dog image.'
 			}
 		});
 	}
@@ -21,7 +21,7 @@ class DogImageCommand extends Command {
 			for (const photo of data.photos) {
 				const title = photo.url.slice(29, -(photo.id.toString().length + 2)).replace(/-/g, ' ').toLowerCase()
 					.replace(/\b(\w)/g, char => char.toUpperCase());
-				const embed = this.client.util.embed().setTitle(title)
+				const embed = this.client.util.embed().setTitle(title).setColor(0X8387DB)
 					.setImage(photo.src.original)
 					.setURL(photo.src.original);
 				return message.util.send(embed);
