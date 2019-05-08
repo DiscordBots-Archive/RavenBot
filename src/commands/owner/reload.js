@@ -18,9 +18,12 @@ class ReloadCommand extends Command {
 
 	*args() {
 		const type = yield {
-			type: [['command', 'c'], ['inhibitor', 'i'], ['listener', 'l']]
+			match: 'option',
+			flag: ['type:'],
+			type: [['command', 'c'], ['inhibitor', 'i'], ['listener', 'l']],
+			default: 'command'
 		};
-		const module = yield {
+		const mod = yield {
 			type: (msg, phrase) => {
 				if (!phrase) return null;
 				const resolver = this.handler.resolver.type({
@@ -31,10 +34,10 @@ class ReloadCommand extends Command {
 				return resolver(msg, phrase);
 			}
 		};
-		return { type, module };
+		return { type, mod };
 	}
 
-	async exec(message, { type, module: mod }) {
+	async exec(message, { type, mod }) {
 		if (!mod) {
 			return message.util.reply(`Invalid ${type} ${type === 'command' ? 'alias' : 'ID'} specified to reload.`);
 		}
