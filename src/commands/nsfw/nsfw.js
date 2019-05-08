@@ -7,7 +7,7 @@ class NsfwCommand extends Command {
 	constructor() {
 		super('nsfw', {
 			aliases: ['nsfw'],
-			category: 'owner',
+			category: 'nsfw',
 			args: [
 				{
 					id: 'query',
