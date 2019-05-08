@@ -10,8 +10,8 @@ class ShardResumedListener extends Listener {
 		});
 	}
 
-	exec(id) {
-		Logger.info(`SHARD ${id} RESUMED`, { tag: 'SHARD RESUMED' });
+	exec(id, replayedEvents) {
+		Logger.info(`SHARD ${id} RESUMED (replayed ${replayedEvents} events)`, { tag: 'SHARD RESUMED' });
 	}
 }
 
