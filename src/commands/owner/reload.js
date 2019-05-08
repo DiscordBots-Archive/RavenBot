@@ -10,18 +10,14 @@ class ReloadCommand extends Command {
 			quoted: false,
 			description: {
 				content: 'Reloads a module or all modules at once.',
-				usage: '<module> [type:]',
-				examples: ['commmand ping', 'listener ready', 'c stats', 'l raw', 'i moderation']
+				usage: '[type] <module>'
 			}
 		});
 	}
 
 	*args() {
 		const type = yield {
-			match: 'option',
-			flag: ['type:'],
-			type: [['command', 'c'], ['inhibitor', 'i'], ['listener', 'l']],
-			default: 'command'
+			type: [['command', 'c'], ['inhibitor', 'i'], ['listener', 'l']]
 		};
 		const mod = yield {
 			type: (msg, phrase) => {
