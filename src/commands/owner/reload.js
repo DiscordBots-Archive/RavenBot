@@ -17,7 +17,8 @@ class ReloadCommand extends Command {
 
 	*args() {
 		const type = yield {
-			type: [['command', 'c'], ['inhibitor', 'i'], ['listener', 'l']]
+			type: [['command', 'c'], ['inhibitor', 'i'], ['listener', 'l']],
+			default: 'command'
 		};
 		const mod = yield {
 			type: (msg, phrase) => {
